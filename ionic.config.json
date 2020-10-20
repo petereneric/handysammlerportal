@@ -1,0 +1,7 @@
+{
+  "name": "Handysammlerportal_Ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
