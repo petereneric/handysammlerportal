@@ -28,7 +28,7 @@ export class AuthGuardService implements CanActivate {
 
         if (error.status == 401 || error.status == 440) {
           console.log('navigate to login');
-          this.router.navigate(['login-component']);
+          this.router.navigate(['login']);
           console.log(error);
         } else {
           console.log(error);
