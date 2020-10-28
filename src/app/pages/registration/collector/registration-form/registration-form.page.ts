@@ -41,11 +41,27 @@ export class RegistrationFormPage implements OnInit {
     },
   ];
 
+  contactTitles: any[] = [
+    {
+      name: 'Herr',
+    },
+    {
+      name: 'Frau',
+    },
+    {
+      name: 'Herr Dr.',
+    },
+    {
+      name: 'Frau Dr.',
+    },
+  ];
+
   compareWithFn = (o1, o2) => {
     return o1 && o2 ? o1.id === o2.id : o1 === o2;
   };
 
   compareWith = this.compareWithFn;
+  bContactFormal: boolean = false;
 
   constructor(private fb: FormBuilder) { }
 
@@ -56,4 +72,7 @@ export class RegistrationFormPage implements OnInit {
 
   }
 
+  changeContactFormal() {
+    this.bContactFormal = !this.bContactFormal;
+  }
 }
