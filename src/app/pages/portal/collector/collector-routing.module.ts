@@ -3,18 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CollectorPage } from './collector.page';
 import {AuthGuardService} from "../../../services/auth-guard.service";
-import {RoleGuardService} from "../../../services/role-guard.service";
 import {DataCollectorPage} from "./data-collector/data-collector.page";
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'collector',
     component: CollectorPage,
-    canActivate: [AuthGuardService],
     children: [
       {path: 'data-collector', component: DataCollectorPage},
     ]
-  }
+  },
 ];
 
 @NgModule({

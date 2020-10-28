@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>RegistrationForm</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="loginFormCollector" (ngSubmit)="onRegisterCollector()">
+    <h5>Sammlung</h5>
+    <ion-item lines="full" class="ion-item">
+      <ion-label position="floating">Sammlername</ion-label>
+      <ion-input type="text" required formControlName="collection_nameCollector"></ion-input>
+    </ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-label>Bereich/Branche</ion-label>
+        <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'">
+          <ion-select-option *ngFor="let type of typesCollector">{{type.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-row class="ion-row">
+      <ion-col>
+        <ion-button type="submit">Registrieren</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

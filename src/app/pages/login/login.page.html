@@ -33,6 +33,11 @@
           <ion-button type="submit">Anmelden</ion-button>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="navRegisterCollector()">Registrieren</ion-button>
+        </ion-col>
+      </ion-row>
     </form>
     <p *ngSwitchCase="'partner'">Partner</p>
   </div>
