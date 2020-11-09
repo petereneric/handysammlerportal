@@ -3,19 +3,28 @@
         <ion-title>RegistrationForm</ion-title>
     </ion-toolbar>
 </ion-header>
-
 <ion-content>
-    <form [formGroup]="loginFormCollector" (ngSubmit)="onRegisterCollector()">
+    <form [formGroup]="registrationFormCollector" (ngSubmit)="registerCollector()">
+
         <h5>Sammlung</h5>
         <ion-item lines="full" class="ion-item">
             <ion-label position="floating">Sammlername</ion-label>
             <ion-input type="text" required formControlName="collection_nameCollector"></ion-input>
         </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Passwort</ion-label>
+            <ion-input type="text" required formControlName="collection_password" [type]="passwordType" clearOnEdit="false"></ion-input>
+            <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Passwort (wiederholen)</ion-label>
+            <ion-input type="text" required formControlName="collection_passwordCheck" type="password"></ion-input>
+        </ion-item>
         <ion-list>
             <ion-item>
                 <ion-label>Bereich/Branche</ion-label>
-                <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'">
-                    <ion-select-option *ngFor="let type of typesCollector">{{type.name}}</ion-select-option>
+                <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'" (ionChange)="onSelected_tCollector($event) ">
+                    <ion-select-option *ngFor="let type of typesCollector" [value]="type['id']">{{type.name}}</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-list>
@@ -25,30 +34,91 @@
             <ion-input type="text" required formControlName="contact_prename"></ion-input>
         </ion-item>
         <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Vorname</ion-label>
+            <ion-label position="floating">Nachname</ion-label>
             <ion-input type="text" required formControlName="contact_surname"></ion-input>
         </ion-item>
         <ion-list>
             <ion-item>
                 <ion-label>Persönliche Anrede</ion-label>
-                <ion-toggle checked="bContactFormal" (ionChange)="changeContactFormal()"></ion-toggle>
+                <ion-toggle [(ngModel)]="bContactFormal" [ngModelOptions]="{standalone: true}" (ionChange)="onToggle_ContactFormal($event)"></ion-toggle>
             </ion-item>
         </ion-list>
-            <ion-item *ngIf="bContactFormal">
-                <ion-label>Titel</ion-label>
-                <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'">
-                    <ion-select-option *ngFor="let title of contactTitles">{{title.name}}</ion-select-option>
+        <ion-item *ngIf="bContactFormal">
+            <ion-label>Titel</ion-label>
+            <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'" (ionChange)="onSelected_cContactTitle($event)">
+                <ion-select-option *ngFor="let title of contactTitles">{{title.name}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">E-Mail</ion-label>
+            <ion-input type="text" required formControlName="contact_email"></ion-input>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">E-Mail (wiederholen)</ion-label>
+            <ion-input type="text" required formControlName="contact_emailCheck"></ion-input>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">E-Mail CC (Optional)</ion-label>
+            <ion-input type="text" required formControlName="contact_emailCC"></ion-input>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Telefon (Festnetz)</ion-label>
+            <ion-input type="text" required formControlName="contact_phoneFixedLine"></ion-input>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Telefon (Mobil)</ion-label>
+            <ion-input type="text" required formControlName="contact_phoneMobile"></ion-input>
+        </ion-item>
+        <h5>Adresse</h5>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Adresszeile 1</ion-label>
+            <ion-input type="text" required formControlName="shipping_nameOne"></ion-input>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Adresszeile 2</ion-label>
+            <ion-input type="text" required formControlName="shipping_nameTwo"></ion-input>
+        </ion-item>
+        <ion-row>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">Straße</ion-label>
+                <ion-input type="text" required formControlName="shipping_street"></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">Hausnummer</ion-label>
+                <ion-input type="text" required formControlName="shipping_streetNumber"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Postleitzahl</ion-label>
+            <ion-input type="text" required formControlName="shipping_zip"></ion-input>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Stadt</ion-label>
+            <ion-input type="text" required formControlName="shipping_city"></ion-input>
+        </ion-item>
+        <ion-item >
+            <ion-label>Land</ion-label>
+            <ion-select [value]="cCountry" (ionChange)="onSelected_cCountry($event)" [okText]="'Übernehmen'" [cancelText]="'Abrechen'">
+                <ion-select-option *ngFor="let country of lCountries">{{country.name}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <h5>Verwendung der Erlöse</h5>
+        <ion-list>
+            <ion-item>
+                <ion-label>Partner (Erlös-Empfänger)</ion-label>
+                <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'" (ionChange)="onSelected_kPartner($event)">
+                    <ion-select-option *ngFor="let partner of lPartner" [value]="partner['id']">{{partner.name}}</ion-select-option>
                 </ion-select>
             </ion-item>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Vorname</ion-label>
-            <ion-input type="text" required formControlName="contact_prename"></ion-input>
-        </ion-item>
-
-        <ion-row class="ion-row">
-            <ion-col>
-                <ion-button type="submit">Registrieren</ion-button>
-            </ion-col>
-        </ion-row>
+        </ion-list>
+        <ion-list>
+            <ion-item>
+                <ion-label>Partner kann Bestellungen von Sammelmaterialien für mich als Sammler aufgeben</ion-label>
+                <ion-toggle [(ngModel)]="bPartnerAdmin" [ngModelOptions]="{standalone: true}" (ionChange)="onToggle_bPartnerAdmin($event)"></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <ion-button type="submit">Registrieren</ion-button>
+        <p>.</p>
+        <p>.</p>
     </form>
 </ion-content>

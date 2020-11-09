@@ -9,8 +9,9 @@ const routes: Routes = [
   {
     path: 'collector',
     component: CollectorPage,
+    canActivate: [AuthGuardService],
     children: [
-      {path: 'data-collector', component: DataCollectorPage},
+      {path: 'data-collector', component: DataCollectorPage, },
     ]
   },
 ];
