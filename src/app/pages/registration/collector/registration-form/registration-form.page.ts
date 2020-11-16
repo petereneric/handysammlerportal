@@ -3,6 +3,8 @@ import {FormBuilder} from '@angular/forms';
 import {ConnApiService} from "../../../../services/conn-api.service";
 import {forEachComment} from "tslint";
 import {AlertController} from "@ionic/angular";
+import {AuthApiService} from "../../../../services/auth-api.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-registration-form',
@@ -85,7 +87,7 @@ export class RegistrationFormPage implements OnInit {
     bPartnerAdmin: boolean = false;
     typeCollector: any = "typeCollector";
 
-    constructor(private fb: FormBuilder, private connApi: ConnApiService, public alertController: AlertController) {
+    constructor(private fb: FormBuilder, private connApi: ConnApiService, public alertController: AlertController, public router: Router) {
     }
 
     ngOnInit() {
@@ -95,6 +97,7 @@ export class RegistrationFormPage implements OnInit {
         // TypesCollector
         let promise = this.connApi.getResponse(ConnApiService.getCollectorTypes);
         promise.then((response) => {
+            console.log("JOOOOOO");
             if (response.status == 200) {
                 console.log(response.body);
                 var array = response.body['collectionTypes'];
@@ -206,10 +209,13 @@ export class RegistrationFormPage implements OnInit {
                     bPartnerAdmin: this.bPartnerAdmin ? 1 : 0
                 };
         console.log(collector);
-        let promise = this.connApi.post(ConnApiService.postCollector, collector);
-        promise.then((response) => {
+        console.log('jo"');
+        this.connApi.post(ConnApiService.postCollector, collector).then( response => {
+            console.log(response);
             if (response.status == 200) {
                 console.log("läuft");
+                // navigate to root
+                //this.router.navigate(['app-root']);
             } else {
                 console.log("läuft nicht")
             }
@@ -219,6 +225,7 @@ export class RegistrationFormPage implements OnInit {
                 console.log('name is already forgiven');
             }
         });
+        console.log("was ein scheiß");
     }
 
     onSelected_tCollector($event) {

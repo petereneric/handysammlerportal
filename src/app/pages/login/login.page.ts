@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthApiService} from "../../services/auth-api.service";
 import {Router} from "@angular/router";
 import {FormBuilder} from "@angular/forms";
+import {ConnApiService} from "../../services/conn-api.service";
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-login',
@@ -10,30 +12,34 @@ import {FormBuilder} from "@angular/forms";
 })
 
 export class LoginPage implements OnInit{
-  type: string;
+  type: number;
   loginFormCollector = this.fb.group({
     email: [''],
     password: ['']
   });
 
-  constructor(private authApiService: AuthApiService, public router: Router,private fb: FormBuilder) {}
+  constructor(private authApiService: AuthApiService, private connApiService: ConnApiService, public router: Router,private fb: FormBuilder, private data: DataService) {}
 
   ngOnInit(): void {
     console.log("ngOnInit: LoginPage");
-    this.type = 'collector';
+    this.type = 1;
   }
 
   segmentChanged(ev: any) {
     console.log('Segment changed', ev);
+    this.data.changeRole(ev['detail']['value']);
   }
 
-  onLoginCollector() {
-    let promise = this.authApiService.login(0, this.loginFormCollector.get('email').value, this.loginFormCollector.get('password').value);
+  private login(role: number) {
+    let data = {'role' : role, 'email' : this.loginFormCollector.get('email').value, 'password' : this.loginFormCollector.get('password').value};
+    let promise = this.connApiService.post(ConnApiService.postLogin, data);
+    //let promise = this.authApiService.login(0, this.loginFormCollector.get('email').value, this.loginFormCollector.get('password').value);
     promise.then((response)=>{
       if (response.status == 200) {
-        console.log(response.body['token']);
-        console.log("joHO");
+        // Save token
         localStorage.setItem('token', response.body['token']);
+
+        // Navigate
         this.router.navigate(['app-root']);
       }
     }).catch((error)=>{
@@ -43,7 +49,19 @@ export class LoginPage implements OnInit{
     });
   }
 
+  onLoginCollector() {
+    this.login(0);
+  }
+
+  onLoginPartner() {
+    this.login(1);
+  }
+
   navRegisterCollector() {
     this.router.navigate(['registration-collector'])
+  }
+
+  onResetPassword() {
+    this.router.navigate(['reset-password']);
   }
 }
