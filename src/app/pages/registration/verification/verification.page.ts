@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {ConnApiService} from "../../../services/conn-api.service";
+import {ConnApiService} from "../../../services/conn-api/conn-api.service";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-verification',
@@ -17,12 +18,11 @@ export class VerificationPage implements OnInit {
     }
 
     mailVerification() {
-        let promise = this.connApi.safePost(ConnApiService.postMailRegistration, null);
-        promise.then((response)=>{
-            if (response.status == 200) {
+        this.connApi.safePost(ConnApiService.postMailRegistration, null).subscribe((data:HttpResponse<any>) => {
+            if (data.status == 200) {
                 console.log("Verification mail sent");
             }
-        }).catch((error)=>{
+        }, error => {
             console.log(error.message);
         });
     }

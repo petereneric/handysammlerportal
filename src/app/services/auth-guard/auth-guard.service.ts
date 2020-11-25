@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from "@angular/router";
-import {AuthApiService} from "./auth-api.service";
+import {AuthApiService} from "../auth-api/auth-api.service";
 
 @Injectable({
     providedIn: 'root'
@@ -15,19 +15,23 @@ export class AuthGuardService implements CanActivate {
         //var currentUser = JSON.parse(localStorage.getItem('token'));
         //var token = currentUser.token;
         return new Promise((resolve) => {
-            this.authApiService.authenticate().then((response) => {
-                localStorage.setItem('token', response.body['token']);
+            this.authApiService.authenticate().subscribe((response) => {
                 console.log('AuthGuard passed');
+
+                // Save token
+                localStorage.setItem('token', response.body['token']);
+
+                // return to router
                 resolve(true);
-            }).catch((error) => {
+            }, error => {
                 switch (error.status) {
                     case 401:
                     case 440:
-                        console.log('navigate to login');
+                        console.log('AuthGuard not passed - Navigate to login');
                         this.router.navigate(['login']);
                         break;
                     case 403:
-                        console.log("navigate to verify page");
+                        console.log("AuthGuard not passed - Navigate to verification");
                         this.router.navigate(['verification']);
                 }
                 console.log(error);

@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
-import {AuthGuardService} from './services/auth-guard.service';
-import {RoleGuardService} from './services/role-guard.service';
-import {DataCollectorPage} from './pages/portal/collector/data-collector/data-collector.page';
+import {AuthGuardService} from './services/auth-guard/auth-guard.service';
+import {RoleGuardService} from './services/role-guard/role-guard.service';
+import {DataCollectorPage} from './pages/portal/collector/data/data-collector.page';
 import {CollectorPage} from './pages/portal/collector/collector.page';
 
 const routes: Routes = [
@@ -12,6 +12,10 @@ const routes: Routes = [
         path: 'collector',
         loadChildren: () => import('./pages/portal/collector/collector.module').then(m => m.CollectorPageModule),
 
+    },
+    {
+        path: 'partner',
+        loadChildren: () => import('./pages/portal/partner/partner.module').then( m => m.PartnerPageModule)
     },
     {
         path: 'login',
@@ -30,6 +34,7 @@ const routes: Routes = [
         path: 'reset-password',
         loadChildren: () => import('./pages/login/reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
     },]
+
 
 
 ;

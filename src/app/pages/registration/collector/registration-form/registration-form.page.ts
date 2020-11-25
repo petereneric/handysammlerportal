@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {ConnApiService} from "../../../../services/conn-api.service";
-import {forEachComment} from "tslint";
+import {ConnApiService} from "../../../../services/conn-api/conn-api.service";
 import {AlertController} from "@ionic/angular";
-import {AuthApiService} from "../../../../services/auth-api.service";
 import {Router} from "@angular/router";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
     selector: 'app-registration-form',
@@ -43,16 +42,7 @@ export class RegistrationFormPage implements OnInit {
     cCountry: string = this.lCountries[0].name;
 
 
-    typesCollector: any[] = [
-        {
-            id: 1,
-            name: 'Schule',
-        },
-        {
-            id: 2,
-            name: 'Stadt',
-        },
-    ];
+    typesCollector: any[] = [];
 
     tCollector: number = 0;
 
@@ -85,41 +75,19 @@ export class RegistrationFormPage implements OnInit {
     compareWith = this.compareWithFn;
     bContactFormal: boolean = true;
     bPartnerAdmin: boolean = false;
-    typeCollector: any = "typeCollector";
 
     constructor(private fb: FormBuilder, private connApi: ConnApiService, public alertController: AlertController, public router: Router) {
     }
 
     ngOnInit() {
-        // Country
-
-
         // TypesCollector
-        let promise = this.connApi.getResponse(ConnApiService.getCollectorTypes);
-        promise.then((response) => {
-            console.log("JOOOOOO");
-            if (response.status == 200) {
-                console.log(response.body);
-                var array = response.body['collectionTypes'];
-                array.forEach(element => console.log(element));
-                this.typesCollector = array;
-            } else {
-                console.log(response.body['collectionTypes']);
-            }
-        });
+        this.connApi.get(ConnApiService.getCollectorTypes).subscribe((data: HttpResponse<any>) =>
+            this.typesCollector = data.body['collectionTypes']);
 
         // listPartner
-        let promisePartner = this.connApi.getResponse(ConnApiService.getPartnerRegistration);
-        promisePartner.then((response) => {
-            if (response.status == 200) {
-                console.log(response.body);
-                var array = response.body['lPartner'];
-                array.forEach(element => console.log(element));
-                this.lPartner = array;
-            } else {
-                console.log(response.body['collectionTypes']);
-            }
-        });
+        this.connApi.get(ConnApiService.getPartnerRegistration).subscribe((data: HttpResponse<any>) =>
+            this.lPartner = data.body['lPartner']);
+
     }
 
     async alertPasswordNotIdentical() {
@@ -186,46 +154,43 @@ export class RegistrationFormPage implements OnInit {
         }
 
         let collector =
-                {
-                    'cCollector': this.registrationFormCollector.get('collection_nameCollector').value,
-                    'cPassword': this.registrationFormCollector.get('collection_password').value,
-                    tCollector: this.tCollector,
-                    cSurname: this.registrationFormCollector.get('contact_surname').value,
-                    cPrename: this.registrationFormCollector.get('contact_prename').value,
-                    bContactFormal: this.bContactFormal ? 1 : 0,
-                    cContactTitle: this.cContactTitle,
-                    cEmail: this.registrationFormCollector.get('contact_email').value,
-                    cEmailCC: this.registrationFormCollector.get('contact_emailCC').value,
-                    cPhoneLandline: this.registrationFormCollector.get('contact_phoneFixedLine').value,
-                    cPhoneMobile: this.registrationFormCollector.get('contact_phoneMobile').value,
-                    cShippingAddressOne: this.registrationFormCollector.get('shipping_nameOne').value,
-                    cShippingAddressTwo: this.registrationFormCollector.get('shipping_nameTwo').value,
-                    cStreet: this.registrationFormCollector.get('shipping_street').value,
-                    cStreetNumber: this.registrationFormCollector.get('shipping_streetNumber').value,
-                    cCity: this.registrationFormCollector.get('shipping_city').value,
-                    cZip: this.registrationFormCollector.get('shipping_zip').value,
-                    cCountry: this.cCountry,
-                    kPartner: this.kPartner,
-                    bPartnerAdmin: this.bPartnerAdmin ? 1 : 0
-                };
+            {
+                'cCollector': this.registrationFormCollector.get('collection_nameCollector').value,
+                'cPassword': this.registrationFormCollector.get('collection_password').value,
+                tCollector: this.tCollector,
+                cSurname: this.registrationFormCollector.get('contact_surname').value,
+                cPrename: this.registrationFormCollector.get('contact_prename').value,
+                bContactFormal: this.bContactFormal ? 1 : 0,
+                cContactTitle: this.cContactTitle,
+                cEmail: this.registrationFormCollector.get('contact_email').value,
+                cEmailCC: this.registrationFormCollector.get('contact_emailCC').value,
+                cPhoneLandline: this.registrationFormCollector.get('contact_phoneFixedLine').value,
+                cPhoneMobile: this.registrationFormCollector.get('contact_phoneMobile').value,
+                cShippingAddressOne: this.registrationFormCollector.get('shipping_nameOne').value,
+                cShippingAddressTwo: this.registrationFormCollector.get('shipping_nameTwo').value,
+                cStreet: this.registrationFormCollector.get('shipping_street').value,
+                cStreetNumber: this.registrationFormCollector.get('shipping_streetNumber').value,
+                cCity: this.registrationFormCollector.get('shipping_city').value,
+                cZip: this.registrationFormCollector.get('shipping_zip').value,
+                cCountry: this.cCountry,
+                kPartner: this.kPartner,
+                bPartnerAdmin: this.bPartnerAdmin ? 1 : 0
+            };
         console.log(collector);
         console.log('jo"');
-        this.connApi.post(ConnApiService.postCollector, collector).then( response => {
-            console.log(response);
-            if (response.status == 200) {
+
+        this.connApi.post(ConnApiService.postCollector, collector).subscribe((data: HttpResponse<any>) => {
+            if (data.status == 200) {
                 console.log("läuft");
-                // navigate to root
-                //this.router.navigate(['app-root']);
-            } else {
-                console.log("läuft nicht")
+                //navigate to root
+                this.router.navigate(['app-root']);
             }
-        }).catch((error) => {
+        }, error => {
             if (error.status == 406) {
                 this.alertCollectorNameForgiven()
                 console.log('name is already forgiven');
             }
         });
-        console.log("was ein scheiß");
     }
 
     onSelected_tCollector($event) {
@@ -252,8 +217,6 @@ export class RegistrationFormPage implements OnInit {
     onToggle_bPartnerAdmin($event) {
         this.bPartnerAdmin = $event['detail']['checked'];
     }
-
-
 
     hideShowPassword() {
         this.passwordType = this.passwordType === 'text' ? 'password' : 'text';

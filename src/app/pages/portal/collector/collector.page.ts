@@ -11,7 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class CollectorPage implements OnInit {
 
-  currentPageTitle = '/data-collector';
+  currentPageTitle = '/data';
 
   constructor(private platform: Platform, private splashScreen: SplashScreen, private statusBar: StatusBar) {
     console.log("jooooo");
@@ -21,9 +21,30 @@ export class CollectorPage implements OnInit {
   appPages = [
     {
       title: 'Meine Daten',
-      url: 'data-collector',
-      icon: 'film'
-    }
+      url: 'data',
+      icon: 'person'
+    },
+    {
+      title: 'Bestellen',
+      url: 'order',
+      icon: 'create'
+    },
+    {
+      title: 'Handys versenden',
+      url: 'send',
+      icon: 'send'
+    },
+    {
+      title: 'Statistiken',
+      url: 'statistics',
+      icon: 'information'
+    },
+    {
+      title: 'Download-Bereich',
+      url: 'download',
+      icon: 'download'
+    },
+
   ]
   selectedIndex: number;
 

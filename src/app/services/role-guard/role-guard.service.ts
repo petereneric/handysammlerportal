@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router, CanActivate, ActivatedRouteSnapshot} from "@angular/router";
-import {AuthApiService} from "./auth-api.service";
 import jwt_decode from "jwt-decode";
+import {AuthApiService} from "../auth-api/auth-api.service";
 
 
 @Injectable({
@@ -15,7 +15,7 @@ export class RoleGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
 
     return new Promise((resolve) => {
-      this.authApiService.authenticate().then((response) => {
+      this.authApiService.authenticate().subscribe((response) => {
         // Save token
         localStorage.setItem('token', response.body['token']);
 
@@ -30,12 +30,12 @@ export class RoleGuardService implements CanActivate {
           this.router.navigate(['collector']);
         }
         if (role == 1) {
-          this.router.navigate(['portal-partner-component']);
+          this.router.navigate(['partner']);
         }
 
         // Return
         resolve(true);
-      }).catch((error)=>{
+      }, error => {
         switch (error.status) {
           case 401:
           case 440:
@@ -48,7 +48,7 @@ export class RoleGuardService implements CanActivate {
         }
         console.log(error);
         resolve(false);
-      });
+      })
     })
   }
 }

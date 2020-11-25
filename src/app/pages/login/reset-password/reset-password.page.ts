@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
-import {ConnApiService} from "../../../services/conn-api.service";
-import {DataService} from "../../../services/data.service";
+import {ConnApiService} from "../../../services/conn-api/conn-api.service";
+import {DataService} from "../../../services/data/data.service";
+import {HttpResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {AlertController} from "@ionic/angular";
 
 @Component({
     selector: 'app-reset-password',
@@ -14,28 +17,41 @@ export class ResetPasswordPage implements OnInit {
         inputEmail: ['']
     })
 
-    constructor(private fb: FormBuilder, private connApi: ConnApiService, private data: DataService) {
+    constructor(private fb: FormBuilder, private connApi: ConnApiService, private data: DataService, public router: Router, public alertController: AlertController) {
     }
+
+    role: number;
 
     ngOnInit() {
-        this.data.currentRole.subscribe(role => console.log("Role"+role))
+        this.data.currentRole.subscribe(role => console.log(this.role = role))
     }
 
-    onResetPassword() {
+    private onResetPassword() {
         let json = {
-            'role': 0,
+            'role': this.role,
             'email':this.resetForm.get('inputEmail').value
         }
-        let promise = this.connApi.post(ConnApiService.postMailResetPassword, json);
-        promise.then((response) => {
-            if (response.status == 200) {
+        console.log(json);
+        this.connApi.post(ConnApiService.postMailResetPassword, json).subscribe((data: HttpResponse<any>) => {
+            console.log("jooo");
+            if (data.status == 200) {
                 console.log("Reset-Password Mail sent")
+                this.alertCheckEmail();
             }
-        }).catch((error) => {
+        }, error => {
             if (error.status == 400) {
                 console.log("Email Adress unknown");
             }
-            console.log(error.message);
-        })
+        });
+    }
+
+    async alertCheckEmail() {
+        const alert = await this.alertController.create({
+            header: 'E-Mail versendet',
+            message: 'Wir haben Dir soeben eine E-Mail zum Zurücksetzen Deines Passworts gesendet.',
+            buttons: [{text: 'Zurück zum Login', handler: () => {this.router.navigate(['login'])}}]
+        });
+
+        await alert.present();
     }
 }

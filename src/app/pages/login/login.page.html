@@ -7,7 +7,7 @@
 <!-- Default Segment -->
 
 <ion-content class="ion-margin-vertical">
-  <ion-segment [(ngModel)]="type" (ionChange)="segmentChanged($event)">
+  <ion-segment [(ngModel)]="selectedRole" (ionChange)="segmentChanged($event)">
     <ion-segment-button value=0>
       <ion-label>Sammler</ion-label>
 
@@ -17,7 +17,7 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div [ngSwitch]="type">
+  <div [ngSwitch]="selectedRole">
     <form *ngSwitchCase="0" [formGroup]="loginFormCollector" (ngSubmit)="onLoginCollector()">
       <ion-item lines="full" class="ion-item">
         <ion-label position="floating">E-Mail</ion-label>
@@ -29,22 +29,42 @@
       </ion-item>
 
       <ion-row class="ion-row">
-        <ion-col>
-          <ion-button type="submit">Anmelden</ion-button>
+        <ion-col class="ion-text-center">
+          <ion-button class=ion-button type="submit">Anmelden</ion-button>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
-          <ion-button class=".ion_button"(click)="onResetPassword()">Passwort vergessen</ion-button>
+        <ion-col class="ion-text-center">
+          <ion-button class=ion-button-two (click)="onResetPassword()">Passwort vergessen</ion-button>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col>
-          <ion-button class=".ion_button"(click)="navRegisterCollector()">Registrieren</ion-button>
+        <ion-col class="ion-text-center">
+          <ion-button class=ion-button-two (click)="navRegisterCollector()">Registrieren</ion-button>
         </ion-col>
       </ion-row>
     </form>
-    <p *ngSwitchCase="1">Partner</p>
+    <form *ngSwitchCase="1" [formGroup]="loginFormPartner" (ngSubmit)="onLoginCollector()">
+    <ion-item lines="full" class="ion-item" [class.ion-invalid]=true>
+      <ion-label position="floating">E-Mail</ion-label>
+      <ion-input type="text" required formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item lines="full" class="ion-item">
+      <ion-label position="floating">Passwort</ion-label>
+      <ion-input type="text" formControlName="password" required></ion-input>
+    </ion-item>
+
+    <ion-row class="ion-row">
+      <ion-col class="ion-text-center">
+        <ion-button class=ion-button type="submit">Anmelden</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button class=ion-button-two (click)="onResetPassword()">Passwort vergessen</ion-button>
+      </ion-col>
+    </ion-row>
+    </form>
   </div>
 </ion-content>
 
