@@ -1,9 +1,31 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>statistics</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Statistiken</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <ion-tabs>
+
+    <ion-tab-bar slot="top">
+
+      <ion-tab-button tab="devices">
+        <ion-icon name="phone-portrait"></ion-icon>
+        <ion-label>Handys</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="ressources">
+        <ion-icon name="leaf"></ion-icon>
+        <ion-label>Ressourcen</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="ranking">
+        <ion-icon name="trophy"></ion-icon>
+        <ion-label>Ranking</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+
+  </ion-tabs>
 
 </ion-content>
