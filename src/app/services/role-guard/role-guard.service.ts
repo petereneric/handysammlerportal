@@ -17,10 +17,10 @@ export class RoleGuardService implements CanActivate {
     return new Promise((resolve) => {
       this.authApiService.authenticate().subscribe((response) => {
         // Save token
-        localStorage.setItem('token', response.body['token']);
+        localStorage.setItem('token', response.headers.get('authorization'));
 
         // Get role from token
-        let token:string = response.body['token'];
+        let token:string = response.headers.get('authorization');
         let tokenInfo = jwt_decode(token);
         let role = tokenInfo['role'];
 

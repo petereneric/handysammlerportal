@@ -48,7 +48,8 @@ export class LoginPage implements OnInit {
         this.connApiService.post(ConnApiService.postLogin, data).subscribe((data: HttpResponse<any>) => {
             if (data.status == 200) {
                 // Save token
-                localStorage.setItem('token', data.body['token']);
+                console.log(data.headers.get('authorization'));
+                localStorage.setItem('token', data.headers.get('authorization'));
 
                 // Navigate
                 this.router.navigate(['app-root']);

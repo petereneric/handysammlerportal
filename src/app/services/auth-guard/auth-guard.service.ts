@@ -16,10 +16,12 @@ export class AuthGuardService implements CanActivate {
         //var token = currentUser.token;
         return new Promise((resolve) => {
             this.authApiService.authenticate().subscribe((response) => {
+                //Log
                 console.log('AuthGuard passed');
+                console.log(response.headers.get('authorization'));
 
                 // Save token
-                localStorage.setItem('token', response.body['token']);
+                localStorage.setItem('token', response.headers.get('authorization'));
 
                 // return to router
                 resolve(true);

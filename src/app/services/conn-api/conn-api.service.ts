@@ -35,7 +35,8 @@ export class ConnApiService {
             headers: new HttpHeaders({'Content-Type': 'application/json'}).set('Authorization', `Bearer ${localStorage.getItem('token')}`),
             observe: 'response' as 'body'
         }
-        return this.http.get<HttpResponse<any>>(`${this.urlApi}${url}`, httpOptions);
+        console.log(httpOptionsToken);
+        return this.http.get<HttpResponse<any>>(`${this.urlApi}${url}`, httpOptionsToken);
     }
 
     post(url: string, json: any) {
@@ -49,6 +50,14 @@ export class ConnApiService {
             observe: 'response' as 'body'
         }
         return this.http.post<HttpResponse<any>>(`${this.urlApi}${url}`, json, httpOptionsToken);
+    }
+
+    safePut(url: string, json: any) {
+        var httpOptionsToken = {
+            headers: new HttpHeaders({'Content-Type': 'application/json'}).set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+            observe: 'response' as 'body'
+        }
+        return this.http.put<HttpResponse<any>>(`${this.urlApi}${url}`, json, httpOptionsToken);
     }
 
 

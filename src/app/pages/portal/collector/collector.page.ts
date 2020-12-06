@@ -25,7 +25,7 @@ export class CollectorPage implements OnInit {
       icon: 'person'
     },
     {
-      title: 'Bestellen',
+      title: 'Sammel-Materialien bestellen',
       url: 'order',
       icon: 'create'
     },

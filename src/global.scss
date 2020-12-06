@@ -14,17 +14,50 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+// Text
+$textPrimary: #212121;
+$textSecondary: #757575;
+$textTertiary: #BDBDBD;
+
+// General
 $brown: #fff329;
 $white: #ffffff;
 $green: #8BC34A;
 $green: #8BC34A;
+
+// Special
+$divider: #BDBDBD;
 
 ion-title {
   color: $white;
 }
 
 p {
-  color: $brown;
+  line-height: 1.6;
+}
+
+ion-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: $green;
+}
+
+.ion-col-header {
+  background: $green;
+  color: $white !important;
+}
+
+.text-page-information {
+  color: $textSecondary;
+  size: 28px;
+  text-align: center;
+  padding-top: 32px;
+}
+
+.text-tertiary {
+  color: $textTertiary;
 }
 
 ion-button {
