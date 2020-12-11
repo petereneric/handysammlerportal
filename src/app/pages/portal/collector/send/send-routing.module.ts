@@ -6,8 +6,18 @@ import { SendPage } from './send.page';
 const routes: Routes = [
   {
     path: '',
-    component: SendPage
-  }
+    component: SendPage,
+    children: [
+      {
+        path: 'add',
+        loadChildren: () => import('./add/add.module').then( m => m.AddPageModule)
+      },
+      {
+        path: 'history',
+        loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
+      }
+    ]
+  },
 ];
 
 @NgModule({

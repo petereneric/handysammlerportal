@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -14,6 +15,7 @@ const httpOptions = {
 
 export class ConnApiService {
     private urlApi: string = 'https://www.svp-api.com/api/public/index.php/'
+    private urlServer: string = 'https://www.svp-api.com/'
 
     // Registration
     public static getCollectorTypes: string = 'registration/collection-types'
@@ -60,5 +62,7 @@ export class ConnApiService {
         return this.http.put<HttpResponse<any>>(`${this.urlApi}${url}`, json, httpOptionsToken);
     }
 
-
+    safeDownload(url: string): any {
+        return this.http.get(`${this.urlApi}${url}`, {responseType: 'blob'});
+    }
 }
