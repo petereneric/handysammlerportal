@@ -11,3 +11,20 @@ p {
 .text-page-information {
   cursor: pointer;
 }
+
+ion-select {
+  okText: "OKAY";
+}
+
+.ion-select-option .alert-wrapper {
+  justify-content: center !important;
+  text-align: center;
+
+  .alert-button-group {
+    justify-content: center;
+  }
+}
+
+.my-custom-interface .select-interface-option {
+  --color: #79193b;
+}

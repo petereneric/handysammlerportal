@@ -74,6 +74,21 @@ ion-button {
   margin-top: 24px;
 }
 
+.my-alert .alert-wrapper {
+  .alert-button-group {
+    justify-content: center;
+  }
+  .alert-sub-title {
+    text-align: center;
+  }
+  .alert-message {
+    text-align: center;
+  }
+  .alert-title {
+    text-align: center;
+  }
+}
+
 
 
 

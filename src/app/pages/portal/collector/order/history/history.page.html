@@ -65,12 +65,12 @@
       </ion-col>
       <ion-col size="1.8">
         <div>
-          {{row.DATE_SHIPPING}}
+          {{row.DATE_SHIPPING != null ? row.DATE_SHIPPING : '-'}}
         </div>
       </ion-col>
       <ion-col>
         <div>
-          {{row.ID_TRACKING}}
+          {{row.ID_TRACKING != null ? row.ID_TRACKING : '-'}}
         </div>
       </ion-col>
     </ion-row>

@@ -4,7 +4,7 @@
 
             <ion-item *ngIf="boxMax > 0">
                 <ion-label>Mobile-Boxen</ion-label>
-                <ion-select [(ngModel)]="boxOrder" [compareWith]="compare" [disabled]="boxAvailable == 0"
+                <ion-select [cancelText]="'Zurück'" [(ngModel)]="boxOrder" [compareWith]="compare" [disabled]="boxAvailable == 0"
                             (ionChange)="onChangedBoxOrder()">
                     <ion-select-option *ngFor="let boxOrder of boxChoice"
                                        [value]="boxOrder">{{boxOrder}}</ion-select-option>
@@ -13,7 +13,7 @@
 
             <ion-item *ngIf="bricolageMax > 0">
                 <ion-label>Mobile-Boxen (Bastelset)</ion-label>
-                <ion-select [(ngModel)]="bricolageOrder" [compareWith]="compare" [disabled]="bricolageAvailable == 0"
+                <ion-select [cancelText]="'Zurück'" [(ngModel)]="bricolageOrder" [compareWith]="compare" [disabled]="bricolageAvailable == 0"
                             (ionChange)="onChangedBricolageOrder()">
                     <ion-select-option *ngFor="let bricolageOrder of bricolageChoice"
                                        [value]="bricolageOrder">{{bricolageOrder}}</ion-select-option>
@@ -22,7 +22,7 @@
 
             <ion-item>
                 <ion-label>Flyer</ion-label>
-                <ion-select [(ngModel)]="flyerOrder" [compareWith]="compare"
+                <ion-select [cancelText]="'Zurück'" [(ngModel)]="flyerOrder" [compareWith]="compare"
                             [disabled]="flyerAvailable == 0" (ionChange)="onChangedFlyerOrder()">
                     <ion-select-option *ngFor="let flyerOrder of flyerChoice"
                                        [value]="flyerOrder">{{flyerOrder}}</ion-select-option>
@@ -31,9 +31,9 @@
 
             <ion-item>
                 <ion-label>Poster</ion-label>
-                <ion-select [(ngModel)]="posterOrder" [compareWith]="compare" [disabled]="posterAvailable == 0"
+                <ion-select [cancelText]="'Zurück'" [(ngModel)]="posterOrder" [compareWith]="compare" [disabled]="posterAvailable == 0"
                             (ionChange)="onChangedPosterOrder()">
-                    <ion-select-option *ngFor="let posterOrder of posterChoice"
+                    <ion-select-option [ngClass]="'.ion-select-option'" *ngFor="let posterOrder of posterChoice"
                                        [value]="posterOrder">{{posterOrder}}</ion-select-option>
                 </ion-select>
             </ion-item>

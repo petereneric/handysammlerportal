@@ -22,14 +22,14 @@ export class AddPage implements OnInit {
     private posterAvailable;
     private boxMax;
     private bricolageMax;
-    private boxChoice = [];
-    private bricolageChoice = [];
-    private flyerChoice = [];
-    private posterChoice = [];
-    private boxOrder = 0;
-    private bricolageOrder = 0;
-    private flyerOrder = 0;
-    private posterOrder = 0;
+    private boxChoice = [0];
+    private bricolageChoice = [0];
+    private flyerChoice = [0];
+    private posterChoice = [0];
+    private boxOrder: number = 0;
+    private bricolageOrder: number = 0;
+    private flyerOrder: number = 0;
+    private posterOrder: number = 0;
 
     private orderDisabled = false;
     private orderTaken = false;
@@ -38,11 +38,15 @@ export class AddPage implements OnInit {
     private flyerSelected = false;
     private posterSelected = false;
 
+
+
     constructor(private connApi: ConnApiService, private alertController: AlertController, public router: Router) {
     }
 
     ngOnInit() {
         this.available();
+
+
     }
 
     onOrder() {
@@ -100,6 +104,7 @@ export class AddPage implements OnInit {
     }
 
     onChangedPosterOrder() {
+        console.log("jo");
         if (!this.posterSelected) this.posterSelected = true;
     }
 
@@ -108,6 +113,7 @@ export class AddPage implements OnInit {
         const alert = await this.alertController.create({
             header: 'Bestell-Limit erreicht',
             message: 'Leider hast Du Dein Bestell-Limit erreicht. Weitere Bestellungen sind nächstes Jahr wieder möglich!',
+            cssClass: 'my-alert',
             buttons: ['Ok']
         });
 
@@ -150,7 +156,7 @@ export class AddPage implements OnInit {
             // Box
             this.boxAvailable = data.body['boxAvailable'];
             if (this.boxAvailable > 0) {
-                for (var i = 0; i <= this.boxAvailable; i++) {
+                for (var i = 1; i <= this.boxAvailable; i++) {
                     this.boxChoice.push(i);
                 }
             }
@@ -158,7 +164,7 @@ export class AddPage implements OnInit {
             // Bricolage
             this.bricolageAvailable = data.body['bricolageAvailable'];
             if (this.bricolageAvailable > 0) {
-                for (var i = 0; i <= this.bricolageAvailable; i++) {
+                for (var i = 1; i <= this.bricolageAvailable; i++) {
                     this.bricolageChoice.push(i);
                 }
             }
@@ -166,8 +172,7 @@ export class AddPage implements OnInit {
             // Flyer
             this.flyerAvailable = data.body['flyerAvailable'];
             if (this.flyerAvailable > 0) {
-                for (var i = 0; i <= this.flyerAvailable; i += 50) {
-                    console.log("heeee");
+                for (var i = 50; i <= this.flyerAvailable; i += 50) {
                     this.flyerChoice.push(i);
                 }
             }
@@ -176,7 +181,7 @@ export class AddPage implements OnInit {
             // Poster
             this.posterAvailable = data.body['posterAvailable'];
             if (this.posterAvailable > 0) {
-                for (var i = 0; i <= this.posterAvailable; i += 5) {
+                for (var i = 5; i <= this.posterAvailable; i += 5) {
                     this.posterChoice.push(i);
                 }
             }

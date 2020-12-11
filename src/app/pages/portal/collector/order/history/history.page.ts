@@ -17,8 +17,6 @@ export class HistoryPage implements OnInit {
   private boxVisible: boolean;
   private bricolageVisible: boolean;
 
-  private sizeColCreated = 10;
-
 
   constructor(private connApi: ConnApiService) { }
 
