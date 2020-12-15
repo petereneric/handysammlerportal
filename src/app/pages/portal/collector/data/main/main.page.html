@@ -1,1 +1,30 @@
+<ion-content>
+    <form [formGroup]="fgCollector" (ngSubmit)="onSave()">
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Sammlername</ion-label>
+            <ion-input [ngModel]="" type="text" required formControlName="cName"></ion-input>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Namenszusatz (Abteilung, ..)</ion-label>
+            <ion-input [ngModel]="" type="text" required formControlName="cName"></ion-input>
+        </ion-item>
+        <ion-list>
+            <ion-item>
+                <ion-label>Bereich/Branche</ion-label>
+                <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'" (ionChange)="onSelectedType() ">
+                    <ion-select-option *ngFor="let type of typesCollector" [value]="type['id']">{{type.name}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
 
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Sammlername</ion-label>
+            <ion-input [ngModel]="" type="text" required formControlName="cName"></ion-input>
+        </ion-item>
+        <ion-item lines="full" class="ion-item">
+            <ion-label position="floating">Sammlername</ion-label>
+            <ion-input [ngModel]="" type="text" required formControlName="cName"></ion-input>
+        </ion-item>
+    </form>
+
+</ion-content>
