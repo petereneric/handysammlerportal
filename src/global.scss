@@ -44,20 +44,41 @@ ion-spinner {
   color: $green;
 }
 
-.ion-col-header {
-  background: $green;
+.ion-col-table-header {
+  background: $textSecondary;
   color: $white !important;
+  border-color: #dbdbdb !important;
+  border-width: 1px !important;
+  border-style:solid; margin-bottom : -1px !important;
+  margin-left: -1px !important;
+}
+
+.ion-col-table {
+  border-color: #dbdbdb !important;
+  border-width: 1px !important;
+  border-style:solid; margin-bottom : -1px !important;
+  margin-left: -1px !important;
+  color: #757575 !important;
 }
 
 .text-head {
   color: $textPrimary;
-  font-size: 24px;
-  text-transform: uppercase;
+  font-size: 18px;
+  margin-bottom: 8px;
 }
 
-.text-content {
+.text-list {
   color: $textSecondary;
   font-size: 14px;
+  line-height: 1.5;
+}
+
+.text-block-element {
+  background: #f1f1f1;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 16px;
 }
 
 .text-page-information {

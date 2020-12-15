@@ -63,6 +63,9 @@ export class ConnApiService {
     }
 
     safeDownload(url: string): any {
-        return this.http.get(`${this.urlApi}${url}`, {responseType: 'blob'});
+        return this.http.get(`${this.urlApi}${url}`, {
+            headers: new HttpHeaders({'Content-Type': 'application/json'}).set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+            responseType: 'blob'
+        });
     }
 }

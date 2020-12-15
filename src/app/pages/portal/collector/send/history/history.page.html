@@ -1,9 +1,68 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>history</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-grid class="ion-content-table">
+    <ion-row>
+      <ion-col [ngClass]="'ion-col-table-header'" size="2.7">
+        <div>
+          Sendungsnummer
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table-header'" size="2">
+        <div>
+          Erstellt am
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table-header'" size="2">
+        <div>
+          Zuletzt bearbeitet
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
+        <div>
+          Status
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
+        <div>
+          Handys
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table-header'">
+        <div>
+          Spende
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let row of records">
+      <ion-col [ngClass]="'ion-col-table'" size="2.7">
+        <div>
+          {{row.shippingNumber != 0 ? row.shippingNumber : '-'}}
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table'" size="2">
+        <div>
+          {{row.creation}}
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table'" size="2">
+        <div>
+          {{row.lastUpdate}}
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table'" size="1.8">
+        <div>
+          {{row.status != 0 ? row.status : '-'}}
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table'" size="1.5">
+        <div>
+          {{row.devices != 0 ? row.devices : '-'}}
+        </div>
+      </ion-col>
+      <ion-col [ngClass]="'ion-col-table'">
+        <div>
+          {{row.payment != 0 ? row.payment : '-'}}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
