@@ -25,6 +25,7 @@ export class ConnApiService {
     public static postMailResetPassword: string = "mail/reset-password"
     public static postLogin: string = "login"
 
+
     constructor(private http: HttpClient) {
     }
 
