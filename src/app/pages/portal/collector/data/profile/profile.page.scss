@@ -1,8 +1,3 @@
-.ion-button {
-  max-width: 60% !important;
-  margin: 25px auto;
-}
-
 // Input - Underline -- Not working in global settings
 :host {
   .item-interactive.ion-invalid{
@@ -11,8 +6,11 @@
   .item-interactive.ion-valid{
     --highlight-background: #FF !important;
   }
+  .item-interactive.ion-select-option{
+    --highlight-background: #FF !important;
+  }
 }
 
-
-
-
+.ion-button-two {
+  margin-top: 8px;
+}

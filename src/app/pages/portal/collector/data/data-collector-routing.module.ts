@@ -1,38 +1,40 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
-import { DataCollectorPage } from './data-collector.page';
+import {DataCollectorPage} from './data-collector.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: DataCollectorPage,
-    children: [
-      {
-        path: 'main',
-        loadChildren: () => import('./main/main.module').then( m => m.MainPageModule)
-      },
-      {
-        path: 'public',
-        loadChildren: () => import('./public/public.module').then( m => m.PublicPageModule)
-      },
-      {
-        path: 'locations',
-        loadChildren: () => import('./locations/locations.module').then( m => m.LocationsPageModule)
-      },
-      {
-        path: 'donation',
-        loadChildren: () => import('./donation/donation.module').then( m => m.DonationPageModule)
-      },
-    ]
-  },
-
-
-
+    {
+        path: 'tabs',
+        component: DataCollectorPage,
+        children: [
+            {
+                path: 'main',
+                loadChildren: () => import('./main/main.module').then(m => m.MainPageModule)
+            },
+            {
+                path: 'profile',
+                loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+            },
+            {
+                path: 'locations',
+                loadChildren: () => import('./locations/locations.module').then(m => m.LocationsPageModule)
+            },
+            {
+                path: 'donation',
+                loadChildren: () => import('./donation/donation.module').then(m => m.DonationPageModule)
+            },
+        ]
+    },
+    {
+        path: '',
+        redirectTo: 'tabs/main'
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule],
 })
-export class DataCollectorPageRoutingModule {}
+export class DataCollectorPageRoutingModule {
+}

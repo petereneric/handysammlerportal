@@ -63,6 +63,20 @@ export class ConnApiService {
         return this.http.put<HttpResponse<any>>(`${this.urlApi}${url}`, json, httpOptionsToken);
     }
 
+    safeUpload(url: string, data: any) {
+        var httpOptionsToken = {
+            headers: new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+            observe: 'response' as 'body'
+        }
+        return this.http.post<HttpResponse<any>>(`${this.urlApi}${url}`, data, httpOptionsToken);
+    }
+
+    safeDownloadPDF(url: string): any {
+        return this.http.get(`${this.urlApi}${url}`, {
+            headers: new HttpHeaders({'Content-Type': 'application/json'}).set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+            responseType: 'blob'
+        });
+    }
     safeDownload(url: string): any {
         return this.http.get(`${this.urlApi}${url}`, {
             headers: new HttpHeaders({'Content-Type': 'application/json'}).set('Authorization', `Bearer ${localStorage.getItem('token')}`),

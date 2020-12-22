@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl} from "@angular/forms";
-import {ConnApiService} from "../../../../../services/conn-api/conn-api.service";
-import {HttpResponse} from "@angular/common/http";
-import {element} from "protractor";
-import {AlertController, ToastController} from "@ionic/angular";
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {ConnApiService} from '../../../../../services/conn-api/conn-api.service';
+import {HttpResponse} from '@angular/common/http';
+import {element} from 'protractor';
+import {AlertController, ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-main',
@@ -13,55 +13,46 @@ import {AlertController, ToastController} from "@ionic/angular";
 export class MainPage implements OnInit {
 
     // Urls
-    private urlCollector = 'collector/collector'
-    private urlTypeNames = 'collector/type-names'
-    private urlSave = 'collector/main'
+    private urlCollector = 'collector/main';
+    private urlTypeNames = 'collector/type-names';
+    private urlSave = 'collector/main';
 
     // IdentAddress
     bAddressIdentSelected: boolean;
 
     // FormBuilder
     fgCollector = this.formBuilder.group({
-        cName: [''],
-        cNameDetails: [''],
-        cStreet: [''],
-        cStreetNumber: [''],
-        cZip: [''],
-        cCity: [''],
-        cCountry: [''],
-        cPrenamePerson: [''],
-        cSurnamePerson: [''],
-        cTitlePerson: [''],
-        cPhoneFixedLine: [''],
-        cPhoneMobile: [''],
-        cEmail: [''],
-        cEmailCC: [''],
-        cShippingNameOne: [''],
-        cShippingNameTwo: [''],
-        cShippingNameThree: [''],
-        cShippingStreet: [''],
-        cShippingStreetNumber: [''],
-        cShippingZip: [''],
-        cShippingCity: [''],
-        cShippingCountry: [''],
+        cName: ['', [Validators.required, Validators.maxLength(50)]],
+        cNameDetails: ['', [Validators.maxLength(50)]],
+        cStreet: ['', [Validators.required, Validators.maxLength(50)]],
+        cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
+        cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+        cCity: ['', [Validators.required, Validators.maxLength(50)]],
+        cPrenamePerson: ['', [Validators.required, Validators.maxLength(50)]],
+        cSurnamePerson: ['', [Validators.required, Validators.maxLength(50)]],
+        cPhoneFixedLine: ['', [Validators.maxLength(50)]],
+        cPhoneMobile: ['', [Validators.maxLength(50)]],
+        cEmail: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(50)]],
+        cEmailCC: ['', [Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(50)]],
+        cShippingNameOne: ['', [Validators.required, Validators.maxLength(50)]],
+        cShippingNameTwo: ['', [Validators.maxLength(50)]],
+        cShippingNameThree: ['', [Validators.maxLength(50)]],
+        cShippingStreet: ['', [Validators.required, Validators.maxLength(50)]],
+        cShippingStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
+        cShippingZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+        cShippingCity: ['', [Validators.required, Validators.maxLength(50)]],
     });
 
     // Variables
-    oType;
+    cType = null;
     lTypes: any[] = [];
-    cTitle: '';
-    lTitles: any[] = [
-        {cName: 'Herr'},
-        {cName: 'Frau'},
-        {cName: 'Herr Dr.'},
-        {cName: 'Frau Dr.'},
-    ];
-    bFormally: boolean;
-    cCountry: string;
-    cShippingCountry: string;
-    lCountries: any[] = [
-        {cName: 'Germany'}
-    ]
+    cTitle = null;
+    lTitles: any[] = [{cName: 'Herr'}, {cName: 'Frau'}, {cName: 'Herr Dr.'}, {cName: 'Frau Dr.'},];
+    bFormally: boolean = true;
+    cCountry: null;
+    cShippingCountry: null;
+    lCountries: any[] = [{cName: 'Deutschland'}];
+    bSubmitted = false;
 
     constructor(private connApi: ConnApiService, private formBuilder: FormBuilder, public toastController: ToastController, public alertController: AlertController) {
     }
@@ -69,17 +60,14 @@ export class MainPage implements OnInit {
     ngOnInit() {
         // types
         this.connApi.safeGet(this.urlTypeNames).subscribe((data: HttpResponse<any>) => {
-            console.log(data.body);
             this.lTypes = data.body;
         });
 
         // collector
         this.connApi.safeGet(this.urlCollector).subscribe((response) => {
             let collector = response.body;
-            console.log(collector);
 
             // controls
-
             this.fgCollector.controls['cName'].setValue(collector.cName);
 
             this.fgCollector.controls['cNameDetails'].setValue(collector.cNameDetails);
@@ -95,7 +83,7 @@ export class MainPage implements OnInit {
             this.fgCollector.controls['cEmailCC'].setValue(collector.cEmailCC);
             this.fgCollector.controls['cShippingNameOne'].setValue(collector.cShippingNameOne);
             this.fgCollector.controls['cShippingNameTwo'].setValue(collector.cShippingNameTwo);
-            //this.fgCollector.controls['cShippingNameThree'].setValue(collector.cShippingNameThree);
+            this.fgCollector.controls['cShippingNameThree'].setValue(collector.cShippingNameThree);
             this.fgCollector.controls['cShippingStreet'].setValue(collector.cShippingStreet);
             this.fgCollector.controls['cShippingStreetNumber'].setValue(collector.cShippingStreetNumber);
             this.fgCollector.controls['cShippingZip'].setValue(collector.cShippingZip);
@@ -104,9 +92,9 @@ export class MainPage implements OnInit {
             // type
             this.lTypes.forEach((element) => {
                 if (collector.cType === element.cName) {
-                    this.oType = collector.cType;
+                    this.cType = collector.cType;
                 }
-            })
+            });
 
             // title
             this.cTitle = collector.cTitlePerson;
@@ -121,18 +109,26 @@ export class MainPage implements OnInit {
             this.cShippingCountry = collector.cShippingCountry;
 
             // addressIdentical
-            this.bAddressIdentSelected = this.compareAddress()
-        })
+            this.bAddressIdentSelected = this.compareAddress();
+        });
     }
 
     onSave() {
+        this.bSubmitted = true;
+
+        // check for invalid input
+        if (!this.fgCollector.valid || this.cType == null || this.cCountry == null || this.cShippingCountry == null || this.cTitle == null) {
+            this.alertInvalid();
+            return;
+        }
+
+        // prepare data
         let kType: number;
         this.lTypes.forEach((element) => {
-            if (element.cName === this.oType) {
+            if (element.cName === this.cType) {
                 kType = element.id;
             }
-        })
-        console.log("ccountry: "+this.cCountry);
+        });
         let collector =
             {
                 cName: this.fgCollector.get('cName').value,
@@ -161,21 +157,21 @@ export class MainPage implements OnInit {
                 cShippingCountry: this.cShippingCountry
             };
 
-        console.log(collector);
+        // send data
         this.connApi.safePost(this.urlSave, collector).subscribe((data: HttpResponse<any>) => {
-            console.log(data);
-            console.log("jo");
             if (data.status == 200) {
-                this.toastSaved()
+                this.toastSaved();
             }
         }, error => {
-
-            console.log(error.message);
             if (error.status == 406) {
-                this.alertCollectorNameForgiven()
+                this.alertCollectorNameForgiven();
             }
         });
 
+    }
+
+    get errorControl() {
+        return this.fgCollector.controls;
     }
 
     onToggleFormally($event: any) {
@@ -190,7 +186,7 @@ export class MainPage implements OnInit {
             this.fgCollector.get('cStreetNumber').value === this.fgCollector.get('cShippingStreetNumber').value &&
             this.fgCollector.get('cZip').value === this.fgCollector.get('cShippingZip').value &&
             this.fgCollector.get('cCity').value === this.fgCollector.get('cShippingCity').value &&
-            this.fgCollector.get('cCountry').value === this.fgCollector.get('cShippingCountry').value)
+            this.cCountry === this.cShippingCountry);
     }
 
     onChangeAddress() {
@@ -208,24 +204,36 @@ export class MainPage implements OnInit {
 
     onChangeAddressIdent($event: any) {
         this.bAddressIdentSelected = $event['detail']['checked'];
-        this.onChangeAddress()
+        this.onChangeAddress();
     }
 
     // Toasts
     async toastSaved() {
         const toast = await this.toastController.create({
-            message: 'Deine Daten wurden gespeichert',
-            duration: 3000
+            message: 'Deine Daten wurden erfolgreich gespeichert.',
+            duration: 2500,
+            cssClass: 'my-toast',
+            position: 'middle'
         });
         await toast.present();
     }
 
     async alertCollectorNameForgiven() {
         const alert = await this.alertController.create({
-            //cssClass: 'my-custom-class',
-            header: 'Sammlername',
-            subHeader: 'Sammlername vergeben',
-            message: 'Ihre Daten konnten nicht gespeichert werden. Bitte geben Sie einen anderen Sammlernamen ein',
+            header: 'Sammlername vergeben',
+            message: 'Ihre Daten konnten nicht gespeichert werden. Bitte geben Sie einen anderen Sammlernamen ein.',
+            cssClass: 'my-alert',
+            buttons: ['Ok']
+        });
+
+        await alert.present();
+    }
+
+    async alertInvalid() {
+        const alert = await this.alertController.create({
+            header: 'Fehlerhafte Eingabe',
+            message: 'Bitte überprüfe deine Daten und korrigiere diese an den markierten Stellen.',
+            cssClass: 'my-alert',
             buttons: ['Ok']
         });
 

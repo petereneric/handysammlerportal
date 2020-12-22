@@ -1,0 +1,42 @@
+<ion-content class="input-background">
+  <div class="input-block-element">
+    <form [formGroup]="fgCollector" (ngSubmit)="onSave()">
+      <ion-row>
+        <ion-col>
+          <ion-row class="text-head">Profildaten</ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item class="no-underline">
+            <ion-label class="input-label" position="floating">Steckbrief</ion-label>
+            <ion-textarea type="text" formControlName="cAbout" auto-grow="true" rows="5" maxlength="500" placeholder="Erzähl uns über euch als Sammler.."></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item class="no-underline">
+            <ion-label class="input-label" position="floating">Motivation</ion-label>
+            <ion-textarea type="text" formControlName="cMotivation" auto-grow="true" rows="5" maxlength="500" placeholder="Erzähl uns warum ihr alte Handys sammelt und warum Nachhaltigkeit für euch so wichtig ist.."></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </form>
+  </div>
+  <div class="input-block-element">
+    <ion-row>
+      <ion-col>
+        <ion-row class="text-head">Logo</ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button class="ion-button-two" (click)="onUpload()">Neues Logo hochladen</ion-button>
+      </ion-col>
+    </ion-row>
+    <span style="color:red;" *ngIf="message">{{message}}</span>
+    <input class="ion-button-two "#file type="file" accept='image/*' (change)="preview(file.files)" />
+    <img [src]="imgURL" height="200" *ngIf="imgURL">
+  </div>
+</ion-content>
