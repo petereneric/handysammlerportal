@@ -30,13 +30,23 @@
         <ion-row class="text-head">Logo</ion-row>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row >
       <ion-col>
-        <ion-button class="ion-button-two" (click)="onUpload()">Neues Logo hochladen</ion-button>
+        <img class="my-image" [src]="imgURL" height="100" *ngIf="imgURL">
       </ion-col>
     </ion-row>
-    <span style="color:red;" *ngIf="message">{{message}}</span>
-    <input class="ion-button-two "#file type="file" accept='image/*' (change)="preview(file.files)" />
-    <img [src]="imgURL" height="200" *ngIf="imgURL">
+    <ion-row>
+      <ion-col>
+        <span style="color:red;" *ngIf="message">{{message}}</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button class="ion-button-two" (click)="file.click()">
+          <span>Neues Logo hochladen</span>
+          <input #file type="file" accept='image/*' (change)="preview(file.files)" style="display:none;">
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </div>
 </ion-content>

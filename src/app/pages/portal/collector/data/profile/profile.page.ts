@@ -58,6 +58,7 @@ export class ProfilePage implements OnInit {
     }
 
     preview(files) {
+
         if (files.length === 0) {
             return;
         }
@@ -72,8 +73,10 @@ export class ProfilePage implements OnInit {
         this.imagePath = files;
         reader.readAsDataURL(files[0]);
         reader.onload = (_event) => {
+
             this.imgURL = reader.result;
             console.log(this.imgURL.constructor.name)
+            this.onUpload();
         };
     }
 
