@@ -5,7 +5,7 @@ import {OrderPage} from './order.page';
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'tabs',
         component: OrderPage,
         children: [
             {
@@ -17,8 +17,10 @@ const routes: Routes = [
                 loadChildren: () => import('./history/history.module').then(m => m.HistoryPageModule)
             }]
     },
-
-
+    {
+        path: '',
+        redirectTo: 'tabs/add'
+    },
 ];
 
 @NgModule({

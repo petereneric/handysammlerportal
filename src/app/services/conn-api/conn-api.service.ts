@@ -83,4 +83,12 @@ export class ConnApiService {
             responseType: 'blob'
         });
     }
+
+    safeDelete(url: string) {
+        var httpOptionsToken = {
+            headers: new HttpHeaders({'Content-Type': 'application/json'}).set('Authorization', `Bearer ${localStorage.getItem('token')}`),
+            observe: 'response' as 'body'
+        }
+        return this.http.delete<HttpResponse<any>>(`${this.urlApi}${url}`, httpOptionsToken);
+    }
 }

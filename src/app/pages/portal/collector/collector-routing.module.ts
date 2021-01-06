@@ -7,7 +7,7 @@ import {DataCollectorPage} from "./data/data-collector.page";
 
 const routes: Routes = [
     {
-        path: 'collector',
+        path: 'collector/menu',
         component: CollectorPage,
         canActivate: [AuthGuardService],
         children: [
@@ -32,6 +32,10 @@ const routes: Routes = [
                 loadChildren: () => import('./download/download.module').then(m => m.DownloadPageModule)
             },
         ]
+    },
+    {
+        path: 'collector',
+        redirectTo: 'collector/menu/data'
     },
 
 

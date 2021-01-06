@@ -5,7 +5,7 @@ import { StatisticsPage } from './statistics.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tabs',
     component: StatisticsPage,
     children: [
       {
@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import('./ranking/ranking.module').then( m => m.RankingPageModule)
       }
     ]
+  },
+  {
+    path: '',
+    redirectTo: 'tabs/devices'
   },
 
 ];

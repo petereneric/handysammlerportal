@@ -1,52 +1,78 @@
 <ion-content class="input-background">
-  <div class="input-block-element">
-    <form [formGroup]="fgCollector" (ngSubmit)="onSave()">
-      <ion-row>
-        <ion-col>
-          <ion-row class="text-head">Profildaten</ion-row>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item class="no-underline">
-            <ion-label class="input-label" position="floating">Steckbrief</ion-label>
-            <ion-textarea type="text" formControlName="cAbout" auto-grow="true" rows="5" maxlength="500" placeholder="Erzähl uns über euch als Sammler.."></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item class="no-underline">
-            <ion-label class="input-label" position="floating">Motivation</ion-label>
-            <ion-textarea type="text" formControlName="cMotivation" auto-grow="true" rows="5" maxlength="500" placeholder="Erzähl uns warum ihr alte Handys sammelt und warum Nachhaltigkeit für euch so wichtig ist.."></ion-textarea>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </form>
-  </div>
-  <div class="input-block-element">
-    <ion-row>
-      <ion-col>
-        <ion-row class="text-head">Logo</ion-row>
-      </ion-col>
-    </ion-row>
-    <ion-row >
-      <ion-col>
-        <img class="my-image" [src]="imgURL" height="100" *ngIf="imgURL">
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <span style="color:red;" *ngIf="message">{{message}}</span>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button class="ion-button-two" (click)="file.click()">
-          <span>Neues Logo hochladen</span>
-          <input #file type="file" accept='image/*' (change)="preview(file.files)" style="display:none;">
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </div>
+    <div class="input-block-element">
+        <form [formGroup]="fgProfile">
+            <ion-row>
+                <ion-col>
+                    <ion-row class="text-head">Profildaten</ion-row>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item class="no-underline">
+                        <ion-label class="input-label" position="floating">Steckbrief</ion-label>
+                        <ion-textarea type="text" formControlName="cAbout" auto-grow="true" rows="2" maxlength="500"
+                                      placeholder="Erzähl uns über euch als Sammler.." (ionChange)="onChangeAbout()"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row align="right">
+                <ion-col>
+                    <span [ngClass]="{'input-info': sizeAbout < 500, 'input-invalid': sizeAbout == 500}"
+                    >{{sizeAbout}}/500
+                    </span>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item class="no-underline">
+                        <ion-label class="input-label" position="floating">Motivation</ion-label>
+                        <ion-textarea type="text" formControlName="cMotivation" auto-grow="true" rows="2"
+                                      maxlength="500"
+                                      placeholder="Erzähl uns warum ihr alte Handys sammelt und warum Nachhaltigkeit für euch so wichtig ist.." (ionChange)="onChangeMotivation()"></ion-textarea>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <ion-row align="right">
+                <ion-col>
+                    <span [ngClass]="{'input-info': sizeMotivation < 500, 'input-invalid': sizeMotivation == 500}"
+                    >{{sizeMotivation}}/500
+                    </span>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-button [disabled]="!bProfileDataChanged" (click)="onSaveData()">Profildaten speichern</ion-button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </div>
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Logo</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <img class="my-image" [src]="imgURL" height="100" *ngIf="imgURL">
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button class="ion-button-no-margin" (click)="file.click()">
+                    <span>Neues Logo hochladen</span>
+                    <input #file type="file" max accept='image/png, image/jpg' (change)="preview(file.files)" style="display:none;">
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button *ngIf="bLogo" class="ion-button-two" (click)="onLogoRemove()">Logo entfernen</ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+    <div class="input-block-element">
+        <ion-row class="text-note">Hinweis: Deine Daten werden auf unserer Mobile-Box Website (www.mobile-box.eu) veröffentlicht.
+        </ion-row>
+    </div>
 </ion-content>

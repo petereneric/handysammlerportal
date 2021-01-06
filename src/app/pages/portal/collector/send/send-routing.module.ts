@@ -5,7 +5,7 @@ import { SendPage } from './send.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tabs',
     component: SendPage,
     children: [
       {
@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule)
       }
     ]
+  },
+  {
+    path: '',
+    redirectTo: 'tabs/add'
   },
 ];
 

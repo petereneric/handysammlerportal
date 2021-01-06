@@ -5,7 +5,7 @@ import { DownloadPage } from './download.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tabs',
     component: DownloadPage,
     children: [
       {
@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import('./information/information.module').then( m => m.InformationPageModule)
       }
     ]
+  },
+  {
+    path: '',
+    redirectTo: 'tabs/bills'
   },
 
 ];
