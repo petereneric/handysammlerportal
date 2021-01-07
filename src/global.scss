@@ -163,6 +163,7 @@ ion-button {
 }
 
 .my-alert .alert-wrapper {
+  min-width: 350px !important;
   .alert-button-group {
     justify-content: center;
   }
@@ -212,10 +213,17 @@ ion-toggle {
   --handle-background: #aeaeae;
 }
 
-.ion-select-option .alert-wrapper {
+.ion-select-option.alert-wrapper {
   .alert-button-group {
     justify-content: center;
   }
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.alert-wrapper {
+  width: 40% !important;
+  max-width: 100% !important;
 }
 
 
