@@ -1,0 +1,20 @@
+<div class="location-item">
+  <div [ngClass]="(oLocation.bActive == 1) ? 'location-checkbox-area' : 'location-checkbox-area-deactivated'">
+    <ion-checkbox [ngClass]="{'location-checkbox-deactivated' : oLocation.bActive == 0}" [matTooltip]="oLocation.bActive == 1 ? 'Deaktivieren' : 'Aktivieren'" [checked]="oLocation.bActive == 1" (ionChange)="onChangeActive()"></ion-checkbox>
+  </div>
+  <div class="location-content">
+    <div [ngClass]="(oLocation.bActive == 1) ? 'location-content-title' : 'location-content-title-deactivated'">
+      <span>{{oLocation.cName}}</span>
+    </div>
+    <div [ngClass]="(oLocation.bActive == 1) ? 'location-content-subtitle' : 'location-content-subtitle-deactivated'">
+      <span>{{oLocation.cZip}} {{oLocation.cCity}}</span>
+    </div>
+  </div>
+  <div *ngIf="oLocation.bActive == 1" class="location-icon">
+    <mat-icon (click)="onEdit()" matTooltip="Bearbeiten">edit</mat-icon>
+  </div>
+  <div [ngClass]="(oLocation.bActive == 1) ? 'location-icon' : 'location-icon-deactivated'">
+    <mat-icon (click)="onDelete()" matTooltip="Löschen">delete</mat-icon>
+  </div>
+</div>
+

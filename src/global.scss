@@ -25,6 +25,7 @@ $white: #ffffff;
 $green: #8BC34A;
 $greenLight: #a5d274;
 $red: #c34a4a;
+$background: #f1f1f1;
 
 // Special
 $divider: #BDBDBD;
@@ -204,6 +205,7 @@ ion-item {
 .text-note {
   color: $textTertiary;
   font-size: 13px;
+  line-height: 1.5;
 }
 
 ion-toggle {
@@ -226,6 +228,9 @@ ion-toggle {
   max-width: 100% !important;
 }
 
+.simple-background {
+  background: #f1f1f1;
+}
 
 
 

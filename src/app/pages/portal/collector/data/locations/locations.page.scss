@@ -1,0 +1,31 @@
+@import '../../../../../../theme/variables';
+
+// Input - Underline -- Not working in global settings
+:host {
+  .item-interactive.ion-invalid{
+    --highlight-background: #FF !important;
+  }
+  .item-interactive.ion-valid{
+    --highlight-background: #FF !important;
+  }
+}
+
+.list-block {
+  margin-top: $cube;
+}
+
+.ion-button-three {
+  margin-top: $cube*3;
+  margin-bottom: $cube*1;
+  --background: $background;
+  --background-hover: #8BC34A !important;
+  --color-hover: #ffffff !important;
+  --background-hover-opacity: 100%;
+}
+
+ion-button {
+  margin-top: $cube*2;
+  margin-bottom: $cube*2;
+}
+
+

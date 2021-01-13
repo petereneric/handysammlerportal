@@ -2,7 +2,20 @@
 // http://ionicframework.com/docs/theming/
 
 /** Custom variables **/
+$cube: 1rem;
+$textPrimary: #212121;
+$textSecondary: #757575;
+$textTertiary: #BDBDBD;
 
+/** colors **/
+$green: #8BC34A;
+$red: #c34a4a;
+$background: #f1f1f1;
+$white: #ffffff;
+
+/** text-sizes **/
+$size-text-item-title: 1rem;
+$size-text-item-subtitle: 0.875rem;
 
 /** Ionic CSS Variables **/
 :root {

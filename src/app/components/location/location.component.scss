@@ -1,0 +1,94 @@
+@import '../../../theme/variables';
+
+.location-item {
+  width: auto;
+  background-color: #f1f1f1;
+  margin-left: $cube;
+  margin-right: $cube;
+  margin-bottom: $cube;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+  border-radius: $cube/2;
+  padding-right: $cube/2;
+
+
+}
+.location-content {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items:start;
+  margin-top: $cube;
+  margin-bottom: $cube;
+}
+
+.location-checkbox-area {
+  padding-left: $cube;
+  padding-right: $cube;
+  align-self: center;
+}
+
+
+
+.location-checkbox-area-deactivated {
+  padding-left: $cube;
+  padding-right: $cube;
+  align-self: center;
+  color: $textTertiary;
+  --border-color: $textTertiary;
+}
+
+.location-checkbox-deactivated {
+  background: #f1f1f1;
+  --background: #f1f1f1;
+  --border-color: $textTertiary;
+}
+
+.location-content-subtitle {
+  padding-top: $cube/2;
+  color: $textSecondary;
+  font-size: $size-text-item-subtitle;
+}
+
+.location-content-subtitle-deactivated {
+  padding-top: $cube/2;
+  color: $textTertiary;
+  font-size: $size-text-item-subtitle;
+}
+
+.location-content-title {
+  color: $textPrimary;
+  font-size: $size-text-item-title;
+
+}
+
+.location-content-title-deactivated {
+  color: $textTertiary;
+  font-size: $size-text-item-title;
+}
+
+.location-icon {
+  padding: $cube;
+  align-self: center;
+  color: $textSecondary;
+  cursor: pointer;
+}
+
+.location-icon-deactivated {
+  padding: $cube;
+  align-self: center;
+  color: $textTertiary;
+  cursor: pointer;
+}
+
+.location-icon:hover {
+  color: $green;
+}
+
+.location-icon-deactivated:hover {
+  color: $red;
+}

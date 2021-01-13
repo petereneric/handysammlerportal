@@ -1,1 +1,38 @@
-
+<ion-content class="input-background">
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Einstellungen</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label class="input-label">Filter</ion-label>
+                    <ion-select [(ngModel)]="cFilter" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cFilter">
+                        <ion-select-option *ngFor="let cFilter of lFilter"
+                                           [value]="cFilter">{{cFilter}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item *ngIf="cFilter !== 'Gesamt'">
+                    <ion-label class="input-label">Auswahl</ion-label>
+                    <ion-select [(ngModel)]="cSelect" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cSelect" (ionChange)="onSelect($event)">
+                        <ion-select-option *ngFor="let cSelect of lSelect"
+                                           [value]="cSelect">{{cSelect}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </div>
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Auswertung</ion-row>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

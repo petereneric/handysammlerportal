@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ConnApiService} from "../../../../../services/conn-api/conn-api.service";
 import {HttpResponse} from "@angular/common/http";
 import {ToastController} from "@ionic/angular";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-donation',
@@ -17,6 +18,7 @@ export class DonationPage implements OnInit {
   // Variables
   private lPartners: any[] = [];
   private cPartner = null;
+  private bChangePartner: boolean = true;
 
   constructor(private connApi: ConnApiService, private toastController: ToastController) {
   }
@@ -35,6 +37,8 @@ export class DonationPage implements OnInit {
         this.lPartners.forEach((element) => {
           if (partner.cName === element.cName) {
             this.cPartner = partner.cName;
+            console.log(partner.bChangePartner);
+            this.bChangePartner = partner.bChangePartner == 1 ? true : false;
           }
         });
       }

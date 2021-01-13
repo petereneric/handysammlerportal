@@ -1,15 +1,22 @@
 <ion-content class="input-background">
     <div class="input-block-element">
-    <ion-row>
-        <ion-col>
-            <ion-item>
-                <ion-label class="input-label">Ausgewählter Spendenempfänger</ion-label>
-                <ion-select [(ngModel)]="cPartner" [okText]="'Übernehmen'" [cancelText]="'Abrechen'"
-                            [selectedText]="cPartner" (ionChange)="onSelectedPartner($event)">
-                    <ion-select-option *ngFor="let oPartner of lPartners" [value]="oPartner.cName">{{oPartner.cName}}</ion-select-option>
-                </ion-select>
-            </ion-item>
-        </ion-col>
-    </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label class="input-label">Ausgewählter Spendenempfänger:</ion-label>
+                    <ion-select [disabled]="!bChangePartner" [(ngModel)]="cPartner" [okText]="'Übernehmen'"
+                                [cancelText]="'Abrechen'"
+                                [selectedText]="cPartner" (ionChange)="onSelectedPartner($event)">
+                        <ion-select-option *ngFor="let oPartner of lPartners"
+                                           [value]="oPartner.cName">{{oPartner.cName}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </div>
+    <div class="input-block-element">
+        <ion-row class="text-note">Hinweis: Mobile-Box spendet bis zu 2 € an den ausgewählten Spendenempfänger. Bitte
+            beachte die Mindestmenge von 40 Handys je Zusendung.
+        </ion-row>
     </div>
 </ion-content>
