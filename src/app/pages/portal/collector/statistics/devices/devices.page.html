@@ -10,7 +10,7 @@
                 <ion-item>
                     <ion-label class="input-label">Filter</ion-label>
                     <ion-select [(ngModel)]="cFilter" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
-                                [selectedText]="cFilter">
+                                [selectedText]="cFilter" (ionChange)="onFilter($event)">
                         <ion-select-option *ngFor="let cFilter of lFilter"
                                            [value]="cFilter">{{cFilter}}</ion-select-option>
                     </ion-select>
@@ -34,5 +34,71 @@
                 <ion-row class="text-head">Auswertung</ion-row>
             </ion-col>
         </ion-row>
+        <ion-grid class="ion-content-table">
+            <ion-row>
+                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                    <div>
+                        {{getColumnName()}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                    <div>
+                        Handys
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                    <div>
+                        Recycelt
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                    <div>
+                        Wiederverwendet
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                    <div>
+                        Repariert
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'">
+                    <div>
+                        Erlöse
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let row of lData">
+                <ion-col [ngClass]="'ion-col-table'" size="2">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{cFilter === lFilter[0] ? (row.cYear != null ? row.cYear : 'Summe') : (row.nMonth != null ? getMonth(row.nMonth) : 'Summe')}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="2">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{row.nDevices}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="2">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{row.nRecycling}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="2">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{row.nReuse}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="2">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{row.nRepair}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'">
+                    <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{getPayment(row.sPayment)}}
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </div>
 </ion-content>

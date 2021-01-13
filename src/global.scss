@@ -16,7 +16,7 @@
 
 // Text
 $textPrimary: #212121;
-$textSecondary: #757575;
+$textSecondary: #afafaf;
 $textTertiary: #BDBDBD;
 
 // General
@@ -230,6 +230,10 @@ ion-toggle {
 
 .simple-background {
   background: #f1f1f1;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 
