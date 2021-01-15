@@ -91,8 +91,4 @@ export class StatisticsPage implements OnInit {
     }
   }
 
-  getPayment(payment) {
-    return payment.replace('.', ',')+' €'
-  }
-
 }

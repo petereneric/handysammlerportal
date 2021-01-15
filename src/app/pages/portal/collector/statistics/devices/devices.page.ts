@@ -22,6 +22,10 @@ export class DevicesPage extends StatisticsPage implements OnInit {
     this.load()
   }
 
+  getPayment(payment) {
+    return payment.replace('.', ',')+' €'
+  }
+
 
 
 

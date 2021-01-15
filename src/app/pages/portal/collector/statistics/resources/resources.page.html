@@ -43,27 +43,27 @@
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table-header'" size="2">
                     <div>
-                        Handys
+                        Gold
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table-header'" size="2">
                     <div>
-                        Recycelt
+                        Silber
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table-header'" size="2">
                     <div>
-                        Wiederverwendet
+                        Kupfer
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table-header'" size="2">
                     <div>
-                        Repariert
+                        Eingespartes CO2*
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table-header'">
                     <div>
-                        Erlöse
+                        Eingesparte Ressourcen**
                     </div>
                 </ion-col>
             </ion-row>
@@ -75,27 +75,27 @@
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'" size="2">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{row.nDevices}}
+                        {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'" size="2">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{row.nRecycling}}
+                        {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'" size="2">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{row.nReuse}}
+                        {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'" size="2">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{row.nRepair}}
+                        {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'">
                     <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{getPayment(row.sPayment)}}
+                        {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
                     </div>
                 </ion-col>
             </ion-row>
