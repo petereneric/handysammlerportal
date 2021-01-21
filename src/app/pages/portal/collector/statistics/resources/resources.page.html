@@ -2,13 +2,13 @@
     <div class="input-block-element">
         <ion-row>
             <ion-col>
-                <ion-row class="text-head">Einstellungen</ion-row>
+                <ion-row class="text-head">Filter</ion-row>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
                 <ion-item>
-                    <ion-label class="input-label">Filter</ion-label>
+                    <ion-label class="input-label">Zeitraum</ion-label>
                     <ion-select [(ngModel)]="cFilter" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
                                 [selectedText]="cFilter" (ionChange)="onFilter($event)">
                         <ion-select-option *ngFor="let cFilter of lFilter"
@@ -36,29 +36,29 @@
         </ion-row>
         <ion-grid class="ion-content-table">
             <ion-row>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
                     <div>
                         {{getColumnName()}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
                     <div>
-                        Gold
+                        Gold*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
                     <div>
-                        Silber
+                        Silber*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
                     <div>
-                        Kupfer
+                        Kupfer*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                <ion-col [ngClass]="'ion-col-table-header'" size="2.5">
                     <div>
-                        Eingespartes CO2*
+                        Eingespartes CO2**
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table-header'">
@@ -68,37 +68,45 @@
                 </ion-col>
             </ion-row>
             <ion-row *ngFor="let row of lData">
-                <ion-col [ngClass]="'ion-col-table'" size="2">
+                <ion-col [ngClass]="'ion-col-table'" size="1.5">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{cFilter === lFilter[0] ? (row.cYear != null ? row.cYear : 'Summe') : (row.nMonth != null ? getMonth(row.nMonth) : 'Summe')}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="2">
+                <ion-col [ngClass]="'ion-col-table'" size="1.5">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="2">
+                <ion-col [ngClass]="'ion-col-table'" size="1.5">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
+                        {{(transGramm(row.gSilver)).value}} {{transGramm(row.gSilver).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="2">
+                <ion-col [ngClass]="'ion-col-table'" size="1.5">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
+                        {{(transGramm(row.gCopper)).value}} {{transGramm(row.gCopper).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="2">
+                <ion-col [ngClass]="'ion-col-table'" size="2.5">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
+                        {{(transGramm(row.kgCo2)).value}} {{transGramm(row.kgCo2).unit}}
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'">
                     <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
+                        {{(transGramm(row.kgResources)).value}} {{transGramm(row.kgResources).unit}}
                     </div>
                 </ion-col>
             </ion-row>
         </ion-grid>
+    </div>
+    <div class="input-block-element">
+        <ion-row class="text-note">
+            *  Recycelte Rohstoffe, der Handys die nicht wiederverwendet werden konnten.
+        </ion-row>
+        <ion-row class="text-note">
+            ** CO2 und Resourcen, die durch die Wiederverwendung und damit nicht notwendige Neu-Herstellung eingespart wurden. Eigene Berechnung basierend auf Fraunhofer Umsicht 2018, Landesamt für Natur-, Umwelt- und Verbraucherschutz NRW 2012.
+        </ion-row>
     </div>
 </ion-content>

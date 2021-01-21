@@ -25,7 +25,12 @@
 
 ion-button {
   margin-top: $cube*2;
-  margin-bottom: $cube*2;
+  margin-bottom: $cube*0.5;
+}
+
+
+.ion-button-two {
+  margin-top: $cube*0.5 !important;
 }
 
 

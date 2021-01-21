@@ -24,12 +24,6 @@ export class DonationPage implements OnInit {
   }
 
   ngOnInit() {
-    // Partners
-    this.connApi.safeGet(this.urlPartners).subscribe((response: HttpResponse<any>) => {
-      this.lPartners = response.body;
-      console.log(this.lPartners);
-    })
-
     // Partner
     this.connApi.safeGet(this.urlPartner).subscribe((response: HttpResponse<any>) => {
       let partner = response.body;
@@ -42,6 +36,12 @@ export class DonationPage implements OnInit {
           }
         });
       }
+    })
+
+    // Partners
+    this.connApi.safeGet(this.urlPartners).subscribe((response: HttpResponse<any>) => {
+      this.lPartners = response.body;
+      console.log(this.lPartners);
     })
   }
 

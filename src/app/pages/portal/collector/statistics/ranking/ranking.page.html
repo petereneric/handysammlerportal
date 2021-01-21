@@ -1,1 +1,147 @@
-
+<ion-content class="input-background">
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Filter</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label class="input-label">Zeitraum</ion-label>
+                    <ion-select [(ngModel)]="cTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cTime">
+                        <ion-select-option *ngFor="let cTime of lTime"
+                                           [value]="cTime">{{lTime}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item *ngIf="cTime !== 'Gesamt'">
+                    <ion-label class="input-label">Auswahl</ion-label>
+                    <ion-select [(ngModel)]="cSelectTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cSelectTime">
+                        <ion-select-option *ngFor="let cSelectTime of lSelectTime"
+                                           [value]="cSelectTime">{{cSelectTime}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label class="input-label">Region</ion-label>
+                    <ion-select [(ngModel)]="cRegion" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cRegion">
+                        <ion-select-option *ngFor="let cRegion of lRegion"
+                                           [value]="cRegion">{{cRegion}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item *ngIf="cRegion !== 'Gesamt'">
+                    <ion-label class="input-label">Auswahl</ion-label>
+                    <ion-select [(ngModel)]="cSelectRegion" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cSelectRegion">
+                        <ion-select-option *ngFor="let cSelectRegion of lSelectRegion"
+                                           [value]="cSelectRegion">{{cSelectRegion}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label class="input-label">Typ/Branche</ion-label>
+                    <ion-select [(ngModel)]="cType" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cType">
+                        <ion-select-option *ngFor="let cType of lType"
+                                           [value]="cType">{{cType}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item *ngIf="cType !== 'Gesamt'">
+                    <ion-label class="input-label">Auswahl</ion-label>
+                    <ion-select [(ngModel)]="cSelectType" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cSelectType">
+                        <ion-select-option *ngFor="let cSelectType of lSelectType"
+                                           [value]="cSelectType">{{cSelectType}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="onLoad()">Auswertung aktualisieren</ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Auswertung</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-grid class="ion-content-table">
+            <ion-row>
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
+                    <div>
+                        Sammler
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
+                    <div>
+                        Aktiv seit
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
+                    <div>
+                        Sammelstandorte
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size="2.4">
+                    <div>
+                        Gesammelte Handys
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let row of lData">
+                <ion-col [ngClass]="'ion-col-table'" size="1.8">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{cFilter === lFilter[0] ? (row.cYear != null ? row.cYear : 'Summe') : (row.nMonth != null ? getMonth(row.nMonth) : 'Summe')}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="1.8">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{row.nDevices}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="1.8">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{row.nRecycling}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="2.4">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{row.nReuse}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="2">
+                    <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{row.nRepair}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'">
+                    <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
+                        {{getPayment(row.sPayment)}}
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <div class="input-block-element">
+        <ion-row class="text-note">* Aktuell reparieren wir defekte Handys, erfassen diese Zahl jedoch (noch) nicht - Daher findet sich hier ein Wert von 0.
+        </ion-row>
+    </div>
+</ion-content>

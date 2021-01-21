@@ -2,13 +2,13 @@
     <div class="input-block-element">
         <ion-row>
             <ion-col>
-                <ion-row class="text-head">Einstellungen</ion-row>
+                <ion-row class="text-head">Filter</ion-row>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
                 <ion-item>
-                    <ion-label class="input-label">Filter</ion-label>
+                    <ion-label class="input-label">Zeitraum</ion-label>
                     <ion-select [(ngModel)]="cFilter" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
                                 [selectedText]="cFilter" (ionChange)="onFilter($event)">
                         <ion-select-option *ngFor="let cFilter of lFilter"
@@ -36,29 +36,29 @@
         </ion-row>
         <ion-grid class="ion-content-table">
             <ion-row>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
                     <div>
                         {{getColumnName()}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
                     <div>
                         Handys
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
                     <div>
                         Recycelt
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                <ion-col [ngClass]="'ion-col-table-header'" size="2.4">
                     <div>
                         Wiederverwendet
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table-header'" size="2">
                     <div>
-                        Repariert
+                        Repariert*
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table-header'">
@@ -68,22 +68,22 @@
                 </ion-col>
             </ion-row>
             <ion-row *ngFor="let row of lData">
-                <ion-col [ngClass]="'ion-col-table'" size="2">
+                <ion-col [ngClass]="'ion-col-table'" size="1.8">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{cFilter === lFilter[0] ? (row.cYear != null ? row.cYear : 'Summe') : (row.nMonth != null ? getMonth(row.nMonth) : 'Summe')}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="2">
+                <ion-col [ngClass]="'ion-col-table'" size="1.8">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{row.nDevices}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="2">
+                <ion-col [ngClass]="'ion-col-table'" size="1.8">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{row.nRecycling}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="2">
+                <ion-col [ngClass]="'ion-col-table'" size="2.4">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{row.nReuse}}
                     </div>
@@ -100,5 +100,9 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
+    </div>
+    <div class="input-block-element">
+        <ion-row class="text-note">* Aktuell reparieren wir defekte Handys, erfassen diese Zahl jedoch (noch) nicht - Daher findet sich hier ein Wert von 0.
+        </ion-row>
     </div>
 </ion-content>
