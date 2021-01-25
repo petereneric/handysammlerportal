@@ -13,7 +13,7 @@ export class CollectorPage implements OnInit {
 
   currentPageTitle = '/data';
 
-  constructor(private platform: Platform, private splashScreen: SplashScreen, private statusBar: StatusBar) {
+  constructor(public menuCtrl: MenuController, private platform: Platform, private splashScreen: SplashScreen, private statusBar: StatusBar) {
     console.log("jooooo");
     this.initializeApp();
   }
@@ -50,6 +50,11 @@ export class CollectorPage implements OnInit {
 
   ngOnInit() {
     console.log("jo");
+    this.menuCtrl.toggle()
+  }
+
+  openMenu() {
+    this.menuCtrl.open();
   }
 
   initializeApp() {

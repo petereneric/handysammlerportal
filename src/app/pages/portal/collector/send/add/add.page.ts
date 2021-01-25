@@ -3,6 +3,7 @@ import {ConnApiService} from "../../../../../services/conn-api/conn-api.service"
 import {HttpClient} from "@angular/common/http";
 import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
+import {repeat} from 'rxjs/operators';
 
 @Component({
     selector: 'app-add',
@@ -24,6 +25,7 @@ export class AddPage implements OnInit {
 
     onClickLithiumNotice() {
         this.connApi.safeDownloadPDF(this.urlLithiumIonLabel).subscribe(response => {
+            console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url)

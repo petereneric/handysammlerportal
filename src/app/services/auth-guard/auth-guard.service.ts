@@ -32,7 +32,7 @@ export class AuthGuardService implements CanActivate {
                         console.log('AuthGuard not passed - Navigate to login');
                         this.router.navigate(['login']);
                         break;
-                    case 403:
+                    case 412:
                         console.log("AuthGuard not passed - Navigate to verification");
                         this.router.navigate(['verification']);
                 }

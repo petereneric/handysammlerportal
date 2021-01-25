@@ -14,8 +14,9 @@ export class MainPage implements OnInit {
 
     // Urls
     private urlCollector = 'collector/main';
-    private urlTypeNames = 'collector/type-names';
+    private urlTypeNames = 'collector/types';
     private urlSave = 'collector/main';
+    private urlRegionStates = 'collector/region/states';
 
     // IdentAddress
     bAddressIdentSelected: boolean;
@@ -50,8 +51,10 @@ export class MainPage implements OnInit {
     lTitles: any[] = [{cName: 'Herr'}, {cName: 'Frau'}, {cName: 'Herr Dr.'}, {cName: 'Frau Dr.'},];
     bFormally: boolean = true;
     cCountry: null;
+    cState = null;
     cShippingCountry: null;
-    lCountries: any[] = [{cName: 'Deutschland'}];
+    lCountries: any[] = [{id: 1, cName: 'Deutschland'}];
+    lStates = [];
     bSubmitted = false;
 
     constructor(private connApi: ConnApiService, private formBuilder: FormBuilder, public toastController: ToastController, public alertController: AlertController) {
@@ -105,6 +108,10 @@ export class MainPage implements OnInit {
             // country
             this.cCountry = collector.cCountry;
 
+            // state
+            this.cState = collector.cState;
+            this.loadStates(1);
+
             // shippingCountry
             this.cShippingCountry = collector.cShippingCountry;
 
@@ -139,6 +146,7 @@ export class MainPage implements OnInit {
                 cZip: this.fgCollector.get('cZip').value,
                 cCity: this.fgCollector.get('cCity').value,
                 cCountry: this.cCountry,
+                cState: this.cState,
                 cPrenamePerson: this.fgCollector.get('cPrenamePerson').value,
                 cSurnamePerson: this.fgCollector.get('cSurnamePerson').value,
                 cTitle: this.cTitle,
@@ -168,6 +176,13 @@ export class MainPage implements OnInit {
             }
         });
 
+    }
+
+    loadStates($kCountry) {
+        this.connApi.safeGet(this.urlRegionStates+'/'+$kCountry).subscribe((response : HttpResponse<any>) => {
+            this.lStates = response.body
+            console.log(response.body);
+        })
     }
 
     get errorControl() {

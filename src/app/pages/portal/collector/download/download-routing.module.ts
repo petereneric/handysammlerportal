@@ -19,13 +19,23 @@ const routes: Routes = [
       {
         path: 'information',
         loadChildren: () => import('./information/information.module').then( m => m.InformationPageModule)
-      }
+      },
+      {
+        path: 'communication',
+        loadChildren: () => import('./communication/communication.module').then( m => m.CommunicationPageModule)
+      },
+      {
+        path: 'law',
+        loadChildren: () => import('./law/law.module').then( m => m.LawPageModule)
+      },
     ]
   },
   {
     path: '',
     redirectTo: 'tabs/bills'
   },
+
+
 
 ];
 

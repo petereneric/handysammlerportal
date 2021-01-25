@@ -1,1 +1,59 @@
-
+<ion-content class="input-background">
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Aktuelle Gesamtabrechnung</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="onTotal()" class="ion-button-two">Herunterladen</ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Archiv</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label class="input-label">Zeitraum</ion-label>
+                    <ion-select [(ngModel)]="cYear" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cYear" (ionChange)="onYear()">
+                        <ion-select-option *ngFor="let cYear of lYears"
+                                           [value]="cYear">{{cYear}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-grid class="ion-content-table">
+            <ion-row>
+                <ion-col [ngClass]="'ion-col-table-header'" size="3">
+                    <div>
+                        Datum
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size="3">
+                    <div>
+                        Abrechnungs-Nummer
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let row of lBills">
+                <ion-col [ngClass]="'ion-col-table'" size="3">
+                    <div>
+                        {{getDate(row.dBill)}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="3">
+                    <div class="link" (click)="onBill(row.kBill)">
+                        {{row.kBill}}
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>

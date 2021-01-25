@@ -14,6 +14,8 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@import 'theme/variables';
+
 // Text
 $textPrimary: #212121;
 $textSecondary: #afafaf;
@@ -25,7 +27,7 @@ $white: #ffffff;
 $green: #8BC34A;
 $greenLight: #a5d274;
 $red: #c34a4a;
-$background: #f1f1f1;
+$background: #f6f6f6;
 
 // Special
 $divider: #BDBDBD;
@@ -38,6 +40,10 @@ p {
   line-height: 14px;
 }
 
+ion-select {
+    max-width: 90% !important;
+}
+
 ion-spinner {
   position: fixed;
   top: 50%;
@@ -47,7 +53,7 @@ ion-spinner {
 }
 
 .ion-col-table-header {
-  background: $textSecondary;
+  background: #a8d27a;
   color: $white !important;
   border-color: #dbdbdb !important;
   border-width: 1px !important;
@@ -63,6 +69,21 @@ ion-spinner {
   color: #757575 !important;
 }
 
+.ion-content-table {
+  margin-top: 1rem;
+}
+
+.ion-col-table-selected {
+  color: $green;
+}
+
+.search-failed {
+  color: $textSecondary;
+  font-size: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
 .text-head {
   color: $textPrimary;
   font-size: 18px;
@@ -76,11 +97,10 @@ ion-spinner {
 }
 
 .text-block-element {
-  background: #f1f1f1;
+  background: #f6f6f6;
   border-radius: 8px;
-  margin-top: 20px;
-  margin-bottom: 20px;
   padding: 16px;
+  width:75%; margin:32px auto;
 }
 
 .no-underline {
@@ -99,12 +119,13 @@ ion-spinner {
   background: #ffffff;
   border-radius: 8px;
   padding: 16px;
-  margin: 32px !important;
+  width:75%; margin:32px auto;
 }
 
 .input-background {
-  --background: #f1f1f1;
-  background: #f1f1f1;
+  --background: #f6f6f6;
+  background: #f6f6f6;
+
 }
 
 .input-invalid {
@@ -113,10 +134,21 @@ ion-spinner {
   margin-left: 16px;
 }
 
+.notice-important {
+  color: $red;
+  font-size: 12px;
+}
+
 .input-info {
   color: $textTertiary;
   font-size: 11px;
   margin-left: 16px;
+}
+
+.link {
+  color: $green;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 
@@ -199,6 +231,7 @@ ion-button {
 
 ion-item {
   --border-color: #cbcbcb;
+  padding-top: 12px;
 }
 
 
@@ -209,6 +242,8 @@ ion-item {
 }
 
 ion-toggle {
+  margin-left: 0px !important;
+  padding-left: 0px !important;
   --background-checked: #d6d6d6;
   --background: #d6d6d6;
 
@@ -229,12 +264,18 @@ ion-toggle {
 }
 
 .simple-background {
-  background: #f1f1f1;
+  background: #f6f6f6;
 }
 
 .bold {
   font-weight: bold;
 }
+
+ion-toolbar ion-menu-button {
+  color: var(--ion-color-primary-contrast);
+}
+
+
 
 
 

@@ -172,6 +172,24 @@
                     </span>
             </ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label class="input-label">Bundesland*</ion-label>
+                    <ion-select [(ngModel)]="cState" [okText]="'Übernehmen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cState" (ionChange)="onChangeAddress()">
+                        <ion-select-option *ngFor="let oState of lStates"
+                                           [value]="oState.cNameLocale">{{oState.cNameLocale}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="bSubmitted && cCountry == null">
+            <ion-col>
+                    <span class="input-invalid">Pflichtfeld
+                    </span>
+            </ion-col>
+        </ion-row>
     </div>
     <div class="input-block-element">
         <form [formGroup]="fgCollector" (ngSubmit)="onSave()">

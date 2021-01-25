@@ -1,0 +1,18 @@
+<ion-content class="input-background">
+  <div class="input-block-element">
+    <ion-row>
+      <ion-col>
+        <ion-row class="text-head">Verwendung Deiner Daten</ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label class="input-label">Anzeige in öffentlichen Statistiken erlauben</ion-label>
+          <ion-toggle [(ngModel)]="bStatistics" [ngModelOptions]="{standalone: true}"
+                      (ionChange)="onChange()"></ion-toggle>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -14,7 +14,7 @@ const routes: Routes = [
             },
             {
                 path: 'profile',
-                loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+                loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule)
             },
             {
                 path: 'locations',
@@ -24,12 +24,18 @@ const routes: Routes = [
                 path: 'donation',
                 loadChildren: () => import('./donation/donation.module').then(m => m.DonationPageModule)
             },
+            {
+                path: 'settings',
+                loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule)
+            },
         ]
     },
     {
         path: '',
         redirectTo: 'tabs/main'
     },
+
+
 ];
 
 @NgModule({
