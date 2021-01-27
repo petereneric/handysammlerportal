@@ -1,9 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>law</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content class="input-background">
+  <div class="input-block-element">
+    <ion-row>
+      <ion-col>
+        <ion-row class="text-head">Dokumente</ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p (click)="onLegalStatement()">> <span class="link">Rechtliche Grundlage</span></p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p (click)="onDataPrivacy()">> <span class="link">Datenschutz</span></p>
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-content>

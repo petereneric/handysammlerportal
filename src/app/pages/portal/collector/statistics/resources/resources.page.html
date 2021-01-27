@@ -90,12 +90,12 @@
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'" size="2.5">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{(transGramm(row.kgCo2)).value}} {{transGramm(row.kgCo2).unit}}
+                        {{(transGramm(row.kgCo2)).value}} {{transKilogramm(row.kgCo2).unit}}
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'">
                     <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
-                        {{(transGramm(row.kgResources)).value}} {{transGramm(row.kgResources).unit}}
+                        {{(transGramm(row.kgResources)).value}} {{transKilogramm(row.kgResources).unit}}
                     </div>
                 </ion-col>
             </ion-row>
