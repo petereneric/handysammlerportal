@@ -1,23 +1,23 @@
 <ion-content class="input-background">
-    <div class="input-block-element">
+    <div class="input-block-element" *ngIf="lYears.length > 0">
         <ion-row>
             <ion-col>
                 <ion-row class="text-head">Aktuelle Gesamtabrechnung</ion-row>
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col>
-                <ion-button (click)="onTotal()" class="ion-button-two">Herunterladen</ion-button>
+            <ion-col class="ion-text-center">
+                <ion-button (click)="onTotal()" class="ion-button-two">Erstellen & Öffnen</ion-button>
             </ion-col>
         </ion-row>
     </div>
-    <div class="input-block-element">
+    <div class="input-block-element" *ngIf="lYears.length > 0">
         <ion-row>
             <ion-col>
                 <ion-row class="text-head">Archiv</ion-row>
             </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row class="center">
             <ion-col size="6">
                 <ion-item>
                     <ion-label class="input-label">Zeitraum</ion-label>
@@ -29,31 +29,34 @@
                 </ion-item>
             </ion-col>
         </ion-row>
-        <ion-grid class="ion-content-table">
-            <ion-row>
-                <ion-col [ngClass]="'ion-col-table-header'" size="3">
-                    <div>
-                        Datum
-                    </div>
-                </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="3">
-                    <div>
-                        Abrechnungs-Nummer
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row *ngFor="let row of lBills">
-                <ion-col [ngClass]="'ion-col-table'" size="3">
-                    <div>
-                        {{getDate(row.dBill)}}
-                    </div>
-                </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="3">
-                    <div class="link" (click)="onBill(row.kBill)">
-                        {{row.kBill}}
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </div>
+            <ion-grid class="ion-content-table" *ngIf="lBills.length > 0">
+                <ion-row class="center">
+                    <ion-col [ngClass]="'ion-col-table-header'" size="3">
+                        <div>
+                            Datum
+                        </div>
+                    </ion-col>
+                    <ion-col [ngClass]="'ion-col-table-header'" size="3">
+                        <div>
+                            Abrechnungs-Nummer
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="center" *ngFor="let row of lBills">
+                    <ion-col [ngClass]="'ion-col-table'" size="3">
+                        <div>
+                            {{getDate(row.dBill)}}
+                        </div>
+                    </ion-col>
+                    <ion-col [ngClass]="'ion-col-table'" size="3">
+                        <div class="link" (click)="onBill(row.kBill)">
+                            {{row.kBill}}
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    <ion-row *ngIf="lYears.length == 0">
+        <span class="search-failed">Es wurden bisher keine Abrechnungen erstellt</span>
+    </ion-row>
 </ion-content>

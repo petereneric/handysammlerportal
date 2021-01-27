@@ -1,0 +1,37 @@
+<ion-content class="input-background">
+    <div class="input-block-element" *ngIf="lSelectTime.length > 0">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Einstellungen</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label class="input-label">Zeitraum</ion-label>
+                    <ion-select [(ngModel)]="cTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cTime.name">
+                        <ion-select-option *ngFor="let oTime of lTime"
+                                           [value]="oTime">{{oTime.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item *ngIf="cTime.key !== 'total'">
+                    <ion-label class="input-label">Auswahl</ion-label>
+                    <ion-select [(ngModel)]="cSelectTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                                [selectedText]="cSelectTime">
+                        <ion-select-option *ngFor="let selectTime of lSelectTime"
+                                           [value]="selectTime">{{selectTime}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </div>
+        <ion-row class="center" *ngIf="lSelectTime.length > 0">
+            <ion-button (click)="onCertificate()">Urkunde erstellen & öffnen</ion-button>
+        </ion-row>
+    <div class="input-block-element" *ngIf="lSelectTime.length == 0">
+        <span class="search-failed">Es wurden noch keine Handys gesammelt</span>
+    </div>
+</ion-content>

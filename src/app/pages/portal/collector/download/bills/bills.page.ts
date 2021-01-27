@@ -20,7 +20,6 @@ export class BillsPage implements OnInit {
     // Variables
     lYears = [];
     cYear: string = null;
-
     lBills = [];
 
     constructor(public datepipe: DatePipe, private connApi: ConnApiService, public toastController: ToastController) {
@@ -28,8 +27,11 @@ export class BillsPage implements OnInit {
 
     ngOnInit() {
         this.connApi.safeGet(this.urlYears).subscribe((response: HttpResponse<any>) => {
-            console.log(response.body);
             this.lYears = response.body;
+            if (this.lYears.length > 0) {
+                this.cYear = this.lYears[0];
+                this.load();
+            }
         }, error => {
             console.log(error);
         });
@@ -37,7 +39,6 @@ export class BillsPage implements OnInit {
 
     load() {
         this.connApi.safeGet(this.urlBills + this.cYear).subscribe((response: HttpResponse<any>) => {
-            console.log(response.body);
             this.lBills = response.body;
         }, error => {
             console.log(error);
@@ -50,43 +51,10 @@ export class BillsPage implements OnInit {
 
     onBill(kBill: any) {
         console.log(kBill);
-        this.connApi.safeDownloadPDF(this.urlBill + '/' + kBill).subscribe(response => {
-            console.log(response);
-            console.log('he');
-
+        this.connApi.safeGetPDF(this.urlBill + '/' + kBill).subscribe(response => {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
-            /*
-            // It is necessary to create a new blob object with mime-type explicitly set
-            // otherwise only Chrome works like it should
-            var newBlob = new Blob([response], { type: "application/pdf" });
-
-            // IE doesn't allow using a blob object directly as link href
-            // instead it is necessary to use msSaveOrOpenBlob
-            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                window.navigator.msSaveOrOpenBlob(newBlob);
-                return;
-            }
-
-            // For other browsers:
-            // Create a link pointing to the ObjectURL containing the blob.
-            const data = window.URL.createObjectURL(newBlob);
-
-            var link = document.createElement('a');
-            link.href = data;
-            link.download = "Je kar.pdf";
-            // this is necessary as link.click() does not work on the latest firefox
-            link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
-
-            setTimeout(function () {
-                // For Firefox it is necessary to delay revoking the ObjectURL
-                window.URL.revokeObjectURL(data);
-                link.remove();
-            }, 100);
-            */
-
-
         }, error => {
             if (error.status) {
                 this.toastNotFound();
@@ -127,14 +95,12 @@ export class BillsPage implements OnInit {
     }
 
     onTotal() {
-        this.connApi.safeDownloadPDF(this.urlBill).subscribe(response => {
-            console.log(response);
-
+        this.connApi.safeGetPDF(this.urlBill).subscribe(response => {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
         }, error => {
-
+            console.log(error);
         });
     }
 }

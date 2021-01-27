@@ -213,7 +213,7 @@ export class MainPage implements OnInit {
             this.fgCollector.controls['cShippingStreetNumber'].setValue(this.fgCollector.get('cStreetNumber').value);
             this.fgCollector.controls['cShippingZip'].setValue(this.fgCollector.get('cZip').value);
             this.fgCollector.controls['cShippingCity'].setValue(this.fgCollector.get('cCity').value);
-            this.fgCollector.controls['cShippingCountry'].setValue(this.fgCollector.get('cCountry').value);
+            this.cShippingCountry = this.cCountry;
         }
     }
 

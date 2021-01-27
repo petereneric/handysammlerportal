@@ -24,7 +24,7 @@ export class AddPage implements OnInit {
 
 
     onClickLithiumNotice() {
-        this.connApi.safeDownloadPDF(this.urlLithiumIonLabel).subscribe(response => {
+        this.connApi.safeGetPDF(this.urlLithiumIonLabel).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
