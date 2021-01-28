@@ -1,14 +1,42 @@
 <ion-content class="input-background">
-  <div class="input-block-element">
-    <ion-row>
-      <ion-col>
-        <ion-row class="text-head">Dokumente</ion-row>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <p  (click)="onModelPressRelease()">> <span class="link">Muster-Pressemitteilung</span></p>
-      </ion-col>
-    </ion-row>
-  </div>
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Dokumente</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <p (click)="onModelPressRelease()">> <span class="link">Muster-Pressemitteilung</span></p>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Flyer</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <p *ngFor="let flyer of lFlyer" (click)="onFlyer(flyer.id)">> <span class="link">{{flyer.cName}}</span>
+                </p>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <div class="input-block-element">
+        <ion-row>
+            <ion-col>
+                <ion-row class="text-head">Flyer</ion-row>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <p *ngFor="let flyer of lFlyer" (click)="onFlyer(flyer.id)">> <span class="link">{{flyer.cName}}</span>
+                </p>
+            </ion-col>
+        </ion-row>
+    </div>
 </ion-content>
