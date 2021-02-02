@@ -30,9 +30,9 @@ export class CommunicationPage implements OnInit {
       console.log(error);
     });
 
-    this.connApi.safeGet(this.urlFlyer).subscribe((response : HttpResponse<any>) => {
+    this.connApi.safeGet(this.urlPoster).subscribe((response : HttpResponse<any>) => {
       console.log(response);
-      this.lFlyer = response.body;
+      this.lPoster = response.body;
     }, error => {
       console.log(error);
     });

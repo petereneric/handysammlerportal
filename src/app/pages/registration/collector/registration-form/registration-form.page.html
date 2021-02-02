@@ -1,133 +1,229 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>RegistrationForm</ion-title>
+        <ion-title>Registrierung | Sammler</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content>
-    <form [formGroup]="registrationFormCollector" (ngSubmit)="registerCollector()">
+<ion-content class="input-background">
+    <div class="input-block-element">
+        <form [formGroup]="fgCollector" (ngSubmit)="register()">
+            <ion-row>
+                <ion-col>
+                    <ion-row class="text-head">Sammlung</ion-row>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item lines="full" class="ion-item">
+                                <ion-label class="input-label" position="floating">Sammlername*</ion-label>
+                                <ion-input type="text" required formControlName="cName"
+                                           (ionChange)="onChangeAddress()"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="bSubmitted && errorControl.cName.errors?.required">
+                        <ion-col>
+                    <span class="input-invalid"
+                    >Pflichtfeld
+                    </span>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="bSubmitted && errorControl.cName.errors?.maxlength">
+                        <ion-col>
+                    <span class="input-invalid"
+                    >Maximal-Länge von 50 Zeichen überschritten
+                    </span>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                <ion-col>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item lines="full">
+                                <ion-label class="input-label" position="floating">Namenszusatz (Abteilung, ...)
+                                </ion-label>
+                                <ion-input type="text" formControlName="cNameDetails"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="bSubmitted && errorControl.cName.errors?.maxlength">
+                        <ion-col>
+                    <span class="input-invalid"
+                    >Maximal-Länge von 50 Zeichen überschritten
+                    </span>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+            </ion-row>
 
-        <h5>Sammlung</h5>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Sammlername</ion-label>
-            <ion-input type="text" required formControlName="collection_nameCollector"></ion-input>
-        </ion-item>
-        <ion-row>
-            <ion-col>
-                <ion-item lines="full" class="ion-item">
 
-                    <ion-label position="floating">Passwort</ion-label>
-                    <ion-input type="text" required formControlName="collection_password" [type]="passwordType" clearOnEdit="false"></ion-input>
 
+            <ion-row>
+                <ion-col>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item lines="full" class="ion-item">
+                                <ion-label class="input-label" position="floating">Passwort*</ion-label>
+                                <ion-input placeholder="Mindestens 8 Zeichen, eine Zahl, einen Großbuchstaben..." type="text" required formControlName="cPassword" [type]="passwordType"
+                                           clearOnEdit="false"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-col>
+                <ion-col>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item lines="full" class="ion-item">
+                                <ion-label class="input-label" position="floating">Passwort wiederholen*</ion-label>
+                                <ion-input placeholder="... und mindestens ein Sonderzeichen ($@!%*?&)" required formControlName="cPasswordCheck" type="password"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+
+                </ion-col>
+            </ion-row>
+
+
+            <ion-row *ngIf="bSubmitted && errorControl.cName.errors?.required">
+                <ion-col>
+                    <span class="input-invalid"
+                    >Pflichtfeld
+                    </span>
+                </ion-col>
+            </ion-row>
+            <ion-row
+                    *ngIf="bSubmitted && !errorControl.cName.errors?.required  && errorControl.cPassword.errors?.minlength">
+                <ion-col>
+                    <span [ngClass]="" class="input-invalid"
+                    >Passwort muss mindestens 8 Zeichen lang sein
+                    </span>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="bSubmitted && !errorControl.cName.errors?.required && !errorControl.cPassword.errors?.minlength && errorControl.cPassword.errors?.pattern">
+                <ion-col>
+                    <span class="input-invalid"
+                    >Passwort folgende Zeichen mindestens einmal enthalten: Großbuchstaben, Kleinbuchstaben, Ziffer, Sonderzeichen ($@$!%*?&) enthalten
+                    </span>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="bSubmitted && !errorControl.cName.errors?.required && !errorControl.cPassword.errors?.minlength && !errorControl.cPassword.errors?.pattern && !bPasswordIdentical">
+                <ion-col>
+                    <span class="input-invalid"
+                    >Passwörter stimmen nicht überein
+                    </span>
+                </ion-col>
+            </ion-row>
+
+
+
+
+
+            <ion-list>
+                <ion-item>
+                    <ion-label>Bereich/Branche</ion-label>
+                    <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'">
+                        <ion-select-option *ngFor="let type of lTypes"
+                                           [value]="type['id']">{{type.name}}</ion-select-option>
+                    </ion-select>
                 </ion-item>
-            </ion-col>
-            <ion-col>
-                <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
-            </ion-col>
-        </ion-row>
-
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Passwort (wiederholen)</ion-label>
-            <ion-input type="text" required formControlName="collection_passwordCheck" type="password"></ion-input>
-        </ion-item>
-        <ion-list>
-            <ion-item>
-                <ion-label>Bereich/Branche</ion-label>
-                <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'" (ionChange)="onSelected_tCollector($event) ">
-                    <ion-select-option *ngFor="let type of typesCollector" [value]="type['id']">{{type.name}}</ion-select-option>
-                </ion-select>
-            </ion-item>
-        </ion-list>
-        <h5>Ansprechpartner</h5>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Vorname</ion-label>
-            <ion-input type="text" required formControlName="contact_prename"></ion-input>
-        </ion-item>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Nachname</ion-label>
-            <ion-input type="text" required formControlName="contact_surname"></ion-input>
-        </ion-item>
-        <ion-list>
-            <ion-item>
-                <ion-label>Persönliche Anrede</ion-label>
-                <ion-toggle [(ngModel)]="bContactFormal" [ngModelOptions]="{standalone: true}" (ionChange)="onToggle_ContactFormal($event)"></ion-toggle>
-            </ion-item>
-        </ion-list>
-        <ion-item *ngIf="bContactFormal">
-            <ion-label>Titel</ion-label>
-            <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'" (ionChange)="onSelected_cContactTitle($event)">
-                <ion-select-option *ngFor="let title of contactTitles">{{title.name}}</ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">E-Mail</ion-label>
-            <ion-input type="text" required formControlName="contact_email"></ion-input>
-        </ion-item>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">E-Mail (wiederholen)</ion-label>
-            <ion-input type="text" required formControlName="contact_emailCheck"></ion-input>
-        </ion-item>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">E-Mail CC (Optional)</ion-label>
-            <ion-input type="text" required formControlName="contact_emailCC"></ion-input>
-        </ion-item>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Telefon (Festnetz)</ion-label>
-            <ion-input type="text" required formControlName="contact_phoneFixedLine"></ion-input>
-        </ion-item>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Telefon (Mobil)</ion-label>
-            <ion-input type="text" required formControlName="contact_phoneMobile"></ion-input>
-        </ion-item>
-        <h5>Adresse</h5>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Adresszeile 1</ion-label>
-            <ion-input type="text" required formControlName="shipping_nameOne"></ion-input>
-        </ion-item>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Adresszeile 2</ion-label>
-            <ion-input type="text" required formControlName="shipping_nameTwo"></ion-input>
-        </ion-item>
-        <ion-row>
+            </ion-list>
+            <h5>Ansprechpartner</h5>
             <ion-item lines="full" class="ion-item">
-                <ion-label position="floating">Straße</ion-label>
-                <ion-input type="text" required formControlName="shipping_street"></ion-input>
+                <ion-label position="floating">Vorname</ion-label>
+                <ion-input type="text" required formControlName="contact_prename"></ion-input>
             </ion-item>
             <ion-item lines="full" class="ion-item">
-                <ion-label position="floating">Hausnummer</ion-label>
-                <ion-input type="text" required formControlName="shipping_streetNumber"></ion-input>
+                <ion-label position="floating">Nachname</ion-label>
+                <ion-input type="text" required formControlName="contact_surname"></ion-input>
             </ion-item>
-        </ion-row>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Postleitzahl</ion-label>
-            <ion-input type="text" required formControlName="shipping_zip"></ion-input>
-        </ion-item>
-        <ion-item lines="full" class="ion-item">
-            <ion-label position="floating">Stadt</ion-label>
-            <ion-input type="text" required formControlName="shipping_city"></ion-input>
-        </ion-item>
-        <ion-item >
-            <ion-label>Land</ion-label>
-            <ion-select [value]="cCountry" (ionChange)="onSelected_cCountry($event)" [okText]="'Übernehmen'" [cancelText]="'Abrechen'">
-                <ion-select-option *ngFor="let country of lCountries">{{country.name}}</ion-select-option>
-            </ion-select>
-        </ion-item>
-        <h5>Verwendung der Erlöse</h5>
-        <ion-list>
-            <ion-item>
-                <ion-label>Partner (Erlös-Empfänger)</ion-label>
-                <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'" (ionChange)="onSelected_kPartner($event)">
-                    <ion-select-option *ngFor="let partner of lPartner" [value]="partner['id']">{{partner.name}}</ion-select-option>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Persönliche Anrede</ion-label>
+                    <ion-toggle [(ngModel)]="bFormally" [ngModelOptions]="{standalone: true}"
+                                (ionChange)="onToggleFormally($event)"></ion-toggle>
+                </ion-item>
+            </ion-list>
+            <ion-item *ngIf="bFormally">
+                <ion-label>Titel</ion-label>
+                <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'">
+                    <ion-select-option *ngFor="let title of lTitles">{{title.name}}</ion-select-option>
                 </ion-select>
             </ion-item>
-        </ion-list>
-        <ion-list>
-            <ion-item>
-                <ion-label>Partner kann Bestellungen von Sammelmaterialien für mich als Sammler aufgeben</ion-label>
-                <ion-toggle [(ngModel)]="bPartnerAdmin" [ngModelOptions]="{standalone: true}" (ionChange)="onToggle_bPartnerAdmin($event)"></ion-toggle>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">E-Mail</ion-label>
+                <ion-input type="text" required formControlName="contact_email"></ion-input>
             </ion-item>
-        </ion-list>
-        <ion-button type="submit">Registrieren</ion-button>
-        <p>.</p>
-        <p>.</p>
-    </form>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">E-Mail (wiederholen)</ion-label>
+                <ion-input type="text" required formControlName="contact_emailCheck"></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">E-Mail CC (Optional)</ion-label>
+                <ion-input type="text" required formControlName="contact_emailCC"></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">Telefon (Festnetz)</ion-label>
+                <ion-input type="text" required formControlName="contact_phoneFixedLine"></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">Telefon (Mobil)</ion-label>
+                <ion-input type="text" required formControlName="contact_phoneMobile"></ion-input>
+            </ion-item>
+            <h5>Adresse</h5>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">Adresszeile 1</ion-label>
+                <ion-input type="text" required formControlName="shipping_nameOne"></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">Adresszeile 2</ion-label>
+                <ion-input type="text" required formControlName="shipping_nameTwo"></ion-input>
+            </ion-item>
+            <ion-row>
+                <ion-item lines="full" class="ion-item">
+                    <ion-label position="floating">Straße</ion-label>
+                    <ion-input type="text" required formControlName="shipping_street"></ion-input>
+                </ion-item>
+                <ion-item lines="full" class="ion-item">
+                    <ion-label position="floating">Hausnummer</ion-label>
+                    <ion-input type="text" required formControlName="shipping_streetNumber"></ion-input>
+                </ion-item>
+            </ion-row>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">Postleitzahl</ion-label>
+                <ion-input type="text" required formControlName="shipping_zip"></ion-input>
+            </ion-item>
+            <ion-item lines="full" class="ion-item">
+                <ion-label position="floating">Stadt</ion-label>
+                <ion-input type="text" required formControlName="shipping_city"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Land</ion-label>
+                <ion-select [value]="oCountry" [okText]="'Übernehmen'" [cancelText]="'Abrechen'">
+                    <ion-select-option *ngFor="let country of lCountries">{{country.name}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <h5>Verwendung der Erlöse</h5>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Partner (Erlös-Empfänger)</ion-label>
+                    <ion-select [okText]="'Übernehmen'" [cancelText]="'Abrechen'">
+                        <ion-select-option *ngFor="let partner of lPartner"
+                                           [value]="partner['id']">{{partner.name}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+            <ion-list>
+                <ion-item>
+                    <ion-label>Partner kann Bestellungen von Sammelmaterialien für mich als Sammler aufgeben</ion-label>
+                    <ion-toggle [(ngModel)]="bPartnerAdmin" [ngModelOptions]="{standalone: true}"
+                                (ionChange)="onTogglePartnerAdmin($event)"></ion-toggle>
+                </ion-item>
+            </ion-list>
+            <ion-button type="submit">Registrieren</ion-button>
+            <p>.</p>
+            <p>.</p>
+        </form>
+    </div>
 </ion-content>

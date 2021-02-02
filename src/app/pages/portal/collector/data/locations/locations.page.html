@@ -116,7 +116,8 @@
                     </span>
                         </ion-col>
                     </ion-row>
-                    <ion-row *ngIf="bSubmitted && (errorControl.cZip.errors?.minlength || errorControl.cZip.errors?.maxlength)">
+                    <ion-row
+                            *ngIf="bSubmitted && (errorControl.cZip.errors?.minlength || errorControl.cZip.errors?.maxlength)">
                         <ion-col>
                     <span class="input-invalid"
                     >Ungültige Eingabe
@@ -151,12 +152,14 @@
         </form>
         <ion-row>
             <ion-col class="ion-text-center">
-                <ion-button (click)="bAdd ? onSaveAdd() : onSaveEdit()">{{bAdd ? 'Hinzufügen' : 'Änderungen übernehmen'}}</ion-button>
+                <ion-button
+                        (click)="bAdd ? onSaveAdd() : onSaveEdit()">{{bAdd ? 'Hinzufügen' : 'Änderungen übernehmen'}}</ion-button>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col class="ion-text-center">
-                <ion-button class="ion-button-two" (click)="bAdd ? isAdding(false) : isEditing(false)">Abrechen</ion-button>
+                <ion-button class="ion-button-two" (click)="bAdd ? isAdding(false) : isEditing(false)">Abrechen
+                </ion-button>
             </ion-col>
         </ion-row>
     </div>
@@ -169,7 +172,8 @@
             </ion-col>
         </ion-row>
         <div class="list-block">
-            <app-location (ping)="ping($event)" [oLocation]="location" *ngFor="let location of lLocationsActive"></app-location>
+            <app-location (ping)="ping($event)" [oLocation]="location"
+                          *ngFor="let location of lLocationsActive"></app-location>
         </div>
     </div>
 
@@ -180,7 +184,8 @@
             </ion-col>
         </ion-row>
         <div class="list-block">
-            <app-location (ping)="ping($event)" [oLocation]="location" *ngFor="let location of lLocationsNotActive"></app-location>
+            <app-location (ping)="ping($event)" [oLocation]="location"
+                          *ngFor="let location of lLocationsNotActive"></app-location>
         </div>
     </div>
 

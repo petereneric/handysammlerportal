@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
-import {ConnApiService} from "../../../../services/conn-api/conn-api.service";
-import {AlertController} from "@ionic/angular";
-import {Router} from "@angular/router";
-import {HttpResponse} from "@angular/common/http";
+import {FormBuilder, Validators} from '@angular/forms';
+import {ConnApiService} from '../../../../services/conn-api/conn-api.service';
+import {AlertController} from '@ionic/angular';
+import {Router} from '@angular/router';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
     selector: 'app-registration-form',
@@ -12,83 +12,200 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class RegistrationFormPage implements OnInit {
 
-    registrationFormCollector = this.fb.group({
-        collection_nameCollector: [''],
-        collection_password: [''],
-        collection_passwordCheck: [''],
-        contact_prename: [''],
-        contact_surname: [''],
-        contact_formal: [''],
-        contact_email: [''],
-        contact_emailCheck: [''],
-        contact_emailCC: [''],
-        contact_phoneFixedLine: [''],
-        contact_phoneMobile: [''],
-        shipping_nameOne: [''],
-        shipping_nameTwo: [''],
-        shipping_street: [''],
-        shipping_streetNumber: [''],
-        shipping_city: [''],
-        shipping_zip: [''],
+    // Urls
+    private urlTypeNames = 'collector/types';
+    private urlRegionStates = 'collector/region/states';
+    private urlRegister = 'registration/collector'
+
+    // FormBuilder
+    fgCollector = this.fb.group({
+        cName: ['', [Validators.required, Validators.maxLength(50)]],
+        cNameDetails: ['', [Validators.maxLength(50)]],
+        cStreet: ['', [Validators.required, Validators.maxLength(50)]],
+        cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
+        cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+        cCity: ['', [Validators.required, Validators.maxLength(50)]],
+        cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]],
+        cPasswordCheck: ['', [Validators.required]],
+        cPrename: ['', [Validators.required, Validators.maxLength(50)]],
+        cSurname: ['', [Validators.required, Validators.maxLength(50)]],
+        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(50)]],
+        cEmailCheck: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(50)]],
+        cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(50)]],
+        cPhoneFixedLine: ['', [Validators.maxLength(50)]],
+        cPhoneMobile: ['', [Validators.maxLength(50)]],
+        cShippingNameOne: ['', [Validators.required, Validators.maxLength(50)]],
+        cShippingNameTwo: ['', [Validators.maxLength(50)]],
+        cShippingStreet: ['', [Validators.required, Validators.maxLength(50)]],
+        cShippingStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
+        cShippingCity: ['', [Validators.required, Validators.maxLength(50)]],
+        cShippingZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
     });
 
+    // Variables
+    oType = null;
+    lTypes: any[] = [];
+    lTitles: any[] = [{cName: 'Herr'}, {cName: 'Frau'}, {cName: 'Herr Dr.'}, {cName: 'Frau Dr.'},];
+    cTitle: string = null;
+    bFormally: boolean = true;
+    lCountries: any[] = [{id: 1, cName: 'Deutschland'}];
+    oCountry = this.lCountries[0];
+    oShippingCountry = this.lCountries[0];
+    lStates = [];
+    oState = null;
+    lPartner: any[];
+    kPartner: number;
+    bPartnerAdmin: boolean = false;
     passwordType: string = 'password';
     passwordIcon: string = 'eye-off';
+    bPasswordIdentical: Boolean;
 
-    lCountries: any[] = [
-        {name: "Deutschland"}
-    ]
-
-    cCountry: string = this.lCountries[0].name;
-
-
-    typesCollector: any[] = [];
-
-    tCollector: number = 0;
-
-    lPartner: any[];
-
-    kPartner: number;
-
-
-    contactTitles: any[] = [
-        {
-            name: 'Herr',
-        },
-        {
-            name: 'Frau',
-        },
-        {
-            name: 'Herr Dr.',
-        },
-        {
-            name: 'Frau Dr.',
-        },
-    ];
-
-    cContactTitle: string = null;
+    bSubmitted: boolean = false;
+    bAddressIdentSelected: boolean;
 
     compareWithFn = (o1, o2) => {
         return o1 && o2 ? o1.id === o2.id : o1 === o2;
     };
 
     compareWith = this.compareWithFn;
-    bContactFormal: boolean = true;
-    bPartnerAdmin: boolean = false;
+
 
     constructor(private fb: FormBuilder, private connApi: ConnApiService, public alertController: AlertController, public router: Router) {
     }
 
     ngOnInit() {
-        // TypesCollector
-        this.connApi.get(ConnApiService.getCollectorTypes).subscribe((data: HttpResponse<any>) =>
-            this.typesCollector = data.body['collectionTypes']);
+        // types
+        this.connApi.safeGet(this.urlTypeNames).subscribe((data: HttpResponse<any>) => {
+            this.lTypes = data.body;
+        });
 
         // listPartner
         this.connApi.get(ConnApiService.getPartnerRegistration).subscribe((data: HttpResponse<any>) =>
             this.lPartner = data.body['lPartner']);
 
+        // states
+        this.loadStates(this.oCountry.id);
     }
+
+    register() {
+        this.bSubmitted = true;
+
+        // check for invalid input
+        if (!this.fgCollector.valid || this.oType == null || this.oCountry == null || this.oShippingCountry == null || this.cTitle == null) {
+            this.alertInvalid();
+            return;
+        }
+
+        // check if password identical
+        if (this.fgCollector.get('cPassword').value !== this.fgCollector.get('cPasswordCheck').value) {
+            this.alertPasswordNotIdentical();
+            return;
+        }
+        if (this.fgCollector.get('cEmail').value !== this.fgCollector.get('cEmailCheck').value) {
+            this.alertEmailNotIdentical();
+            return;
+        }
+
+        let collector =
+            {
+                cName: this.fgCollector.get('cName').value,
+                cStreet: this.fgCollector.get('cStreet').value,
+                cStreetNumber: this.fgCollector.get('cStreetNumber').value,
+                cZip: this.fgCollector.get('cZip').value,
+                cCity: this.fgCollector.get('cCity').value,
+                kState: this.oState.id,
+                kCountry: this.oCountry.id,
+                cPassword: this.fgCollector.get('cPassword').value,
+                kType: this.oType.id,
+                cSurname: this.fgCollector.get('cSurname').value,
+                cPrename: this.fgCollector.get('cPrename').value,
+                bFormally: this.bFormally ? 1 : 0,
+                cTitle: this.cTitle,
+                cEmail: this.fgCollector.get('cEmail').value,
+                cEmailCC: this.fgCollector.get('cEmailCC').value,
+                cPhoneFixedLine: this.fgCollector.get('cPhoneFixedLine').value,
+                cPhoneMobile: this.fgCollector.get('cPhoneMobile').value,
+                cShippingAddressOne: this.fgCollector.get('cShippingAddressOne').value,
+                cShippingAddressTwo: this.fgCollector.get('cShippingAddressTwo').value,
+                cShippingStreet: this.fgCollector.get('cShippingStreet').value,
+                cShippingStreetNumber: this.fgCollector.get('cShippingStreetNumber').value,
+                cShippingCity: this.fgCollector.get('cShippingCity').value,
+                cShippingZip: this.fgCollector.get('cShippingZip').value,
+                cShippingCountry: this.oCountry.cName,
+                kPartner: this.kPartner,
+                bPartnerAdmin: this.bPartnerAdmin ? 1 : 0
+            };
+        console.log(collector);
+
+        this.connApi.post(this.urlRegister, collector).subscribe((data: HttpResponse<any>) => {
+            if (data.status == 200) {
+                console.log(data);
+                this.router.navigate(['app-root']);
+            }
+        }, error => {
+            if (error.status == 406) {
+                this.alertCollectorNameForgiven();
+            }
+        });
+    }
+
+    onToggleFormally($event) {
+        this.bFormally = $event['detail']['checked'];
+    }
+
+    onTogglePartnerAdmin($event) {
+        this.bPartnerAdmin = $event['detail']['checked'];
+    }
+
+    hideShowPassword() {
+        this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+    }
+
+    // Address
+
+    compareAddress() {
+        return (this.fgCollector.get('cName').value === this.fgCollector.get('cShippingNameOne').value &&
+            this.fgCollector.get('cNameDetails').value === this.fgCollector.get('cShippingNameTwo').value &&
+            'z.H. ' + this.fgCollector.get('cPrenamePerson').value + ' ' + this.fgCollector.get('cSurnamePerson').value === this.fgCollector.get('cShippingNameThree').value &&
+            this.fgCollector.get('cStreet').value === this.fgCollector.get('cShippingStreet').value &&
+            this.fgCollector.get('cStreetNumber').value === this.fgCollector.get('cShippingStreetNumber').value &&
+            this.fgCollector.get('cZip').value === this.fgCollector.get('cShippingZip').value &&
+            this.fgCollector.get('cCity').value === this.fgCollector.get('cShippingCity').value &&
+            this.oCountry.cName === this.oShippingCountry.cName);
+    }
+
+    onChangeAddress() {
+        if (this.bAddressIdentSelected) {
+            this.fgCollector.controls['cShippingNameOne'].setValue(this.fgCollector.get('cName').value);
+            this.fgCollector.controls['cShippingNameTwo'].setValue(this.fgCollector.get('cNameDetails').value);
+            this.fgCollector.controls['cShippingNameThree'].setValue('z.H. ' + this.fgCollector.get('cPrenamePerson').value + ' ' + this.fgCollector.get('cSurnamePerson').value);
+            this.fgCollector.controls['cShippingStreet'].setValue(this.fgCollector.get('cStreet').value);
+            this.fgCollector.controls['cShippingStreetNumber'].setValue(this.fgCollector.get('cStreetNumber').value);
+            this.fgCollector.controls['cShippingZip'].setValue(this.fgCollector.get('cZip').value);
+            this.fgCollector.controls['cShippingCity'].setValue(this.fgCollector.get('cCity').value);
+            this.oShippingCountry = this.oCountry;
+        }
+    }
+
+    onChangeAddressIdent($event: any) {
+        this.bAddressIdentSelected = $event['detail']['checked'];
+        this.onChangeAddress();
+    }
+
+    // Load
+    loadStates($kCountry) {
+        this.connApi.safeGet(this.urlRegionStates+'/'+$kCountry).subscribe((response : HttpResponse<any>) => {
+            this.lStates = response.body
+            console.log(response.body);
+        })
+    }
+
+    get errorControl() {
+        return this.fgCollector.controls;
+    }
+
+    // Alerts
 
     async alertPasswordNotIdentical() {
         const alert = await this.alertController.create({
@@ -110,7 +227,6 @@ export class RegistrationFormPage implements OnInit {
             message: 'Bitte geben Sie beide E-Mail Adressen erneut ein. Die E-Mail Adresse in CC ist selbstverständlich eine andere wenn vorhanden.',
             buttons: ['OK']
         });
-
         await alert.present();
     }
 
@@ -122,7 +238,6 @@ export class RegistrationFormPage implements OnInit {
             message: 'Bitte geben Sie ein Passwort mit mindestens 8 Zeichen ein',
             buttons: ['OK']
         });
-
         await alert.present();
     }
 
@@ -134,92 +249,17 @@ export class RegistrationFormPage implements OnInit {
             message: 'Bitte geben Sie einen neuen Sammlernamen ein',
             buttons: ['OK']
         });
-
         await alert.present();
     }
 
-    registerCollector() {
-        // check if password identical
-        if (this.registrationFormCollector.get('collection_password').value !== this.registrationFormCollector.get('collection_passwordCheck').value) {
-            this.alertPasswordNotIdentical();
-            return;
-        }
-        if (this.registrationFormCollector.get('collection_password').value.length < 8) {
-            this.alertPasswordTooShort();
-            return;
-        }
-        if (this.registrationFormCollector.get('contact_email').value !== this.registrationFormCollector.get('contact_emailCheck').value) {
-            this.alertEmailNotIdentical();
-            return;
-        }
-
-        let collector =
-            {
-                'cCollector': this.registrationFormCollector.get('collection_nameCollector').value,
-                'cPassword': this.registrationFormCollector.get('collection_password').value,
-                tCollector: this.tCollector,
-                cSurname: this.registrationFormCollector.get('contact_surname').value,
-                cPrename: this.registrationFormCollector.get('contact_prename').value,
-                bContactFormal: this.bContactFormal ? 1 : 0,
-                cContactTitle: this.cContactTitle,
-                cEmail: this.registrationFormCollector.get('contact_email').value,
-                cEmailCC: this.registrationFormCollector.get('contact_emailCC').value,
-                cPhoneLandline: this.registrationFormCollector.get('contact_phoneFixedLine').value,
-                cPhoneMobile: this.registrationFormCollector.get('contact_phoneMobile').value,
-                cShippingAddressOne: this.registrationFormCollector.get('shipping_nameOne').value,
-                cShippingAddressTwo: this.registrationFormCollector.get('shipping_nameTwo').value,
-                cStreet: this.registrationFormCollector.get('shipping_street').value,
-                cStreetNumber: this.registrationFormCollector.get('shipping_streetNumber').value,
-                cCity: this.registrationFormCollector.get('shipping_city').value,
-                cZip: this.registrationFormCollector.get('shipping_zip').value,
-                cCountry: this.cCountry,
-                kPartner: this.kPartner,
-                bPartnerAdmin: this.bPartnerAdmin ? 1 : 0
-            };
-        console.log(collector);
-        console.log('jo"');
-
-        this.connApi.post(ConnApiService.postCollector, collector).subscribe((data: HttpResponse<any>) => {
-            if (data.status == 200) {
-                console.log("läuft");
-                //navigate to root
-                this.router.navigate(['app-root']);
-            }
-        }, error => {
-            if (error.status == 406) {
-                this.alertCollectorNameForgiven()
-                console.log('name is already forgiven');
-            }
+    async alertInvalid() {
+        const alert = await this.alertController.create({
+            header: 'Fehlerhafte Eingabe',
+            message: 'Bitte überprüfe deine Daten und korrigiere diese an den markierten Stellen.',
+            cssClass: 'my-alert',
+            buttons: ['Ok']
         });
-    }
 
-    onSelected_tCollector($event) {
-        this.tCollector = $event['detail']['value'];
-    }
-
-    onSelected_cContactTitle($event) {
-        this.cContactTitle = $event['detail']['value'];
-    }
-
-    onSelected_cCountry($event) {
-        this.cCountry = $event['detail']['value'];
-    }
-
-    onSelected_kPartner($event) {
-        this.kPartner = $event['detail']['value'];
-    }
-
-    onToggle_ContactFormal($event) {
-        this.kPartner = $event['detail']['checked'];
-        console.log(this.bContactFormal);
-    }
-
-    onToggle_bPartnerAdmin($event) {
-        this.bPartnerAdmin = $event['detail']['checked'];
-    }
-
-    hideShowPassword() {
-        this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
-        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+        await alert.present();
     }
 }

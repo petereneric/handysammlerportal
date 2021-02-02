@@ -5,6 +5,12 @@
   margin: 0 auto !important;
 }
 
-form {
-  margin: 20px
+// Input - Underline -- Not working in global settings
+:host {
+  .item-interactive.ion-invalid{
+    --highlight-background: #FF !important;
+  }
+  .item-interactive.ion-valid{
+    --highlight-background: #FF !important;
+  }
 }

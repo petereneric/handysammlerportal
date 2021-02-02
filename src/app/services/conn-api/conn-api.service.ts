@@ -19,7 +19,6 @@ export class ConnApiService {
 
     // Registration
     public static getCollectorTypes: string = 'registration/collection-types'
-    public static postCollector: string = 'registration/collector'
     public static getPartnerRegistration: string = 'registration/partner'
     public static postMailRegistration: string = "registration/mail"
     public static postMailResetPassword: string = "mail/reset-password"

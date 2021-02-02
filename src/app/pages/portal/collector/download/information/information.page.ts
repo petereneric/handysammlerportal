@@ -10,6 +10,7 @@ export class InformationPage implements OnInit {
 
   // Urls
   urlInformationForCollector = "collector/download/document/informations_for_collector"
+  urlBecomeCollector = "collector/download/document/become_collector"
 
   constructor(public connApi: ConnApiService) { }
 
@@ -18,6 +19,15 @@ export class InformationPage implements OnInit {
 
     onInformationForCollector() {
       this.connApi.safeGetPDF(this.urlInformationForCollector).subscribe(response => {
+        console.log(response);
+        let blob: any = new Blob([response], {type: 'application/pdf'});
+        const url = window.URL.createObjectURL(blob);
+        window.open(url)
+      })
+    }
+
+    onBecomeCollector() {
+      this.connApi.safeGetPDF(this.urlBecomeCollector).subscribe(response => {
         console.log(response);
         let blob: any = new Blob([response], {type: 'application/pdf'});
         const url = window.URL.createObjectURL(blob);
