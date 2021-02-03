@@ -36,6 +36,7 @@ export class RegistrationFormPage implements OnInit {
         cPhoneMobile: ['', [Validators.maxLength(50)]],
         cShippingNameOne: ['', [Validators.required, Validators.maxLength(50)]],
         cShippingNameTwo: ['', [Validators.maxLength(50)]],
+        cShippingNameThree: ['', [Validators.maxLength(50)]],
         cShippingStreet: ['', [Validators.required, Validators.maxLength(50)]],
         cShippingStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
         cShippingCity: ['', [Validators.required, Validators.maxLength(50)]],
@@ -43,6 +44,7 @@ export class RegistrationFormPage implements OnInit {
     });
 
     // Variables
+    cType = null
     oType = null;
     lTypes: any[] = [];
     lTitles: any[] = [{cName: 'Herr'}, {cName: 'Frau'}, {cName: 'Herr Dr.'}, {cName: 'Frau Dr.'},];
@@ -50,18 +52,26 @@ export class RegistrationFormPage implements OnInit {
     bFormally: boolean = true;
     lCountries: any[] = [{id: 1, cName: 'Deutschland'}];
     oCountry = this.lCountries[0];
+    cCountry = null;
     oShippingCountry = this.lCountries[0];
+    cShippingCountry = null;
     lStates = [];
     oState = null;
+    cState = null;
     lPartner: any[];
+    oPartner = null;
+    cPartner = null;
     kPartner: number;
     bPartnerAdmin: boolean = false;
-    passwordType: string = 'password';
     passwordIcon: string = 'eye-off';
     bPasswordIdentical: Boolean;
 
     bSubmitted: boolean = false;
     bAddressIdentSelected: boolean;
+    bShowPassword: boolean = false;
+    bChangePartner = true;
+    bConditions = false;
+    bSecurity = false;
 
     compareWithFn = (o1, o2) => {
         return o1 && o2 ? o1.id === o2.id : o1 === o2;
@@ -157,9 +167,8 @@ export class RegistrationFormPage implements OnInit {
         this.bPartnerAdmin = $event['detail']['checked'];
     }
 
-    hideShowPassword() {
-        this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
-        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+    showPassword() {
+        this.bShowPassword = !this.bShowPassword;
     }
 
     // Address
@@ -191,6 +200,14 @@ export class RegistrationFormPage implements OnInit {
     onChangeAddressIdent($event: any) {
         this.bAddressIdentSelected = $event['detail']['checked'];
         this.onChangeAddress();
+    }
+
+    onChangeCondtions($event: any) {
+        this.bConditions = $event['detail']['checked'];
+    }
+
+    onChangeSecurity($event: any) {
+        this.bSecurity = $event['detail']['checked'];
     }
 
     // Load
@@ -261,5 +278,34 @@ export class RegistrationFormPage implements OnInit {
         });
 
         await alert.present();
+    }
+
+    onRegister() {
+
+    }
+
+    // Password
+
+    passwordInactive() {
+        return this.fgCollector.get('cPassword').value.length == 0;
+    }
+
+    passwordLength() {
+        return this.fgCollector.get('cPassword').value.length >= 8;
+    }
+
+    passwordBigSmall() {
+        let regex = new RegExp('(?=.*[a-z])(?=.*[A-Z])');
+        return regex.test(this.fgCollector.get('cPassword').value);
+    }
+
+    passwordNumber() {
+        let regex = new RegExp('(?=.*[1-9])');
+        return regex.test(this.fgCollector.get('cPassword').value);
+    }
+
+    passwordExtra() {
+        let regex = new RegExp('(?=.*[§#@$!%*?&])');
+        return regex.test(this.fgCollector.get('cPassword').value);
     }
 }

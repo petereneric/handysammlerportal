@@ -41,7 +41,7 @@ p {
 }
 
 ion-select {
-    max-width: 90% !important;
+  max-width: 90% !important;
 }
 
 ion-spinner {
@@ -57,14 +57,16 @@ ion-spinner {
   color: $white !important;
   border-color: #dbdbdb !important;
   border-width: 1px !important;
-  border-style:solid; margin-bottom : -1px !important;
+  border-style: solid;
+  margin-bottom: -1px !important;
   margin-left: -1px !important;
 }
 
 .ion-col-table {
   border-color: #dbdbdb !important;
   border-width: 1px !important;
-  border-style:solid; margin-bottom : -1px !important;
+  border-style: solid;
+  margin-bottom: -1px !important;
   margin-left: -1px !important;
   color: #757575 !important;
 }
@@ -85,9 +87,10 @@ ion-spinner {
 }
 
 .text-head {
-  color: $textPrimary;
-  font-size: 18px;
-  margin-bottom: 8px;
+  color: #8BC34A;
+  font-size: 24px;
+  display: inline;
+  font-weight: 400;
 }
 
 .text-list {
@@ -100,13 +103,24 @@ ion-spinner {
   background: #f6f6f6;
   border-radius: 8px;
   padding: 16px;
-  width:75%; margin:32px auto;
+  width: 75%;
+  margin: 32px auto;
+}
+
+.text-inside-block-element {
+  background: #f6f6f6;
+  border-radius: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .no-underline {
   --highlight-background: transparent;
 }
-
 
 
 // Input
@@ -119,7 +133,8 @@ ion-spinner {
   background: #ffffff;
   border-radius: 8px;
   padding: 16px;
-  width:75%; margin:32px auto;
+  width: 75%;
+  margin: 32px auto;
 }
 
 .input-background {
@@ -132,6 +147,23 @@ ion-spinner {
   color: $red;
   font-size: 11px;
   margin-left: 16px;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.password-invalid {
+  color: #c34a4a;
+  font-size: 11px;
+}
+
+.password-valid {
+  color: #8BC34A;
+  font-size: 11px;
+}
+
+.password-inactive {
+  color: #BDBDBD;
+  font-size: 11px;
 }
 
 .input-info {
@@ -158,7 +190,6 @@ ion-spinner {
 }
 
 
-
 .text-page-information {
   color: $textSecondary;
   size: 28px;
@@ -172,7 +203,7 @@ ion-spinner {
 
 ion-button {
   width: 500px;
-  margin-top: 32px;
+  margin-top: 8px;
 }
 
 .ion-button-deactivated {
@@ -201,14 +232,34 @@ ion-button {
   margin-top: 24px;
 }
 
+.button-input {
+  --color: #afafaf;
+  --background: white;
+  --ion-text-color: #afafaf;
+  --box-shadow: white;
+  width: 100%;
+  border: 1px solid #afafaf;
+  border-radius: 4px;
+  --box-shadow: white;
+}
+
+.button-input:hover {
+  --color: #8BC34A;
+  --ion-text-color: #8BC34A;
+  border: 1px solid $green;
+}
+
 .my-alert .alert-wrapper {
   min-width: 350px !important;
+
   .alert-button-group {
     justify-content: center;
   }
+
   .alert-sub-title {
     //text-align: center;
   }
+
   /*
   .alert-message {
     text-align: center;
@@ -219,14 +270,14 @@ ion-button {
   }
 }
 
-.my-toast{
+.my-toast {
   --background: #565650;
-  --border-color:#FF;
-  --border-radius:0px;
-  --border-style:solid;
-  --border-width:0px;
+  --border-color: #FF;
+  --border-radius: 0px;
+  --border-style: solid;
+  --border-width: 0px;
   font-size: 16px;
-  --button-color:#FFDD00;
+  --button-color: #FFDD00;
   --color: #e7e7e7;
   text-align: center;
 }
@@ -260,6 +311,7 @@ ion-toggle {
   .alert-button-group {
     justify-content: center;
   }
+
   width: 100% !important;
   max-width: 100% !important;
 }
@@ -282,7 +334,25 @@ ion-toolbar ion-menu-button {
 }
 
 .center {
-  justify-content:center;
+  justify-content: center;
+}
+
+h2 {
+  margin-left: 0.5rem;
+  display: inline;
+  align-self: center;
+}
+
+.horizontal-orientation {
+  display: flex;
+  align-items: center;
+}
+
+.icon-head {
+  margin-left: 1rem;
+  color: #afafaf;
+  align-self: center;
+
 }
 
 
