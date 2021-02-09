@@ -33,7 +33,12 @@ const routes: Routes = [
     {
         path: 'reset-password',
         loadChildren: () => import('./pages/login/reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
+    },
+    {
+        path: 'impressum',
+        loadChildren: () => import('./pages/portal/universal/impressum/impressum.module').then( m => m.ImpressumPageModule)
     },]
+
 ;
 
 @NgModule({

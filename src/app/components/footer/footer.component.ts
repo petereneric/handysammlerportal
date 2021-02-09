@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as https from 'https';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-footer',
@@ -8,14 +9,14 @@ import * as https from 'https';
 })
 export class FooterComponent implements OnInit {
 
-    constructor() {
+    constructor(public router: Router) {
     }
 
     ngOnInit() {
     }
 
     onImpressum() {
-
+        this.router.navigate(['impressum']);
     }
 
     onMobileBox() {

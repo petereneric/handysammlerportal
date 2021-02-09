@@ -118,6 +118,27 @@ ion-spinner {
   margin-bottom: 1rem;
 }
 
+b {
+  font-weight: 500;
+}
+
+.text {
+  font-size: 13px;
+  color: #212121;
+  line-height: 5px;
+}
+
+.text-secondary {
+  font-size: 13px;
+  color: #afafaf;
+  line-height: 5px;
+}
+
+.text-block {
+  margin: 0.75rem;
+  margin-top: 2rem;
+}
+
 .no-underline {
   --highlight-background: transparent;
 }
@@ -285,6 +306,7 @@ ion-button {
 
 .footer {
   display: inline-flex;
+  transform: translateY(-100%);
   flex-direction: column;
   background-color: #a5d274;
   height: 50px !important;
@@ -294,7 +316,29 @@ ion-button {
   padding-bottom: 0.5rem;
   width: 100%;
   justify-content: center;
+}
 
+.scroll-content {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
+  contain: size style layout;
+  display: flex;             // added by me
+  flex-direction: column;    // added by me
+}
+
+.lower-content {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .toolbar-subtitle {

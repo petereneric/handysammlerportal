@@ -7,6 +7,7 @@
 <!-- Default Segment -->
 
 <ion-content class="ion-margin-vertical">
+  <div class="scroll-content">
   <ion-segment [(ngModel)]="selectedRole" (ionChange)="segmentChanged($event)">
     <ion-segment-button value=0>
       <ion-label>Sammler</ion-label>
@@ -66,6 +67,7 @@
     </ion-row>
     </form>
   </div>
-
+  <app-footer class="lower-content"></app-footer>
+  </div>
 </ion-content>
 

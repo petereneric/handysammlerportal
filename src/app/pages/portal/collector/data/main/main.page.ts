@@ -14,9 +14,9 @@ export class MainPage implements OnInit {
 
     // Urls
     private urlCollector = 'collector/main';
-    private urlTypeNames = 'collector/types';
+    private urlTypeNames = 'types';
     private urlSave = 'collector/main';
-    private urlRegionStates = 'collector/region/states';
+    private urlRegionStates = 'region/states';
 
     // IdentAddress
     bAddressIdentSelected: boolean;
