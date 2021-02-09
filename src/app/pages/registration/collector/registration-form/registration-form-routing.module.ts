@@ -4,8 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegistrationFormPage } from './registration-form.page';
 
 const routes: Routes = [
+    /*
   {
-    path: '',
+    path: 'test',
+    component: RegistrationFormPage,
+
+  },
+  */
+  {
+    path: 'id/:id',
     component: RegistrationFormPage
   }
 ];

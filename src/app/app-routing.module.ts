@@ -15,7 +15,7 @@ const routes: Routes = [
     },
     {
         path: 'partner',
-        loadChildren: () => import('./pages/portal/partner/partner.module').then( m => m.PartnerPageModule)
+        loadChildren: () => import('./pages/portal/partner/partner.module').then(m => m.PartnerPageModule)
     },
     {
         path: 'login',
@@ -34,11 +34,6 @@ const routes: Routes = [
         path: 'reset-password',
         loadChildren: () => import('./pages/login/reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
     },]
-
-
-
-
-
 ;
 
 @NgModule({

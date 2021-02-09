@@ -10,7 +10,7 @@ export class InformationPage implements OnInit {
 
   // Urls
   urlInformationForCollector = "collector/download/document/informations_for_collector"
-  urlBecomeCollector = "collector/download/document/become_collector"
+  urlBecomeCollector = "download/document/become_collector"
 
   constructor(public connApi: ConnApiService) { }
 
@@ -27,7 +27,7 @@ export class InformationPage implements OnInit {
     }
 
     onBecomeCollector() {
-      this.connApi.safeGetPDF(this.urlBecomeCollector).subscribe(response => {
+      this.connApi.getPDF(this.urlBecomeCollector).subscribe(response => {
         console.log(response);
         let blob: any = new Blob([response], {type: 'application/pdf'});
         const url = window.URL.createObjectURL(blob);

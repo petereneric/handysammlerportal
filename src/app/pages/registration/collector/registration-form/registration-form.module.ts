@@ -8,6 +8,8 @@ import { RegistrationFormPageRoutingModule } from './registration-form-routing.m
 
 import { RegistrationFormPage } from './registration-form.page';
 import {MatIconModule} from "@angular/material/icon";
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {FooterComponent} from '../../../../components/footer/footer.component';
 
 @NgModule({
     imports: [
@@ -16,8 +18,12 @@ import {MatIconModule} from "@angular/material/icon";
         IonicModule,
         RegistrationFormPageRoutingModule,
         ReactiveFormsModule,
+        [MatTooltipModule],
         MatIconModule
     ],
-  declarations: [RegistrationFormPage]
+    exports: [
+        FooterComponent
+    ],
+    declarations: [RegistrationFormPage, FooterComponent]
 })
 export class RegistrationFormPageModule {}

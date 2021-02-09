@@ -16,7 +16,7 @@
 }
 
 .button-register {
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 
 .button-input {
@@ -26,6 +26,13 @@
 .end {
   align-items: flex-end;
 }
+
+ion-content {
+  --padding-bottom: 50px !important;
+}
+
+
+
 
 
 

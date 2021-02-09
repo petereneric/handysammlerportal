@@ -26,6 +26,7 @@ export class LoginPage implements OnInit {
     });
 
     constructor(private authApiService: AuthApiService, private connApiService: ConnApiService, public router: Router, private fb: FormBuilder, private data: DataService) {
+    console.log("teeest");
     }
 
     ngOnInit(): void {
@@ -70,7 +71,7 @@ export class LoginPage implements OnInit {
     }
 
     navRegisterCollector() {
-        this.router.navigate(['registration-collector'])
+        this.router.navigate(['registration-collector/id/0'])
     }
 
     onResetPassword() {

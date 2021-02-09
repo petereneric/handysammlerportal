@@ -88,9 +88,9 @@ ion-spinner {
 
 .text-head {
   color: #8BC34A;
-  font-size: 24px;
+  font-size: 22px;
   display: inline;
-  font-weight: 400;
+  font-weight: 300;
 }
 
 .text-list {
@@ -127,6 +127,17 @@ ion-spinner {
 .input-label {
   --color: #757575 !important;
   --margin-bottom: 8px;
+}
+
+.checkbox-label {
+  --color: #212121 !important;
+  --margin-bottom: 8px;
+}
+
+.law-label {
+  --color: #212121 !important;
+  --margin-bottom: 8px;
+  font-style: italic;
 }
 
 .input-block-element {
@@ -187,6 +198,8 @@ ion-spinner {
   color: $green;
   text-decoration: underline;
   cursor: pointer;
+  position: relative;
+  z-index: 10;
 }
 
 
@@ -270,6 +283,30 @@ ion-button {
   }
 }
 
+.footer {
+  display: inline-flex;
+  flex-direction: column;
+  background-color: #a5d274;
+  height: 50px !important;
+  min-height: 50px !important;
+  bottom: 0px !important;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  justify-content: center;
+
+}
+
+.toolbar-subtitle {
+  font-size: 12px;
+  margin-top: 0.125rem;
+  font-style: normal;
+}
+
+.toolbar-icon {
+  color: white;
+}
+
 .my-toast {
   --background: #565650;
   --border-color: #FF;
@@ -291,6 +328,9 @@ ion-item {
   padding-top: 12px;
 }
 
+ion-back-button {
+  color: white;
+}
 
 .text-note {
   color: $textTertiary;
@@ -301,10 +341,10 @@ ion-item {
 ion-toggle {
   margin-left: 0px !important;
   padding-left: 0px !important;
-  --background-checked: #d6d6d6;
-  --background: #d6d6d6;
+  --background-checked: #d9d9d9;
+  --background: #d9d9d9;
 
-  --handle-background: #aeaeae;
+  --handle-background: white;
 }
 
 .ion-select-option.alert-wrapper {
@@ -343,16 +383,48 @@ h2 {
   align-self: center;
 }
 
-.horizontal-orientation {
+.block-head {
   display: flex;
   align-items: center;
+  margin-top:0.75rem;
+  margin-left:0.75rem;
 }
 
 .icon-head {
   margin-left: 1rem;
   color: #afafaf;
   align-self: center;
+  cursor: pointer;
+}
 
+.icon-head:hover {
+  color: $green;
+}
+
+.footer-element {
+  margin-top: 0.125rem;
+  font-size: 10px;
+  display: flex;
+  align-items: center !important;
+  color: white;
+  font-weight: 300;
+}
+
+.footer-element-link {
+  cursor: pointer;
+}
+
+.footer-element-link:hover {
+  text-decoration: underline;
+}
+
+.footer-element-title {
+  margin-top: 0.125rem;
+  font-size: 12px;
+  display: flex;
+  align-items: center !important;
+  color: white;
+  font-weight: 400;
 }
 
 

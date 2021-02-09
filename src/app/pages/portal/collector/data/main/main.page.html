@@ -378,14 +378,14 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-            <ion-row *ngIf="bSubmitted && errorControl.cShippingNameOne.errors?.required">
+            <ion-row *ngIf="bSubmitted && errorControl.cShippingAddressOne.errors?.required">
                 <ion-col>
                     <span class="input-invalid"
                     >Pflichtfeld
                     </span>
                 </ion-col>
             </ion-row>
-            <ion-row *ngIf="bSubmitted && errorControl.cShippingNameOne.errors?.maxlength">
+            <ion-row *ngIf="bSubmitted && errorControl.cShippingAddressOne.errors?.maxlength">
                 <ion-col>
                     <span class="input-invalid"
                     >Maximal-Länge von 50 Zeichen überschritten
@@ -401,7 +401,7 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-            <ion-row *ngIf="bSubmitted && errorControl.cShippingNameTwo.errors?.maxlength">
+            <ion-row *ngIf="bSubmitted && errorControl.cShippingAddressTwo.errors?.maxlength">
                 <ion-col>
                     <span class="input-invalid"
                     >Maximal-Länge von 50 Zeichen überschritten
@@ -417,7 +417,7 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-            <ion-row *ngIf="bSubmitted && errorControl.cShippingNameThree.errors?.maxlength">
+            <ion-row *ngIf="bSubmitted && errorControl.cShippingAddressThree.errors?.maxlength">
                 <ion-col>
                     <span class="input-invalid"
                     >Maximal-Länge von 50 Zeichen überschritten
