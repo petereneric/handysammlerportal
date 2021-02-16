@@ -16,27 +16,27 @@ export class AddPage implements OnInit {
     private urlOrder = 'collector/order';
 
     // Variables
-    private boxAvailable;
-    private bricolageAvailable;
-    private flyerAvailable;
-    private posterAvailable;
-    private boxMax;
-    private bricolageMax;
-    private boxChoice = [0];
-    private bricolageChoice = [0];
-    private flyerChoice = [0];
-    private posterChoice = [0];
-    private boxOrder: number = 0;
-    private bricolageOrder: number = 0;
-    private flyerOrder: number = 0;
-    private posterOrder: number = 0;
+    public boxAvailable;
+    public bricolageAvailable;
+    public flyerAvailable;
+    public posterAvailable;
+    public boxMax;
+    public bricolageMax;
+    public boxChoice = [0];
+    public bricolageChoice = [0];
+    public flyerChoice = [0];
+    public posterChoice = [0];
+    public boxOrder: number = 0;
+    public bricolageOrder: number = 0;
+    public flyerOrder: number = 0;
+    public posterOrder: number = 0;
 
-    private orderDisabled = false;
-    private orderTaken = false;
-    private spinner = false;
+    public orderDisabled = false;
+    public orderTaken = false;
+    public spinner = false;
 
-    private flyerSelected = false;
-    private posterSelected = false;
+    public flyerSelected = false;
+    public posterSelected = false;
 
 
 

@@ -16,9 +16,9 @@ export class DonationPage implements OnInit {
   private urlPartner = 'collector/partner';
 
   // Variables
-  private lPartners: any[] = [];
-  private cPartner = null;
-  private bChangePartner: boolean = true;
+  public lPartners: any[] = [];
+  public cPartner = null;
+  public bChangePartner: boolean = true;
 
   constructor(private connApi: ConnApiService, private toastController: ToastController) {
   }

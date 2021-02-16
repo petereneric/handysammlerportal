@@ -31,13 +31,35 @@ const routes: Routes = [
         loadChildren: () => import('./pages/registration/verification/verification.module').then(m => m.VerificationPageModule)
     },
     {
-        path: 'reset-password',
-        loadChildren: () => import('./pages/login/reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
-    },
-    {
         path: 'impressum',
         loadChildren: () => import('./pages/portal/universal/impressum/impressum.module').then( m => m.ImpressumPageModule)
-    },]
+    },
+    {
+        path: 'confirmation',
+        loadChildren: () => import('./pages/registration/confirmation/confirmation.module').then( m => m.ConfirmationPageModule)
+    },
+    {
+        path: 'invalid',
+        loadChildren: () => import('./pages/registration/invalid/invalid.module').then( m => m.InvalidPageModule)
+    },
+    {
+        path: 'reset',
+        loadChildren: () => import('./pages/password/reset/reset.module').then( m => m.ResetPageModule)
+    },
+    {
+        path: 'request',
+        loadChildren: () => import('./pages/password/request/request.module').then( m => m.RequestPageModule)
+    },
+    {
+        path: 'agreement',
+        loadChildren: () => import('./pages/agreement/agreement.module').then( m => m.AgreementPageModule)
+    },
+    ]
+
+
+
+
+
 
 ;
 

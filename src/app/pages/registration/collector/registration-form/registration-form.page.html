@@ -30,7 +30,7 @@
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cName.errors?.required" class="input-invalid">Pflichtfeld</span>
                         <span *ngIf="bSubmitted && errorControl.cName.errors?.maxlength" class="input-invalid"
-                        >Maximal-Länge von 50 Zeichen überschritten
+                        >Maximal-Länge von 80 Zeichen überschritten
                         </span>
                     </ion-col>
                     <ion-col>
@@ -39,7 +39,7 @@
                             </ion-label>
                             <ion-input type="text" formControlName="cNameDetails"></ion-input>
                         </ion-item>
-                        <span *ngIf="bSubmitted && errorControl.cName.errors?.maxlength" class="input-invalid"
+                        <span *ngIf="bSubmitted && errorControl.cNameDetails.errors?.maxlength" class="input-invalid"
                         >Maximal-Länge von 50 Zeichen überschritten
                     </span>
                     </ion-col>
@@ -141,7 +141,7 @@
                             habe und diesen zustimme*
                         </ion-label>
                         <ion-checkbox [ngModel]="bConditions" [checked]=bConditions
-                                      (ionChange)="onConditions()"></ion-checkbox>
+                                      (ionChange)="changeConditions()"></ion-checkbox>
                     </ion-item>
                     <span *ngIf="bSubmitted && !bConditions" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
@@ -151,7 +151,7 @@
                             habe und diesen zustimme*
                         </ion-label>
                         <ion-checkbox [ngModel]="bSecurity" [checked]=bSecurity
-                                      (ionChange)="onSecurity()"></ion-checkbox>
+                                      (ionChange)="changeSecurity()"></ion-checkbox>
                     </ion-item>
                     <span *ngIf="bSubmitted && !bSecurity" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
@@ -215,7 +215,7 @@
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cEmail.errors?.required" class="input-invalid">Pflichtfeld</span>
                         <span *ngIf="bSubmitted && errorControl.cEmail.errors?.pattern" class="input-invalid">Fehlerhafte Eingabe</span>
-                        <span *ngIf="bSubmitted && errorControl.cEmail.errors?.maxlength" class="input-invalid">Maximal-Länge von 50 Zeichen überschritten</span>
+                        <span *ngIf="bSubmitted && errorControl.cEmail.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
                     </ion-col>
                     <ion-col>
                         <ion-item lines="full">
@@ -223,7 +223,7 @@
                             <ion-input type="text" formControlName="cEmailCC"></ion-input>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cEmailCC.errors?.pattern" class="input-invalid">Fehlerhafte Eingabe</span>
-                        <span *ngIf="bSubmitted && errorControl.cEmailCC.errors?.maxlength" class="input-invalid">Maximal-Länge von 50 Zeichen überschritten</span>
+                        <span *ngIf="bSubmitted && errorControl.cEmailCC.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -237,7 +237,7 @@
                     </ion-col>
                     <ion-col>
                         <ion-item lines="full">
-                            <ion-label class="input-label" position="floating">Telefon (Festnetz)</ion-label>
+                            <ion-label class="input-label" position="floating">Telefon (Mobil)</ion-label>
                             <ion-input type="text" formControlName="cPhoneMobile"></ion-input>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cPhoneMobile.errors?.maxlength" class="input-invalid">Maximal-Länge von 50 Zeichen überschritten</span>
@@ -376,7 +376,7 @@
                     </ion-col>
                     <ion-col size="4">
                         <ion-button (click)="showPassword()"
-                                    class="button-input">{{bShowPassword ? 'Passwort nicht anzeigen' : 'Passwort anzeigen'}}</ion-button>
+                                    class="button-four">{{bShowPassword ? 'Passwort nicht anzeigen' : 'Passwort anzeigen'}}</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -431,6 +431,9 @@
             <ion-button class="button-register" (click)="register()">Registrieren</ion-button>
         </ion-col>
     </ion-row>
+    <br/>
+    <br/>
+    <br/>
     <app-footer></app-footer>
 </ion-content>
 

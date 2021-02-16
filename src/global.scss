@@ -125,18 +125,35 @@ b {
 .text {
   font-size: 13px;
   color: #212121;
-  line-height: 5px;
+  line-height: 18px;
+  margin: 0;
+  padding: 0;
 }
 
 .text-secondary {
+  margin: 0;
+  padding: 0;
   font-size: 13px;
   color: #afafaf;
-  line-height: 5px;
+  line-height: 18px;
+  text-align: justify;
+}
+
+.ion-row-buttons {
+  text-align: center;
+  margin-top: 2rem;
+
+}
+
+.ion-col-button {
+  align-self: center;
+  text-align: center;
 }
 
 .text-block {
   margin: 0.75rem;
   margin-top: 2rem;
+  text-align: justify;
 }
 
 .no-underline {
@@ -236,8 +253,7 @@ b {
 }
 
 ion-button {
-  width: 500px;
-  margin-top: 8px;
+  width: 80%;
 }
 
 .ion-button-deactivated {
@@ -252,55 +268,63 @@ ion-button {
   --ion-text-color: #8BC34A;
   border: 1px solid $green;
   border-radius: 4px;
-  width: 500px;
+  width: 80%;
   --box-shadow: white;
-  margin-top: 20px;
 }
 
 .ion-button-three {
   --color: #8BC34A;
   --background: white;
   --ion-text-color: #8BC34A;
-  width: 500px;
+  width: 80%;
   --box-shadow: white;
-  margin-top: 24px;
 }
 
-.button-input {
+.button-four {
   --color: #afafaf;
   --background: white;
   --ion-text-color: #afafaf;
   --box-shadow: white;
-  width: 100%;
+  width: 80%;
   border: 1px solid #afafaf;
   border-radius: 4px;
   --box-shadow: white;
 }
 
-.button-input:hover {
+.button-four:hover {
   --color: #8BC34A;
   --ion-text-color: #8BC34A;
   border: 1px solid $green;
 }
 
 .my-alert .alert-wrapper {
-  min-width: 350px !important;
+  //min-width: 350px !important;
+  justify-content: center;
 
   .alert-button-group {
     justify-content: center;
   }
 
   .alert-sub-title {
-    //text-align: center;
-  }
-
-  /*
-  .alert-message {
+    font-size: 16px;
+    color: $textSecondary;
+    margin-top: 1rem;
     text-align: center;
   }
-  */
+
+
+  .alert-message {
+    font-size: 16px;
+    margin-top: 1rem;
+    text-align: center;
+    color: $textPrimary;
+  }
+
   .alert-title {
-    //text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    color: $textPrimary;
+    text-align: center;
   }
 }
 
@@ -391,11 +415,10 @@ ion-toggle {
   --handle-background: white;
 }
 
-.ion-select-option.alert-wrapper {
+.ion-select-option .alert-wrapper {
   .alert-button-group {
     justify-content: center;
   }
-
   width: 100% !important;
   max-width: 100% !important;
 }
@@ -421,11 +444,14 @@ ion-toolbar ion-menu-button {
   justify-content: center;
 }
 
+/*
 h2 {
   margin-left: 0.5rem;
   display: inline;
   align-self: center;
 }
+
+ */
 
 .block-head {
   display: flex;

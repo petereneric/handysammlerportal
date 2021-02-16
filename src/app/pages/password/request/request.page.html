@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Handysammlerportal</ion-title>
+        <ion-title class="toolbar-subtitle">Passwort vergessen</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="input-background">
+    <div class="input-block-element">
+        <form [formGroup]="formGroup">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-item lines="full">
+                            <ion-label class="input-label" position="floating">E-Mail Adresse</ion-label>
+                            <ion-input type="text" formControlName="cEmail"></ion-input>
+                        </ion-item>
+                        <span *ngIf="bSubmitted && errorControl.cEmail.errors?.required" class="input-invalid">Pflichtfeld</span>
+                        <span *ngIf="bSubmitted && errorControl.cEmail.errors?.pattern" class="input-invalid">Fehlerhafte Eingabe</span>
+                        <span *ngIf="bSubmitted && errorControl.cEmail.errors?.maxlength" class="input-invalid">Maximal-Länge von 50 Zeichen überschritten</span>
+                    </ion-col>
+                    <ion-col class="ion-col-button">
+                        <ion-button (click)="onMail()">Passwort zurücksetzen</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+    </div>
+</ion-content>

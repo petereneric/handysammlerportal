@@ -17,6 +17,7 @@ export class MainPage implements OnInit {
     private urlTypeNames = 'types';
     private urlSave = 'collector/main';
     private urlRegionStates = 'region/states';
+    private urlPasswordRequest = "password/request"
 
     // IdentAddress
     bAddressIdentSelected: boolean;
@@ -84,9 +85,9 @@ export class MainPage implements OnInit {
             this.fgCollector.controls['cPhoneMobile'].setValue(collector.cPhoneMobile);
             this.fgCollector.controls['cEmail'].setValue(collector.cEmail);
             this.fgCollector.controls['cEmailCC'].setValue(collector.cEmailCC);
-            this.fgCollector.controls['cShippingNameOne'].setValue(collector.cShippingNameOne);
-            this.fgCollector.controls['cShippingNameTwo'].setValue(collector.cShippingNameTwo);
-            this.fgCollector.controls['cShippingNameThree'].setValue(collector.cShippingNameThree);
+            this.fgCollector.controls['cShippingAddressOne'].setValue(collector.cShippingNameOne);
+            this.fgCollector.controls['cShippingAddressTwo'].setValue(collector.cShippingNameTwo);
+            this.fgCollector.controls['cShippingAddressThree'].setValue(collector.cShippingNameThree);
             this.fgCollector.controls['cShippingStreet'].setValue(collector.cShippingStreet);
             this.fgCollector.controls['cShippingStreetNumber'].setValue(collector.cShippingStreetNumber);
             this.fgCollector.controls['cShippingZip'].setValue(collector.cShippingZip);
@@ -153,11 +154,10 @@ export class MainPage implements OnInit {
                 bAddressFormally: this.bFormally ? 1 : 0,
                 cPhoneFixedLine: this.fgCollector.get('cPhoneFixedLine').value,
                 cPhoneMobile: this.fgCollector.get('cPhoneMobile').value,
-                cEmail: this.fgCollector.get('cEmail').value,
                 cEmailCC: this.fgCollector.get('cEmailCC').value,
-                cShippingAddressOne: this.fgCollector.get('cShippingNameOne').value,
-                cShippingAddressTwo: this.fgCollector.get('cShippingNameTwo').value,
-                cShippingAddressThree: this.fgCollector.get('cShippingNameThree').value,
+                cShippingAddressOne: this.fgCollector.get('cShippingAddressOne').value,
+                cShippingAddressTwo: this.fgCollector.get('cShippingAddressTwo').value,
+                cShippingAddressThree: this.fgCollector.get('cShippingAddressThree').value,
                 cShippingStreet: this.fgCollector.get('cShippingStreet').value,
                 cShippingStreetNumber: this.fgCollector.get('cShippingStreetNumber').value,
                 cShippingZip: this.fgCollector.get('cShippingZip').value,
@@ -194,9 +194,9 @@ export class MainPage implements OnInit {
     }
 
     compareAddress() {
-        return (this.fgCollector.get('cName').value === this.fgCollector.get('cShippingNameOne').value &&
-            this.fgCollector.get('cNameDetails').value === this.fgCollector.get('cShippingNameTwo').value &&
-            'z.H. ' + this.fgCollector.get('cPrenamePerson').value + ' ' + this.fgCollector.get('cSurnamePerson').value === this.fgCollector.get('cShippingNameThree').value &&
+        return (this.fgCollector.get('cName').value === this.fgCollector.get('cShippingAddressOne').value &&
+            this.fgCollector.get('cNameDetails').value === this.fgCollector.get('cShippingAddressTwo').value &&
+            'z.H. ' + this.fgCollector.get('cPrenamePerson').value + ' ' + this.fgCollector.get('cSurnamePerson').value === this.fgCollector.get('cShippingAddressThree').value &&
             this.fgCollector.get('cStreet').value === this.fgCollector.get('cShippingStreet').value &&
             this.fgCollector.get('cStreetNumber').value === this.fgCollector.get('cShippingStreetNumber').value &&
             this.fgCollector.get('cZip').value === this.fgCollector.get('cShippingZip').value &&
@@ -206,9 +206,9 @@ export class MainPage implements OnInit {
 
     onChangeAddress() {
         if (this.bAddressIdentSelected) {
-            this.fgCollector.controls['cShippingNameOne'].setValue(this.fgCollector.get('cName').value);
-            this.fgCollector.controls['cShippingNameTwo'].setValue(this.fgCollector.get('cNameDetails').value);
-            this.fgCollector.controls['cShippingNameThree'].setValue('z.H. ' + this.fgCollector.get('cPrenamePerson').value + ' ' + this.fgCollector.get('cSurnamePerson').value);
+            this.fgCollector.controls['cShippingAddressOne'].setValue(this.fgCollector.get('cName').value);
+            this.fgCollector.controls['cShippingAddressTwo'].setValue(this.fgCollector.get('cNameDetails').value);
+            this.fgCollector.controls['cShippingAddressThree'].setValue('z.H. ' + this.fgCollector.get('cPrenamePerson').value + ' ' + this.fgCollector.get('cSurnamePerson').value);
             this.fgCollector.controls['cShippingStreet'].setValue(this.fgCollector.get('cStreet').value);
             this.fgCollector.controls['cShippingStreetNumber'].setValue(this.fgCollector.get('cStreetNumber').value);
             this.fgCollector.controls['cShippingZip'].setValue(this.fgCollector.get('cZip').value);
@@ -249,6 +249,34 @@ export class MainPage implements OnInit {
             header: 'Fehlerhafte Eingabe',
             message: 'Bitte überprüfe deine Daten und korrigiere diese an den markierten Stellen.',
             cssClass: 'my-alert',
+            buttons: ['Ok']
+        });
+
+        await alert.present();
+    }
+
+    onPassword() {
+        // prepare
+        let data = {
+            'role': 0,
+            'email':this.fgCollector.get('cEmail').value
+        }
+
+        // send
+        this.connApi.post(this.urlPasswordRequest, data).subscribe((data: HttpResponse<any>) => {
+            if (data.status == 200) {
+                this.alertCheckEmail();
+            }
+        }, error => {
+            console.log(error)
+        });
+    }
+
+    async alertCheckEmail() {
+        const alert = await this.alertController.create({
+            cssClass: 'my-alert',
+            header: 'E-Mail versendet',
+            message: 'Bitte öffne die an Dich versendete E-Mail, um dein Passwort zurückzusetzen.',
             buttons: ['Ok']
         });
 

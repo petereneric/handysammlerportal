@@ -1,13 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Verification</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Handysammlerportal</ion-title>
+        <ion-title class="toolbar-subtitle">E-Mail-Adresse bestätigen</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-row>
-    <p>Fast geschafft. Bitte bestätige abschließend Deine E-Mail Adresse. Öffne dazu die Bestätigungs-Mail die wir Dir zugesendet haben und klicke auf den enthaltenen
-    Link. Wenn du keine E-Mail erhalten hast, dann kicke bitte auf den unteren Button.</p>
-  </ion-row>
-<ion-button (click)="mailVerification()">Bestätigungs-Email erneut senden</ion-button><ion-button (click)="checkVerification()">Ich habe meine E-Mail Adresse bestätigt</ion-button>
+<ion-content class="input-background">
+    <div class="input-block-element">
+        <div class="block-head">
+            <span class="text-head">Fast geschafft</span>
+        </div>
+        <div class="text-block">
+            <p class="text-secondary">Wir freuen uns über deine Anmeldung und dein Engagement. Um deine Registrierung als Sammler abzuschließen zu können, bitten wir dich deine E-Mail-Adresse zu bestätigen. Öffne dazu bitte die E-Mail die wir dir zugesendet haben und folge den dort enthaltenen Anweisungen.</p>
+        </div>
+        <ion-grid>
+            <ion-row class="ion-row-buttons">
+                <ion-col>
+                    <ion-button (click)="mailVerification()">E-Mail erneut zusenden</ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button class="ion-button-three" (click)="confirmVerification()">E-Mail bereits bestätigt</ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 </ion-content>

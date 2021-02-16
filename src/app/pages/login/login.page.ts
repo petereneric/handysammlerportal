@@ -59,6 +59,9 @@ export class LoginPage implements OnInit {
             if (error.status == 401) {
                 console.log('wrong login credentials');
             }
+            if (error.status == 412) {
+                this.router.navigate(['verification']);
+            }
         });
     }
 
@@ -75,6 +78,6 @@ export class LoginPage implements OnInit {
     }
 
     onResetPassword() {
-        this.router.navigate(['reset-password']);
+        this.router.navigate(['request/role/'+this.selectedRole]);
     }
 }

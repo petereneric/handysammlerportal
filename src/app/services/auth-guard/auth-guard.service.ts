@@ -26,6 +26,8 @@ export class AuthGuardService implements CanActivate {
                 // return to router
                 resolve(true);
             }, error => {
+                console.log("jo");
+                console.log(error.status);
                 switch (error.status) {
                     case 401:
                     case 440:
@@ -35,6 +37,9 @@ export class AuthGuardService implements CanActivate {
                     case 412:
                         console.log("AuthGuard not passed - Navigate to verification");
                         this.router.navigate(['verification']);
+                    case 451:
+                        console.log("navigate to agreement page");
+                        this.router.navigate(['agreement']);
                 }
                 console.log(error);
                 resolve(false);

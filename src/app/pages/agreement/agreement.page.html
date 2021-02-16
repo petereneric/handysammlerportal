@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Handysammlerportal</ion-title>
+        <ion-title class="toolbar-subtitle">Erklärungen & Vereinbarungen</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="input-background">
+    <div class="input-block-element">
+        <div class="block-head">
+            <span class="text-head">Einwilligung notwendig</span>
+        </div>
+        <div class="text-block">
+            <p *ngIf="data != null && bAny && length > 1" class="text-secondary">Wir haben unsere rechtlichen Vereinbarungen bzw. Erklärungen aktualisiert und bitten dich diese zu lesen und diesen zuzustimmen.</p>
+            <p *ngIf="data != null && bAny && !(length > 1)" class="text-secondary">Wir haben folgende rechtliche Vereinbarungen bzw. Erklärung aktualisiert und bitten dich diese zu lesen und dieser zuzustimmen.</p>
+            <p *ngIf="data != null && !bAny && length > 1" class="text-secondary">Uns liegt noch keine Bestätigung von dir zu folgenden Vereinbarungen bzw. Erklärungen vor. Wir bitten dich daher diese zu lesen und diesen zuzustimmen.</p>
+            <p *ngIf="data != null &&!bAny && !(length > 1)" class="text-secondary">Uns liegt noch keine Bestätigung von dir zu folgender Vereinbarung bzw. Erklärung vor. Wir bitten dich daher diese zu lesen und dieser zuzustimmen.</p>
+        </div>
+        <ion-grid>
+            <ion-row *ngIf="bTermsOfUse != null">
+                <ion-col>
+                    <ion-item>
+                        <ion-label class="law-label">Hiermit bestätige ich, dass ich die
+                            <span class="link" (click)="onConditions()">Nutzungsbedingungen</span>
+                            gelesen habe und diesen zustimme*
+                        </ion-label>
+                        <ion-checkbox [ngModel]="bTermsOfUse" [checked]=bTermsOfUse
+                                      (ionChange)="changeTermsOfUse()"></ion-checkbox>
+                    </ion-item>
+                    <span *ngIf="bSubmitted && !bTermsOfUse" class="input-invalid">Pflichtfeld</span>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="bPrivacyPolicy != null">
+                <ion-col>
+                    <ion-item>
+                        <ion-label class="law-label">Hiermit bestätige ich, dass ich die
+                            <span class="link" (click)="onPrivacyPolicy()">Datenschutzerklärung</span>
+                            gelesen habe und diesen zustimme*
+                        </ion-label>
+                        <ion-checkbox [ngModel]="bPrivacyPolicy" [checked]=bPrivacyPolicy
+                                      (ionChange)="changePrivacyPolicy()"></ion-checkbox>
+                    </ion-item>
+                    <span *ngIf="bSubmitted && !bPrivacyPolicy" class="input-invalid">Pflichtfeld</span>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-row-buttons">
+                <ion-col>
+                    <ion-button [disabled]="isDisabled()" (click)="onSave()">Speichern</ion-button>
+                </ion-col>
+
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>

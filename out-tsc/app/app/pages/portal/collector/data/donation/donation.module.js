@@ -1,0 +1,22 @@
+import { __decorate } from "tslib";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { DonationPageRoutingModule } from './donation-routing.module';
+import { DonationPage } from './donation.page';
+let DonationPageModule = class DonationPageModule {
+};
+DonationPageModule = __decorate([
+    NgModule({
+        imports: [
+            CommonModule,
+            FormsModule,
+            IonicModule,
+            DonationPageRoutingModule
+        ],
+        declarations: [DonationPage]
+    })
+], DonationPageModule);
+export { DonationPageModule };
+//# sourceMappingURL=donation.module.js.map

@@ -13,9 +13,9 @@ export class HistoryPage implements OnInit {
   private urlOrders = 'collector/orders';
 
   // Variables
-  private orders = [];
-  private boxVisible: boolean;
-  private bricolageVisible: boolean;
+  public orders = [];
+  public boxVisible: boolean;
+  public bricolageVisible: boolean;
 
 
   constructor(private connApi: ConnApiService) { }

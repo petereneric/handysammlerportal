@@ -1,11 +1,7 @@
 import {Component, NgModule, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {MatTooltipModule} from '@angular/material/tooltip';
 import {Location} from '../../interfaces/location';
 import {Eventping} from '../../interfaces/eventping';
 
-@NgModule({
-  imports: [MatTooltipModule],
-})
 
 @Component({
   selector: 'app-location',

@@ -9,6 +9,7 @@ import { LocationsPage } from './locations.page';
 import {LocationComponent} from '../../../../../components/location/location.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {LocationComponentModule} from '../../../../../components/location/location.module';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatIconModule,
     ReactiveFormsModule,
     MatTooltipModule,
+    LocationComponentModule,
   ],
-  declarations: [LocationsPage, LocationComponent]
+  declarations: [LocationsPage]
 })
 export class LocationsPageModule {}

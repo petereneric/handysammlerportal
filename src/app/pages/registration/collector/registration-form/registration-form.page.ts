@@ -20,10 +20,11 @@ export class RegistrationFormPage implements OnInit {
     private urlRegister = 'registration/collector';
     private urlPartner = 'partner';
     private urlBecomeCollector = "download/document/become_collector"
+    private urlMailRegistration = "collector/registration/mail"
 
     // FormBuilder
     fgCollector = this.fb.group({
-        cName: ['', [Validators.required, Validators.maxLength(50)]],
+        cName: ['', [Validators.required, Validators.maxLength(80)]],
         cNameDetails: ['', [Validators.maxLength(50)]],
         cStreet: ['', [Validators.required, Validators.maxLength(50)]],
         cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
@@ -32,8 +33,8 @@ export class RegistrationFormPage implements OnInit {
         cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]],
         cPrename: ['', [Validators.required, Validators.maxLength(50)]],
         cSurname: ['', [Validators.required, Validators.maxLength(50)]],
-        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(50)]],
-        cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(50)]],
+        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
+        cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
         cPhoneFixedLine: ['', [Validators.maxLength(50)]],
         cPhoneMobile: ['', [Validators.maxLength(50)]],
         cShippingAddressOne: ['', [Validators.required, Validators.maxLength(50)]],
@@ -131,8 +132,6 @@ export class RegistrationFormPage implements OnInit {
     register() {
         this.bSubmitted = true;
 
-
-
         // check for invalid input
         if (!this.fgCollector.valid || this.oType == null || this.oState == null || this.oCountry == null || this.oShippingCountry == null || this.oTitle == null || this.oPartner == null) {
             this.getFormValidationErrors();
@@ -175,10 +174,14 @@ export class RegistrationFormPage implements OnInit {
         this.connApi.post(this.urlRegister, collector).subscribe((data: HttpResponse<any>) => {
             if (data.status == 200) {
                 console.log(data);
-                //this.router.navigate(['app-root']);
+                this.mailVerification()
+                this.router.navigate(['app-root']);
             }
         }, error => {
             if (error.status == 406) {
+                this.alertCollectorNameForgiven();
+            }
+            if (error.status == 409) {
                 this.alertCollectorNameForgiven();
             }
             if (error.status == 429) {
@@ -194,6 +197,16 @@ export class RegistrationFormPage implements OnInit {
 
     showPassword() {
         this.bShowPassword = !this.bShowPassword;
+    }
+
+    private mailVerification() {
+        this.connApi.safePost(this.urlMailRegistration, null).subscribe((data:HttpResponse<any>) => {
+            if (data.status == 200) {
+                console.log("Verification mail sent");
+            }
+        }, error => {
+            console.log(error.message);
+        });
     }
 
     // Address
@@ -276,9 +289,20 @@ export class RegistrationFormPage implements OnInit {
     async alertCollectorNameForgiven() {
         const alert = await this.alertController.create({
             cssClass: 'my-alert',
-            header: 'Sammlername',
+            header: 'Ungültige Eingabe',
             subHeader: 'Sammlername vergeben',
-            message: 'Bitte geben Sie einen neuen Sammlernamen ein',
+            message: 'Dieser Sammler existiert bereits - Eine Registrierung ist daher nicht möglich.',
+            buttons: ['Ok']
+        });
+        await alert.present();
+    }
+
+    async alertEmailForgiven() {
+        const alert = await this.alertController.create({
+            cssClass: 'my-alert',
+            header: 'Ungültige Eingabe',
+            subHeader: 'E-Mail Adresse vergeben',
+            message: 'Bitte gib eine andere E-Mail Adresse ein.',
             buttons: ['Ok']
         });
         await alert.present();
@@ -297,9 +321,9 @@ export class RegistrationFormPage implements OnInit {
 
     async alertInvalid() {
         const alert = await this.alertController.create({
-            header: 'Fehlerhafte Eingabe',
-            message: 'Bitte überprüfe deine Daten und korrigiere diese an den markierten Stellen.',
             cssClass: 'my-alert',
+            header: 'Ungültige Eingabe',
+            message: 'Bitte überprüfe deine Daten und korrigiere diese an den markierten Stellen.',
             buttons: ['Ok']
         });
 
@@ -335,11 +359,11 @@ export class RegistrationFormPage implements OnInit {
         return regex.test(this.fgCollector.get('cPassword').value);
     }
 
-    onConditions() {
+    changeConditions() {
         this.bConditions = !this.bConditions;
     }
 
-    onSecurity() {
+    changeSecurity() {
         this.bSecurity = !this.bSecurity;
     }
 
@@ -353,5 +377,13 @@ export class RegistrationFormPage implements OnInit {
         }, error => {
             console.log(error);
         })
+    }
+
+    onConditions() {
+
+    }
+
+    onSecurity() {
+
     }
 }

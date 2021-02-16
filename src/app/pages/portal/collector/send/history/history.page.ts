@@ -13,7 +13,7 @@ export class HistoryPage implements OnInit {
   private urlRecords = 'collector/records'
 
   // Variables
-  private records = []
+  public records = []
 
   constructor(public connApi: ConnApiService) { }
 

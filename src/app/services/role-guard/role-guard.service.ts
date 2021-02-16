@@ -42,9 +42,12 @@ export class RoleGuardService implements CanActivate {
             console.log('navigate to login');
             this.router.navigate(['login']);
             break;
-          case 403:
+          case 412:
             console.log("navigate to verify page");
             this.router.navigate(['verification']);
+          case 451:
+            console.log("navigate to agreement page");
+            this.router.navigate(['agreement']);
         }
         console.log(error);
         resolve(false);
