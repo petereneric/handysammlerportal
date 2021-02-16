@@ -25,11 +25,11 @@ export class RoleGuardService implements CanActivate {
         let role = tokenInfo['role'];
 
         // Navigate
-        if (role == 0) {
+        if (role == 1) {
           console.log('navigate to collector portal');
           this.router.navigate(['collector']);
         }
-        if (role == 1) {
+        if (role == 2) {
           this.router.navigate(['partner']);
         }
 

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AgreementPageRoutingModule } from './agreement-routing.module';
 
 import { AgreementPage } from './agreement.page';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AgreementPageRoutingModule
+    AgreementPageRoutingModule,
+    HttpClientModule
   ],
   declarations: [AgreementPage]
 })

@@ -66,11 +66,11 @@ export class LoginPage implements OnInit {
     }
 
     onLoginCollector() {
-        this.login(0);
+        this.login(1);
     }
 
     onLoginPartner() {
-        this.login(1);
+        this.login(2);
     }
 
     navRegisterCollector() {
