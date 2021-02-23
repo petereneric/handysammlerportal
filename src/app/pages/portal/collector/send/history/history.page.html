@@ -1,68 +1,36 @@
-<ion-content>
-  <ion-grid class="ion-content-table">
-    <ion-row>
-      <ion-col [ngClass]="'ion-col-table-header'" size="2.7">
-        <div>
-          Sendungsnummer
+<ion-content class="input-background">
+    <div class="input-block-element">
+        <div class="block-head" *ngIf="records.length > 0">
+            <span class="text-head">Versand-Historie</span>
         </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table-header'" size="2">
-        <div>
-          Erstellt am
+        <ion-grid class="ion-grid-table" *ngIf="records.length > 0">
+            <ion-row>
+                <ion-col [ngClass]="'ion-col-table-header'" size="8">
+                    <div>
+                        Sendungsnummer
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size="4">
+                    <div>
+                        Status
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let row of records">
+                <ion-col [ngClass]="'ion-col-table'" size="8">
+                    <div>
+                        {{row.shippingNumber != 0 ? row.shippingNumber : '-'}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size="4">
+                    <div>
+                        {{row.status != 0 ? row.status : '-'}}
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div class="block-text-information" *ngIf="records.length == 0">
+            <p [ngClass]="'text-information-two'">Du hast noch keine Handys über das Handysammlerportal versendet</p>
         </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table-header'" size="2">
-        <div>
-          Zuletzt bearbeitet
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
-        <div>
-          Status
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
-        <div>
-          Handys
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table-header'">
-        <div>
-          Spende
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngFor="let row of records">
-      <ion-col [ngClass]="'ion-col-table'" size="2.7">
-        <div>
-          {{row.shippingNumber != 0 ? row.shippingNumber : '-'}}
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table'" size="2">
-        <div>
-          {{row.creation}}
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table'" size="2">
-        <div>
-          {{row.lastUpdate}}
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table'" size="1.8">
-        <div>
-          {{row.status != 0 ? row.status : '-'}}
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table'" size="1.5">
-        <div>
-          {{row.devices != 0 ? row.devices : '-'}}
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table'">
-        <div>
-          {{row.payment != 0 ? row.payment : '-'}}
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    </div>
 </ion-content>

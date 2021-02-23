@@ -19,6 +19,7 @@ export class DonationPage implements OnInit {
   public lPartners: any[] = [];
   public oPartner = null;
   public bChangePartner: boolean = true;
+  public bFirstSelect = false;
 
   constructor(private connApi: ConnApiService, private toastController: ToastController) {
   }
@@ -79,13 +80,20 @@ export class DonationPage implements OnInit {
       message: 'Deine Daten wurden erfolgreich gespeichert.',
       duration: 2500,
       cssClass: 'my-toast',
-      position: 'middle'
+      position: 'bottom'
     });
     await toast.present();
   }
 
   onSelectedPartner($event: any) {
-    this.oPartner = $event['detail']['value'];
-    this.savePartner();
+    if (!this.bFirstSelect) {
+      this.bFirstSelect = true;
+    } else {
+      this.oPartner = $event['detail']['value'];
+      this.savePartner();
+    }
+
   }
+
+
 }

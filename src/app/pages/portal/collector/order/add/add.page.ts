@@ -187,6 +187,7 @@ export class AddPage implements OnInit {
             }
 
             this.boxMax = data.body['boxMax'];
+            console.log(this.boxMax);
             this.bricolageMax = data.body['bricolageMax'];
             console.log(data.body);
         });

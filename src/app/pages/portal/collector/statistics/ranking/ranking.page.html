@@ -118,7 +118,7 @@
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'" size="1.5">
                     <div [ngClass]="{bold : row.cName == null, 'ion-col-table-selected' : isSelf(row.id)}">
-                        {{row.dStart != null ? getYearFromDate(row.dStart) : ''}}
+                        {{row.dStart != null ? getYearFromDate(row.dStart) : '&nbsp;'}}
                     </div>
                 </ion-col>
                 <ion-col [ngClass]="'ion-col-table'" size="2.5">

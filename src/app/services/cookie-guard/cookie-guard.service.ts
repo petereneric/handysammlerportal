@@ -34,6 +34,7 @@ export class CookieGuardService implements CanActivate {
       buttons: [
         {
           side: 'end',
+          role: 'cancel',
           icon: 'checkmark',
           text: 'Akzeptieren',
           handler: () => {
@@ -41,6 +42,7 @@ export class CookieGuardService implements CanActivate {
           }
         }, {
           text: 'Weitere Informationen',
+          role: 'cancel',
           handler: () => {
             this.toastCookie()
             this.onPrivacyPolicy()

@@ -1,55 +1,64 @@
-<ion-content>
-    <div *ngIf="!orderTaken">
-        <ion-list >
-
-            <ion-item *ngIf="boxMax > 0">
-                <ion-label>Mobile-Boxen</ion-label>
-                <ion-select [cancelText]="'Zurück'" [(ngModel)]="boxOrder" [compareWith]="compare" [disabled]="boxAvailable == 0"
-                            (ionChange)="onChangedBoxOrder()">
-                    <ion-select-option *ngFor="let boxOrder of boxChoice"
-                                       [value]="boxOrder">{{boxOrder}}</ion-select-option>
-                </ion-select>
-            </ion-item>
-
-            <ion-item *ngIf="bricolageMax > 0">
-                <ion-label>Mobile-Boxen (Bastelset)</ion-label>
-                <ion-select [cancelText]="'Zurück'" [(ngModel)]="bricolageOrder" [compareWith]="compare" [disabled]="bricolageAvailable == 0"
-                            (ionChange)="onChangedBricolageOrder()">
-                    <ion-select-option *ngFor="let bricolageOrder of bricolageChoice"
-                                       [value]="bricolageOrder">{{bricolageOrder}}</ion-select-option>
-                </ion-select>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Flyer</ion-label>
-                <ion-select [cancelText]="'Zurück'" [(ngModel)]="flyerOrder" [compareWith]="compare"
-                            [disabled]="flyerAvailable == 0" (ionChange)="onChangedFlyerOrder()">
-                    <ion-select-option *ngFor="let flyerOrder of flyerChoice"
-                                       [value]="flyerOrder">{{flyerOrder}}</ion-select-option>
-                </ion-select>
-            </ion-item>
-
-            <ion-item>
-                <ion-label>Poster</ion-label>
-                <ion-select [cancelText]="'Zurück'" [(ngModel)]="posterOrder" [compareWith]="compare" [disabled]="posterAvailable == 0"
-                            (ionChange)="onChangedPosterOrder()">
-                    <ion-select-option [ngClass]="'.ion-select-option'" *ngFor="let posterOrder of posterChoice"
-                                       [value]="posterOrder">{{posterOrder}}</ion-select-option>
-                </ion-select>
-            </ion-item>
-        </ion-list>
-        <ion-row
-                *ngIf="(boxMax > 0 && boxAvailable == 0) || (bricolageMax > 0 && bricolageAvailable == 0) || flyerAvailable == 0 || posterAvailable == 0">
-            <p [ngClass]="'text-tertiary'">Du hast Dein jährliches Bestell-Limit teilweise oder komplett erreicht.</p>
-        </ion-row>
-        <ion-row class="ion-row">
-            <ion-col class="ion-text-center">
-                <ion-button [disabled]="orderDisabled" class=ion-button (click)="onOrder()">Bestellen</ion-button>
-            </ion-col>
-        </ion-row>
+<ion-content class="input-background">
+    <div *ngIf="!spinner" class="input-block-element">
+        <div *ngIf="!orderTaken" class="block-head">
+            <span class="text-head">Neue Bestellung</span>
+        </div>
+        <div *ngIf="!orderTaken">
+            <ion-grid>
+                <ion-row *ngIf="bricolageMax > 0 || boxMax > 0">
+                    <ion-col *ngIf="(boxMax > 0)" [sizeXl]="(boxMax > 0) ? 6 : 0" [sizeLg]="boxMax > 0 ? 6 : 0" [sizeMd]="boxMax > 0 ? 12 : 0" [sizeSm]="boxMax > 0 ? 12 : 0" [sizeXs]="boxMax > 0 ? 12 : 0">
+                        <ion-item>
+                            <ion-label>Mobile-Boxen</ion-label>
+                            <ion-select [cancelText]="'Zurück'" [(ngModel)]="boxOrder" [compareWith]="compare" [disabled]="boxAvailable == 0" (ionChange)="onChangedBoxOrder()">
+                                <ion-select-option *ngFor="let boxOrder of boxChoice" [value]="boxOrder">{{boxOrder}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col *ngIf="(bricolageMax > 0)" [sizeXl]="(bricolageMax > 0) ? 6 : 0" [sizeLg]="bricolageMax > 0 ? 6 : 0" [sizeMd]="bricolageMax > 0 ? 12 : 0" [sizeSm]="bricolageMax > 0 ? 12 : 0" [sizeXs]="bricolageMax > 0 ? 12 : 0">
+                        <ion-item>
+                            <ion-label>Mobile-Boxen (Bastelset)</ion-label>
+                            <ion-select [cancelText]="'Zurück'" [(ngModel)]="bricolageOrder" [compareWith]="compare" [disabled]="bricolageAvailable == 0"
+                                        (ionChange)="onChangedBricolageOrder()">
+                                <ion-select-option *ngFor="let bricolageOrder of bricolageChoice" [value]="bricolageOrder">{{bricolageOrder}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                        <ion-item>
+                            <ion-label>Flyer</ion-label>
+                            <ion-select [cancelText]="'Zurück'" [(ngModel)]="flyerOrder" [compareWith]="compare"
+                                        [disabled]="flyerAvailable == 0" (ionChange)="onChangedFlyerOrder()">
+                                <ion-select-option *ngFor="let flyerOrder of flyerChoice"
+                                                   [value]="flyerOrder">{{flyerOrder}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                        <ion-item>
+                            <ion-label>Poster</ion-label>
+                            <ion-select [cancelText]="'Zurück'" [(ngModel)]="posterOrder" [compareWith]="compare" [disabled]="posterAvailable == 0"
+                                        (ionChange)="onChangedPosterOrder()">
+                                <ion-select-option [ngClass]="'.ion-select-option'" *ngFor="let posterOrder of posterChoice"
+                                                   [value]="posterOrder">{{posterOrder}}</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <div class="block-text-information" *ngIf="(boxMax > 0 && boxAvailable == 0) || (bricolageMax > 0 && bricolageAvailable == 0) || flyerAvailable == 0 || posterAvailable == 0">
+                <p [ngClass]="'text-information-two'">Du hast Dein jährliches Bestell-Limit teilweise oder komplett erreicht.</p>
+            </div>
+            <ion-row class="ion-row-buttons">
+                <ion-col>
+                    <ion-button [disabled]="!(boxOrder > 0 || bricolageOrder > 0 || flyerOrder > 0 || posterOrder > 0)" class=ion-button-one-inside (click)="onOrder()">Bestellen</ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
+        <div class="block-text-information" *ngIf="(orderTaken && !spinner)">
+            <p (click)="onClickPageInformation()" [ngClass]="'text-information-pointer'">Vielen Dank für Deine Bestellung. In der "Bestell-Historie" kannst Du Dich jederzeit über den Status Deiner Bestellung informieren.</p>
+        </div>
     </div>
     <ion-spinner *ngIf="spinner" name="bubbles"></ion-spinner>
-    <div *ngIf="orderTaken && !spinner">
-        <p (click)="onClickPageInformation()" [ngClass]="'text-page-information'">Vielen Dank für Deine Bestellung. In der "Bestell-Historie" kannst Du Dich jederzeit über den Status Deiner Bestellung informieren.</p>
-    </div>
 </ion-content>

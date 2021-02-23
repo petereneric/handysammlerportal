@@ -1,78 +1,36 @@
-<ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
-        <div>
-          Erstellt am
+<ion-content class="input-background">
+    <div class="input-block-element">
+        <div class="block-head" *ngIf="orders.length > 0">
+            <span class="text-head">Bestell-Historie</span>
         </div>
-      </ion-col>
-      <ion-col *ngIf="boxVisible" [ngClass]="'ion-col-table-header'" size="1.5">
-        <div>
-          Mobile-Boxen
+        <ion-grid class="ion-grid-table" *ngIf="orders.length > 0">
+            <ion-row>
+                <ion-col [ngClass]="'ion-col-table-header'" size="4">
+                    <div>
+                        Erstellt am
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header' " size="8">
+                    <div>
+                        Sendungsnummer
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let row of orders">
+                <ion-col size="4">
+                    <div>
+                        {{row.dateCreation}}
+                    </div>
+                </ion-col>
+                <ion-col size="8">
+                    <div>
+                        {{row.ID_TRACKING != null ? row.ID_TRACKING : 'Noch nicht versendet'}}
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div class="block-text-information" *ngIf="orders.length == 0">
+            <p [ngClass]="'text-information-two'">Du hast noch keine Bestellung getätigt</p>
         </div>
-      </ion-col>
-      <ion-col *ngIf="bricolageVisible" [ngClass]="'ion-col-table-header'" size="2.75">
-        <div>
-          Mobile-Boxen (Bastelset)
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table-header'" size="0.8">
-        <div>
-          Flyer
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table-header'" size="0.8">
-        <div>
-          Poster
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
-        <div>
-          Versendet am
-        </div>
-      </ion-col>
-      <ion-col [ngClass]="'ion-col-table-header'" >
-        <div>
-          Sendungsnummer
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngFor="let row of orders">
-      <ion-col size="1.5">
-        <div>
-          {{row.dateCreation}}
-        </div>
-      </ion-col>
-      <ion-col *ngIf="boxVisible" size="1.5">
-        <div>
-          {{row.NUMBER_BOX}}
-        </div>
-      </ion-col>
-      <ion-col *ngIf="bricolageVisible"size="2.75">
-        <div>
-          {{row.NUMBER_BRICOLAGE}}
-        </div>
-      </ion-col>
-      <ion-col size="0.8">
-        <div>
-          {{row.NUMBER_FLYER}}
-        </div>
-      </ion-col>
-      <ion-col size="0.8">
-        <div>
-          {{row.NUMBER_POSTER}}
-        </div>
-      </ion-col>
-      <ion-col size="1.8">
-        <div>
-          {{row.DATE_SHIPPING != null ? row.DATE_SHIPPING : '-'}}
-        </div>
-      </ion-col>
-      <ion-col>
-        <div>
-          {{row.ID_TRACKING != null ? row.ID_TRACKING : '-'}}
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    </div>
 </ion-content>

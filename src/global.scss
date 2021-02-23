@@ -19,7 +19,7 @@
 // Text
 $textPrimary: #212121;
 $textSecondary: #afafaf;
-$textTertiary: #BDBDBD;
+$textTertiary: #979797;
 
 // General
 $brown: #fff329;
@@ -122,21 +122,66 @@ b {
   font-weight: 500;
 }
 
+.block-text-information {
+  display: flex;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  justify-content: center;
+}
+
+.block-text {
+  display: flex;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+
+
+.ion-grid-table {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-bottom: 1.25rem;
+  padding-top: 1.25rem;
+}
+
 .text {
-  font-size: 13px;
+  font-size: 14px;
   color: #212121;
   line-height: 18px;
   margin: 0;
-  padding: 0;
+}
+
+.text-information {
+  font-size: 16px;
+  color: $textPrimary;
+  line-height: 18px;
+}
+
+.text-information-pointer {
+  font-size: 16px;
+  color: $textPrimary;
+  line-height: 18px;
+  cursor: pointer;
+}
+
+.text-information-two {
+  font-size: 16px;
+  color: $textSecondary;
+  line-height: 18px;
 }
 
 .text-secondary {
   margin: 0;
-  padding: 0;
-  font-size: 13px;
+  font-size: 14px;
   color: #afafaf;
-  line-height: 18px;
-  text-align: justify;
+  line-height: 20px;
+}
+
+.text-list {
+  margin: 0;
+  font-size: 15px;
+  color: $textSecondary;
+  line-height: 30px;
 }
 
 .ion-row-buttons {
@@ -561,6 +606,7 @@ ion-row {
 .ion-label-toggle {
   margin-bottom: 0.75rem;
   margin-left: 1rem;
+  --color: $textPrimary !important;
 }
 
 .ion-item-toggle-check {
