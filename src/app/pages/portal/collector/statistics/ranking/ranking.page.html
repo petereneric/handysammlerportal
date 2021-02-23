@@ -41,11 +41,11 @@
             <ion-col>
                 <ion-item *ngIf="cRegion.key !== 'total'">
                     <ion-label class="input-label">Auswahl</ion-label>
-                    <ion-select #selectRegion [(ngModel)]="cSelectRegion" [okText]="'Auswählen'"
+                    <ion-select #selectRegion [(ngModel)]="oSelectRegion" [okText]="'Auswählen'"
                                 [cancelText]="'Abrechen'"
-                                [selectedText]="cSelectRegion" (ionChange)="onLoad()">
-                        <ion-select-option *ngFor="let cSelectRegion of lSelectRegion"
-                                           [value]="cSelectRegion.cName">{{cSelectRegion.cName}}</ion-select-option>
+                                [selectedText]="oSelectRegion != null ? oSelectRegion.cNameLocale : ''" (ionChange)="onLoad()">
+                        <ion-select-option *ngFor="let oSelectRegion of lSelectRegion"
+                                           [value]="oSelectRegion">{{oSelectRegion.cNameLocale}}</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-col>

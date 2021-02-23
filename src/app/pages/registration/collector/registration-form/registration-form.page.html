@@ -17,7 +17,7 @@
 
     <div class="input-block-element">
         <div class="block-head">
-        <span class="text-head">Sammler</span>
+            <span class="text-head">Sammler</span>
         </div>
         <form [formGroup]="fgCollector">
             <ion-grid>
@@ -40,7 +40,7 @@
                             <ion-input type="text" formControlName="cNameDetails"></ion-input>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cNameDetails.errors?.maxlength" class="input-invalid"
-                        >Maximal-Länge von 50 Zeichen überschritten
+                        >Maximal-Länge von 80 Zeichen überschritten
                     </span>
                     </ion-col>
                 </ion-row>
@@ -115,7 +115,8 @@
                     <ion-item>
                         <ion-label class="input-label">Bundesland*</ion-label>
                         <ion-select [(ngModel)]="oState" [okText]="'Übernehmen'" [cancelText]="'Abrechen'"
-                                    [selectedText]="oState != null ? oState.cNameLocale : ''" (ionChange)="onChangeAddress()">
+                                    [selectedText]="oState != null ? oState.cNameLocale : ''"
+                                    (ionChange)="onChangeAddress()">
                             <ion-select-option *ngFor="let oState of lStates"
                                                [value]="oState">{{oState.cNameLocale}}</ion-select-option>
                         </ion-select>
@@ -126,7 +127,8 @@
                     <ion-item>
                         <ion-label class="input-label">Land*</ion-label>
                         <ion-select [(ngModel)]="oCountry" [okText]="'Übernehmen'" [cancelText]="'Abrechen'"
-                                    [selectedText]="oCountry != null ? oCountry.cNameLocale : ''" (ionChange)="onChangeAddress()">
+                                    [selectedText]="oCountry != null ? oCountry.cNameLocale : ''"
+                                    (ionChange)="onChangeAddress()">
                             <ion-select-option *ngFor="let oCountry of lCountries"
                                                [value]="oCountry">{{oCountry.cNameLocale}}</ion-select-option>
                         </ion-select>
@@ -137,7 +139,9 @@
             <ion-row>
                 <ion-col>
                     <ion-item>
-                        <ion-label class="law-label">Hiermit bestätige ich, dass ich die <span class="link" (click)="onConditions()">Nutzungsbedingungen</span> gelesen
+                        <ion-label class="law-label">Hiermit bestätige ich, dass ich die <span class="link"
+                                                                                               (click)="onConditions()">Nutzungsbedingungen</span>
+                            gelesen
                             habe und diesen zustimme*
                         </ion-label>
                         <ion-checkbox [ngModel]="bConditions" [checked]=bConditions
@@ -147,7 +151,9 @@
                 </ion-col>
                 <ion-col>
                     <ion-item>
-                        <ion-label class="law-label">Hiermit bestätige ich, dass ich die <span class="link" (click)="onSecurity()">Datenschutzerklärung</span> gelesen
+                        <ion-label class="law-label">Hiermit bestätige ich, dass ich die <span class="link"
+                                                                                               (click)="onSecurity()">Datenschutzerklärung</span>
+                            gelesen
                             habe und diesen zustimme*
                         </ion-label>
                         <ion-checkbox [ngModel]="bSecurity" [checked]=bSecurity
@@ -160,7 +166,7 @@
     </div>
     <div class="input-block-element">
         <div class="block-head">
-        <span class="text-head">Ansprechpartner</span>
+            <span class="text-head">Ansprechpartner</span>
         </div>
         <form [formGroup]="fgCollector">
             <ion-grid>
@@ -200,7 +206,8 @@
             <ion-col>
                 <ion-item>
                     <ion-label class="input-label">Persönliche Anrede*</ion-label>
-                    <ion-toggle [(ngModel)]="bPersonally" checked="{{bPersonally}}" [ngModelOptions]="{standalone: true}"
+                    <ion-toggle [(ngModel)]="bPersonally" checked="{{bPersonally}}"
+                                [ngModelOptions]="{standalone: true}"
                                 (ionChange)="onToggleFormally($event)"></ion-toggle>
                 </ion-item>
             </ion-col>
@@ -248,7 +255,7 @@
     </div>
     <div class="input-block-element">
         <div class="block-head">
-        <span class="text-head">Versandadresse</span>
+            <span class="text-head">Versandadresse</span>
         </div>
         <ion-grid>
             <ion-row>
@@ -273,7 +280,7 @@
                         <span *ngIf="bSubmitted && errorControl.cShippingAddressOne.errors?.required"
                               class="input-invalid">Pflichtfeld</span>
                         <span *ngIf="bSubmitted && errorControl.cShippingAddressOne.errors?.maxlength"
-                              class="input-invalid">Maximal-Länge von 50 Zeichen überschritten</span>
+                              class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -349,7 +356,8 @@
                     <ion-item>
                         <ion-label class="input-label">Land*</ion-label>
                         <ion-select [(ngModel)]="oShippingCountry" [okText]="'Übernehmen'" [cancelText]="'Abrechen'"
-                                    [selectedText]="oShippingCountry != null ? oShippingCountry.cNameLocale : ''" [disabled]="bAddressIdentical">
+                                    [selectedText]="oShippingCountry != null ? oShippingCountry.cNameLocale : ''"
+                                    [disabled]="bAddressIdentical">
                             <ion-select-option *ngFor="let oShippingCountry of lCountries"
                                                [value]="oShippingCountry">{{oShippingCountry.cNameLocale}}</ion-select-option>
                         </ion-select>
@@ -361,7 +369,7 @@
     </div>
     <div class="input-block-element">
         <div class="block-head">
-        <span class="text-head">Sicherheit</span>
+            <span class="text-head">Sicherheit</span>
         </div>
         <form [formGroup]="fgCollector">
 
@@ -401,7 +409,9 @@
     <div class="input-block-element">
         <div class="block-head">
             <span class="text-head">Partner (Spendenempfänger)</span>
-            <mat-icon class="icon-head" matTooltip="Mobile-Box spendet bis zu 2 € pro Handy an den von dir ausgewählten Partner">info</mat-icon>
+            <mat-icon class="icon-head"
+                      matTooltip="Mobile-Box spendet bis zu 2 € pro Handy an den von dir ausgewählten Partner">info
+            </mat-icon>
         </div>
 
         <ion-grid>

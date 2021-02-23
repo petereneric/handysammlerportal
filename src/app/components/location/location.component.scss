@@ -3,8 +3,8 @@
 .location-item {
   width: auto;
   background-color: #f6f6f6;
-  margin-left: $cube;
-  margin-right: $cube;
+  margin-left: 1rem;
+  margin-right: 1rem;
   margin-bottom: $cube;
   display: flex;
   flex-flow: row;
@@ -92,3 +92,5 @@
 .location-icon-deactivated:hover {
   color: $red;
 }
+
+

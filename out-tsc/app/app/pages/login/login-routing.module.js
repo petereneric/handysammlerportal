@@ -2,10 +2,12 @@ import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginPage } from './login.page';
+import { CookieGuardService } from '../../services/cookie-guard/cookie-guard.service';
 const routes = [
     {
         path: '',
-        component: LoginPage
+        component: LoginPage,
+        canActivate: [CookieGuardService]
     }
 ];
 let LoginPageRoutingModule = class LoginPageRoutingModule {

@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AgreementPage } from './agreement.page';
 import {AuthGuardService} from '../../services/auth-guard/auth-guard.service';
+import {CookieGuardService} from '../../services/cookie-guard/cookie-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: AgreementPage,
+    canActivate: [CookieGuardService]
   }
 ];
 

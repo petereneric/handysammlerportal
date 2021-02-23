@@ -83,7 +83,6 @@ let ConnApiService = class ConnApiService {
 };
 // Registration
 ConnApiService.getCollectorTypes = 'registration/collection-types';
-ConnApiService.postLogin = "login";
 ConnApiService = __decorate([
     Injectable({
         providedIn: 'root'

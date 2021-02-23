@@ -6,11 +6,13 @@ let RankingPage = class RankingPage {
         this.connApi = connApi;
         // Urls
         this.urlRanking = 'collector/statistics/ranking';
-        this.urlCountries = 'collector/region/countries';
-        this.urlStates = 'collector/region/states';
+        this.urlCountries = 'region/countries';
+        this.urlStates = 'region/states/';
         this.urlCities = 'collector/region/cities';
-        this.urlTypes = 'collector/types';
+        this.urlTypes = 'types';
         this.urlType = 'collector/type';
+        this.urlState = 'collector/region/state';
+        this.urlCity = 'collector/region/city';
         this.urlSettings = 'collector/settings';
         // Variables
         this.lTime = [{ key: 'total', name: 'Gesamt' }, { key: 'year', name: 'Jahr' }];
@@ -25,8 +27,10 @@ let RankingPage = class RankingPage {
         this.lSelectRegion = [];
         this.lCountries = [];
         this.lStates = [];
+        this.oCollectorState = null;
         this.lCities = [];
-        this.cSelectRegion = null;
+        this.oCollectorCity = null;
+        this.oSelectRegion = null;
         this.lType = [{ key: 'total', name: 'Gesamt' }, { key: 'individual', name: 'Benutzerdefiniert' }];
         this.cType = this.lType[0];
         this.lSelectType = [];
@@ -43,13 +47,22 @@ let RankingPage = class RankingPage {
         this.kCollector = tokenInfo['id'];
         // load
         this.load();
-        // regions
+        // city
         this.connApi.safeGet(this.urlCities).subscribe((response) => {
+            console.log(response.body);
             this.lCities = response.body;
         });
-        this.connApi.safeGet(this.urlStates).subscribe((response) => {
+        this.connApi.safeGet(this.urlCity).subscribe((response) => {
+            this.oCollectorCity = response.body;
+        });
+        // states
+        this.connApi.safeGet(this.urlStates + 1).subscribe((response) => {
             this.lStates = response.body;
         });
+        this.connApi.safeGet(this.urlState).subscribe((response) => {
+            this.oCollectorState = response.body;
+        });
+        // country
         this.connApi.safeGet(this.urlCountries).subscribe((response) => {
             this.lCountries = response.body;
         });
@@ -76,7 +89,7 @@ let RankingPage = class RankingPage {
             kTime: this.cTime.key,
             cSelectTime: this.cSelectTime.key,
             kRegion: this.cRegion.key,
-            cSelectRegion: this.cSelectRegion,
+            kSelectRegion: this.oSelectRegion != null ? this.oSelectRegion.id : null,
             kType: this.cType.key,
             kSelectType: this.oSelectType != null ? this.oSelectType.id : null
         };
@@ -97,32 +110,38 @@ let RankingPage = class RankingPage {
         this.load();
     }
     onRegion($event) {
-        if ($event['detail']['value'] !== this.cSelectRegion) {
-            this.cSelectRegion = null;
-            switch ($event['detail']['value']) {
-                case this.lRegion[0]:
-                    this.lSelectRegion = [];
-                    this.load();
-                    break;
-                case this.lRegion[1]:
-                    this.lSelectRegion = this.lCountries;
-                    setTimeout(() => {
-                        this.selectRegion.open();
-                    }, this.timeSelect);
-                    break;
-                case this.lRegion[2]:
-                    this.lSelectRegion = this.lStates;
-                    setTimeout(() => {
-                        this.selectRegion.open();
-                    }, this.timeSelect);
-                    break;
-                case this.lRegion[3]:
-                    this.lSelectRegion = this.lCities;
-                    setTimeout(() => {
-                        this.selectRegion.open();
-                    }, this.timeSelect);
-                    break;
-            }
+        this.oSelectRegion = null;
+        switch ($event['detail']['value']) {
+            case this.lRegion[0]:
+                this.lSelectRegion = [];
+                this.load();
+                break;
+            case this.lRegion[1]:
+                this.lSelectRegion = this.lCountries;
+                setTimeout(() => {
+                    this.selectRegion.open();
+                }, this.timeSelect);
+                break;
+            case this.lRegion[2]:
+                this.lSelectRegion = this.lStates;
+                this.oSelectRegion = this.oCollectorState;
+                /*
+                setTimeout(() => {
+                    this.selectRegion.open();
+                }, this.timeSelect);
+                 */
+                this.load();
+                break;
+            case this.lRegion[3]:
+                this.lSelectRegion = this.lCities;
+                this.oSelectRegion = this.oCollectorCity;
+                /*
+                setTimeout(() => {
+                    this.selectRegion.open();
+                }, this.timeSelect);
+                 */
+                this.load();
+                break;
         }
     }
     onTime($event) {

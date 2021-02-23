@@ -1,78 +1,75 @@
 <ion-content class="input-background">
     <div class="input-block-element">
+        <div class="block-head">
+            <span class="text-head">Profildaten</span>
+        </div>
         <form [formGroup]="fgProfile">
-            <ion-row>
-                <ion-col>
-                    <ion-row class="text-head">Profildaten</ion-row>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <ion-item class="no-underline">
-                        <ion-label class="input-label" position="floating">Steckbrief</ion-label>
-                        <ion-textarea type="text" formControlName="cAbout" auto-grow="true" rows="2" maxlength="500"
-                                      placeholder="Erzähl uns über euch als Sammler.." (ionChange)="onChangeAbout()"></ion-textarea>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-            <ion-row align="right">
-                <ion-col>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-item class="no-underline">
+                            <ion-label class="input-label" position="floating">Steckbrief</ion-label>
+                            <ion-textarea type="text" formControlName="cAbout" auto-grow="true" rows="2" maxlength="500"
+                                          placeholder="Erzähl uns über euch als Sammler.." (ionChange)="onChangeAbout()"></ion-textarea>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row align="right">
+                    <ion-col>
                     <span [ngClass]="{'input-info': sizeAbout < 500, 'input-invalid': sizeAbout == 500}"
                     >{{sizeAbout}}/500
                     </span>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <ion-item class="no-underline">
-                        <ion-label class="input-label" position="floating">Motivation</ion-label>
-                        <ion-textarea type="text" formControlName="cMotivation" auto-grow="true" rows="2"
-                                      maxlength="500"
-                                      placeholder="Erzähl uns warum ihr alte Handys sammelt und warum Nachhaltigkeit für euch so wichtig ist.." (ionChange)="onChangeMotivation()"></ion-textarea>
-                    </ion-item>
-                </ion-col>
-            </ion-row>
-            <ion-row align="right">
-                <ion-col>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item class="no-underline">
+                            <ion-label class="input-label" position="floating">Motivation</ion-label>
+                            <ion-textarea type="text" formControlName="cMotivation" auto-grow="true" rows="2"
+                                          maxlength="500"
+                                          placeholder="Erzähl uns warum ihr alte Handys sammelt und warum Nachhaltigkeit für euch so wichtig ist.." (ionChange)="onChangeMotivation()"></ion-textarea>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row align="right">
+                    <ion-col>
                     <span [ngClass]="{'input-info': sizeMotivation < 500, 'input-invalid': sizeMotivation == 500}"
                     >{{sizeMotivation}}/500
                     </span>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <ion-button [disabled]="!bProfileDataChanged" (click)="onSaveData()">Profildaten speichern</ion-button>
-                </ion-col>
-            </ion-row>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-row-buttons">
+                    <ion-col>
+                        <ion-button class="ion-button-one-inside" [disabled]="!bProfileDataChanged" (click)="onSaveData()">Profildaten speichern</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </form>
     </div>
     <div class="input-block-element">
+        <div class="block-head">
+            <span class="text-head">Logo</span>
+        </div>
         <ion-row>
             <ion-col>
-                <ion-row class="text-head">Logo</ion-row>
+                <img class="image-block" [src]="imgURL" height="100" *ngIf="imgURL">
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-col>
-                <img class="my-image" [src]="imgURL" height="100" *ngIf="imgURL">
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <ion-button class="ion-button-no-margin" (click)="file.click()">
+        <ion-row class="ion-row-buttons">
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                <ion-button class="ion-button-one-inside" (click)="file.click()">
                     <span>Neues Logo hochladen</span>
                     <input #file type="file" max accept='image/png, image/jpg' (change)="preview(file.files)" style="display:none;">
                 </ion-button>
             </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <ion-button *ngIf="bLogo" class="ion-button-two" (click)="onLogoRemove()">Logo entfernen</ion-button>
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                <ion-button *ngIf="bLogo" class="ion-button-two-inside" (click)="onLogoRemove()">Logo entfernen</ion-button>
             </ion-col>
         </ion-row>
     </div>
     <div class="input-block-element">
-        <ion-row class="text-note">Hinweis: Deine Daten werden auf unserer Mobile-Box Website (www.mobile-box.eu) veröffentlicht.
-        </ion-row>
+        <span class="text-note">Hinweis: Deine Daten werden auf unserer Mobile-Box Website (www.mobile-box.eu) veröffentlicht.
+        </span>
     </div>
+
 </ion-content>

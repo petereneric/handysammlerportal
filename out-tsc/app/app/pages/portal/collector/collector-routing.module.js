@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CollectorPage } from './collector.page';
 import { AuthGuardService } from "../../../services/auth-guard/auth-guard.service";
+import { CookieGuardService } from '../../../services/cookie-guard/cookie-guard.service';
 const routes = [
     {
         path: 'collector/menu',
         component: CollectorPage,
-        canActivate: [AuthGuardService],
+        canActivate: [CookieGuardService, AuthGuardService],
         children: [
             {
                 path: 'data',

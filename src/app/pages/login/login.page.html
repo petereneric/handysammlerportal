@@ -1,73 +1,92 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Handysammlerportal | By Mobile-Box</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Handysammlerportal</ion-title>
+        <ion-title class="toolbar-subtitle">Entwickelt von Mobile-Box</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="onInfo()" fill="clear">
+                <ion-icon class="toolbar-icon" slot="icon-only" name="information-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <!-- Default Segment -->
 
-<ion-content class="ion-margin-vertical">
-  <div class="scroll-content">
-  <ion-segment [(ngModel)]="selectedRole" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value=0>
-      <ion-label>Sammler</ion-label>
+<ion-content [ngClass]="{'ion-margin-vertical': true, 'input-background': true}">
+        <div class="input-block-element">
+                <ion-segment [(ngModel)]="selectedRole" (ionChange)="segmentChanged($event)">
+                    <ion-segment-button value=1>
+                        <ion-label>Sammler</ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button value=2>
+                        <ion-label>Partner</ion-label>
+                    </ion-segment-button>
+                </ion-segment>
 
-    </ion-segment-button>
-    <ion-segment-button value=1>
-      <ion-label>Partner</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+                <div [ngSwitch]="selectedRole">
+                    <form *ngSwitchCase="1" [formGroup]="loginFormCollector" (ngSubmit)="onLoginCollector()">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-item lines="full" class="ion-item">
+                                        <ion-label position="floating">E-Mail</ion-label>
+                                        <ion-input type="text" required formControlName="cEmail"></ion-input>
+                                    </ion-item>
+                                    <span *ngIf="bSubmittedCollector && errorControlCollector.cEmail.errors?.required" class="input-invalid">Pflichtfeld</span>
+                                    <span *ngIf="bSubmittedCollector && errorControlCollector.cEmail.errors?.pattern" class="input-invalid">Fehlerhafte Eingabe</span>
+                                    <span *ngIf="bSubmittedCollector && errorControlCollector.cEmail.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-item lines="full" class="ion-item">
+                                        <ion-label position="floating">Passwort</ion-label>
+                                        <ion-input type="password" formControlName="cPassword" required></ion-input>
+                                    </ion-item>
+                                    <span *ngIf="bSubmittedCollector && errorControlCollector.cPassword.errors?.required" class="input-invalid">Pflichtfeld</span>
+                                    <span *ngIf="bSubmittedCollector && errorControlCollector.cPassword.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
 
-  <div [ngSwitch]="selectedRole">
-    <form *ngSwitchCase="0" [formGroup]="loginFormCollector" (ngSubmit)="onLoginCollector()">
-      <ion-item lines="full" class="ion-item">
-        <ion-label position="floating">E-Mail</ion-label>
-        <ion-input type="text" required formControlName="email"></ion-input>
-      </ion-item>
-      <ion-item lines="full" class="ion-item">
-        <ion-label position="floating">Passwort</ion-label>
-        <ion-input type="text" formControlName="password" required></ion-input>
-      </ion-item>
 
-      <ion-row class="ion-row">
-        <ion-col class="ion-text-center">
-          <ion-button class=ion-button type="submit">Anmelden</ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="ion-text-center">
-          <ion-button class=ion-button-three (click)="onResetPassword()">Passwort vergessen</ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col class="ion-text-center">
-          <ion-button class=ion-button-three (click)="navRegisterCollector()">Registrieren</ion-button>
-        </ion-col>
-      </ion-row>
-    </form>
-    <form *ngSwitchCase="1" [formGroup]="loginFormPartner" (ngSubmit)="onLoginCollector()">
-    <ion-item lines="full" class="ion-item" [class.ion-invalid]=true>
-      <ion-label position="floating">E-Mail</ion-label>
-      <ion-input type="text" required formControlName="email"></ion-input>
-    </ion-item>
-    <ion-item lines="full" class="ion-item">
-      <ion-label position="floating">Passwort</ion-label>
-      <ion-input type="text" formControlName="password" required></ion-input>
-    </ion-item>
 
-    <ion-row class="ion-row">
-      <ion-col class="ion-text-center">
-        <ion-button class=ion-button type="submit">Anmelden</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-button class=ion-button-three (click)="onResetPassword()">Passwort vergessen</ion-button>
-      </ion-col>
-    </ion-row>
-    </form>
-  </div>
-  <app-footer class="lower-content"></app-footer>
-  </div>
+                        <ion-row class="ion-row">
+                            <ion-col class="ion-text-center">
+                                <ion-button class=ion-button type="submit">Anmelden</ion-button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col class="ion-text-center">
+                                <ion-button class=ion-button-three (click)="onResetPassword()">Passwort vergessen
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col class="ion-text-center">
+                                <ion-button class=ion-button-three (click)="navRegisterCollector()">Registrieren
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </form>
+                    <form *ngSwitchCase="2" [formGroup]="loginFormPartner" (ngSubmit)="onLoginCollector()">
+                        <ion-item lines="full" class="ion-item" [class.ion-invalid]=true>
+                            <ion-label position="floating">E-Mail</ion-label>
+                            <ion-input type="text" required formControlName="cEmail"></ion-input>
+                        </ion-item>
+                        <ion-item lines="full" class="ion-item">
+                            <ion-label position="floating">Passwort</ion-label>
+                            <ion-input type="password" formControlName="cPassword" required></ion-input>
+                        </ion-item>
+
+                        <ion-row class="ion-row">
+                            <ion-col class="ion-text-center">
+                                <ion-button disabled="true" class=ion-button type="submit">Anmelden</ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </form>
+                </div>
+        </div>
+    <app-footer class="lower-content"></app-footer>
 </ion-content>
 

@@ -15,6 +15,17 @@ let Toast = class Toast {
             yield toast.present();
         });
     }
+    successfulRegistration() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const toast = yield this.toastController.create({
+                message: 'Wir haben deine Daten erhalten und erfolgreich gespeichert - Willkommen!',
+                duration: 2500,
+                cssClass: 'my-toast',
+                position: 'bottom'
+            });
+            yield toast.present();
+        });
+    }
 };
 Toast = __decorate([
     Injectable()

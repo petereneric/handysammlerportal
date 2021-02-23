@@ -1,5 +1,6 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
+import jwt_decode from "jwt-decode";
 let AgreementPage = class AgreementPage {
     constructor(http, router, api) {
         this.http = http;
@@ -7,6 +8,8 @@ let AgreementPage = class AgreementPage {
         this.api = api;
         // Urls
         this.urlAgreement = 'agreement';
+        this.urlTermsOfUse = 'agreement/terms_of_use/';
+        this.urlPrivacyPolicy = 'agreement/privacy_policy/';
         // Variables
         this.bTermsOfUse = null;
         this.bPrivacyPolicy = null;
@@ -16,17 +19,40 @@ let AgreementPage = class AgreementPage {
         this.length = 0;
     }
     ngOnInit() {
-        console.log("test");
+        // stakeholder
+        let token = localStorage.getItem('token');
+        if (token == null) {
+            this.router.navigate(['app-root']);
+        }
+        else {
+            let tokenInfo = jwt_decode(token);
+            this.tStakeholder = tokenInfo['role'];
+        }
+        // ip
+        this.http.get("http://api.ipify.org/?format=json").subscribe((res) => {
+            this.ip = res.ip;
+        });
+        // agreements
         this.api.safeGet(this.urlAgreement).subscribe((response) => {
-            console.log(response);
             this.data = response.body;
-            this.length = Object.keys(this.data).length;
+            this.length = this.data.length;
+            // check for any agreement
             if (this.length > 0) {
-                console.log("jo");
-                this.bTermsOfUse = (this.data.termsOfUse != null) ? false : null;
-                console.log(this.bTermsOfUse);
-                this.bPrivacyPolicy = (this.data.privacyPolicy != null) ? false : null;
-                this.bAny = (this.data.termsOfUse.bAny || this.data.privacyPolicy.bAny);
+                // check for concrete agreements
+                for (let i of this.data) {
+                    if (i.tAgreement == 1 && this.bTermsOfUse == null) {
+                        this.bTermsOfUse = false;
+                    }
+                    if (i.tAgreement == 2 && this.bPrivacyPolicy == null) {
+                        this.bPrivacyPolicy = false;
+                    }
+                }
+                // check if this is the first agreement with stakeholder or an update of existing ones
+                for (let i of this.data) {
+                    if (i.bAny) {
+                        this.bAny = true;
+                    }
+                }
             }
             else {
                 this.router.navigate(['app-root']);
@@ -43,20 +69,34 @@ let AgreementPage = class AgreementPage {
         this.bPrivacyPolicy = !this.bPrivacyPolicy;
     }
     onConditions() {
+        this.api.getPDF(this.urlTermsOfUse + this.tStakeholder).subscribe(response => {
+            console.log(response);
+            let blob = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            window.open(url);
+        }, error => {
+            console.log(error);
+        });
     }
     onPrivacyPolicy() {
+        this.api.getPDF(this.urlPrivacyPolicy + this.tStakeholder).subscribe(response => {
+            console.log(response);
+            let blob = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            window.open(url);
+        });
     }
     isDisabled() {
         let bTermsOfUse;
         if (this.bTermsOfUse == null) {
-            bTermsOfUse = false;
+            bTermsOfUse = true;
         }
         else {
             bTermsOfUse = this.bTermsOfUse;
         }
         let bPrivacyPolicy;
         if (this.bPrivacyPolicy == null) {
-            bPrivacyPolicy = false;
+            bPrivacyPolicy = true;
         }
         else {
             bPrivacyPolicy = this.bPrivacyPolicy;
@@ -69,12 +109,23 @@ let AgreementPage = class AgreementPage {
         }
     }
     onSave() {
-        // prepare
-        let data = {};
+        for (let i of this.data) {
+            let data = {
+                cIp: this.ip,
+                tAgreement: i.tAgreement,
+                kAgreement: i.kAgreement
+            };
+            this.save(data);
+        }
     }
-    getIp() {
-        this.http.get("http://api.ipify.org/?format=json").subscribe((res) => {
-            return res.ip;
+    save(data) {
+        console.log(data);
+        this.api.safePut(this.urlAgreement, data).subscribe((response) => {
+            console.log("jo");
+            this.router.navigate(['app-root']);
+        }, error => {
+            console.log("no");
+            console.log(error);
         });
     }
 };

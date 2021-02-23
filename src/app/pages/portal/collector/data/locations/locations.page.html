@@ -1,164 +1,82 @@
 <div class="simple-background">
     <div class="ion-text-center">
-        <ion-button *ngIf="!bEdit && !bAdd" (click)="isAdding(true)">Sammelstandort hinzufügen</ion-button>
+        <ion-button class="ion-button-outside" *ngIf="!bEdit && !bAdd" (click)="isAdding(true)">Sammelstandort hinzufügen</ion-button>
     </div>
 </div>
 
 <ion-content id="locations" class="input-background">
     <div *ngIf="bEdit || bAdd" class="input-block-element">
+
+            <div class="block-head">
+                <span class="text-head">{{bEdit ? 'Bearbeiten' : 'Hinzufügen'}}</span>
+            </div>
         <form [formGroup]="fgLocation" (ngSubmit)="onSaveAdd()">
+
             <ion-row>
-                <ion-col>
-                    <ion-row class="text-head">{{bEdit ? 'Bearbeiten' : 'Hinzufügen'}}</ion-row>
+                <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                    <ion-item lines="full">
+                        <ion-label class="input-label" position="floating">Name*</ion-label>
+                        <ion-input type="text" formControlName="cName"></ion-input>
+                    </ion-item>
+                    <span *ngIf="bSubmitted && errorControl.cName.errors?.required"
+                          class="input-invalid">Pflichtfeld</span>
+                    <span *ngIf="bSubmitted && errorControl.cName.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
+                </ion-col>
+                <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                    <ion-item lines="full">
+                        <ion-label class="input-label" position="floating">Website</ion-label>
+                        <ion-input type="text" formControlName="cWebsite"></ion-input>
+                    </ion-item>
+                    <span *ngIf="bSubmitted && errorControl.cWebsite.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
                 </ion-col>
             </ion-row>
+
             <ion-row>
-                <ion-col>
-                    <ion-row>
-                        <ion-col>
-                            <ion-item lines="full">
-                                <ion-label class="input-label" position="floating">Name*</ion-label>
-                                <ion-input type="text" formControlName="cName"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cName.errors?.required">
-                        <ion-col>
-                    <span class="input-invalid"
-                    >Pflichtfeld
-                    </span>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cName.errors?.maxlength">
-                        <ion-col>
-                    <span class="input-invalid"
-                    >Maximal-Länge von 50 Zeichen überschritten
-                    </span>
-                        </ion-col>
-                    </ion-row>
+                <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                    <ion-item lines="full">
+                        <ion-label class="input-label" position="floating">Straße*</ion-label>
+                        <ion-input type="text" formControlName="cStreet"></ion-input>
+                    </ion-item>
+                    <span *ngIf="bSubmitted && errorControl.cStreet.errors?.required"
+                          class="input-invalid">Pflichtfeld</span>
+                    <span *ngIf="bSubmitted && errorControl.cStreet.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
                 </ion-col>
-                <ion-col>
-                    <ion-row>
-                        <ion-col>
-                            <ion-item lines="full">
-                                <ion-label class="input-label" position="floating">Website</ion-label>
-                                <ion-input type="text" formControlName="cWebsite"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cName.errors?.maxlength">
-                        <ion-col>
-                    <span class="input-invalid"
-                    >Maximal-Länge von 50 Zeichen überschritten
-                    </span>
-                        </ion-col>
-                    </ion-row>
+                <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                    <ion-item lines="full">
+                        <ion-label class="input-label" position="floating">Nummer*</ion-label>
+                        <ion-input type="text" formControlName="cStreetNumber"></ion-input>
+                    </ion-item>
+                    <span *ngIf="bSubmitted && errorControl.cStreetNumber.errors?.required" class="input-invalid">Pflichtfeld</span>
+                    <span *ngIf="bSubmitted && errorControl.cStreetNumber.errors?.maxlength" class="input-invalid">Maximal-Länge von 10 Zeichen überschritten</span>
                 </ion-col>
             </ion-row>
+
             <ion-row>
-                <ion-col>
-                    <ion-row>
-                        <ion-col>
-                            <ion-item lines="full">
-                                <ion-label class="input-label" position="floating">Straße*</ion-label>
-                                <ion-input type="text" formControlName="cStreet"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cStreet.errors?.required">
-                        <ion-col>
-                            <span class="input-invalid">Pflichtfeld</span>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cStreet.errors?.maxlength">
-                        <ion-col>
-                            <span class="input-invalid">Maximal-Länge von 50 Zeichen überschritten</span>
-                        </ion-col>
-                    </ion-row>
+                <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                    <ion-item lines="full">
+                        <ion-label class="input-label" position="floating">PLZ*</ion-label>
+                        <ion-input type="text" formControlName="cZip"></ion-input>
+                    </ion-item>
+                    <span *ngIf="bSubmitted && errorControl.cZip.errors?.required" class="input-invalid">Pflichtfeld</span>
+                    <span *ngIf="bSubmitted && (errorControl.cZip.errors?.minlength || errorControl.cZip.errors?.maxlength)" class="input-invalid">Ungültige Eingabe</span>
                 </ion-col>
-                <ion-col>
-                    <ion-row>
-                        <ion-col>
-                            <ion-item lines="full">
-                                <ion-label class="input-label" position="floating">Nummer*</ion-label>
-                                <ion-input type="text" formControlName="cStreetNumber"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cStreetNumber.errors?.required">
-                        <ion-col>
-                    <span class="input-invalid">Pflichtfeld
-                    </span>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cStreetNumber.errors?.maxlength">
-                        <ion-col>
-                    <span class="input-invalid"
-                    >Maximal-Länge von 10 Zeichen überschritten
-                    </span>
-                        </ion-col>
-                    </ion-row>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <ion-row>
-                        <ion-col>
-                            <ion-item lines="full">
-                                <ion-label class="input-label" position="floating">PLZ*</ion-label>
-                                <ion-input type="text" formControlName="cZip"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cZip.errors?.required">
-                        <ion-col>
-                    <span class="input-invalid">Pflichtfeld
-                    </span>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row
-                            *ngIf="bSubmitted && (errorControl.cZip.errors?.minlength || errorControl.cZip.errors?.maxlength)">
-                        <ion-col>
-                    <span class="input-invalid"
-                    >Ungültige Eingabe
-                    </span>
-                        </ion-col>
-                    </ion-row>
-                </ion-col>
-                <ion-col>
-                    <ion-row>
-                        <ion-col>
-                            <ion-item lines="full">
-                                <ion-label class="input-label" position="floating">Stadt*</ion-label>
-                                <ion-input type="text" formControlName="cCity"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cCity.errors?.required">
-                        <ion-col>
-                    <span class="input-invalid">Pflichtfeld
-                    </span>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row *ngIf="bSubmitted && errorControl.cCity.errors?.maxlength">
-                        <ion-col>
-                    <span class="input-invalid"
-                    >Maximal-Länge von 50 Zeichen überschritten
-                    </span>
-                        </ion-col>
-                    </ion-row>
+                <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                    <ion-item lines="full">
+                        <ion-label class="input-label" position="floating">Stadt*</ion-label>
+                        <ion-input type="text" formControlName="cCity"></ion-input>
+                    </ion-item>
+                    <span *ngIf="bSubmitted && errorControl.cCity.errors?.required" class="input-invalid">Pflichtfeld</span>
+                    <span *ngIf="bSubmitted && errorControl.cCity.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
                 </ion-col>
             </ion-row>
         </form>
-        <ion-row>
-            <ion-col class="ion-text-center">
-                <ion-button
-                        (click)="bAdd ? onSaveAdd() : onSaveEdit()">{{bAdd ? 'Hinzufügen' : 'Änderungen übernehmen'}}</ion-button>
+        <ion-row class="ion-row-buttons">
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                <ion-button class="ion-button-one-inside"
+                            (click)="bAdd ? onSaveAdd() : onSaveEdit()">{{bAdd ? 'Hinzufügen' : 'Änderungen übernehmen'}}</ion-button>
             </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="ion-text-center">
-                <ion-button class="ion-button-two" (click)="bAdd ? isAdding(false) : isEditing(false)">Abrechen
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                <ion-button class="ion-button-two-inside" (click)="bAdd ? isAdding(false) : isEditing(false)">Abrechen
                 </ion-button>
             </ion-col>
         </ion-row>
@@ -166,11 +84,9 @@
 
 
     <div class="input-block-element" *ngIf="lLocationsActive.length > 0">
-        <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Aktive Sammelstandorte</ion-row>
-            </ion-col>
-        </ion-row>
+        <div class="block-head">
+            <span class="text-head">Aktive Sammelstandorte</span>
+        </div>
         <div class="list-block">
             <app-location (ping)="ping($event)" [oLocation]="location"
                           *ngFor="let location of lLocationsActive"></app-location>
@@ -178,11 +94,10 @@
     </div>
 
     <div class="input-block-element" *ngIf="lLocationsNotActive.length > 0">
-        <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Inaktive Sammelstandorte</ion-row>
-            </ion-col>
-        </ion-row>
+
+        <div class="block-head">
+            <span class="text-head">Inaktive Sammelstandorte</span>
+        </div>
         <div class="list-block">
             <app-location (ping)="ping($event)" [oLocation]="location"
                           *ngFor="let location of lLocationsNotActive"></app-location>

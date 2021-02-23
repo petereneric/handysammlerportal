@@ -16,6 +16,16 @@ export class Toast {
         });
         await toast.present();
     }
+
+    async successfulRegistration() {
+        const toast = await this.toastController.create({
+            message: 'Wir haben deine Daten erhalten und erfolgreich gespeichert - Willkommen!',
+            duration: 2500,
+            cssClass: 'my-toast',
+            position: 'bottom'
+        });
+        await toast.present();
+    }
 }
 
 

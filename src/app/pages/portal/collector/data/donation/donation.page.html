@@ -4,11 +4,11 @@
             <ion-col>
                 <ion-item>
                     <ion-label class="input-label">Ausgewählter Spendenempfänger:</ion-label>
-                    <ion-select [disabled]="!bChangePartner" [(ngModel)]="cPartner" [okText]="'Übernehmen'"
+                    <ion-select [disabled]="oPartner != null ? oPartner.bChangePartner == 0 : false" [(ngModel)]="oPartner" [okText]="'Übernehmen'"
                                 [cancelText]="'Abrechen'"
-                                [selectedText]="cPartner" (ionChange)="onSelectedPartner($event)">
+                                [selectedText]="oPartner != null ? oPartner.cName : ''" (ionChange)="onSelectedPartner($event)">
                         <ion-select-option *ngFor="let oPartner of lPartners"
-                                           [value]="oPartner.cName">{{oPartner.cName}}</ion-select-option>
+                                           [value]="oPartner">{{oPartner.cName}}</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-col>

@@ -8,6 +8,7 @@ import { RegistrationFormPage } from './registration-form.page';
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FooterComponent } from '../../../../components/footer/footer.component';
+import { Toast } from '../../../../utilities/Toast';
 let RegistrationFormPageModule = class RegistrationFormPageModule {
 };
 RegistrationFormPageModule = __decorate([
@@ -19,8 +20,9 @@ RegistrationFormPageModule = __decorate([
             RegistrationFormPageRoutingModule,
             ReactiveFormsModule,
             [MatTooltipModule],
-            MatIconModule
+            MatIconModule,
         ],
+        providers: [Toast],
         exports: [
             FooterComponent
         ],

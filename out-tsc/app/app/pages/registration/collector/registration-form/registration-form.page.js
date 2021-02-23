@@ -3,24 +3,27 @@ import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 let RegistrationFormPage = class RegistrationFormPage {
     // private activatedRoute: ActivatedRoute
-    constructor(activatedRoute, fb, connApi, alertController, router) {
+    constructor(uToast, activatedRoute, fb, connApi, alertController, router) {
+        this.uToast = uToast;
         this.activatedRoute = activatedRoute;
         this.fb = fb;
         this.connApi = connApi;
         this.alertController = alertController;
         this.router = router;
         // Urls
-        this.urlTypeNames = 'types';
+        this.urlTypes = 'types';
         this.urlRegionStates = 'region/states/';
         this.urlRegionCountries = 'region/countries';
         this.urlRegister = 'registration/collector';
         this.urlPartner = 'partner';
         this.urlBecomeCollector = "download/document/become_collector";
         this.urlMailRegistration = "collector/registration/mail";
+        this.urlTermsOfUse = 'agreement/terms_of_use/';
+        this.urlPrivacyPolicy = 'agreement/privacy_policy/';
         // FormBuilder
         this.fgCollector = this.fb.group({
             cName: ['', [Validators.required, Validators.maxLength(80)]],
-            cNameDetails: ['', [Validators.maxLength(50)]],
+            cNameDetails: ['', [Validators.maxLength(80)]],
             cStreet: ['', [Validators.required, Validators.maxLength(50)]],
             cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
             cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
@@ -32,7 +35,7 @@ let RegistrationFormPage = class RegistrationFormPage {
             cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
             cPhoneFixedLine: ['', [Validators.maxLength(50)]],
             cPhoneMobile: ['', [Validators.maxLength(50)]],
-            cShippingAddressOne: ['', [Validators.required, Validators.maxLength(50)]],
+            cShippingAddressOne: ['', [Validators.required, Validators.maxLength(80)]],
             cShippingAddressTwo: ['', [Validators.maxLength(50)]],
             cShippingAddressThree: ['', [Validators.maxLength(50)]],
             cShippingStreet: ['', [Validators.required, Validators.maxLength(50)]],
@@ -68,7 +71,7 @@ let RegistrationFormPage = class RegistrationFormPage {
     }
     ngOnInit() {
         // types
-        this.connApi.get(this.urlTypeNames).subscribe((data) => {
+        this.connApi.get(this.urlTypes).subscribe((data) => {
             this.lTypes = data.body;
         });
         // partner
@@ -147,6 +150,7 @@ let RegistrationFormPage = class RegistrationFormPage {
         this.connApi.post(this.urlRegister, collector).subscribe((data) => {
             if (data.status == 200) {
                 console.log(data);
+                this.uToast.successfulRegistration();
                 this.mailVerification();
                 this.router.navigate(['app-root']);
             }
@@ -335,8 +339,22 @@ let RegistrationFormPage = class RegistrationFormPage {
         });
     }
     onConditions() {
+        this.connApi.getPDF(this.urlTermsOfUse + 1).subscribe(response => {
+            console.log(response);
+            let blob = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            window.open(url);
+        }, error => {
+            console.log(error);
+        });
     }
     onSecurity() {
+        this.connApi.getPDF(this.urlPrivacyPolicy + 1).subscribe(response => {
+            console.log(response);
+            let blob = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            window.open(url);
+        });
     }
 };
 RegistrationFormPage = __decorate([

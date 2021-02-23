@@ -9,7 +9,7 @@ let DonationPage = class DonationPage {
         this.urlPartner = 'collector/partner';
         // Variables
         this.lPartners = [];
-        this.cPartner = null;
+        this.oPartner = null;
         this.bChangePartner = true;
     }
     ngOnInit() {
@@ -17,14 +17,19 @@ let DonationPage = class DonationPage {
         this.connApi.safeGet(this.urlPartner).subscribe((response) => {
             let partner = response.body;
             if (partner != null) {
+                this.oPartner = partner;
+                /*
                 this.lPartners.forEach((element) => {
-                    if (partner.cName === element.cName) {
-                        this.cPartner = partner.cName;
-                        console.log(partner.bChangePartner);
-                        this.bChangePartner = partner.bChangePartner == 1 ? true : false;
-                    }
+                  if (partner.cName === element.cName) {
+                    this.oPartner = partner.cName;
+                    console.log(partner.bChangePartner);
+                    this.bChangePartner = partner.bChangePartner == 1 ? true : false;
+                  }
                 });
+                 */
             }
+        }, error => {
+            console.log(error);
         });
         // Partners
         this.connApi.safeGet(this.urlPartners).subscribe((response) => {
@@ -34,15 +39,16 @@ let DonationPage = class DonationPage {
     }
     savePartner() {
         // prepare data
-        let kPartner = 0;
+        /*
+        let kPartner: number = 0;
         this.lPartners.forEach((element) => {
-            if (element.cName === this.cPartner) {
-                kPartner = element.kPartner;
-            }
+          if (element.cName === this.oPartner) {
+            kPartner = element.kPartner;
+          }
         });
-        console.log("partner: " + kPartner);
+         */
         let data = {
-            kPartner: kPartner
+            id: this.oPartner.id
         };
         // save
         this.connApi.safePost(this.urlPartner, data).subscribe((response) => {
@@ -64,7 +70,7 @@ let DonationPage = class DonationPage {
         });
     }
     onSelectedPartner($event) {
-        this.cPartner = $event['detail']['value'];
+        this.oPartner = $event['detail']['value'];
         this.savePartner();
     }
 };

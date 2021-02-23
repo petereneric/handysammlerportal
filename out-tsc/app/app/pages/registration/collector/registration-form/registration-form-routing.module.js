@@ -2,6 +2,7 @@ import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RegistrationFormPage } from './registration-form.page';
+import { CookieGuardService } from '../../../../services/cookie-guard/cookie-guard.service';
 const routes = [
     /*
   {
@@ -12,7 +13,8 @@ const routes = [
   */
     {
         path: 'id/:id',
-        component: RegistrationFormPage
+        component: RegistrationFormPage,
+        canActivate: [CookieGuardService]
     }
 ];
 let RegistrationFormPageRoutingModule = class RegistrationFormPageRoutingModule {

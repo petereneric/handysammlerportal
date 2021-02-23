@@ -88,7 +88,7 @@ ion-spinner {
 
 .text-head {
   color: #8BC34A;
-  font-size: 22px;
+  font-size: 23px;
   display: inline;
   font-weight: 300;
 }
@@ -141,7 +141,7 @@ b {
 
 .ion-row-buttons {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 
 }
 
@@ -162,9 +162,8 @@ b {
 
 
 // Input
-.input-label {
+ion-label {
   --color: #757575 !important;
-  --margin-bottom: 8px;
 }
 
 .checkbox-label {
@@ -189,15 +188,25 @@ b {
 .input-background {
   --background: #f6f6f6;
   background: #f6f6f6;
+}
 
+.block-button-outside {
+  display: flex;
+  width: 100%;
+  --background: #f6f6f6 ;
+  background: #f6f6f6 ;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  justify-content: center;
 }
 
 .input-invalid {
   color: $red;
   font-size: 11px;
-  margin-left: 16px;
   display: block;
   margin-top: 0.5rem;
+  margin-right: 1rem;
+  margin-left: 2rem;
 }
 
 .password-invalid {
@@ -216,9 +225,12 @@ b {
 }
 
 .input-info {
+  margin-top: 0.5rem;
   color: $textTertiary;
   font-size: 11px;
+  display: block;
   margin-left: 16px;
+  margin-right: 1rem;
 }
 
 .notice-important {
@@ -226,11 +238,7 @@ b {
   font-size: 12px;
 }
 
-.input-info {
-  color: $textTertiary;
-  font-size: 11px;
-  margin-left: 16px;
-}
+
 
 .link {
   color: $green;
@@ -253,7 +261,12 @@ b {
 }
 
 ion-button {
-  width: 80%;
+  width: 100%;
+
+}
+
+.ion-button-outside {
+  width: 75%;
 }
 
 .ion-button-deactivated {
@@ -262,14 +275,31 @@ ion-button {
   --background: #757575;
 }
 
-.ion-button-two {
+.ion-button-two-inside {
   --color: #8BC34A;
   --background: white;
   --ion-text-color: #8BC34A;
   border: 1px solid $green;
   border-radius: 4px;
-  width: 80%;
   --box-shadow: white;
+  display: block;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
+  /*
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+   */
+}
+
+
+
+
+.ion-button-one-inside {
+  display: block;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
 }
 
 .ion-button-three {
@@ -295,6 +325,10 @@ ion-button {
   --color: #8BC34A;
   --ion-text-color: #8BC34A;
   border: 1px solid $green;
+}
+
+.image-block {
+  margin: 2rem 1rem 1rem 1rem;
 }
 
 .my-alert .alert-wrapper {
@@ -363,6 +397,9 @@ ion-button {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .toolbar-subtitle {
@@ -382,9 +419,12 @@ ion-button {
   --border-style: solid;
   --border-width: 0px;
   font-size: 16px;
-  --button-color: #FFDD00;
+  --button-color: #8BC34A;
   --color: #e7e7e7;
   text-align: center;
+  --width: 60% !important;
+  --max-width: 60% !important;
+  --min-width: 60% !important;
 }
 
 .default-content-margin {
@@ -393,7 +433,10 @@ ion-button {
 
 ion-item {
   --border-color: #cbcbcb;
-  padding-top: 12px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 ion-back-button {
@@ -404,6 +447,8 @@ ion-back-button {
   color: $textTertiary;
   font-size: 13px;
   line-height: 1.5;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 ion-toggle {
@@ -411,6 +456,7 @@ ion-toggle {
   padding-left: 0px !important;
   --background-checked: #d9d9d9;
   --background: #d9d9d9;
+  margin-bottom: 0.75rem;
 
   --handle-background: white;
 }
@@ -456,8 +502,9 @@ h2 {
 .block-head {
   display: flex;
   align-items: center;
-  margin-top:0.75rem;
-  margin-left:0.75rem;
+  margin-top:1.25rem;
+  margin-left:1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .icon-head {
@@ -496,6 +543,35 @@ h2 {
   color: white;
   font-weight: 400;
 }
+
+ion-label {
+  padding-bottom: 0.25rem;
+}
+
+ion-row {
+  align-items: flex-start;
+}
+
+.ion-row-toggle {
+  align-items: flex-end;
+}
+
+
+
+.ion-label-toggle {
+  margin-bottom: 0.75rem;
+  margin-left: 1rem;
+}
+
+.ion-item-toggle-check {
+  display: flex;
+  margin-left: -1rem !important;
+}
+
+.ion-label-check {
+  margin-left: 1rem;
+}
+
 
 
 

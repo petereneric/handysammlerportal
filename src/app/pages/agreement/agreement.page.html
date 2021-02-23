@@ -8,7 +8,7 @@
 <ion-content class="input-background">
     <div class="input-block-element">
         <div class="block-head">
-            <span class="text-head">Einwilligung notwendig</span>
+            <span class="text-head">Bestätigung notwendig</span>
         </div>
         <div class="text-block">
             <p *ngIf="data != null && bAny && length > 1" class="text-secondary">Wir haben unsere rechtlichen Vereinbarungen bzw. Erklärungen aktualisiert und bitten dich diese zu lesen und diesen zuzustimmen.</p>
@@ -27,7 +27,6 @@
                         <ion-checkbox [ngModel]="bTermsOfUse" [checked]=bTermsOfUse
                                       (ionChange)="changeTermsOfUse()"></ion-checkbox>
                     </ion-item>
-                    <span *ngIf="bSubmitted && !bTermsOfUse" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
             </ion-row>
             <ion-row *ngIf="bPrivacyPolicy != null">
@@ -35,12 +34,11 @@
                     <ion-item>
                         <ion-label class="law-label">Hiermit bestätige ich, dass ich die
                             <span class="link" (click)="onPrivacyPolicy()">Datenschutzerklärung</span>
-                            gelesen habe und diesen zustimme*
+                            gelesen habe und dieser zustimme*
                         </ion-label>
                         <ion-checkbox [ngModel]="bPrivacyPolicy" [checked]=bPrivacyPolicy
                                       (ionChange)="changePrivacyPolicy()"></ion-checkbox>
                     </ion-item>
-                    <span *ngIf="bSubmitted && !bPrivacyPolicy" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
             </ion-row>
             <ion-row class="ion-row-buttons">

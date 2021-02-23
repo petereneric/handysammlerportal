@@ -2,6 +2,7 @@ import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ConfirmationPage } from './confirmation.page';
+import { CookieGuardService } from '../../../services/cookie-guard/cookie-guard.service';
 const routes = [
     {
         path: 'token/:token',
@@ -9,7 +10,8 @@ const routes = [
     },
     {
         path: 'test',
-        component: ConfirmationPage
+        component: ConfirmationPage,
+        canActivate: [CookieGuardService]
     },
 ];
 let ConfirmationPageRoutingModule = class ConfirmationPageRoutingModule {

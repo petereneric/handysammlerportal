@@ -6,6 +6,8 @@ let LawPage = class LawPage {
         // Urls
         this.urlLegalStatement = "collector/download/document/legal_statement";
         this.urlDataPrivacy = "collector/download/document/data_privacy";
+        this.urlTermsOfUse = 'agreement/terms_of_use/';
+        this.urlPrivacyPolicy = 'agreement/privacy_policy/';
     }
     ngOnInit() {
     }
@@ -23,6 +25,24 @@ let LawPage = class LawPage {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+        });
+    }
+    onPrivacyPolicy() {
+        this.connApi.getPDF(this.urlPrivacyPolicy + 1).subscribe(response => {
+            console.log(response);
+            let blob = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            window.open(url);
+        });
+    }
+    onTermsOfUse() {
+        this.connApi.getPDF(this.urlTermsOfUse + 1).subscribe(response => {
+            console.log(response);
+            let blob = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            window.open(url);
+        }, error => {
+            console.log(error);
         });
     }
 };

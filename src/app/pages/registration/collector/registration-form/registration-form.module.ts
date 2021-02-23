@@ -10,6 +10,7 @@ import { RegistrationFormPage } from './registration-form.page';
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {FooterComponent} from '../../../../components/footer/footer.component';
+import {Toast} from '../../../../utilities/Toast';
 
 @NgModule({
     imports: [
@@ -19,8 +20,9 @@ import {FooterComponent} from '../../../../components/footer/footer.component';
         RegistrationFormPageRoutingModule,
         ReactiveFormsModule,
         [MatTooltipModule],
-        MatIconModule
+        MatIconModule,
     ],
+    providers: [Toast],
     exports: [
         FooterComponent
     ],

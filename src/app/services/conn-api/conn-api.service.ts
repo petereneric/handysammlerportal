@@ -19,7 +19,6 @@ export class ConnApiService {
 
     // Registration
     public static getCollectorTypes: string = 'registration/collection-types'
-    public static postLogin: string = "login"
 
 
     constructor(private http: HttpClient) {

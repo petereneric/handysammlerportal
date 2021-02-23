@@ -5,6 +5,7 @@ import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {HttpResponse} from '@angular/common/http';
 import {ActivatedRoute} from "@angular/router";
+import {Toast} from '../../../../utilities/Toast';
 
 @Component({
     selector: 'app-registration-form',
@@ -14,18 +15,20 @@ import {ActivatedRoute} from "@angular/router";
 export class RegistrationFormPage implements OnInit {
 
     // Urls
-    private urlTypeNames = 'types';
+    private urlTypes = 'types';
     private urlRegionStates = 'region/states/';
     private urlRegionCountries = 'region/countries';
     private urlRegister = 'registration/collector';
     private urlPartner = 'partner';
     private urlBecomeCollector = "download/document/become_collector"
     private urlMailRegistration = "collector/registration/mail"
+    private urlTermsOfUse = 'agreement/terms_of_use/';
+    private urlPrivacyPolicy = 'agreement/privacy_policy/';
 
     // FormBuilder
     fgCollector = this.fb.group({
         cName: ['', [Validators.required, Validators.maxLength(80)]],
-        cNameDetails: ['', [Validators.maxLength(50)]],
+        cNameDetails: ['', [Validators.maxLength(80)]],
         cStreet: ['', [Validators.required, Validators.maxLength(50)]],
         cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
         cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
@@ -37,7 +40,7 @@ export class RegistrationFormPage implements OnInit {
         cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
         cPhoneFixedLine: ['', [Validators.maxLength(50)]],
         cPhoneMobile: ['', [Validators.maxLength(50)]],
-        cShippingAddressOne: ['', [Validators.required, Validators.maxLength(50)]],
+        cShippingAddressOne: ['', [Validators.required, Validators.maxLength(80)]],
         cShippingAddressTwo: ['', [Validators.maxLength(50)]],
         cShippingAddressThree: ['', [Validators.maxLength(50)]],
         cShippingStreet: ['', [Validators.required, Validators.maxLength(50)]],
@@ -78,13 +81,13 @@ export class RegistrationFormPage implements OnInit {
     compareWith = this.compareWithFn;
 
 // private activatedRoute: ActivatedRoute
-    constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder, private connApi: ConnApiService, public alertController: AlertController, public router: Router) {
+    constructor(private uToast: Toast, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private connApi: ConnApiService, public alertController: AlertController, public router: Router) {
 
     }
 
     ngOnInit() {
         // types
-        this.connApi.get(this.urlTypeNames).subscribe((data: HttpResponse<any>) => {
+        this.connApi.get(this.urlTypes).subscribe((data: HttpResponse<any>) => {
             this.lTypes = data.body;
         });
 
@@ -174,6 +177,7 @@ export class RegistrationFormPage implements OnInit {
         this.connApi.post(this.urlRegister, collector).subscribe((data: HttpResponse<any>) => {
             if (data.status == 200) {
                 console.log(data);
+                this.uToast.successfulRegistration();
                 this.mailVerification()
                 this.router.navigate(['app-root']);
             }
@@ -380,10 +384,22 @@ export class RegistrationFormPage implements OnInit {
     }
 
     onConditions() {
-
+        this.connApi.getPDF(this.urlTermsOfUse+1).subscribe(response => {
+            console.log(response);
+            let blob: any = new Blob([response], {type: 'application/pdf'});
+            const url = window.URL.createObjectURL(blob);
+            window.open(url)
+        }, error => {
+            console.log(error)
+        })
     }
 
     onSecurity() {
-
+        this.connApi.getPDF(this.urlPrivacyPolicy+1).subscribe(response => {
+            console.log(response);
+            let blob: any = new Blob([response], {type: 'application/pdf'});
+            const url = window.URL.createObjectURL(blob);
+            window.open(url)
+        })
     }
 }

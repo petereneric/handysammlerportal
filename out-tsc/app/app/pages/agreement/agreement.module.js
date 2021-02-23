@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AgreementPageRoutingModule } from './agreement-routing.module';
 import { AgreementPage } from './agreement.page';
+import { HttpClientModule } from "@angular/common/http";
 let AgreementPageModule = class AgreementPageModule {
 };
 AgreementPageModule = __decorate([
@@ -13,7 +14,8 @@ AgreementPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            AgreementPageRoutingModule
+            AgreementPageRoutingModule,
+            HttpClientModule
         ],
         declarations: [AgreementPage]
     })
