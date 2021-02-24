@@ -133,6 +133,7 @@ b {
   display: block;
   margin-left: 1.25rem;
   margin-right: 1.25rem;
+  margin-top: 1.25rem;
 }
 
 
@@ -192,10 +193,7 @@ b {
 
 }
 
-.ion-col-button {
-  align-self: center;
-  text-align: center;
-}
+
 
 .text-block {
   margin: 0.75rem;
@@ -285,9 +283,15 @@ ion-label {
   font-size: 12px;
 }
 
+.link-one {
+  color: $green;
+  text-decoration: underline;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
 
-
-.link {
+.link-two {
   color: $textSecondary;
   text-decoration: underline;
   cursor: pointer;
@@ -353,16 +357,19 @@ ion-button {
   --color: #8BC34A;
   --background: white;
   --ion-text-color: #8BC34A;
-  width: 80%;
   --box-shadow: white;
+  display: block;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
 }
 
 .button-four {
   --color: #afafaf;
   --background: white;
   --ion-text-color: #afafaf;
-  --box-shadow: white;
-  width: 80%;
+  width: auto;
+  display: block;
+  margin: 0.5rem 1rem 0.5rem 1rem;
   border: 1px solid #afafaf;
   border-radius: 4px;
   --box-shadow: white;
@@ -599,6 +606,10 @@ ion-row {
   align-items: flex-start;
 }
 
+.ion-row-center {
+  align-items: center;
+}
+
 .ion-row-table {
   flex-wrap: nowrap;
   align-items: stretch;
@@ -623,6 +634,9 @@ ion-row {
 
 .ion-label-check {
   margin-left: 1rem;
+  --color: $textPrimary !important;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 
