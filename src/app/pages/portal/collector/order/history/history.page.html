@@ -4,25 +4,25 @@
             <span class="text-head">Bestell-Historie</span>
         </div>
         <ion-grid class="ion-grid-table" *ngIf="orders.length > 0">
-            <ion-row>
-                <ion-col [ngClass]="'ion-col-table-header'" size="4">
+            <ion-row class="ion-row-table">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
                     <div>
                         Erstellt am
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header' " size="8">
+                <ion-col [ngClass]="'ion-col-table-header' " size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
                     <div>
                         Sendungsnummer
                     </div>
                 </ion-col>
             </ion-row>
-            <ion-row *ngFor="let row of orders">
-                <ion-col size="4">
+            <ion-row class="ion-row-table" *ngFor="let row of orders">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
                     <div>
                         {{row.dateCreation}}
                     </div>
                 </ion-col>
-                <ion-col size="8">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
                     <div>
                         {{row.ID_TRACKING != null ? row.ID_TRACKING : 'Noch nicht versendet'}}
                     </div>

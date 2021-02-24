@@ -42,7 +42,9 @@ let StatisticsPage = class StatisticsPage {
             cSelect: this.cSelect
         };
         this.connApi.safePost(this.urlStatistics, data).subscribe((response) => {
+            console.log("jo");
             console.log(response.body);
+            console.log("joo");
             this.lData = response.body;
         }), error => {
             console.log(error);

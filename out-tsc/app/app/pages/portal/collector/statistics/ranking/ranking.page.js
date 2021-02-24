@@ -98,6 +98,7 @@ let RankingPage = class RankingPage {
         this.connApi.safePost(this.urlRanking, data).subscribe((response) => {
             // data
             this.lData = response.body;
+            console.log(this.lData);
             // spinner
             this.bLoading = false;
         }, error => {

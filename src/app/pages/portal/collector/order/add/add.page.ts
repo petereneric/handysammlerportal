@@ -3,6 +3,7 @@ import {ConnApiService} from '../../../../../services/conn-api/conn-api.service'
 import {AlertController} from '@ionic/angular';
 import {HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {DataService} from '../../../../../services/data/data.service';
 
 @Component({
     selector: 'app-add',
@@ -40,7 +41,7 @@ export class AddPage implements OnInit {
 
 
 
-    constructor(private connApi: ConnApiService, private alertController: AlertController, public router: Router) {
+    constructor(private connApi: ConnApiService, private alertController: AlertController, public router: Router, private dataService: DataService) {
     }
 
     ngOnInit() {
@@ -71,6 +72,7 @@ export class AddPage implements OnInit {
         this.connApi.safePut(this.urlOrder, json).subscribe((data: HttpResponse<any>) => {
             if (data.status == 200) {
                 console.log('Order added');
+                this.dataService.publishData(null);
                 (async () => {
                     this.orderTaken = true;
                     await new Promise( resolve => setTimeout(resolve, 2000));

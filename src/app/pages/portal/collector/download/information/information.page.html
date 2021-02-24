@@ -1,19 +1,11 @@
 <ion-content class="input-background">
     <div class="input-block-element">
-        <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Dokumente</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <p  (click)="onBecomeCollector()">> <span class="link">Sammler werden</span></p>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <p  (click)="onInformationForCollector()">> <span class="link">Informationen für Sammler</span></p>
-            </ion-col>
-        </ion-row>
+        <div class="block-head">
+            <span class="text-head">Dokumente</span>
+        </div>
+        <div class="block-text">
+            <p  (click)="onBecomeCollector()"><span class="link">Sammler werden</span></p>
+            <p  (click)="onInformationForCollector()"><span class="link">Informationen für Sammler</span></p>
+        </div>
     </div>
 </ion-content>

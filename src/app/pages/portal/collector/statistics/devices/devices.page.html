@@ -30,77 +30,80 @@
 
     </div>
     <div class="input-block-element">
-        <div class="block-head">
+        <div class="block-head" *ngIf="lData != null && lData.length > 0">
             <span class="text-head">Auswertung</span>
         </div>
-        <ion-grid class="ion-grid-table">
-                <ion-row class="forecast_container">
-                    <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
+        <ion-grid class="ion-grid-table" *ngIf="lData != null && lData.length > 0">
+                <ion-row class="ion-row-table">
+                    <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                         <div>
                             {{getColumnName()}}
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
+                    <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                         <div>
                             Handys
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table-header'" size="1.8">
+                    <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                         <div>
                             Recycelt
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table-header'" size="2.4">
+                    <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                         <div>
                             Wiederverwendet
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table-header'" size="2">
+                    <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                         <div>
                             Repariert*
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table-header'">
+                    <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                         <div>
                             Erlöse
                         </div>
                     </ion-col>
-                </ion-row >
-                <ion-row class="forecast_container" *ngFor="let row of lData">
-                    <ion-col [ngClass]="'ion-col-table'" size="1.8">
+                </ion-row>
+                <ion-row class="ion-row-table" *ngFor="let row of lData">
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                         <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                             {{cFilter === lFilter[0] ? (row.cYear != null ? row.cYear : 'Summe') : (row.nMonth != null ? getMonth(row.nMonth) : 'Summe')}}
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table'" size="1.8">
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                         <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                             {{row.nDevices}}
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table'" size="1.8">
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                         <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                             {{row.nRecycling}}
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table'" size="2.4">
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                         <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                             {{row.nReuse}}
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table'" size="2">
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                         <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                             {{row.nRepair}}
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table'">
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                         <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                             {{getPayment(row.sPayment)}}
                         </div>
                     </ion-col>
                 </ion-row>
         </ion-grid>
+        <div class="block-text-information" *ngIf="lData != null && lData.length == 0">
+            <p [ngClass]="'text-information-two'">Für diese Auswahl liegen uns leider keine Daten vor</p>
+        </div>
     </div>
-    <div class="input-block-element">
+    <div class="input-block-element" *ngIf="lData != null && lData.length > 0">
         <ion-row class="text-note">* Aktuell reparieren wir defekte Handys, erfassen diese Zahl jedoch (noch) nicht - Daher findet sich hier ein Wert von 0.
         </ion-row>
     </div>

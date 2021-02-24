@@ -1,24 +1,13 @@
 <ion-content class="input-background">
-    <div class="input-block-element" *ngIf="lYears.length > 0">
-        <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Aktuelle Gesamtabrechnung</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="ion-text-center">
-                <ion-button (click)="onTotal()" class="ion-button-two-inside">Erstellen & Öffnen</ion-button>
-            </ion-col>
-        </ion-row>
+    <div class="block-button-outside">
+        <ion-button class="ion-button-outside" (click)="onTotal()">Gesamtabrechnung erstellen & öffnen</ion-button>
     </div>
     <div class="input-block-element" *ngIf="lYears.length > 0">
+        <div class="block-head">
+            <span class="text-head">Archiv</span>
+        </div>
         <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Archiv</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row class="center">
-            <ion-col size="6">
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Zeitraum</ion-label>
                     <ion-select [(ngModel)]="cYear" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
@@ -29,34 +18,34 @@
                 </ion-item>
             </ion-col>
         </ion-row>
-            <ion-grid class="ion-content-table" *ngIf="lBills.length > 0">
-                <ion-row class="center">
-                    <ion-col [ngClass]="'ion-col-table-header'" size="3">
-                        <div>
-                            Datum
-                        </div>
-                    </ion-col>
-                    <ion-col [ngClass]="'ion-col-table-header'" size="3">
-                        <div>
-                            Abrechnungs-Nummer
-                        </div>
-                    </ion-col>
-                </ion-row>
-                <ion-row class="center" *ngFor="let row of lBills">
-                    <ion-col [ngClass]="'ion-col-table'" size="3">
-                        <div>
-                            {{getDate(row.dBill)}}
-                        </div>
-                    </ion-col>
-                    <ion-col [ngClass]="'ion-col-table'" size="3">
-                        <div class="link" (click)="onBill(row.kBill)">
-                            {{row.kBill}}
-                        </div>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+        <ion-grid class="ion-grid-table" *ngIf="lBills.length > 0">
+            <ion-row class="ion-row-table">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="3" size-lg="3" size-md="6" size-sm="6" size-xs="6">
+                    <div>
+                        Datum
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="3" size-lg="3" size-md="6" size-sm="6" size-xs="6">
+                    <div>
+                        Abrechnungs-Nummer
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row class="ion-row-table" *ngFor="let row of lBills">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="3" size-lg="3" size-md="6" size-sm="6" size-xs="6">
+                    <div>
+                        {{getDate(row.dBill)}}
+                    </div>
+                </ion-col>
+                <ion-col [ngClass]="'ion-col-table'" size-xl="3" size-lg="3" size-md="6" size-sm="6" size-xs="6">
+                    <div class="link" (click)="onBill(row.kBill)">
+                        {{row.kBill}}
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div class="block-text-information" *ngIf="lYears.length == 0">
+            <p [ngClass]="'text-information-two'">Für diese Auswahl liegen uns leider keine Daten vor</p>
         </div>
-    <ion-row *ngIf="lYears.length == 0">
-        <span class="search-failed">Es wurden bisher keine Abrechnungen erstellt</span>
-    </ion-row>
+    </div>
 </ion-content>

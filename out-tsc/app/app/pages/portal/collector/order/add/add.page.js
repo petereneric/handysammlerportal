@@ -1,10 +1,11 @@
 import { __awaiter, __decorate } from "tslib";
 import { Component } from '@angular/core';
 let AddPage = class AddPage {
-    constructor(connApi, alertController, router) {
+    constructor(connApi, alertController, router, dataService) {
         this.connApi = connApi;
         this.alertController = alertController;
         this.router = router;
+        this.dataService = dataService;
         // Urls
         this.urlOrdersAvailable = 'collector/order/available';
         this.urlOrder = 'collector/order';
@@ -45,6 +46,7 @@ let AddPage = class AddPage {
         this.connApi.safePut(this.urlOrder, json).subscribe((data) => {
             if (data.status == 200) {
                 console.log('Order added');
+                this.dataService.publishData(null);
                 (() => __awaiter(this, void 0, void 0, function* () {
                     this.orderTaken = true;
                     yield new Promise(resolve => setTimeout(resolve, 2000));
@@ -147,6 +149,7 @@ let AddPage = class AddPage {
                 }
             }
             this.boxMax = data.body['boxMax'];
+            console.log(this.boxMax);
             this.bricolageMax = data.body['bricolageMax'];
             console.log(data.body);
         });

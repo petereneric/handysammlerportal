@@ -130,6 +130,7 @@ export class RankingPage implements OnInit {
         this.connApi.safePost(this.urlRanking, data).subscribe((response: HttpResponse<any>) => {
             // data
             this.lData = response.body;
+            console.log(this.lData);
 
             // spinner
             this.bLoading = false;

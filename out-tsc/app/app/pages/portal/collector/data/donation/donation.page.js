@@ -11,6 +11,7 @@ let DonationPage = class DonationPage {
         this.lPartners = [];
         this.oPartner = null;
         this.bChangePartner = true;
+        this.bFirstSelect = false;
     }
     ngOnInit() {
         // Partner
@@ -64,14 +65,19 @@ let DonationPage = class DonationPage {
                 message: 'Deine Daten wurden erfolgreich gespeichert.',
                 duration: 2500,
                 cssClass: 'my-toast',
-                position: 'middle'
+                position: 'bottom'
             });
             yield toast.present();
         });
     }
     onSelectedPartner($event) {
-        this.oPartner = $event['detail']['value'];
-        this.savePartner();
+        if (!this.bFirstSelect) {
+            this.bFirstSelect = true;
+        }
+        else {
+            this.oPartner = $event['detail']['value'];
+            this.savePartner();
+        }
     }
 };
 DonationPage = __decorate([

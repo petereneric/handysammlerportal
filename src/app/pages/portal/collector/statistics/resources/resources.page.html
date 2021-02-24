@@ -1,22 +1,19 @@
 <ion-content class="input-background">
     <div class="input-block-element">
+        <div class="block-head">
+            <span class="text-head">Filter</span>
+        </div>
         <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Filter</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Zeitraum</ion-label>
                     <ion-select [(ngModel)]="cFilter" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
                                 [selectedText]="cFilter" (ionChange)="onFilter($event)">
-                        <ion-select-option *ngFor="let cFilter of lFilter"
-                                           [value]="cFilter">{{cFilter}}</ion-select-option>
+                        <ion-select-option *ngFor="let cFilter of lFilter" [value]="cFilter">{{cFilter}}</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
-            <ion-col>
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item *ngIf="cFilter !== 'Gesamt'">
                     <ion-label class="input-label">Auswahl</ion-label>
                     <ion-select [(ngModel)]="cSelect" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
@@ -29,79 +26,80 @@
         </ion-row>
     </div>
     <div class="input-block-element">
-        <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Auswertung</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-grid class="ion-content-table">
-            <ion-row>
-                <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
+        <div class="block-head" *ngIf="lData != null && lData.length > 0">
+            <span class="text-head">Auswertung</span>
+        </div>
+        <ion-grid class="ion-grid-table" *ngIf="lData != null && lData.length > 0">
+            <ion-row class="ion-row-table">
+                <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                     <div>
                         {{getColumnName()}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div>
                         Gold*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div>
                         Silber*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div>
                         Kupfer*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2.5">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="4" size-md="5" size-sm="6" size-xs="6">
                     <div>
                         Eingespartes CO2**
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="4" size-md="5" size-sm="6" size-xs="6">
                     <div>
                         Eingesparte Ressourcen**
                     </div>
                 </ion-col>
             </ion-row>
-            <ion-row *ngFor="let row of lData">
-                <ion-col [ngClass]="'ion-col-table'" size="1.5">
+            <ion-row class="ion-row-table" *ngFor="let row of lData">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{cFilter === lFilter[0] ? (row.cYear != null ? row.cYear : 'Summe') : (row.nMonth != null ? getMonth(row.nMonth) : 'Summe')}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="1.5">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="1.5">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.gSilver)).value}} {{transGramm(row.gSilver).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="1.5">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.gCopper)).value}} {{transGramm(row.gCopper).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="2.5">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="4" size-md="5" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.kgCo2)).value}} {{transKilogramm(row.kgCo2).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="4" size-md="5" size-sm="6" size-xs="6">
                     <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.kgResources)).value}} {{transKilogramm(row.kgResources).unit}}
                     </div>
                 </ion-col>
             </ion-row>
         </ion-grid>
+        <div class="block-text-information" *ngIf="lData != null && lData.length == 0">
+            <p [ngClass]="'text-information-two'">Für diese Auswahl liegen uns leider keine Daten vor</p>
+        </div>
     </div>
-    <div class="input-block-element">
+    <div class="input-block-element" *ngIf="lData != null && lData.length > 0">
         <ion-row class="text-note">
             *  Recycelte Rohstoffe, der Handys die nicht wiederverwendet werden konnten.
         </ion-row>

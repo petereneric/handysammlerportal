@@ -1,42 +1,30 @@
 <ion-content class="input-background">
     <div class="input-block-element">
-        <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Dokumente</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <p (click)="onModelPressRelease()">> <span class="link">Muster-Pressemitteilung</span></p>
-            </ion-col>
-        </ion-row>
+        <div class="block-head">
+            <span class="text-head">Dokumente</span>
+        </div>
+        <div class="block-text">
+                <p (click)="onModelPressRelease()"><span class="link">Muster-Pressemitteilung</span></p>
+        </div>
     </div>
 
     <div class="input-block-element">
-        <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Flyer</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <p *ngFor="let flyer of lFlyer" (click)="onFlyer(flyer.id)">> <span class="link">{{flyer.cName}}</span>
-                </p>
-            </ion-col>
-        </ion-row>
+        <div class="block-head">
+            <span class="text-head">Flyer</span>
+        </div>
+        <div class="block-text">
+            <p *ngFor="let flyer of lFlyer" (click)="onFlyer(flyer.id)"><span class="link">{{flyer.cName}}</span>
+            </p>
+        </div>
     </div>
 
     <div class="input-block-element">
-        <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Poster</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <p *ngFor="let poster of lPoster" (click)="onFlyer(poster.id)">> <span class="link">{{poster.cName}}</span>
-                </p>
-            </ion-col>
-        </ion-row>
+        <div class="block-head">
+            <span class="text-head">Poster</span>
+        </div>
+        <div class="block-text">
+            <p *ngFor="let poster of lPoster" (click)="onFlyer(poster.id)"><span class="link">{{poster.cName}}</span>
+            </p>
+        </div>
     </div>
 </ion-content>

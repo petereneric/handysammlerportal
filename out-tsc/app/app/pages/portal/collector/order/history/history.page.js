@@ -1,14 +1,21 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
 let HistoryPage = class HistoryPage {
-    constructor(connApi) {
+    constructor(connApi, dataService) {
         this.connApi = connApi;
+        this.dataService = dataService;
         // Urls
         this.urlOrders = 'collector/orders';
         // Variables
         this.orders = [];
     }
     ngOnInit() {
+        this.load();
+        this.dataService.getData().subscribe((data) => {
+            this.load();
+        });
+    }
+    load() {
         this.connApi.safeGet(this.urlOrders).subscribe((data) => {
             if (data.status == 200) {
                 console.log(data);

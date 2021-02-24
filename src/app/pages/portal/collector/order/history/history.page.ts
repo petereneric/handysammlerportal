@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ConnApiService} from '../../../../../services/conn-api/conn-api.service';
 import {HttpResponse} from '@angular/common/http';
+import {DataService} from '../../../../../services/data/data.service';
 
 @Component({
   selector: 'app-history',
@@ -18,9 +19,17 @@ export class HistoryPage implements OnInit {
   public bricolageVisible: boolean;
 
 
-  constructor(private connApi: ConnApiService) { }
+  constructor(private connApi: ConnApiService, private dataService: DataService) { }
 
   ngOnInit() {
+    this.load();
+
+    this.dataService.getData().subscribe((data) => {
+        this.load()
+    })
+  }
+
+  load() {
     this.connApi.safeGet(this.urlOrders).subscribe((data: HttpResponse<any>) => {
       if (data.status == 200) {
         console.log(data);

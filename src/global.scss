@@ -130,9 +130,9 @@ b {
 }
 
 .block-text {
-  display: flex;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  display: block;
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
 }
 
 
@@ -142,6 +142,8 @@ b {
   padding-right: 1.25rem;
   padding-bottom: 1.25rem;
   padding-top: 1.25rem;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
 }
 
 .text {
@@ -286,7 +288,7 @@ ion-label {
 
 
 .link {
-  color: $green;
+  color: $textSecondary;
   text-decoration: underline;
   cursor: pointer;
   position: relative;
@@ -595,6 +597,11 @@ ion-label {
 
 ion-row {
   align-items: flex-start;
+}
+
+.ion-row-table {
+  flex-wrap: nowrap;
+  align-items: stretch;
 }
 
 .ion-row-toggle {

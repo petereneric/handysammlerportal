@@ -58,7 +58,9 @@ export class StatisticsPage implements OnInit {
     }
 
     this.connApi.safePost(this.urlStatistics, data).subscribe((response: HttpResponse<any>) => {
+      console.log("jo");
       console.log(response.body)
+      console.log("joo");
       this.lData = response.body;
     }), error => {
       console.log(error)

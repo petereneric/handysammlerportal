@@ -29,6 +29,7 @@ let CookieGuardService = class CookieGuardService {
                 buttons: [
                     {
                         side: 'end',
+                        role: 'cancel',
                         icon: 'checkmark',
                         text: 'Akzeptieren',
                         handler: () => {
@@ -36,6 +37,7 @@ let CookieGuardService = class CookieGuardService {
                         }
                     }, {
                         text: 'Weitere Informationen',
+                        role: 'cancel',
                         handler: () => {
                             this.toastCookie();
                             this.onPrivacyPolicy();

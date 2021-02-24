@@ -1,12 +1,10 @@
 <ion-content class="input-background">
     <div class="input-block-element">
+        <div class="block-head">
+            <span class="text-head">Filter</span>
+        </div>
         <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Filter</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Zeitraum</ion-label>
                     <ion-select [(ngModel)]="cTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
@@ -16,7 +14,7 @@
                     </ion-select>
                 </ion-item>
             </ion-col>
-            <ion-col>
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item *ngIf="cTime.key !== 'total'">
                     <ion-label class="input-label">Auswahl</ion-label>
                     <ion-select #selectTime [(ngModel)]="cSelectTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
@@ -28,7 +26,7 @@
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col>
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Region</ion-label>
                     <ion-select [(ngModel)]="cRegion" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
@@ -38,7 +36,7 @@
                     </ion-select>
                 </ion-item>
             </ion-col>
-            <ion-col>
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item *ngIf="cRegion.key !== 'total'">
                     <ion-label class="input-label">Auswahl</ion-label>
                     <ion-select #selectRegion [(ngModel)]="oSelectRegion" [okText]="'Auswählen'"
@@ -51,7 +49,7 @@
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col>
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Typ/Branche</ion-label>
                     <ion-select [(ngModel)]="cType" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
@@ -61,7 +59,7 @@
                     </ion-select>
                 </ion-item>
             </ion-col>
-            <ion-col>
+            <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item *ngIf="cType.key !== 'total'">
                     <ion-label class="input-label">Auswahl</ion-label>
                     <ion-select class="myCustomSelect" #selectType [(ngModel)]="oSelectType" [okText]="'Auswählen'"
@@ -74,75 +72,73 @@
             </ion-col>
         </ion-row>
     </div>
-    <div class="input-block-element" *ngIf="lData.length > 1 && !bLoading">
-        <ion-row>
-            <ion-col>
-                <ion-row class="text-head">Auswertung</ion-row>
-            </ion-col>
-        </ion-row>
-        <ion-row *ngIf="!bStatistics">
+    <div class="input-block-element" >
+            <div class="block-head" *ngIf="lData.length > 0 && !bLoading">
+                <span class="text-head">Auswertung</span>
+            </div>
+        <ion-row *ngIf="!bStatistics && lData.length > 0 && !bLoading">
             <ion-col>
                     <span class="notice-important"
                     >Deine Daten sind nicht enthalten - Du kannst diese <a class="notice-important" [routerLink]="['/collector/menu/data/tabs/settings']">hier</a> freigeben
                     </span>
             </ion-col>
         </ion-row>
-        <ion-grid class="ion-content-table">
-            <ion-row>
-                <ion-col [ngClass]="'ion-col-table-header'" size="5">
+        <ion-grid class="ion-grid-table" *ngIf="lData.length > 0 && !bLoading">
+            <ion-row class="ion-row-table">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="5" size-lg="5" size-md="6" size-sm="8" size-xs="8">
                     <div>
                         Sammler
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="1.5">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div>
                         Aktiv seit
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size="2.5">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2.5" size-lg="3.5" size-md="5" size-sm="6" size-xs="6">
                     <div>
                         Sammelstandorte*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2.5" size-lg="3.5" size-md="5" size-sm="8" size-xs="8">
                     <div>
                         Gesammelte Handys
                     </div>
                 </ion-col>
             </ion-row>
-            <ion-row *ngFor="let row of lData">
-                <ion-col [ngClass]="'ion-col-table'" size="5">
+            <ion-row *ngFor="let row of lData" class="ion-row-table">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="5" size-lg="5" size-md="6" size-sm="8" size-xs="8">
                     <div [ngClass]="{bold : row.cName == null, 'ion-col-table-selected' : isSelf(row.id)}">
                         {{row.cName != null ? row.cName : 'Summe'}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="1.5">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div [ngClass]="{bold : row.cName == null, 'ion-col-table-selected' : isSelf(row.id)}">
                         {{row.dStart != null ? getYearFromDate(row.dStart) : '&nbsp;'}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size="2.5">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="2.5" size-lg="3.5" size-md="5" size-sm="6" size-xs="6">
                     <div [ngClass]="{bold : row.cName == null, 'ion-col-table-selected' : isSelf(row.id)}">
                         {{row.nLocations != null ? row.nLocations : ''}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="2.5" size-lg="3.5" size-md="4" size-sm="8" size-xs="8">
                     <div [ngClass]="{bold : row.cName == null, 'ion-col-table-selected' : isSelf(row.id)}">
                         {{getNumber(row.nDevices | number:'1.0':'en-US')}}
                     </div>
                 </ion-col>
             </ion-row>
         </ion-grid>
+        <div class="block-text-information" *ngIf="lData.length == 0 && !bLoading">
+            <p [ngClass]="'text-information-two'">Für diese Auswahl liegen uns leider keine Daten vor</p>
+        </div>
     </div>
-    <div class="input-block-element" *ngIf="lData.length > 1 && !bLoading">
+    <div class="input-block-element" *ngIf="lData.length > 0 && !bLoading">
         <ion-row class="text-note">* Berücksichtigt werden nur vom jeweiligen Sammler eingetragene Sammelstandorte.
             Trage diese bitte&nbsp;<a [routerLink]="['/collector/menu/data/tabs/locations']">hier</a>&nbsp;ein und
             aktualisiere diese bei Veränderungen.
         </ion-row>
     </div>
-    <ion-row *ngIf="lData.length <= 1 && !bLoading">
-        <span class="search-failed">Kein Ergebnis für diese Auswahl</span>
-    </ion-row>
     <div>
         <ion-spinner *ngIf="bLoading" name="bubbles"></ion-spinner>
     </div>
