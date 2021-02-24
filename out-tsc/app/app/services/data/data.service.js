@@ -10,6 +10,7 @@ let DataService = class DataService {
     changeRole(role) {
         this.roleSource.next(role);
     }
+    // test
     publishData(data) {
         this.dataSubject.next(data);
     }
