@@ -295,16 +295,19 @@
                                                [value]="oShippingCountry">{{oShippingCountry.cNameLocale}}</ion-select-option>
                         </ion-select>
                     </ion-item>
+                    <span *ngIf="bSubmitted && oShippingCountry == null" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
             </ion-row>
         </ion-grid>
     </div>
     <div class="input-block-element">
-        <span class="text-note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.</span>
+        <span class="note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.</span>
     </div>
 </ion-content>
 
-<div class="block-button-outside">
-    <ion-button [disabled]="!bChanged" class="ion-button-outside" (click)="onSave()">Speichern</ion-button>
+<div class="simple-background">
+    <div class="ion-text-center">
+        <ion-button [disabled]="!bChanged" class="ion-button-outside-bottom" (click)="onSave()">Speichern</ion-button>
+    </div>
 </div>
 

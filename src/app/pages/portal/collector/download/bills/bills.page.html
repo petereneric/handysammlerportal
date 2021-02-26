@@ -1,6 +1,6 @@
 <ion-content class="input-background">
     <div class="block-button-outside">
-        <ion-button class="ion-button-outside" (click)="onTotal()">Gesamtabrechnung erstellen & öffnen</ion-button>
+        <ion-button class="ion-button-outside-top" (click)="onTotal()">Gesamtabrechnung erstellen & öffnen</ion-button>
     </div>
     <div class="input-block-element" *ngIf="lYears.length > 0">
         <div class="block-head">
@@ -45,7 +45,7 @@
             </ion-row>
         </ion-grid>
         <div class="block-text-information" *ngIf="lYears.length == 0">
-            <p [ngClass]="'text-information-two'">Für diese Auswahl liegen uns leider keine Daten vor</p>
+            <p [ngClass]="'text-information'">Für diese Auswahl liegen uns leider keine Daten vor</p>
         </div>
     </div>
 </ion-content>

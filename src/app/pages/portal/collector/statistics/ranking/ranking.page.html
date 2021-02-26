@@ -76,13 +76,11 @@
             <div class="block-head" *ngIf="lData.length > 0 && !bLoading">
                 <span class="text-head">Auswertung</span>
             </div>
-        <ion-row *ngIf="!bStatistics && lData.length > 0 && !bLoading">
-            <ion-col>
-                    <span class="notice-important"
-                    >Deine Daten sind nicht enthalten - Du kannst diese <a class="notice-important" [routerLink]="['/collector/menu/data/tabs/settings']">hier</a> freigeben
+                <div *ngIf="!bStatistics && lData.length > 0 && !bLoading" class="block-note">
+                    <span class="note-important"
+                    >Deine Daten sind nicht enthalten - Du kannst diese <a class="note-important" [routerLink]="['/collector/menu/data/tabs/settings']">hier</a> freigeben
                     </span>
-            </ion-col>
-        </ion-row>
+                </div>
         <ion-grid class="ion-grid-table" *ngIf="lData.length > 0 && !bLoading">
             <ion-row class="ion-row-table">
                 <ion-col [ngClass]="'ion-col-table-header'" size-xl="5" size-lg="5" size-md="6" size-sm="8" size-xs="8">
@@ -130,11 +128,11 @@
             </ion-row>
         </ion-grid>
         <div class="block-text-information" *ngIf="lData.length == 0 && !bLoading">
-            <p [ngClass]="'text-information-two'">Für diese Auswahl liegen uns leider keine Daten vor</p>
+            <p [ngClass]="'text-information'">Für diese Auswahl liegen uns leider keine Daten vor</p>
         </div>
     </div>
     <div class="input-block-element" *ngIf="lData.length > 0 && !bLoading">
-        <ion-row class="text-note">* Berücksichtigt werden nur vom jeweiligen Sammler eingetragene Sammelstandorte.
+        <ion-row class="note">* Berücksichtigt werden nur vom jeweiligen Sammler eingetragene Sammelstandorte.
             Trage diese bitte&nbsp;<a [routerLink]="['/collector/menu/data/tabs/locations']">hier</a>&nbsp;ein und
             aktualisiere diese bei Veränderungen.
         </ion-row>

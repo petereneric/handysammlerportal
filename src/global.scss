@@ -19,9 +19,20 @@
 // +++DIMEN+++
 
 // Text
-$textSize: 0.9rem;
-$lineHeight: 0.4rem;
-$lineHeightList: 1.8rem;
+$sizeTextInformation: 1rem;
+$textSize: 0.95rem;
+$sizeTextHead: 1.5rem;
+$textSizeList: 0.95rem;
+$textSizeNote: 0.8rem;
+$textHeight: 0.4rem;
+$noteHeight: 1.2rem;
+$listHeight: 1.75rem;
+
+// Block
+$blockMarginOutside: 1.25rem;
+
+// Radius
+$borderRadius: 0.6rem;
 
 // +++COLORS+++
 
@@ -30,12 +41,16 @@ $textPrimary: #212121;
 $textSecondary: #757575;
 $textTertiary: #979797;
 
+// Icon
+$colorIcon: #afafaf;
+
 // General
 $white: #ffffff;
 $green: #8BC34A;
 $greenLight: #a5d274;
 $red: #c34a4a;
 $background: #f6f6f6;
+$colorTransparent: rgba(0, 0, 0, 0);
 
 // Special
 $divider: #BDBDBD;
@@ -73,7 +88,9 @@ ion-label {
 }
 
 ion-button {
-  width: 100%;
+  //width: 100%;
+  --border-radius: 0.6rem;
+  border-radius: $borderRadius;
 }
 
 ion-item {
@@ -150,7 +167,7 @@ b {
 
 .text-head {
   color: #8BC34A;
-  font-size: 1.5rem !important;
+  font-size: $sizeTextHead !important;
   display: inline;
   font-weight: 300;
 }
@@ -158,49 +175,55 @@ b {
 .text-list {
   color: $textSecondary;
   font-size: $textSize !important;
-  line-height: $lineHeightList !important;
+  line-height: $listHeight !important;
 }
 
 .text {
   font-size: $textSize;
   color: $textPrimary;
-  line-height: $lineHeight;
+  line-height: $textHeight;
 }
 
 .text-secondary {
   font-size: $textSize;
   color: $textSecondary;
-  line-height: $lineHeight;
+  line-height: $textHeight;
 }
 
-// HIer -- Impressum
-
 .text-information-pointer {
-  font-size: 16px;
-  color: $textPrimary;
-  line-height: 18px;
+  font-size: $sizeTextInformation;
+  color: $textSecondary;
+  line-height: $textHeight;
   cursor: pointer;
 }
 
-.text-information-two {
-  font-size: 16px;
+.text-information {
+  font-size: $sizeTextInformation;
   color: $textSecondary;
-  line-height: 18px;
+  line-height: $textHeight;
 }
 
 .text-list {
-  margin: 0;
-  font-size: 15px;
+  font-size: $textSizeList;
   color: $textSecondary;
-  line-height: 30px;
+  line-height: $listHeight;
 }
 
-.notice-important {
+.note-important {
   color: $red;
-  font-size: 12px;
+  font-size: $textSizeNote;
 }
 
-.link {
+
+.link-one {
+  color: $green;
+  text-decoration: underline;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+}
+
+.link-two {
   color: $textSecondary;
   text-decoration: underline;
   cursor: pointer;
@@ -208,22 +231,10 @@ b {
   z-index: 10;
 }
 
-
-.text-page-information {
-  color: $textSecondary;
-  size: 28px;
-  text-align: center;
-  padding-top: 32px;
-}
-
-.text-tertiary {
+.note {
   color: $textTertiary;
-}
-
-.text-note {
-  color: $textTertiary;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: $textSizeNote;
+  line-height: $noteHeight;
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -232,9 +243,11 @@ b {
   font-weight: bold;
 }
 
+// Icon
+
 .icon-head {
   margin-left: 1rem;
-  color: #afafaf;
+  color: $colorIcon;
   align-self: center;
   cursor: pointer;
 }
@@ -248,7 +261,6 @@ b {
 .ion-row-buttons {
   text-align: center;
   margin-top: 1rem;
-
 }
 
 .ion-col-button {
@@ -256,24 +268,17 @@ b {
   text-align: center;
 }
 
-.block-button-outside {
-  display: flex;
-  width: 100%;
-  --background: #f6f6f6;
-  background: #f6f6f6;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  justify-content: center;
-}
-
-.ion-button-outside {
+.ion-button-outside-top {
+  //width: 74.4%;
+  //margin-right: 1.05rem;
   width: 75%;
+  margin-top: 2rem;
+
 }
 
-.ion-button-deactivated {
-  width: 500px;
-  margin-top: 32px;
-  --background: #757575;
+.ion-button-outside-bottom {
+  width: 75%;
+  margin-top: 2rem;
 }
 
 .ion-button-two-inside {
@@ -281,8 +286,7 @@ b {
   --background: white;
   --ion-text-color: #8BC34A;
   border: 1px solid $green;
-  border-radius: 4px;
-  --box-shadow: white;
+  --box-shadow: #00;
   display: block;
   width: auto;
   margin: 0.5rem 1rem 0.5rem 1rem;
@@ -299,19 +303,21 @@ b {
   --color: #8BC34A;
   --background: white;
   --ion-text-color: #8BC34A;
-  width: 80%;
-  --box-shadow: white;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
+  --box-shadow: #00;
 }
 
 .button-four {
+  display: block;
   --color: #afafaf;
   --background: white;
   --ion-text-color: #afafaf;
   --box-shadow: white;
-  width: 80%;
+  width: auto;
+  margin: 0.5rem 0.5rem 0.5rem 0.5rem;
   border: 1px solid #afafaf;
-  border-radius: 4px;
-  --box-shadow: white;
+  --box-shadow: #00;
 }
 
 .button-four:hover {
@@ -326,11 +332,6 @@ b {
   --highlight-background: transparent;
 }
 
-.checkbox-label {
-  --color: #212121 !important;
-  --margin-bottom: 8px;
-}
-
 .law-label {
   --color: #212121 !important;
   --margin-bottom: 8px;
@@ -339,18 +340,16 @@ b {
 
 .input-background {
   --background: #f6f6f6;
-  background: #f6f6f6;
+  background: $background;
 }
 
 .ion-row-toggle {
   align-items: flex-end;
 }
 
-
 .ion-label-toggle {
   margin-bottom: 0.75rem;
   margin-left: 1rem;
-  --color: $textPrimary !important;
 }
 
 .ion-item-toggle-check {
@@ -364,51 +363,58 @@ b {
 
 .input-invalid {
   color: $red;
-  font-size: 11px;
+  font-size: $textSizeNote;
   display: block;
-  margin-top: 0.5rem;
   margin-right: 1rem;
   margin-left: 2rem;
 }
 
 .password-invalid {
   color: #c34a4a;
-  font-size: 11px;
+  font-size: $textSizeNote;
 }
 
 .password-valid {
   color: #8BC34A;
-  font-size: 11px;
+  font-size: $textSizeNote;
 }
 
 .password-inactive {
   color: #BDBDBD;
-  font-size: 11px;
+  font-size: $textSizeNote;
 }
 
 .input-info {
-  margin-top: 0.5rem;
   color: $textTertiary;
-  font-size: 11px;
+  font-size: $textSizeNote;
   display: block;
-  margin-left: 16px;
   margin-right: 1rem;
+  margin-left: 2rem;
 }
 
 // Background & Block
 
+.block-button-outside {
+  display: flex;
+  width: 100%;
+  background: #f6f6f6;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  justify-content: center;
+}
+
 .block-text-information {
   display: flex;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
   justify-content: center;
 }
 
 .block-text {
   display: block;
   margin-top: 2rem;
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
 }
 
 .simple-background {
@@ -418,27 +424,29 @@ b {
 .block-head {
   display: flex;
   align-items: center;
-  margin-top: 1.25rem;
-  margin-left: 1.25rem;
-  margin-bottom: 0.5rem;
+  margin: $blockMarginOutside $blockMarginOutside 0.5rem $blockMarginOutside;
+}
+
+.block-note {
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
 }
 
 .input-block-element {
   background: #ffffff;
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: $borderRadius;
+  padding: 0.65rem 1rem 1rem 1rem;
   width: 75%;
-  margin: 32px auto;
+  margin: 2rem auto;
 }
 
 .image-block {
-  margin: 2rem 1rem 1rem 1rem;
+  margin: 2rem $blockMarginOutside 1rem $blockMarginOutside;
 }
 
 // Alert & Toast
 
 .my-alert .alert-wrapper {
-  //min-width: 350px !important;
   justify-content: center;
 
   .alert-button-group {
@@ -446,29 +454,29 @@ b {
   }
 
   .alert-sub-title {
-    font-size: 16px;
+    font-size: $sizeTextInformation;
     color: $textSecondary;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     text-align: center;
   }
 
   .alert-message {
-    font-size: 16px;
-    margin-top: 1rem;
+    font-size: $textSize;
+    margin-top: 0.5rem;
     text-align: center;
     color: $textPrimary;
   }
 
   .alert-title {
     font-weight: 500;
-    font-size: 20px;
+    font-size: $sizeTextHead;
     color: $textPrimary;
     text-align: center;
   }
 }
 
 .alert-wrapper {
-  width: 40% !important;
+  width: 50% !important;
   max-width: 100% !important;
 }
 
@@ -484,10 +492,10 @@ b {
 .my-toast {
   --background: #565650;
   --border-color: #FF;
-  --border-radius: 0px;
+  --border-radius: 0.6rem;
   --border-style: solid;
   --border-width: 0px;
-  font-size: 16px;
+  font-size: $sizeTextInformation;
   --button-color: #8BC34A;
   --color: #e7e7e7;
   text-align: center;
@@ -497,6 +505,8 @@ b {
 }
 
 // Footer
+
+// Hier
 
 .footer {
   display: inline-flex;

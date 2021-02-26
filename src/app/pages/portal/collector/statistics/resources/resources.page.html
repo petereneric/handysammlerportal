@@ -96,14 +96,14 @@
             </ion-row>
         </ion-grid>
         <div class="block-text-information" *ngIf="lData != null && lData.length == 0">
-            <p [ngClass]="'text-information-two'">Für diese Auswahl liegen uns leider keine Daten vor</p>
+            <p [ngClass]="'text-information'">Für diese Auswahl liegen uns leider keine Daten vor</p>
         </div>
     </div>
     <div class="input-block-element" *ngIf="lData != null && lData.length > 0">
-        <ion-row class="text-note">
+        <ion-row class="note">
             *  Recycelte Rohstoffe, der Handys die nicht wiederverwendet werden konnten.
         </ion-row>
-        <ion-row class="text-note">
+        <ion-row class="note">
             ** CO2 und Resourcen, die durch die Wiederverwendung und damit nicht notwendige Neu-Herstellung eingespart wurden. Eigene Berechnung basierend auf Fraunhofer Umsicht 2018, Landesamt für Natur-, Umwelt- und Verbraucherschutz NRW 2012.
         </ion-row>
     </div>

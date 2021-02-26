@@ -100,11 +100,11 @@
                 </ion-row>
         </ion-grid>
         <div class="block-text-information" *ngIf="lData != null && lData.length == 0">
-            <p [ngClass]="'text-information-two'">Für diese Auswahl liegen uns leider keine Daten vor</p>
+            <p [ngClass]="'text-information'">Für diese Auswahl liegen uns leider keine Daten vor</p>
         </div>
     </div>
     <div class="input-block-element" *ngIf="lData != null && lData.length > 0">
-        <ion-row class="text-note">* Aktuell reparieren wir defekte Handys, erfassen diese Zahl jedoch (noch) nicht - Daher findet sich hier ein Wert von 0.
+        <ion-row class="note">* Aktuell reparieren wir defekte Handys, erfassen diese Zahl jedoch (noch) nicht - Daher findet sich hier ein Wert von 0.
         </ion-row>
     </div>
 </ion-content>

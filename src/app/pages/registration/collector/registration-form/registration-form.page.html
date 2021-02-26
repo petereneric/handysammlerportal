@@ -379,8 +379,7 @@
                         </ion-item>
                     </ion-col>
                     <ion-col size-xl="4" size-lg="4" size-md="12" size-sm="12" size-xs="12">
-                        <ion-button (click)="showPassword()"
-                                    class="button-four">{{bShowPassword ? 'Passwort nicht anzeigen' : 'Passwort anzeigen'}}</ion-button>
+                        <ion-button (click)="showPassword()" class="button-four">{{bShowPassword ? 'Passwort nicht anzeigen' : 'Passwort anzeigen'}}</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -429,14 +428,14 @@
         </ion-grid>
     </div>
     <div class="input-block-element">
-        <ion-row class="text-note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.
+        <ion-row class="note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.
         </ion-row>
     </div>
-    <ion-row class="ion-row-buttons">
-        <ion-col>
-            <ion-button class="ion-button-outside" (click)="register()">Registrieren</ion-button>
-        </ion-col>
-    </ion-row>
+    <div class="simple-background">
+        <div class="ion-text-center">
+            <ion-button class="ion-button-outside-bottom" (click)="register()">Registrieren</ion-button>
+        </div>
+    </div>
     <br/>
     <br/>
     <br/>
