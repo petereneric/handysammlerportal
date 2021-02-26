@@ -10,7 +10,7 @@
         <div class="block-head">
             <span class="text-head">Bestätigung notwendig</span>
         </div>
-        <div class="text-block">
+        <div class="block-text">
             <p *ngIf="data != null && bAny && length > 1" class="text-secondary">Wir haben unsere rechtlichen Vereinbarungen bzw. Erklärungen aktualisiert und bitten dich diese zu lesen und diesen zuzustimmen.</p>
             <p *ngIf="data != null && bAny && !(length > 1)" class="text-secondary">Wir haben folgende rechtliche Vereinbarungen bzw. Erklärung aktualisiert und bitten dich diese zu lesen und dieser zuzustimmen.</p>
             <p *ngIf="data != null && !bAny && length > 1" class="text-secondary">Uns liegt noch keine Bestätigung von dir zu folgenden Vereinbarungen bzw. Erklärungen vor. Wir bitten dich daher diese zu lesen und diesen zuzustimmen.</p>
