@@ -57,10 +57,14 @@ export class RequestPage implements OnInit {
 
         // send
         this.connApi.post(this.urlPasswordRequest, data).subscribe((data: HttpResponse<any>) => {
+            console.log("hier")
+            console.log(data.status);
             if (data.status == 200) {
+                console.log("jo??)");
                 this.alertCheckEmail();
             }
         }, error => {
+            console.log(error);
             if (error.status == 400) {
                 this.alertUnknownEmail()
             }
@@ -72,7 +76,7 @@ export class RequestPage implements OnInit {
             cssClass: 'my-alert',
             header: 'E-Mail versendet',
             message: 'Bitte öffne die an Dich versendete E-Mail, um dein Passwort zurückzusetzen.',
-            buttons: ['Ok']
+            buttons: [{text: 'Ok', handler: () => {this.router.navigate(['app-root'])}}]
         });
 
         await alert.present();
@@ -84,7 +88,7 @@ export class RequestPage implements OnInit {
             header: 'Ungültige Eingabe',
             subHeader: 'E-Mail-Adresse unbekannt',
             message: 'In unserer Datenbank existiert kein '+ ((this.role == 0) ? 'Sammler' : 'Partner') + ' mit dieser E-Mail Adresse.',
-            buttons: ['Ok', {text: 'Ich bin ein ' + ((this.role == 0) ? 'Partner' : 'Sammler'), handler: () => {this.role = (this.role == 0) ? 1 : 0}}]
+            buttons: ['Ok', {text: 'Ich bin ein ' + ((this.role == 1) ? 'Partner' : 'Sammler'), handler: () => {this.role = (this.role == 1) ? 0 : 1}}]
         });
 
         await alert.present();

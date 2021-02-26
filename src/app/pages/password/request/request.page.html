@@ -9,8 +9,8 @@
     <div class="input-block-element">
         <form [formGroup]="formGroup">
             <ion-grid>
-                <ion-row>
-                    <ion-col>
+                <ion-row class="ion-row-center">
+                    <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">E-Mail Adresse</ion-label>
                             <ion-input type="text" formControlName="cEmail"></ion-input>
@@ -19,8 +19,8 @@
                         <span *ngIf="bSubmitted && errorControl.cEmail.errors?.pattern" class="input-invalid">Fehlerhafte Eingabe</span>
                         <span *ngIf="bSubmitted && errorControl.cEmail.errors?.maxlength" class="input-invalid">Maximal-Länge von 50 Zeichen überschritten</span>
                     </ion-col>
-                    <ion-col class="ion-col-button">
-                        <ion-button (click)="onMail()">Passwort zurücksetzen</ion-button>
+                    <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                        <ion-button class="ion-button-one-inside" (click)="onMail()">Passwort zurücksetzen</ion-button>
                     </ion-col>
                 </ion-row>
             </ion-grid>

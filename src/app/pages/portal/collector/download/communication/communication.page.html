@@ -4,7 +4,7 @@
             <span class="text-head">Dokumente</span>
         </div>
         <div class="block-text">
-                <p (click)="onModelPressRelease()"><span class="link">Muster-Pressemitteilung</span></p>
+                <p (click)="onModelPressRelease()"><span class="link-two">Muster-Pressemitteilung</span></p>
         </div>
     </div>
 
@@ -13,7 +13,7 @@
             <span class="text-head">Flyer</span>
         </div>
         <div class="block-text">
-            <p *ngFor="let flyer of lFlyer" (click)="onFlyer(flyer.id)"><span class="link">{{flyer.cName}}</span>
+            <p *ngFor="let flyer of lFlyer" (click)="onFlyer(flyer.id)"><span class="link-two">{{flyer.cName}}</span>
             </p>
         </div>
     </div>
@@ -23,7 +23,7 @@
             <span class="text-head">Poster</span>
         </div>
         <div class="block-text">
-            <p *ngFor="let poster of lPoster" (click)="onFlyer(poster.id)"><span class="link">{{poster.cName}}</span>
+            <p *ngFor="let poster of lPoster" (click)="onFlyer(poster.id)"><span class="link-two">{{poster.cName}}</span>
             </p>
         </div>
     </div>
