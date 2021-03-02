@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ConnApiService} from "../../../../../services/conn-api/conn-api.service";
-import {HttpClient} from "@angular/common/http";
+import {ConnApiService} from '../../../../../services/conn-api/conn-api.service';
+import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 import {repeat} from 'rxjs/operators';
@@ -28,8 +28,8 @@ export class AddPage implements OnInit {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
-            window.open(url)
-        })
+            window.open(url);
+        });
     }
 
     onClickShippingLabel() {
@@ -54,18 +54,22 @@ export class AddPage implements OnInit {
             message: 'Bitte bestätige uns kurz, dass du Dein Paket fertig gepackt und den Lithium-Ionen-Warnhinweis ' +
                 'aufgeklebt hast. Danach erstellen wir Dir ein neues Versand-Label und merken ' +
                 'Deine Versendung vor.',
-            buttons: [{'text':'Bestätigen', handler: () => {
-                    this.connApi.safeGet(this.urlLabel).subscribe(response => {
+            buttons: [{
+                'text': 'Bestätigen', handler: () => {
+                    this.connApi.safeGetPDF(this.urlLabel).subscribe(response => {
                             console.log(response);
-                            console.log(response.status);
+                            let blob: any = new Blob([response], {type: 'application/pdf'});
+                            const url = window.URL.createObjectURL(blob);
+                            window.open(url);
                         },
                         error => {
+                            console.log(error);
                             if (error.status == 429) {
                                 this.dialogMaxLabels();
                             }
-                        })
+                        });
                 }
-        }]
+            }]
         });
 
         await alert.present();

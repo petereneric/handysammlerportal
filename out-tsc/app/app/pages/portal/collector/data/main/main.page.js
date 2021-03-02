@@ -117,6 +117,10 @@ let MainPage = class MainPage {
         this.bSubmitted = true;
         // check for invalid input
         if (!this.fgCollector.valid || this.oType == null || this.oCountry == null || this.oShippingCountry == null || this.oTitle == null) {
+            console.log(this.oType);
+            console.log(this.oCountry);
+            console.log(this.oShippingCountry);
+            console.log(this.oTitle);
             this.alertInvalid();
             return;
         }
@@ -213,7 +217,7 @@ let MainPage = class MainPage {
                 message: 'Deine Daten wurden erfolgreich gespeichert.',
                 duration: 2500,
                 cssClass: 'my-toast',
-                position: 'middle'
+                position: 'bottom'
             });
             yield toast.present();
         });

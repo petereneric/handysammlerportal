@@ -141,7 +141,7 @@
                     </ion-item>
                     <span *ngIf="bSubmitted && oTitle == null" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
-                <ion-col  size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item class="ion-item-toggle-check">
                         <ion-label class="ion-label-toggle">Persönliche Anrede*</ion-label>
                         <ion-toggle [(ngModel)]="bFormally" [ngModelOptions]="{standalone: true}" (ionChange)="onToggleFormally($event)"></ion-toggle>
@@ -249,7 +249,7 @@
                             <ion-input type="text" formControlName="cShippingStreet"
                                        [disabled]="bAddressIdentSelected" (ionChange)="onChange()"></ion-input>
                         </ion-item>
-                        <span *ngIf="bSubmitted && errorControl.cShippingStreet.errors?.required"class="input-invalid">Pflichtfeld</span>
+                        <span *ngIf="bSubmitted && errorControl.cShippingStreet.errors?.required" class="input-invalid">Pflichtfeld</span>
                         <span *ngIf="bSubmitted && errorControl.cShippingStreet.errors?.maxlength" class="input-invalid">Maximal-Länge von 50 Zeichen überschritten</span>
                     </ion-col>
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
@@ -305,9 +305,7 @@
     </div>
 </ion-content>
 
-<div class="simple-background">
-    <div class="ion-text-center">
-        <ion-button [disabled]="!bChanged" class="ion-button-outside-bottom" (click)="onSave()">Speichern</ion-button>
-    </div>
+<div class="block-button-outside-bottom">
+    <ion-button [disabled]="!bChanged" class="ion-button-outside" (click)="onSave()">Speichern</ion-button>
 </div>
 

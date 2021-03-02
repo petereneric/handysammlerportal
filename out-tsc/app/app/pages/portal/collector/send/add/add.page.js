@@ -41,11 +41,16 @@ let AddPage = class AddPage {
                 message: 'Bitte bestätige uns kurz, dass du Dein Paket fertig gepackt und den Lithium-Ionen-Warnhinweis ' +
                     'aufgeklebt hast. Danach erstellen wir Dir ein neues Versand-Label und merken ' +
                     'Deine Versendung vor.',
-                buttons: [{ 'text': 'Bestätigen', handler: () => {
-                            this.connApi.safeGet(this.urlLabel).subscribe(response => {
+                buttons: [{
+                        'text': 'Bestätigen',
+                        handler: () => {
+                            this.connApi.safeGetPDF(this.urlLabel).subscribe(response => {
                                 console.log(response);
-                                console.log(response.status);
+                                let blob = new Blob([response], { type: 'application/pdf' });
+                                const url = window.URL.createObjectURL(blob);
+                                window.open(url);
                             }, error => {
+                                console.log(error);
                                 if (error.status == 429) {
                                     this.dialogMaxLabels();
                                 }

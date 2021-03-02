@@ -1,15 +1,14 @@
-<div class="simple-background">
-    <div class="ion-text-center">
-        <ion-button class="ion-button-outside-top" *ngIf="!bEdit && !bAdd" (click)="isAdding(true)">Sammelstandort hinzufügen</ion-button>
-    </div>
-</div>
+
 
 <ion-content id="locations" class="input-background">
+    <div class="block-button-outside-top-content">
+        <ion-button class="ion-button-outside" *ngIf="!bEdit && !bAdd" (click)="isAdding(true)">Sammelstandort hinzufügen</ion-button>
+    </div>
     <div *ngIf="bEdit || bAdd" class="input-block-element">
 
-            <div class="block-head">
-                <span class="text-head">{{bEdit ? 'Bearbeiten' : 'Hinzufügen'}}</span>
-            </div>
+        <div class="block-head">
+            <span class="text-head">{{bEdit ? 'Bearbeiten' : 'Hinzufügen'}}</span>
+        </div>
         <form [formGroup]="fgLocation" (ngSubmit)="onSaveAdd()">
 
             <ion-row>
