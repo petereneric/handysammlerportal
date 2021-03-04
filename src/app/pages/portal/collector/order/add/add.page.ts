@@ -17,6 +17,9 @@ export class AddPage implements OnInit {
     private urlOrder = 'collector/order';
 
     // Variables
+    public data;
+    public oBox;
+    public oBricolage;
     public boxAvailable;
     public bricolageAvailable;
     public flyerAvailable;
@@ -156,18 +159,31 @@ export class AddPage implements OnInit {
     available() {
         this.connApi.safeGet(this.urlOrdersAvailable).subscribe((response: HttpResponse<any>) => {
             console.log(response.body);
-            let data = response.body;
+            this.data = response.body;
 
             // Box
-            let oBox = data.oBox;
-            if (oBox.bAvailable == 1) {
-                this.boxAvailable = +data.nLocations + (data.nDevices/data.intervallDevices) - oBox.nOrder;
-                console.log(this.boxAvailable);
-                if (this.boxAvailable > 0) {
-                    for (var i = 1; i <= this.boxAvailable && i < 5; i++) {
+            this.oBox = this.data.oBox;
+            if (this.oBox.bAvailable == 1) {
+                this.oBox.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices/this.data.intervallDevices) - this.oBox.nOrder));
+                console.log(this.oBox.maxOrder);
+                if (this.oBox.maxOrder > 0) {
+                    for (var i = 1; i <= this.oBox.maxOrder && i < 5; i++) {
                         this.boxChoice.push(i);
                     }
                 }
+            }
+
+            // Bricolage
+            this.oBricolage = this.data.oBricolage;
+            if (this.oBricolage.bAvailable == 1) {
+                this.oBricolage.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices/this.data.intervallDevices) - this.oBox.nOrder));
+                console.log(this.oBricolage.maxOrder);
+                if (this.oBricolage.maxOrder > 0) {
+                    for (var i = 1; i <= this.oBricolage.maxOrder && i < 5; i++) {
+                        this.bricolageChoice.push(i);
+                    }
+                }
+                this.oBricolage.maxOrder = 0;
             }
 
             /*

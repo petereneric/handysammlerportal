@@ -178,7 +178,8 @@ export class RegistrationFormPage implements OnInit {
             if (data.status == 200) {
                 console.log(data);
                 this.uToast.successfulRegistration();
-                this.mailVerification()
+                //this.mailVerification()
+                localStorage.setItem('token', null);
                 this.router.navigate(['app-root']);
             }
         }, error => {
