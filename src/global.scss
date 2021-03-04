@@ -24,7 +24,7 @@ $textSize: 0.95rem;
 $sizeTextHead: 1.5rem;
 $textSizeList: 0.95rem;
 $textSizeNote: 0.8rem;
-$textHeight: 0.4rem;
+$textHeight: 1.5;
 $noteHeight: 1.2rem;
 $listHeight: 1.75rem;
 
@@ -235,8 +235,8 @@ b {
   color: $textTertiary;
   font-size: $textSizeNote;
   line-height: $noteHeight;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
 }
 
 .bold {
@@ -450,7 +450,7 @@ b {
 .block-head {
   display: flex;
   align-items: center;
-  margin: $blockMarginOutside $blockMarginOutside 0.5rem $blockMarginOutside;
+  margin: 0.9rem $blockMarginOutside 0.5rem $blockMarginOutside;
 }
 
 .block-note {
@@ -461,7 +461,7 @@ b {
 .input-block-element {
   background: #ffffff;
   border-radius: $borderRadius;
-  padding: 0.65rem 1rem 1rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
   width: 75%;
   margin: 2rem auto;
 }

@@ -11,17 +11,17 @@
             <span class="text-head">Bestätigung notwendig</span>
         </div>
         <div class="block-text">
-            <p *ngIf="data != null && bAny && length > 1" class="text-secondary">Wir haben unsere rechtlichen Vereinbarungen bzw. Erklärungen aktualisiert und bitten dich diese zu lesen und diesen zuzustimmen.</p>
-            <p *ngIf="data != null && bAny && !(length > 1)" class="text-secondary">Wir haben folgende rechtliche Vereinbarungen bzw. Erklärung aktualisiert und bitten dich diese zu lesen und dieser zuzustimmen.</p>
-            <p *ngIf="data != null && !bAny && length > 1" class="text-secondary">Uns liegt noch keine Bestätigung von dir zu folgenden Vereinbarungen bzw. Erklärungen vor. Wir bitten dich daher diese zu lesen und diesen zuzustimmen.</p>
-            <p *ngIf="data != null &&!bAny && !(length > 1)" class="text-secondary">Uns liegt noch keine Bestätigung von dir zu folgender Vereinbarung bzw. Erklärung vor. Wir bitten dich daher diese zu lesen und dieser zuzustimmen.</p>
+            <p *ngIf="data != null && bAny && length > 1" class="text">Wir haben unsere rechtlichen Vereinbarungen bzw. Erklärungen aktualisiert und bitten dich diese zu lesen und diesen zuzustimmen.</p>
+            <p *ngIf="data != null && bAny && !(length > 1)" class="text">Wir haben folgende rechtliche Vereinbarungen bzw. Erklärung aktualisiert und bitten dich diese zu lesen und dieser zuzustimmen.</p>
+            <p *ngIf="data != null && !bAny && length > 1" class="text">Uns liegt noch keine Bestätigung von dir zu folgenden Vereinbarungen bzw. Erklärungen vor. Wir bitten dich daher diese zu lesen und diesen zuzustimmen.</p>
+            <p *ngIf="data != null &&!bAny && !(length > 1)" class="text">Uns liegt noch keine Bestätigung von dir zu folgender Vereinbarung bzw. Erklärung vor. Wir bitten dich daher diese zu lesen und dieser zuzustimmen.</p>
         </div>
         <ion-grid>
             <ion-row *ngIf="bTermsOfUse != null">
                 <ion-col>
-                    <ion-item>
+                    <ion-item class="ion-item-toggle-check">
                         <ion-label [ngClass]="{'ion-text-wrap' : true, 'ion-label-check' : true}">Hiermit bestätige ich, dass ich die
-                            <span class="link-two" (click)="onConditions()">Nutzungsbedingungen</span>
+                            <span class="link-one" (click)="onConditions()">Nutzungsbedingungen</span>
                             gelesen habe und diesen zustimme*
                         </ion-label>
                         <ion-checkbox [ngModel]="bTermsOfUse" [checked]=bTermsOfUse
@@ -31,9 +31,9 @@
             </ion-row>
             <ion-row *ngIf="bPrivacyPolicy != null">
                 <ion-col>
-                    <ion-item>
+                    <ion-item class="ion-item-toggle-check">
                         <ion-label [ngClass]="{'ion-text-wrap' : true, 'ion-label-check' : true}">Hiermit bestätige ich, dass ich die
-                            <span class="link-two" (click)="onPrivacyPolicy()">Datenschutzerklärung</span>
+                            <span class="link-one" (click)="onPrivacyPolicy()">Datenschutzerklärung</span>
                             gelesen habe und dieser zustimme*
                         </ion-label>
                         <ion-checkbox [ngModel]="bPrivacyPolicy" [checked]=bPrivacyPolicy
@@ -43,7 +43,7 @@
             </ion-row>
             <ion-row class="ion-row-buttons">
                 <ion-col>
-                    <ion-button [disabled]="isDisabled()" (click)="onSave()">Speichern</ion-button>
+                    <ion-button class="ion-button-one-inside" [disabled]="isDisabled()" (click)="onSave()">Speichern</ion-button>
                 </ion-col>
 
             </ion-row>

@@ -81,7 +81,7 @@
                         <ion-label position="floating" class="input-label">Land*</ion-label>
                         <ion-select [(ngModel)]="oCountry" [okText]="'Übernehmen'" [cancelText]="'Abrechen'"
                                     [selectedText]="oCountry != null ? oCountry.cNameLocale : ''"
-                                    (ionChange)="onChangeAddress()">
+                                    (ionChange)="onChangeCountry()">
                             <ion-select-option *ngFor="let oCountry of lCountries" [value]="oCountry">{{oCountry.cNameLocale}}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -301,7 +301,7 @@
         </ion-grid>
     </div>
     <div class="input-block-element">
-        <span class="note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.</span>
+        <ion-row class="note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.</ion-row>
     </div>
 </ion-content>
 

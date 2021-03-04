@@ -154,44 +154,54 @@ export class AddPage implements OnInit {
     }
 
     available() {
-        this.connApi.safeGet(this.urlOrdersAvailable).subscribe((data: HttpResponse<any>) => {
+        this.connApi.safeGet(this.urlOrdersAvailable).subscribe((response: HttpResponse<any>) => {
+            console.log(response.body);
+            let data = response.body;
+
             // Box
-            this.boxAvailable = data.body['boxAvailable'];
-            if (this.boxAvailable > 0) {
-                for (var i = 1; i <= this.boxAvailable; i++) {
-                    this.boxChoice.push(i);
+            let oBox = data.oBox;
+            if (oBox.bAvailable == 1) {
+                this.boxAvailable = +data.nLocations + (data.nDevices/data.intervallDevices) - oBox.nOrder;
+                console.log(this.boxAvailable);
+                if (this.boxAvailable > 0) {
+                    for (var i = 1; i <= this.boxAvailable && i < 5; i++) {
+                        this.boxChoice.push(i);
+                    }
                 }
             }
 
-            // Bricolage
-            this.bricolageAvailable = data.body['bricolageAvailable'];
-            if (this.bricolageAvailable > 0) {
-                for (var i = 1; i <= this.bricolageAvailable; i++) {
-                    this.bricolageChoice.push(i);
-                }
-            }
+            /*
+                        // Bricolage
+                        this.bricolageAvailable = data.body['bricolageAvailable'];
+                        if (this.bricolageAvailable > 0) {
+                            for (var i = 1; i <= this.bricolageAvailable; i++) {
+                                this.bricolageChoice.push(i);
+                            }
+                        }
 
-            // Flyer
-            this.flyerAvailable = data.body['flyerAvailable'];
-            if (this.flyerAvailable > 0) {
-                for (var i = 50; i <= this.flyerAvailable; i += 50) {
-                    this.flyerChoice.push(i);
-                }
-            }
+                        // Flyer
+                        this.flyerAvailable = data.body['flyerAvailable'];
+                        if (this.flyerAvailable > 0) {
+                            for (var i = 50; i <= this.flyerAvailable; i += 50) {
+                                this.flyerChoice.push(i);
+                            }
+                        }
 
 
-            // Poster
-            this.posterAvailable = data.body['posterAvailable'];
-            if (this.posterAvailable > 0) {
-                for (var i = 5; i <= this.posterAvailable; i += 5) {
-                    this.posterChoice.push(i);
-                }
-            }
+                        // Poster
+                        this.posterAvailable = data.body['posterAvailable'];
+                        if (this.posterAvailable > 0) {
+                            for (var i = 5; i <= this.posterAvailable; i += 5) {
+                                this.posterChoice.push(i);
+                            }
+                        }
 
-            this.boxMax = data.body['boxMax'];
-            console.log(this.boxMax);
-            this.bricolageMax = data.body['bricolageMax'];
-            console.log(data.body);
+                        this.boxMax = data.body['boxMax'];
+                        console.log(this.boxMax);
+                        this.bricolageMax = data.body['bricolageMax'];
+                        console.log(data.body);
+
+                         */
         });
     }
 }

@@ -134,8 +134,10 @@ let MainPage = class MainPage {
             cStreetNumber: this.fgCollector.get('cStreetNumber').value,
             cZip: this.fgCollector.get('cZip').value,
             cCity: this.fgCollector.get('cCity').value,
-            cCountry: this.oCountry,
-            cState: this.oState,
+            // @ts-ignore
+            kCountry: this.oCountry.id,
+            // @ts-ignore
+            kState: this.oState.id,
             cPrenamePerson: this.fgCollector.get('cPrenamePerson').value,
             cSurnamePerson: this.fgCollector.get('cSurnamePerson').value,
             cTitle: this.oTitle,
@@ -150,7 +152,8 @@ let MainPage = class MainPage {
             cShippingStreetNumber: this.fgCollector.get('cShippingStreetNumber').value,
             cShippingZip: this.fgCollector.get('cShippingZip').value,
             cShippingCity: this.fgCollector.get('cShippingCity').value,
-            cShippingCountry: this.oShippingCountry
+            // @ts-ignore
+            kShippingCountry: this.oShippingCountry.id
         };
         // send data
         this.connApi.safePost(this.urlSave, collector).subscribe((data) => {
@@ -158,21 +161,29 @@ let MainPage = class MainPage {
                 this.toastSaved();
             }
         }, error => {
+            console.log(error);
             if (error.status == 406) {
                 this.alertCollectorNameForgiven();
             }
         });
     }
-    loadStates($kCountry) {
-        this.connApi.safeGet(this.urlRegionStates + '/' + $kCountry).subscribe((response) => {
-            this.lStates = response.body;
-            // state
-            this.lStates.forEach(state => {
-                if (state.id == this.dataCollector.kState) {
-                    this.oState = state;
-                }
+    loadStates() {
+        if (this.oCountry != null) {
+            // @ts-ignore
+            let kCountry = this.oCountry.id;
+            this.connApi.safeGet(this.urlRegionStates + '/' + kCountry).subscribe((response) => {
+                this.lStates = response.body;
+                console.log(this.lStates);
+                // state
+                this.lStates.forEach(state => {
+                    if (state.id == this.dataCollector.kState) {
+                        this.oState = state;
+                    }
+                });
+            }, error => {
+                console.log(error);
             });
-        });
+        }
     }
     get errorControl() {
         return this.fgCollector.controls;
@@ -273,6 +284,10 @@ let MainPage = class MainPage {
     onChange() {
         if (!this.bChanged)
             this.bChanged = true;
+    }
+    onChangeCountry() {
+        this.onChangeAddress();
+        this.loadStates();
     }
 };
 MainPage = __decorate([

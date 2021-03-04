@@ -1,22 +1,10 @@
-.app-logo{
-  background-image: url(https://www.freakyjolly.com/wp-content/uploads/2020/04/fj-logo-1.png);
-  height: 150px;
-  width: 150px;
-  background-repeat: no-repeat;
-  border-radius: 320px;
-  background-position: center;
-  background-size: contain;
-  background-color: #e3f8ff;
-  margin: 30px auto;
-}
-
 .nav-header {
   display: flex;
   flex-direction: column;
-  height: 30%;
-  justify-content: center;
+  height: 35%;
   align-items: flex-start;
-  padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   background: linear-gradient(135deg, #8BC34A, #a5d274) !important;
 }
 
@@ -25,40 +13,46 @@
 }
 
 ion-list {
-  height: 70%;
+  height: 65%;
 }
 
 ion-content {
-  --overflow: hidden;
-  --background: linear-gradient(90deg, #f2f5ec, white) !important;
-}
-
-ion-list {
-  --background: linear-gradient(90deg, #f2f5ec, white) !important;
+  //--overflow: hidden;
 }
 
 .image {
-  color: white;
   height: 70%;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
 }
 
-.divider {
-  height: 0px;
-  width: 100%;
-  background: #a5d274;
+.my-block-text {
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  justify-content: center;
+  padding-bottom: 2rem;
 }
 
 .nav-title {
   color: white;
   font-size: 1.2rem;
   margin-bottom: 0.25rem;
-  margin-top: 2rem;
 }
 
 .nav-subtitle {
   color: white;
   font-size: 0.85rem;
-  opacity: 0.9;
+  opacity: 0.875;
+}
+
+.selected-icon {
+  color: #a5d274 !important;
+}
+
+.selected-label {
+  color: #a5d274 !important;
+  font-weight: 500;
 }
 
 

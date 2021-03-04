@@ -53,7 +53,7 @@ export class MainPage implements OnInit {
     oTitle = null;
     lTitles: any[] = [{cName: 'Herr'}, {cName: 'Frau'}, {cName: 'Herr Dr.'}, {cName: 'Frau Dr.'},];
     bFormally: boolean = true;
-    oCountry?: null;
+    oCountry: null;
     oState = null;
     oShippingCountry: null;
     lCountries: any[] = [];
@@ -133,6 +133,8 @@ export class MainPage implements OnInit {
                     // @ts-ignore
                     this.loadStates(this.oCountry.id);
                 }
+
+
             });
 
             // addressIdentical
@@ -170,8 +172,10 @@ export class MainPage implements OnInit {
                 cStreetNumber: this.fgCollector.get('cStreetNumber').value,
                 cZip: this.fgCollector.get('cZip').value,
                 cCity: this.fgCollector.get('cCity').value,
-                cCountry: this.oCountry,
-                cState: this.oState,
+                // @ts-ignore
+                kCountry: this.oCountry.id,
+                // @ts-ignore
+                kState: this.oState.id,
                 cPrenamePerson: this.fgCollector.get('cPrenamePerson').value,
                 cSurnamePerson: this.fgCollector.get('cSurnamePerson').value,
                 cTitle: this.oTitle,
@@ -186,7 +190,8 @@ export class MainPage implements OnInit {
                 cShippingStreetNumber: this.fgCollector.get('cShippingStreetNumber').value,
                 cShippingZip: this.fgCollector.get('cShippingZip').value,
                 cShippingCity: this.fgCollector.get('cShippingCity').value,
-                cShippingCountry: this.oShippingCountry
+                // @ts-ignore
+                kShippingCountry: this.oShippingCountry.id
             };
 
         // send data
@@ -195,6 +200,7 @@ export class MainPage implements OnInit {
                 this.toastSaved();
             }
         }, error => {
+            console.log(error);
             if (error.status == 406) {
                 this.alertCollectorNameForgiven();
             }
@@ -202,17 +208,24 @@ export class MainPage implements OnInit {
 
     }
 
-    loadStates($kCountry) {
-        this.connApi.safeGet(this.urlRegionStates+'/'+$kCountry).subscribe((response : HttpResponse<any>) => {
-            this.lStates = response.body
+    loadStates() {
+        if (this.oCountry != null) {
+            // @ts-ignore
+            let kCountry = this.oCountry!.id;
+            this.connApi.safeGet(this.urlRegionStates+'/'+kCountry).subscribe((response : HttpResponse<any>) => {
+                this.lStates = response.body
+                console.log(this.lStates);
 
-            // state
-            this.lStates.forEach(state => {
-                if (state.id == this.dataCollector.kState) {
-                    this.oState = state;
-                }
+                // state
+                this.lStates.forEach(state => {
+                    if (state.id == this.dataCollector.kState) {
+                        this.oState = state;
+                    }
+                })
+            }, error => {
+                console.log(error);
             })
-        })
+        }
     }
 
     get errorControl() {
@@ -318,5 +331,10 @@ export class MainPage implements OnInit {
 
     onChange() {
         if (!this.bChanged) this.bChanged = true;
+    }
+
+    onChangeCountry() {
+        this.onChangeAddress();
+        this.loadStates();
     }
 }

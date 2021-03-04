@@ -26,6 +26,7 @@ let AddPage = class AddPage {
     dialogMaxLabels() {
         return __awaiter(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
+                cssClass: 'my-alert',
                 header: 'Maximale Versandmenge',
                 message: 'Du hast Deine maximal täglich verfügbare Versandmenge erreicht und kannst heute leider kein weiteres ' +
                     'Versand-Label erstellen. Weitere Versendungen sind morgen wieder möglich',
@@ -37,6 +38,7 @@ let AddPage = class AddPage {
     dialogCreateLabel() {
         return __awaiter(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
+                cssClass: 'my-alert',
                 header: 'Versand bestätigen',
                 message: 'Bitte bestätige uns kurz, dass du Dein Paket fertig gepackt und den Lithium-Ionen-Warnhinweis ' +
                     'aufgeklebt hast. Danach erstellen wir Dir ein neues Versand-Label und merken ' +
@@ -56,7 +58,7 @@ let AddPage = class AddPage {
                                 }
                             });
                         }
-                    }]
+                    }, 'Ich bin noch nicht soweit']
             });
             yield alert.present();
         });
