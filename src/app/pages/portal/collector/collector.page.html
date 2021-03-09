@@ -11,8 +11,8 @@
             <ion-list id="inbox-list">
                 <ion-menu-toggle *ngFor="let p of appPages; let i = index">
                     <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
-                        <ion-icon [ngClass]="{'selected-icon' : selectedIndex == i}" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-                        <ion-label [ngClass]="{'selected-label' : selectedIndex == i}">{{ p.title }}</ion-label>
+                        <ion-icon [routerLinkActive]="['selected-icon']" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                        <ion-label [routerLinkActive]="['selected-label']">{{ p.title }}</ion-label>
                     </ion-item>
                 </ion-menu-toggle>
             </ion-list>

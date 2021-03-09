@@ -17,7 +17,7 @@ let RegistrationFormPage = class RegistrationFormPage {
         this.urlRegister = 'registration/collector';
         this.urlPartner = 'partner';
         this.urlBecomeCollector = "download/document/become_collector";
-        this.urlMailRegistration = "collector/registration/mail";
+        this.urlMailRegistration = "registration/mail";
         this.urlTermsOfUse = 'agreement/terms_of_use/';
         this.urlPrivacyPolicy = 'agreement/privacy_policy/';
         // FormBuilder
@@ -28,7 +28,7 @@ let RegistrationFormPage = class RegistrationFormPage {
             cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
             cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
             cCity: ['', [Validators.required, Validators.maxLength(50)]],
-            cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]],
+            cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{8,}'), Validators.minLength(8)]],
             cPrename: ['', [Validators.required, Validators.maxLength(50)]],
             cSurname: ['', [Validators.required, Validators.maxLength(50)]],
             cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
@@ -151,7 +151,8 @@ let RegistrationFormPage = class RegistrationFormPage {
             if (data.status == 200) {
                 console.log(data);
                 this.uToast.successfulRegistration();
-                this.mailVerification();
+                //this.mailVerification()
+                localStorage.setItem('token', null);
                 this.router.navigate(['app-root']);
             }
         }, error => {

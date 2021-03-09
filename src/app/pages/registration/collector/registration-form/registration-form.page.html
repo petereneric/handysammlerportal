@@ -411,9 +411,9 @@
 
         <ion-grid>
             <ion-row>
-                <ion-col>
+                <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item>
-                        <ion-label class="input-label">Partnername*</ion-label>
+                        <ion-label position="floating" class="input-label">Partnername*</ion-label>
                         <ion-select [disabled]="!bChangePartner" [(ngModel)]="oPartner" [okText]="'Übernehmen'"
                                     [cancelText]="'Abrechen'"
                                     [selectedText]="oPartner != null ? oPartner.cName : ''">

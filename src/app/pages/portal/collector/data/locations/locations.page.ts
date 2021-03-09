@@ -6,6 +6,8 @@ import {Location} from '../../../../../interfaces/location';
 import {Eventping} from '../../../../../interfaces/eventping';
 import {AlertController, IonContent, ToastController} from '@ionic/angular';
 import {Content} from '@angular/compiler/src/render3/r3_ast';
+import {Router} from '@angular/router';
+import {DataService} from '../../../../../services/data/data.service';
 
 @Component({
     selector: 'app-locations',
@@ -20,6 +22,7 @@ export class LocationsPage implements OnInit {
 
     // Urls
     private urlLocation = 'collector/location';
+    private urlLocationActive = 'collector/location/active';
     private urlLocations = 'collector/locations';
 
     // FormBuilder
@@ -41,7 +44,7 @@ export class LocationsPage implements OnInit {
     oLocationEdit: Location = null;
 
 
-    constructor(private connApi: ConnApiService, private formBuilder: FormBuilder, public toastController: ToastController, public alertController: AlertController) {
+    constructor(private router: Router, private connApi: ConnApiService, private formBuilder: FormBuilder, public toastController: ToastController, public alertController: AlertController, private dataService: DataService) {
     }
 
     ngOnInit() {
@@ -62,6 +65,7 @@ export class LocationsPage implements OnInit {
                         this.lLocationsNotActive.push(location);
                     }
                 });
+                if (lLocations.length == 0) this.bAdd = true;
             }
         );
     }
@@ -89,10 +93,12 @@ export class LocationsPage implements OnInit {
         // send
         this.connApi.safePut(this.urlLocation, location).subscribe((data: HttpResponse<any>) => {
             if (data.status == 200) {
+                this.dataService.callLocation(null);
                 this.bAdd = false;
                 this.bSubmitted = false;
                 const location: Location = data.body;
-                this.lLocationsActive.push(location);
+                this.lLocationsNotActive.push(location);
+                this.alertAdded(location);
                 this.fgLocation.reset();
 
             }
@@ -164,6 +170,7 @@ export class LocationsPage implements OnInit {
     upload(location: Location) {
         console.log(location);
         this.connApi.safePost(this.urlLocation, location).subscribe((response: HttpResponse<any>) => {
+
             console.log(response);
         }, error => {
             console.log(error);
@@ -250,6 +257,7 @@ export class LocationsPage implements OnInit {
                     handler: () => {
                         console.log(locaction.id);
                         this.connApi.safeDelete(this.urlLocation+"/"+locaction.id).subscribe((response : HttpResponse<any>) => {
+                            this.dataService.callLocation(null);
                             console.log(response);
                             if (locaction.bActive == 1) {
                                 this.lLocationsActive.splice(this.lLocationsActive.indexOf(locaction), 1);
@@ -263,6 +271,35 @@ export class LocationsPage implements OnInit {
                 },
                 {text: 'Abrechen',
                 role: 'cancel'}]
+        });
+        await alert.present();
+    }
+
+    async alertAdded(locaction: Location) {
+        const alert = await this.alertController.create({
+            header: 'Sammelstandort hinzugefügt',
+            subHeader: locaction.cName,
+            message: 'Wir haben diesen Sammelstandort zunächst auf inaktiv gesetzt. Wenn dort bereits eine Sammelbox steht, klicke bitte auf Aktivieren. Wenn du bereits eine Sammelbox für diesen Sammelstandort vorliegen hast, diese aber erst ' +
+                'später aufstellen möchtest, klicke bitte auf später und aktiviere den Sammelstandort sobald die Sammelbox aufgestellt wurde. Dazu klickst du bitte auf die Checkbox des Sammelstandortes. Wenn du für diesen Sammelstandort noch keine Sammelbox ' +
+                'vorliegen hast und auch noch keine bestellt hast, klicke bitte auf Bestellen.',
+            cssClass: 'my-alert',
+            buttons: [
+                {
+                    text: 'Aktivieren',
+                    handler: () => {
+                        // prepare
+                        let data = {
+                           id: locaction.id
+                        }
+                        this.connApi.safePost(this.urlLocationActive, data).subscribe((response: HttpResponse<any>) => {
+                            this.load();
+                        })
+                    }
+                },
+                {text: 'Später'},
+                {text: 'Bestellen', handler: () => {
+                    this.router.navigate(['collector/menu/order/tabs/add'])
+                }}]
         });
         await alert.present();
     }

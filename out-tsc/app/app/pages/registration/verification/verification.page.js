@@ -23,6 +23,7 @@ let VerificationPage = class VerificationPage {
     mailVerification() {
         this.connApi.safePost(this.urlRegistrationMail, null).subscribe((data) => {
             if (data.status == 200) {
+                console.log(data);
                 this.toastSent();
             }
         }, error => {

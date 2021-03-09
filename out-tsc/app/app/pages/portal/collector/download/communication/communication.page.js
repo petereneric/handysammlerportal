@@ -47,6 +47,18 @@ let CommunicationPage = class CommunicationPage {
             }
         });
     }
+    onPoster(id) {
+        this.connApi.safeGetPDF(this.urlPoster + '/' + id).subscribe(response => {
+            console.log(response);
+            let blob = new Blob([response], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            window.open(url);
+        }, error => {
+            if (error.status == 404) {
+                this.Toast.fileNotFound();
+            }
+        });
+    }
 };
 CommunicationPage = __decorate([
     Component({

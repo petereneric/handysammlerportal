@@ -24,7 +24,7 @@ $textSize: 0.95rem;
 $sizeTextHead: 1.5rem;
 $textSizeList: 0.95rem;
 $textSizeNote: 0.8rem;
-$textHeight: 1.5;
+$textHeight: 1.3;
 $noteHeight: 1.2rem;
 $listHeight: 1.75rem;
 
@@ -95,7 +95,7 @@ ion-button {
 
 ion-item {
   --border-color: #cbcbcb;
-  padding: 0.5rem 1rem 0.5rem 1rem;
+  padding: 0.4rem 1rem 0.4rem 1rem;
 }
 
 ion-back-button {
@@ -118,7 +118,7 @@ ion-toolbar ion-menu-button {
 // Html
 
 p {
-  line-height: 14px;
+  //line-height: 14px;
 }
 
 b {
@@ -195,6 +195,8 @@ b {
   color: $textSecondary;
   line-height: $textHeight;
   cursor: pointer;
+  justify-content: center;
+  text-align: center;
 }
 
 .text-information {
@@ -291,7 +293,8 @@ b {
   margin: 0.5rem 1rem 0.5rem 1rem;
 }
 
-.ion-button-three {
+.ion-button-three-inside {
+  display: block;
   --color: #8BC34A;
   --background: white;
   --ion-text-color: #8BC34A;
@@ -346,7 +349,8 @@ b {
 
 .ion-item-toggle-check {
   display: flex;
-  margin-left: -1rem !important;
+  margin-left: -1rem ;
+  padding-top: 1rem;
 }
 
 .ion-label-check {
@@ -384,7 +388,14 @@ b {
   margin-left: 2rem;
 }
 
-// Background & Block
+// Background, Block & Grid
+
+.ion-grid {
+  --padding-left: 0rem !important;
+  --margin-left: 0rem !important;
+  margin-left: 0rem !important;
+  padding-left: 0rem !important;
+}
 
 .block-button-outside {
   display: flex;
@@ -427,18 +438,24 @@ b {
   padding-bottom: 1rem;
 }
 
-
-
 .block-text-information {
   display: flex;
   margin-left: $blockMarginOutside;
   margin-right: $blockMarginOutside;
+  margin-top: 1.5rem;
+}
+
+.block-text-information-center {
+  display: flex;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
+  margin-top: 1.5rem;
   justify-content: center;
 }
 
 .block-text {
   display: block;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   margin-left: $blockMarginOutside;
   margin-right: $blockMarginOutside;
 }
@@ -476,6 +493,8 @@ b {
   justify-content: center;
 
   .alert-button-group {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
   }
 
@@ -501,19 +520,34 @@ b {
   }
 }
 
+/*
 .alert-wrapper {
   width: 50% !important;
   max-width: 100% !important;
 }
+*/
 
+
+.my-select .alert-wrapper {
+  .alert-button-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+  }
+}
+
+/*
 .ion-select-option .alert-wrapper {
   .alert-button-group {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
   }
 
   width: 100% !important;
   max-width: 100% !important;
-}
+}*/
 
 .my-toast {
   --background: #565650;
@@ -531,8 +565,6 @@ b {
 }
 
 // Footer
-
-// Hier
 
 .footer {
   display: inline-flex;
@@ -574,14 +606,29 @@ b {
   font-weight: 400;
 }
 
+.footer-content {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
+  contain: size style layout;
+  display: flex;             // added by me
+  flex-direction: column;    // added by me
+}
+
 .lower-content {
-  flex-grow: 1;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  position: absolute;
-  bottom: 0;
+  align-self: end;
   width: 100%;
+  flex-grow: 1;
 }
 
 // Toolbar

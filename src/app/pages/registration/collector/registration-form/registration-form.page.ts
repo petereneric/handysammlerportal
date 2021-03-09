@@ -21,7 +21,7 @@ export class RegistrationFormPage implements OnInit {
     private urlRegister = 'registration/collector';
     private urlPartner = 'partner';
     private urlBecomeCollector = "download/document/become_collector"
-    private urlMailRegistration = "collector/registration/mail"
+    private urlMailRegistration = "registration/mail"
     private urlTermsOfUse = 'agreement/terms_of_use/';
     private urlPrivacyPolicy = 'agreement/privacy_policy/';
 
@@ -33,7 +33,7 @@ export class RegistrationFormPage implements OnInit {
         cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
         cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
         cCity: ['', [Validators.required, Validators.maxLength(50)]],
-        cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(8)]],
+        cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{8,}'), Validators.minLength(8)]],
         cPrename: ['', [Validators.required, Validators.maxLength(50)]],
         cSurname: ['', [Validators.required, Validators.maxLength(50)]],
         cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],

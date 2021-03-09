@@ -59,4 +59,17 @@ export class CommunicationPage implements OnInit {
       }
     })
   }
+
+  onPoster(id: any) {
+    this.connApi.safeGetPDF(this.urlPoster+'/'+id).subscribe(response => {
+      console.log(response);
+      let blob: any = new Blob([response], {type: 'application/pdf'});
+      const url = window.URL.createObjectURL(blob);
+      window.open(url)
+    }, error => {
+      if (error.status == 404) {
+        this.Toast.fileNotFound();
+      }
+    })
+  }
 }

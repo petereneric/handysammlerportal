@@ -1,6 +1,5 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
-import jwt_decode from 'jwt-decode';
 let ConfirmationPage = class ConfirmationPage {
     constructor(router, activatedRoute, connApi) {
         this.router = router;
@@ -12,20 +11,7 @@ let ConfirmationPage = class ConfirmationPage {
     ngOnInit() {
         this.activatedRoute.params.subscribe(params => {
             if (params.token != null) {
-                let token = localStorage.getItem('token');
-                if (token != null) {
-                    let tokenInfo = jwt_decode(token);
-                    let bVerified = tokenInfo['bVerified'];
-                    if (bVerified == 1) {
-                        this.router.navigate(['app-root']);
-                    }
-                    else {
-                        this.verifyToken(params.token);
-                    }
-                }
-                else {
-                    this.router.navigate(['app-root']);
-                }
+                this.verifyToken(params.token);
             }
         });
     }

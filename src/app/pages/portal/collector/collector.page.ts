@@ -33,12 +33,12 @@ export class CollectorPage implements OnInit {
             icon: 'person'
         },
         {
-            title: 'Sammel-Materialien bestellen',
+            title: 'Bestellen',
             url: 'order',
             icon: 'create'
         },
         {
-            title: 'Handys versenden',
+            title: 'Versenden',
             url: 'send',
             icon: 'send'
         },

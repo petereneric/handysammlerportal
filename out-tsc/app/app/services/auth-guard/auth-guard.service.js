@@ -30,9 +30,11 @@ let AuthGuardService = class AuthGuardService {
                     case 412:
                         console.log("AuthGuard not passed - Navigate to verification");
                         this.router.navigate(['verification']);
+                        break;
                     case 451:
                         console.log("navigate to agreement page");
                         this.router.navigate(['agreement']);
+                        break;
                 }
                 console.log(error);
                 resolve(false);

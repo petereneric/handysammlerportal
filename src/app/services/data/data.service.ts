@@ -10,6 +10,7 @@ export class DataService {
   currentRole = this.roleSource.asObservable();
 
   private dataSubject = new Subject<any>();
+  private locationSubject = new Subject<any>();
 
   constructor() { }
 
@@ -25,5 +26,13 @@ export class DataService {
 
   getData(): Subject<any> {
     return this.dataSubject;
+  }
+
+  callLocation(data: any) {
+    this.locationSubject.next(data);
+  }
+
+  callbackLocation(): Subject<any> {
+    return this.locationSubject;
   }
 }

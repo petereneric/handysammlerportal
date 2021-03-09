@@ -31,6 +31,7 @@ export class VerificationPage implements OnInit {
     public mailVerification() {
         this.connApi.safePost(this.urlRegistrationMail, null).subscribe((data:HttpResponse<any>) => {
             if (data.status == 200) {
+                console.log(data);
                 this.toastSent()
             }
         }, error => {

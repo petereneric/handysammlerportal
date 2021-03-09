@@ -20,25 +20,14 @@ export class ConfirmationPage implements OnInit {
     ngOnInit() {
         this.activatedRoute.params.subscribe(params => {
             if (params.token != null) {
-                let token: string = localStorage.getItem('token');
-                if (token != null) {
-                    let tokenInfo = jwt_decode(token);
-                    let bVerified = tokenInfo['bVerified'];
-                    if (bVerified == 1) {
-                        this.router.navigate(['app-root']);
-                    } else {
-                        this.verifyToken(params.token);
-                    }
-                } else {
-                    this.router.navigate(['app-root']);
-                }
+                this.verifyToken(params.token);
             }
         });
     }
 
     verifyToken(token) {
         this.connApi.get(this.urlRegistrationVerify + token).subscribe((response: HttpResponse<any>) => {
-            console.log(response)
+            console.log(response);
             localStorage.removeItem('token');
 
         }, error => {

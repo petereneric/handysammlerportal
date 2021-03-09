@@ -3,13 +3,16 @@ import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { IonContent } from '@ionic/angular';
 let LocationsPage = class LocationsPage {
-    constructor(connApi, formBuilder, toastController, alertController) {
+    constructor(router, connApi, formBuilder, toastController, alertController, dataService) {
+        this.router = router;
         this.connApi = connApi;
         this.formBuilder = formBuilder;
         this.toastController = toastController;
         this.alertController = alertController;
+        this.dataService = dataService;
         // Urls
         this.urlLocation = 'collector/location';
+        this.urlLocationActive = 'collector/location/active';
         this.urlLocations = 'collector/locations';
         // FormBuilder
         this.fgLocation = this.formBuilder.group({
@@ -46,6 +49,8 @@ let LocationsPage = class LocationsPage {
                     this.lLocationsNotActive.push(location);
                 }
             });
+            if (lLocations.length == 0)
+                this.bAdd = true;
         });
     }
     onSaveAdd() {
@@ -67,10 +72,12 @@ let LocationsPage = class LocationsPage {
         // send
         this.connApi.safePut(this.urlLocation, location).subscribe((data) => {
             if (data.status == 200) {
+                this.dataService.callLocation(null);
                 this.bAdd = false;
                 this.bSubmitted = false;
                 const location = data.body;
-                this.lLocationsActive.push(location);
+                this.lLocationsNotActive.push(location);
+                this.alertAdded(location);
                 this.fgLocation.reset();
             }
         }, error => {
@@ -215,6 +222,7 @@ let LocationsPage = class LocationsPage {
                         handler: () => {
                             console.log(locaction.id);
                             this.connApi.safeDelete(this.urlLocation + "/" + locaction.id).subscribe((response) => {
+                                this.dataService.callLocation(null);
                                 console.log(response);
                                 if (locaction.bActive == 1) {
                                     this.lLocationsActive.splice(this.lLocationsActive.indexOf(locaction), 1);
@@ -229,6 +237,37 @@ let LocationsPage = class LocationsPage {
                     },
                     { text: 'Abrechen',
                         role: 'cancel' }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    alertAdded(locaction) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Sammelstandort hinzugefügt',
+                subHeader: locaction.cName,
+                message: 'Wir haben diesen Sammelstandort zunächst auf inaktiv gesetzt. Wenn dort bereits eine Sammelbox steht, klicke bitte auf Aktivieren. Wenn du bereits eine Sammelbox für diesen Sammelstandort vorliegen hast, diese aber erst ' +
+                    'später aufstellen möchtest, klicke bitte auf später und aktiviere den Sammelstandort sobald die Sammelbox aufgestellt wurde. Dazu klickst du bitte auf die Checkbox des Sammelstandortes. Wenn du für diesen Sammelstandort noch keine Sammelbox ' +
+                    'vorliegen hast und auch noch keine bestellt hast, klicke bitte auf Bestellen.',
+                cssClass: 'my-alert',
+                buttons: [
+                    {
+                        text: 'Aktivieren',
+                        handler: () => {
+                            // prepare
+                            let data = {
+                                id: locaction.id
+                            };
+                            this.connApi.safePost(this.urlLocationActive, data).subscribe((response) => {
+                                this.load();
+                            });
+                        }
+                    },
+                    { text: 'Später' },
+                    { text: 'Bestellen', handler: () => {
+                            this.router.navigate(['collector/menu/order/tabs/add']);
+                        } }
                 ]
             });
             yield alert.present();

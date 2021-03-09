@@ -25,6 +25,9 @@ let AddPage = class AddPage {
     }
     ngOnInit() {
         this.available();
+        this.dataService.callbackLocation().subscribe((data) => {
+            this.available();
+        });
     }
     onOrder() {
         if (this.boxAvailable == 0 && this.bricolageAvailable == 0 && this.flyerAvailable == 0 && this.posterAvailable == 0) {
@@ -46,6 +49,7 @@ let AddPage = class AddPage {
         this.connApi.safePut(this.urlOrder, json).subscribe((data) => {
             if (data.status == 200) {
                 console.log('Order added');
+                this.available();
                 this.dataService.publishData(null);
                 (() => __awaiter(this, void 0, void 0, function* () {
                     this.orderTaken = true;
@@ -58,14 +62,14 @@ let AddPage = class AddPage {
     }
     onChangedBoxOrder() {
         if (!this.flyerSelected && !this.posterSelected) {
-            this.flyerOrder = (this.boxOrder * 50 <= this.flyerAvailable) ? this.boxOrder * 50 : this.flyerAvailable;
-            this.posterOrder = this.boxOrder * 5 <= this.posterAvailable ? this.boxOrder * 5 : this.posterAvailable;
+            this.flyerOrder = (this.boxOrder * 100 <= this.flyerAvailable) ? this.boxOrder * 100 : this.flyerAvailable;
+            this.posterOrder = this.boxOrder * 10 <= this.posterAvailable ? this.boxOrder * 10 : this.posterAvailable;
         }
     }
     onChangedBricolageOrder() {
         if (!this.flyerSelected && !this.posterSelected) {
-            this.flyerOrder = this.bricolageOrder * 50 <= this.flyerAvailable ? this.bricolageOrder * 50 : this.flyerAvailable;
-            this.posterOrder = this.bricolageOrder * 5 <= this.posterAvailable ? this.bricolageOrder * 5 : this.posterAvailable;
+            this.flyerOrder = this.bricolageOrder * 100 <= this.flyerAvailable ? this.bricolageOrder * 100 : this.flyerAvailable;
+            this.posterOrder = this.bricolageOrder * 10 <= this.posterAvailable ? this.bricolageOrder * 10 : this.posterAvailable;
         }
     }
     onChangedFlyerOrder() {
@@ -121,16 +125,50 @@ let AddPage = class AddPage {
     available() {
         this.connApi.safeGet(this.urlOrdersAvailable).subscribe((response) => {
             console.log(response.body);
-            let data = response.body;
+            this.data = response.body;
+            //this.data.nLocations = 2;
             // Box
-            let oBox = data.oBox;
-            if (oBox.bAvailable == 1) {
-                this.boxAvailable = +data.nLocations + (data.nDevices / data.intervallDevices) - oBox.nOrder;
-                console.log(this.boxAvailable);
-                if (this.boxAvailable > 0) {
-                    for (var i = 1; i <= this.boxAvailable && i < 5; i++) {
+            this.oBox = this.data.oBox;
+            if (this.oBox.bAvailable == 1) {
+                this.oBox.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices / this.data.intervallDevices) - this.oBox.nOrder));
+                console.log(this.oBox.maxOrder);
+                if (this.oBox.maxOrder > 0) {
+                    for (var i = 1; i <= this.oBox.maxOrder && i <= 5; i++) {
                         this.boxChoice.push(i);
                     }
+                }
+                //this.oBox.maxOrder = 0;
+            }
+            else {
+                this.oBox.maxOrder = 0;
+            }
+            // Bricolage
+            this.oBricolage = this.data.oBricolage;
+            if (this.oBricolage.bAvailable == 1) {
+                this.oBricolage.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices / this.data.intervallDevices) - this.oBox.nOrder));
+                console.log(this.oBricolage.maxOrder);
+                if (this.oBricolage.maxOrder > 0) {
+                    for (var i = 1; i <= this.oBricolage.maxOrder && i <= 5; i++) {
+                        this.bricolageChoice.push(i);
+                    }
+                }
+                //this.oBricolage.maxOrder = 0;
+            }
+            else {
+                this.oBricolage.maxOrder = 0;
+            }
+            // Flyer
+            this.flyerAvailable = 500;
+            if (this.flyerAvailable > 0) {
+                for (var i = 100; i <= this.flyerAvailable; i += 100) {
+                    this.flyerChoice.push(i);
+                }
+            }
+            // Poster
+            this.posterAvailable = 50;
+            if (this.posterAvailable > 0) {
+                for (var i = 10; i <= this.posterAvailable; i += 10) {
+                    this.posterChoice.push(i);
                 }
             }
             /*
@@ -142,22 +180,7 @@ let AddPage = class AddPage {
                             }
                         }
 
-                        // Flyer
-                        this.flyerAvailable = data.body['flyerAvailable'];
-                        if (this.flyerAvailable > 0) {
-                            for (var i = 50; i <= this.flyerAvailable; i += 50) {
-                                this.flyerChoice.push(i);
-                            }
-                        }
 
-
-                        // Poster
-                        this.posterAvailable = data.body['posterAvailable'];
-                        if (this.posterAvailable > 0) {
-                            for (var i = 5; i <= this.posterAvailable; i += 5) {
-                                this.posterChoice.push(i);
-                            }
-                        }
 
                         this.boxMax = data.body['boxMax'];
                         console.log(this.boxMax);
@@ -166,6 +189,14 @@ let AddPage = class AddPage {
 
                          */
         });
+    }
+    getRestIntervall() {
+        if (this.data != null) {
+            return Math.floor(this.data.nDevices % this.data.intervallDevices) == 0 ? 200 : Math.floor(this.data.nDevices % this.data.intervallDevices);
+        }
+    }
+    onLocation() {
+        this.router.navigate(['collector/menu/data/tabs/locations']);
     }
 };
 AddPage = __decorate([

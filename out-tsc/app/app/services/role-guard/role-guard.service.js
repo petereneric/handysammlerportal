@@ -35,9 +35,11 @@ let RoleGuardService = class RoleGuardService {
                     case 412:
                         console.log("navigate to verify page");
                         this.router.navigate(['verification']);
+                        break;
                     case 451:
                         console.log("navigate to agreement page");
                         this.router.navigate(['agreement']);
+                        break;
                 }
                 console.log(error);
                 resolve(false);

@@ -50,7 +50,9 @@ export class AddPage implements OnInit {
     ngOnInit() {
         this.available();
 
-
+        this.dataService.callbackLocation().subscribe((data) => {
+            this.available();
+        })
     }
 
     onOrder() {
@@ -75,6 +77,7 @@ export class AddPage implements OnInit {
         this.connApi.safePut(this.urlOrder, json).subscribe((data: HttpResponse<any>) => {
             if (data.status == 200) {
                 console.log('Order added');
+                this.available();
                 this.dataService.publishData(null);
                 (async () => {
                     this.orderTaken = true;
@@ -90,17 +93,19 @@ export class AddPage implements OnInit {
 
     }
 
+
+
     onChangedBoxOrder() {
         if (!this.flyerSelected && !this.posterSelected) {
-            this.flyerOrder = (this.boxOrder*50 <= this.flyerAvailable) ? this.boxOrder*50 : this.flyerAvailable;
-            this.posterOrder = this.boxOrder*5 <= this.posterAvailable ? this.boxOrder*5 : this.posterAvailable;
+            this.flyerOrder = (this.boxOrder*100 <= this.flyerAvailable) ? this.boxOrder*100 : this.flyerAvailable;
+            this.posterOrder = this.boxOrder*10 <= this.posterAvailable ? this.boxOrder*10 : this.posterAvailable;
         }
     }
 
     onChangedBricolageOrder() {
         if (!this.flyerSelected && !this.posterSelected) {
-            this.flyerOrder = this.bricolageOrder*50 <= this.flyerAvailable ? this.bricolageOrder*50 : this.flyerAvailable;
-            this.posterOrder = this.bricolageOrder*5 <= this.posterAvailable ? this.bricolageOrder*5 : this.posterAvailable;
+            this.flyerOrder = this.bricolageOrder*100 <= this.flyerAvailable ? this.bricolageOrder*100 : this.flyerAvailable;
+            this.posterOrder = this.bricolageOrder*10 <= this.posterAvailable ? this.bricolageOrder*10 : this.posterAvailable;
         }
     }
 
@@ -161,16 +166,21 @@ export class AddPage implements OnInit {
             console.log(response.body);
             this.data = response.body;
 
+            //this.data.nLocations = 2;
+
             // Box
             this.oBox = this.data.oBox;
             if (this.oBox.bAvailable == 1) {
                 this.oBox.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices/this.data.intervallDevices) - this.oBox.nOrder));
                 console.log(this.oBox.maxOrder);
                 if (this.oBox.maxOrder > 0) {
-                    for (var i = 1; i <= this.oBox.maxOrder && i < 5; i++) {
+                    for (var i = 1; i <= this.oBox.maxOrder && i <= 5; i++) {
                         this.boxChoice.push(i);
                     }
                 }
+                //this.oBox.maxOrder = 0;
+            } else {
+                this.oBox.maxOrder = 0;
             }
 
             // Bricolage
@@ -179,11 +189,29 @@ export class AddPage implements OnInit {
                 this.oBricolage.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices/this.data.intervallDevices) - this.oBox.nOrder));
                 console.log(this.oBricolage.maxOrder);
                 if (this.oBricolage.maxOrder > 0) {
-                    for (var i = 1; i <= this.oBricolage.maxOrder && i < 5; i++) {
+                    for (var i = 1; i <= this.oBricolage.maxOrder && i <= 5; i++) {
                         this.bricolageChoice.push(i);
                     }
                 }
+                //this.oBricolage.maxOrder = 0;
+            } else {
                 this.oBricolage.maxOrder = 0;
+            }
+
+            // Flyer
+            this.flyerAvailable = 500;
+            if (this.flyerAvailable > 0) {
+                for (var i = 100; i <= this.flyerAvailable; i += 100) {
+                    this.flyerChoice.push(i);
+                }
+            }
+
+            // Poster
+            this.posterAvailable = 50;
+            if (this.posterAvailable > 0) {
+                for (var i = 10; i <= this.posterAvailable; i += 10) {
+                    this.posterChoice.push(i);
+                }
             }
 
             /*
@@ -195,22 +223,7 @@ export class AddPage implements OnInit {
                             }
                         }
 
-                        // Flyer
-                        this.flyerAvailable = data.body['flyerAvailable'];
-                        if (this.flyerAvailable > 0) {
-                            for (var i = 50; i <= this.flyerAvailable; i += 50) {
-                                this.flyerChoice.push(i);
-                            }
-                        }
 
-
-                        // Poster
-                        this.posterAvailable = data.body['posterAvailable'];
-                        if (this.posterAvailable > 0) {
-                            for (var i = 5; i <= this.posterAvailable; i += 5) {
-                                this.posterChoice.push(i);
-                            }
-                        }
 
                         this.boxMax = data.body['boxMax'];
                         console.log(this.boxMax);
@@ -219,5 +232,16 @@ export class AddPage implements OnInit {
 
                          */
         });
+    }
+
+    getRestIntervall() {
+        if (this.data != null) {
+            return Math.floor(this.data.nDevices%this.data.intervallDevices) == 0 ? 200 : Math.floor(this.data.nDevices%this.data.intervallDevices);
+        }
+
+    }
+
+    onLocation() {
+        this.router.navigate(['collector/menu/data/tabs/locations'])
     }
 }

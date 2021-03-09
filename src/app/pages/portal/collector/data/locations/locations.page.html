@@ -1,13 +1,12 @@
 
 
 <ion-content id="locations" class="input-background">
-    <div class="block-button-outside-top-content">
-        <ion-button class="ion-button-outside" *ngIf="!bEdit && !bAdd" (click)="isAdding(true)">Sammelstandort hinzufügen</ion-button>
+    <div *ngIf="!bEdit && !bAdd" class="block-button-outside-top-content">
+        <ion-button class="ion-button-outside"  (click)="isAdding(true)">Sammelstandort hinzufügen</ion-button>
     </div>
     <div *ngIf="bEdit || bAdd" class="input-block-element">
-
         <div class="block-head">
-            <span class="text-head">{{bEdit ? 'Bearbeiten' : 'Hinzufügen'}}</span>
+            <span class="text-head">{{bEdit ? 'Sammelstandort bearbeiten' : 'Sammelstandort hinzufügen'}}</span>
         </div>
         <form [formGroup]="fgLocation" (ngSubmit)="onSaveAdd()">
 
@@ -93,13 +92,11 @@
     </div>
 
     <div class="input-block-element" *ngIf="lLocationsNotActive.length > 0">
-
         <div class="block-head">
             <span class="text-head">Inaktive Sammelstandorte</span>
         </div>
         <div class="list-block">
-            <app-location (ping)="ping($event)" [oLocation]="location"
-                          *ngFor="let location of lLocationsNotActive"></app-location>
+            <app-location (ping)="ping($event)" [oLocation]="location" *ngFor="let location of lLocationsNotActive"></app-location>
         </div>
     </div>
 

@@ -53,9 +53,9 @@ export class MainPage implements OnInit {
     oTitle = null;
     lTitles: any[] = [{cName: 'Herr'}, {cName: 'Frau'}, {cName: 'Herr Dr.'}, {cName: 'Frau Dr.'},];
     bFormally: boolean = true;
-    oCountry: null;
+    oCountry: { cNameLocale: '' };
     oState = null;
-    oShippingCountry: null;
+    oShippingCountry: { cNameLocale: '' };
     lCountries: any[] = [];
     lStates = [];
     bSubmitted = false;

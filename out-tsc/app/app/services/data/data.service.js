@@ -6,6 +6,7 @@ let DataService = class DataService {
         this.roleSource = new BehaviorSubject(0);
         this.currentRole = this.roleSource.asObservable();
         this.dataSubject = new Subject();
+        this.locationSubject = new Subject();
     }
     changeRole(role) {
         this.roleSource.next(role);
@@ -16,6 +17,12 @@ let DataService = class DataService {
     }
     getData() {
         return this.dataSubject;
+    }
+    callLocation(data) {
+        this.locationSubject.next(data);
+    }
+    callbackLocation() {
+        return this.locationSubject;
     }
 };
 DataService = __decorate([
