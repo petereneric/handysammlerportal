@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ConnApiService} from "../../../../../services/conn-api/conn-api.service";
+import {Downloads} from "../../../../../utilities/downloads";
+import {Alert} from "../../../../../utilities/alert";
 
 @Component({
     selector: 'app-law',
     templateUrl: './law.page.html',
     styleUrls: ['./law.page.scss'],
+    providers: [Downloads, Alert]
 })
 export class LawPage implements OnInit {
 
@@ -14,7 +17,7 @@ export class LawPage implements OnInit {
     private urlTermsOfUse = 'agreement/terms_of_use/';
     private urlPrivacyPolicy = 'agreement/privacy_policy/';
 
-    constructor(public connApi: ConnApiService) {
+    constructor(public Alert: Alert, public Downloads: Downloads, public connApi: ConnApiService) {
     }
 
     ngOnInit() {
@@ -26,6 +29,9 @@ export class LawPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url)
+            this.Alert.alertPopUp('Rechtliche Grundlage').then(res => {
+                if (!res) window.open(url);
+            })
         })
     }
 
@@ -35,26 +41,17 @@ export class LawPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url)
+            this.Alert.alertPopUp('Datenschutz').then(res => {
+                if (!res) window.open(url);
+            })
         })
     }
 
     onPrivacyPolicy() {
-        this.connApi.getFile(this.urlPrivacyPolicy+1).subscribe(response => {
-            console.log(response);
-            let blob: any = new Blob([response], {type: 'application/pdf'});
-            const url = window.URL.createObjectURL(blob);
-            window.open(url)
-        })
+        this.Downloads.privacyPolicyCollector();
     }
 
     onTermsOfUse() {
-        this.connApi.getFile(this.urlTermsOfUse+1).subscribe(response => {
-            console.log(response);
-            let blob: any = new Blob([response], {type: 'application/pdf'});
-            const url = window.URL.createObjectURL(blob);
-            window.open(url)
-        }, error => {
-            console.log(error)
-        })
+        this.Downloads.termsOfUseCollector();
     }
 }

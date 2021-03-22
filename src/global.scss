@@ -522,7 +522,8 @@ b {
   .alert-message {
     font-size: $textSize;
     margin-top: 0.5rem;
-    text-align: center;
+    margin-bottom: 0.5rem;
+    text-align: justify;
     color: $textPrimary;
   }
 

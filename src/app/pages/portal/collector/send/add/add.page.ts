@@ -32,12 +32,8 @@ export class AddPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
-            this.Alert.alertPopUp().then(res => {
-                console.log('reuslt '+res);
-                if (!res) {
-                    console.log("yeah");
-                    this.onClickLithiumNotice()
-                }
+            this.Alert.alertPopUp('Lithium-Ionen-Warnhinweis').then(res => {
+                if (!res) window.open(url);
             })
         });
     }
@@ -73,6 +69,9 @@ export class AddPage implements OnInit {
                             let blob: any = new Blob([response], {type: 'application/pdf'});
                             const url = window.URL.createObjectURL(blob);
                             window.open(url);
+                            this.Alert.alertPopUp('DHL Versandlabel').then(res => {
+                                if (!res) window.open(url);
+                            })
                         },
                         error => {
                             console.log(error);

@@ -55,6 +55,7 @@ const routes: Routes = [
         path: 'agreement',
         loadChildren: () => import('./pages/agreement/agreement.module').then( m => m.AgreementPageModule)
     },
+    {path: '**', component: AppComponent, canActivate: [CookieGuardService, RoleGuardService]},
     ]
 
 

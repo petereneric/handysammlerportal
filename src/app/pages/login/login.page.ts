@@ -7,12 +7,13 @@ import {DataService} from '../../services/data/data.service';
 import {HttpResponse} from '@angular/common/http';
 import {AlertController} from '@ionic/angular';
 import {Downloads} from '../../utilities/downloads';
+import {Alert} from "../../utilities/alert";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
-    providers: [Downloads]
+    providers: [Downloads, Alert]
 })
 
 export class LoginPage implements OnInit {
@@ -43,8 +44,7 @@ export class LoginPage implements OnInit {
         console.log('ngOnInit: LoginPage');
         //this.data.currentRole.subscribe(role => console.log(this.selectedRole = role))
         this.selectedRole = 1;
-
-
+        localStorage.setItem('bPopUp', 'false');
     }
 
     segmentChanged(ev: any) {

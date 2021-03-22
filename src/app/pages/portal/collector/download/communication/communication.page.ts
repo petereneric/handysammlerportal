@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {ConnApiService} from "../../../../../services/conn-api/conn-api.service";
 import {HttpResponse} from '@angular/common/http';
 import {Toast} from '../../../../../utilities/toast';
+import {Alert} from "../../../../../utilities/alert";
 
 @Component({
   selector: 'app-communication',
   templateUrl: './communication.page.html',
   styleUrls: ['./communication.page.scss'],
-  providers: [Toast]
+  providers: [Toast, Alert]
 })
 export class CommunicationPage implements OnInit {
 
@@ -20,7 +21,7 @@ export class CommunicationPage implements OnInit {
   lFlyer = [];
   lPoster = [];
 
-  constructor(public connApi: ConnApiService, public Toast: Toast) { }
+  constructor(public Alert: Alert, public connApi: ConnApiService, public Toast: Toast) { }
 
   ngOnInit() {
     this.connApi.safeGet(this.urlFlyer).subscribe((response : HttpResponse<any>) => {
@@ -47,6 +48,9 @@ export class CommunicationPage implements OnInit {
         link.href = URL.createObjectURL(blob);
         link.download = "Muster-Pressemitteilung.docx";
         link.click();
+        this.Alert.alertPopUp('Muster-Pressemitteilung').then(res => {
+          if (!res) link.click();
+        })
       })
     }
 
@@ -56,6 +60,9 @@ export class CommunicationPage implements OnInit {
       let blob: any = new Blob([response], {type: 'application/pdf'});
       const url = window.URL.createObjectURL(blob);
       window.open(url)
+      this.Alert.alertPopUp('Flyer').then(res => {
+        if (!res) window.open(url);
+      })
     }, error => {
       if (error.status == 404) {
         this.Toast.fileNotFound();
@@ -69,6 +76,9 @@ export class CommunicationPage implements OnInit {
       let blob: any = new Blob([response], {type: 'application/pdf'});
       const url = window.URL.createObjectURL(blob);
       window.open(url)
+      this.Alert.alertPopUp('Poster').then(res => {
+        if (!res) window.open(url);
+      })
     }, error => {
       if (error.status == 404) {
         this.Toast.fileNotFound();

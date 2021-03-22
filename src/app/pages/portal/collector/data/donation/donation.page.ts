@@ -18,8 +18,6 @@ export class DonationPage implements OnInit {
   // Variables
   public lPartners: any[] = [];
   public oPartner = null;
-  public bChangePartner: boolean = true;
-  public bFirstSelect = false;
 
   constructor(private connApi: ConnApiService, private toastController: ToastController) {
   }
@@ -30,15 +28,6 @@ export class DonationPage implements OnInit {
       let partner = response.body;
       if (partner != null) {
         this.oPartner = partner;
-        /*
-        this.lPartners.forEach((element) => {
-          if (partner.cName === element.cName) {
-            this.oPartner = partner.cName;
-            console.log(partner.bChangePartner);
-            this.bChangePartner = partner.bChangePartner == 1 ? true : false;
-          }
-        });
-         */
       }
     }, error => {
       console.log(error);
@@ -53,15 +42,6 @@ export class DonationPage implements OnInit {
 
   savePartner() {
     // prepare data
-    /*
-    let kPartner: number = 0;
-    this.lPartners.forEach((element) => {
-      if (element.cName === this.oPartner) {
-        kPartner = element.kPartner;
-      }
-    });
-     */
-
     let data = {
       id : this.oPartner.id
     }
@@ -86,8 +66,8 @@ export class DonationPage implements OnInit {
   }
 
   onSelectedPartner($event: any) {
-    if (!this.bFirstSelect) {
-      this.bFirstSelect = true;
+    if (this.oPartner == null) {
+      this.oPartner = $event['detail']['value'];
     } else {
       this.oPartner = $event['detail']['value'];
       this.savePartner();

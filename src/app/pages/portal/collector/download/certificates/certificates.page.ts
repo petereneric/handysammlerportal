@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ConnApiService} from '../../../../../services/conn-api/conn-api.service';
 import {HttpResponse} from '@angular/common/http';
+import {Alert} from "../../../../../utilities/alert";
 
 @Component({
     selector: 'app-certificates',
     templateUrl: './certificates.page.html',
     styleUrls: ['./certificates.page.scss'],
+    providers: [Alert]
 })
 export class CertificatesPage implements OnInit {
 
@@ -19,7 +21,7 @@ export class CertificatesPage implements OnInit {
     lSelectTime = [];
     cSelectTime = null;
 
-    constructor(private connApi: ConnApiService) {
+    constructor(public Alert: Alert, private connApi: ConnApiService) {
     }
 
     ngOnInit() {
@@ -44,6 +46,9 @@ export class CertificatesPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.alertPopUp('Urkunde').then(res => {
+                if (!res) window.open(url);
+            })
         }, error => {
             console.log(error);
         });

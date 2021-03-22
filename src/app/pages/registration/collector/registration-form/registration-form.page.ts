@@ -6,11 +6,14 @@ import {Router} from '@angular/router';
 import {HttpResponse} from '@angular/common/http';
 import {ActivatedRoute} from "@angular/router";
 import {Toast} from '../../../../utilities/toast';
+import {Downloads} from "../../../../utilities/downloads";
+import {Alert} from "../../../../utilities/alert";
 
 @Component({
     selector: 'app-registration-form',
     templateUrl: './registration-form.page.html',
     styleUrls: ['./registration-form.page.scss'],
+    providers: [Downloads, Alert]
 })
 export class RegistrationFormPage implements OnInit {
 
@@ -82,7 +85,7 @@ export class RegistrationFormPage implements OnInit {
     compareWith = this.compareWithFn;
 
 // private activatedRoute: ActivatedRoute
-    constructor(private uToast: Toast, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private connApi: ConnApiService, public alertController: AlertController, public router: Router) {
+    constructor(public Downloads: Downloads, private uToast: Toast, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private connApi: ConnApiService, public alertController: AlertController, public router: Router) {
 
     }
 
@@ -385,23 +388,11 @@ export class RegistrationFormPage implements OnInit {
         })
     }
 
-    onConditions() {
-        this.connApi.getFile(this.urlTermsOfUse+1).subscribe(response => {
-            console.log(response);
-            let blob: any = new Blob([response], {type: 'application/pdf'});
-            const url = window.URL.createObjectURL(blob);
-            window.open(url)
-        }, error => {
-            console.log(error)
-        })
+    onTermsOfUse() {
+        this.Downloads.termsOfUseCollector();
     }
 
-    onSecurity() {
-        this.connApi.getFile(this.urlPrivacyPolicy+1).subscribe(response => {
-            console.log(response);
-            let blob: any = new Blob([response], {type: 'application/pdf'});
-            const url = window.URL.createObjectURL(blob);
-            window.open(url)
-        })
+    onPrivacyPolicy() {
+        this.Downloads.privacyPolicyCollector();
     }
 }

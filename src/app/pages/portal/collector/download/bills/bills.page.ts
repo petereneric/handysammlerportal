@@ -3,12 +3,13 @@ import {ConnApiService} from '../../../../../services/conn-api/conn-api.service'
 import {HttpResponse} from '@angular/common/http';
 import {ToastController} from '@ionic/angular';
 import {DatePipe} from '@angular/common';
+import {Alert} from "../../../../../utilities/alert";
 
 @Component({
     selector: 'app-bills',
     templateUrl: './bills.page.html',
     styleUrls: ['./bills.page.scss'],
-    providers: [DatePipe]
+    providers: [DatePipe, Alert],
 })
 export class BillsPage implements OnInit {
 
@@ -22,7 +23,7 @@ export class BillsPage implements OnInit {
     cYear: string = null;
     lBills = [];
 
-    constructor(public datepipe: DatePipe, private connApi: ConnApiService, public toastController: ToastController) {
+    constructor(public Alert: Alert, public datepipe: DatePipe, private connApi: ConnApiService, public toastController: ToastController) {
     }
 
     ngOnInit() {
@@ -55,6 +56,9 @@ export class BillsPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.alertPopUp('Abrechnung').then(res => {
+                if (!res) window.open(url);
+            })
         }, error => {
             if (error.status) {
                 this.toastNotFound();
@@ -99,6 +103,9 @@ export class BillsPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.alertPopUp('Abrechnung').then(res => {
+                if (!res) window.open(url);
+            })
         }, error => {
             console.log(error);
         });
