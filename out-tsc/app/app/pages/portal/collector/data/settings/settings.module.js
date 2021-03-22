@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SettingsPageRoutingModule } from './settings-routing.module';
 import { SettingsPage } from './settings.page';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 let SettingsPageModule = class SettingsPageModule {
 };
 SettingsPageModule = __decorate([
@@ -13,7 +15,9 @@ SettingsPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            SettingsPageRoutingModule
+            SettingsPageRoutingModule,
+            [MatTooltipModule],
+            MatIconModule
         ],
         declarations: [SettingsPage]
     })

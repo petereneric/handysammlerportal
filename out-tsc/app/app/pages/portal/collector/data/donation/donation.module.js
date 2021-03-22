@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { DonationPageRoutingModule } from './donation-routing.module';
 import { DonationPage } from './donation.page';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 let DonationPageModule = class DonationPageModule {
 };
 DonationPageModule = __decorate([
@@ -13,7 +15,9 @@ DonationPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            DonationPageRoutingModule
+            DonationPageRoutingModule,
+            [MatTooltipModule],
+            MatIconModule
         ],
         declarations: [DonationPage]
     })

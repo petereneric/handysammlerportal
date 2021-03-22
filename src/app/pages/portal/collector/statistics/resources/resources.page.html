@@ -31,64 +31,64 @@
         </div>
         <ion-grid class="ion-grid-table" *ngIf="lData != null && lData.length > 0">
             <ion-row class="ion-row-table">
-                <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
+                <ion-col size-xl="1.5" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                     <div>
                         {{getColumnName()}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="1.5" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div>
                         Gold*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="1.5" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div>
                         Silber*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="1.5" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div>
                         Kupfer*
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="4" size-md="5" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="3" size-lg="4" size-md="5" size-sm="6" size-xs="6">
                     <div>
                         Eingespartes CO2**
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size-xl="2" size-lg="4" size-md="5" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table-header'" size-xl="3" size-lg="4" size-md="5" size-sm="6" size-xs="6">
                     <div>
                         Eingesparte Ressourcen**
                     </div>
                 </ion-col>
             </ion-row>
             <ion-row class="ion-row-table" *ngFor="let row of lData">
-                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="1.5" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{cFilter === lFilter[0] ? (row.cYear != null ? row.cYear : 'Summe') : (row.nMonth != null ? getMonth(row.nMonth) : 'Summe')}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="1.5" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.gGold)).value}} {{transGramm(row.gGold).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="1.5" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.gSilver)).value}} {{transGramm(row.gSilver).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="1.5" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.gCopper)).value}} {{transGramm(row.gCopper).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="4" size-md="5" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="3" size-lg="4" size-md="5" size-sm="6" size-xs="6">
                     <div  [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.kgCo2)).value}} {{transKilogramm(row.kgCo2).unit}}
                     </div>
                 </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="4" size-md="5" size-sm="6" size-xs="6">
+                <ion-col [ngClass]="'ion-col-table'" size-xl="3" size-lg="4" size-md="5" size-sm="6" size-xs="6">
                     <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                         {{(transGramm(row.kgResources)).value}} {{transKilogramm(row.kgResources).unit}}
                     </div>
@@ -104,7 +104,7 @@
             *  Recycelte Rohstoffe, der Handys die nicht wiederverwendet werden konnten.
         </ion-row>
         <ion-row class="note">
-            ** CO2 und Resourcen, die durch die Wiederverwendung und damit nicht notwendige Neu-Herstellung eingespart wurden. Eigene Berechnung basierend auf Fraunhofer Umsicht 2018, Landesamt für Natur-, Umwelt- und Verbraucherschutz NRW 2012.
+            ** CO2 und Ressourcen, die durch die Wiederverwendung und damit nicht notwendige Neu-Herstellung eingespart wurden. Eigene Berechnung basierend auf Fraunhofer Umsicht 2018, Landesamt für Natur-, Umwelt- und Verbraucherschutz NRW 2012.
         </ion-row>
     </div>
 </ion-content>

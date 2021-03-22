@@ -28,7 +28,7 @@ export class FooterComponent implements OnInit {
     }
 
     onPrivacyPolicy() {
-        this.api.getPDF(this.urlPrivacyPolicy+1).subscribe(response => {
+        this.api.getFile(this.urlPrivacyPolicy+1).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
@@ -37,7 +37,7 @@ export class FooterComponent implements OnInit {
     }
 
     onTermsOfUse() {
-        this.api.getPDF(this.urlTermsOfUse+1).subscribe(response => {
+        this.api.getFile(this.urlTermsOfUse+1).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);

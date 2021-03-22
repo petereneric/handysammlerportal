@@ -1,8 +1,10 @@
 import { __awaiter, __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Downloads } from '../../utilities/downloads';
 let LoginPage = class LoginPage {
-    constructor(alertController, authApiService, connApiService, router, fb, data) {
+    constructor(Downloads, alertController, authApiService, connApiService, router, fb, data) {
+        this.Downloads = Downloads;
         this.alertController = alertController;
         this.authApiService = authApiService;
         this.connApiService = connApiService;
@@ -102,7 +104,7 @@ let LoginPage = class LoginPage {
     onResetPassword() {
         this.router.navigate(['request/role/' + this.selectedRole]);
     }
-    // Alerts
+    // Alert
     alertWrongLoginCredentials(subheader) {
         return __awaiter(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
@@ -127,6 +129,7 @@ let LoginPage = class LoginPage {
         });
     }
     onInfo() {
+        this.Downloads.becomeCollector();
     }
 };
 LoginPage = __decorate([
@@ -134,6 +137,7 @@ LoginPage = __decorate([
         selector: 'app-login',
         templateUrl: './login.page.html',
         styleUrls: ['./login.page.scss'],
+        providers: [Downloads]
     })
 ], LoginPage);
 export { LoginPage };

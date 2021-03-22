@@ -49,7 +49,7 @@ let CookieGuardService = class CookieGuardService {
         });
     }
     onPrivacyPolicy() {
-        this.api.getPDF(this.urlPrivacyPolicy + 1).subscribe(response => {
+        this.api.getFile(this.urlPrivacyPolicy + 1).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);

@@ -14,7 +14,7 @@
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item lines="full">
                         <ion-label class="input-label" position="floating">Name*</ion-label>
-                        <ion-input type="text" formControlName="cName"></ion-input>
+                        <ion-textarea rows="1" auto-grow="true" type="text" formControlName="cName"></ion-textarea>
                     </ion-item>
                     <span *ngIf="bSubmitted && errorControl.cName.errors?.required"
                           class="input-invalid">Pflichtfeld</span>
@@ -23,7 +23,7 @@
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item lines="full">
                         <ion-label class="input-label" position="floating">Website</ion-label>
-                        <ion-input type="text" formControlName="cWebsite"></ion-input>
+                        <ion-textarea rows="1" auto-grow="true" type="text" formControlName="cWebsite"></ion-textarea>
                     </ion-item>
                     <span *ngIf="bSubmitted && errorControl.cWebsite.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
                 </ion-col>
@@ -33,7 +33,7 @@
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item lines="full">
                         <ion-label class="input-label" position="floating">Straße*</ion-label>
-                        <ion-input type="text" formControlName="cStreet"></ion-input>
+                        <ion-textarea rows="1" auto-grow="true" type="text" formControlName="cStreet"></ion-textarea>
                     </ion-item>
                     <span *ngIf="bSubmitted && errorControl.cStreet.errors?.required"
                           class="input-invalid">Pflichtfeld</span>
@@ -61,7 +61,7 @@
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item lines="full">
                         <ion-label class="input-label" position="floating">Stadt*</ion-label>
-                        <ion-input type="text" formControlName="cCity"></ion-input>
+                        <ion-textarea rows="1" auto-grow="true" type="text" formControlName="cCity"></ion-textarea>
                     </ion-item>
                     <span *ngIf="bSubmitted && errorControl.cCity.errors?.required" class="input-invalid">Pflichtfeld</span>
                     <span *ngIf="bSubmitted && errorControl.cCity.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>

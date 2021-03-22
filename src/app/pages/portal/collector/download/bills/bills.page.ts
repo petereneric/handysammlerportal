@@ -51,7 +51,7 @@ export class BillsPage implements OnInit {
 
     onBill(kBill: any) {
         console.log(kBill);
-        this.connApi.safeGetPDF(this.urlBill + '/' + kBill).subscribe(response => {
+        this.connApi.safeGetFile(this.urlBill + '/' + kBill).subscribe(response => {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
@@ -95,7 +95,7 @@ export class BillsPage implements OnInit {
     }
 
     onTotal() {
-        this.connApi.safeGetPDF(this.urlBill).subscribe(response => {
+        this.connApi.safeGetFile(this.urlBill).subscribe(response => {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);

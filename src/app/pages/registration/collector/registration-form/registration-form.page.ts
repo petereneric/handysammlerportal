@@ -5,7 +5,7 @@ import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {HttpResponse} from '@angular/common/http';
 import {ActivatedRoute} from "@angular/router";
-import {Toast} from '../../../../utilities/Toast';
+import {Toast} from '../../../../utilities/toast';
 
 @Component({
     selector: 'app-registration-form',
@@ -20,6 +20,7 @@ export class RegistrationFormPage implements OnInit {
     private urlRegionCountries = 'region/countries';
     private urlRegister = 'registration/collector';
     private urlPartner = 'partner';
+    private urlPartners = 'partner'; // next update set partners, also change in api
     private urlBecomeCollector = "download/document/become_collector"
     private urlMailRegistration = "registration/mail"
     private urlTermsOfUse = 'agreement/terms_of_use/';
@@ -33,7 +34,7 @@ export class RegistrationFormPage implements OnInit {
         cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
         cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
         cCity: ['', [Validators.required, Validators.maxLength(50)]],
-        cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{8,}'), Validators.minLength(8)]],
+        cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{7,}'), Validators.minLength(8)]],
         cPrename: ['', [Validators.required, Validators.maxLength(50)]],
         cSurname: ['', [Validators.required, Validators.maxLength(50)]],
         cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
@@ -92,7 +93,7 @@ export class RegistrationFormPage implements OnInit {
         });
 
         // partner
-        this.connApi.get(this.urlPartner).subscribe((response: HttpResponse<any>) => {
+        this.connApi.get(this.urlPartners).subscribe((response: HttpResponse<any>) => {
             this.lPartner = response.body;
         });
 
@@ -255,7 +256,7 @@ export class RegistrationFormPage implements OnInit {
         return this.fgCollector.controls;
     }
 
-    // Alerts
+    // Alert
 
     async alertPasswordNotIdentical() {
         const alert = await this.alertController.create({
@@ -374,7 +375,7 @@ export class RegistrationFormPage implements OnInit {
 
     onInfo() {
         console.log("test")
-        this.connApi.getPDF(this.urlBecomeCollector).subscribe(response => {
+        this.connApi.getFile(this.urlBecomeCollector).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
@@ -385,7 +386,7 @@ export class RegistrationFormPage implements OnInit {
     }
 
     onConditions() {
-        this.connApi.getPDF(this.urlTermsOfUse+1).subscribe(response => {
+        this.connApi.getFile(this.urlTermsOfUse+1).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
@@ -396,7 +397,7 @@ export class RegistrationFormPage implements OnInit {
     }
 
     onSecurity() {
-        this.connApi.getPDF(this.urlPrivacyPolicy+1).subscribe(response => {
+        this.connApi.getFile(this.urlPrivacyPolicy+1).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);

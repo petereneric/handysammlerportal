@@ -4,11 +4,13 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 import {repeat} from 'rxjs/operators';
+import {Alert} from '../../../../../utilities/alert';
 
 @Component({
     selector: 'app-add',
     templateUrl: './add.page.html',
     styleUrls: ['./add.page.scss'],
+    providers: [Alert]
 })
 export class AddPage implements OnInit {
 
@@ -16,19 +18,27 @@ export class AddPage implements OnInit {
     private urlLithiumIonLabel = 'collector/lithium-ion-label';
     private urlLabel = 'collector/label';
 
-    constructor(public connApi: ConnApiService, private router: Router, private alertController: AlertController) {
+    constructor(public Alert: Alert, public connApi: ConnApiService, private router: Router, private alertController: AlertController) {
     }
 
     ngOnInit() {
+        //localStorage.setItem('bPopUp', 'false');
     }
 
 
     onClickLithiumNotice() {
-        this.connApi.safeGetPDF(this.urlLithiumIonLabel).subscribe(response => {
+        this.connApi.safeGetFile(this.urlLithiumIonLabel).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.alertPopUp().then(res => {
+                console.log('reuslt '+res);
+                if (!res) {
+                    console.log("yeah");
+                    this.onClickLithiumNotice()
+                }
+            })
         });
     }
 
@@ -58,7 +68,7 @@ export class AddPage implements OnInit {
                 'Deine Versendung vor.',
             buttons: [{
                 'text': 'Bestätigen', handler: () => {
-                    this.connApi.safeGetPDF(this.urlLabel).subscribe(response => {
+                    this.connApi.safeGetFile(this.urlLabel).subscribe(response => {
                             console.log(response);
                             let blob: any = new Blob([response], {type: 'application/pdf'});
                             const url = window.URL.createObjectURL(blob);

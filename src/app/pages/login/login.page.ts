@@ -6,11 +6,13 @@ import {ConnApiService} from '../../services/conn-api/conn-api.service';
 import {DataService} from '../../services/data/data.service';
 import {HttpResponse} from '@angular/common/http';
 import {AlertController} from '@ionic/angular';
+import {Downloads} from '../../utilities/downloads';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
+    providers: [Downloads]
 })
 
 export class LoginPage implements OnInit {
@@ -33,7 +35,7 @@ export class LoginPage implements OnInit {
         cPassword: ['', [Validators.required, Validators.maxLength(50)]]
     });
 
-    constructor(public alertController: AlertController, private authApiService: AuthApiService, private connApiService: ConnApiService, public router: Router, private fb: FormBuilder, private data: DataService) {
+    constructor(public Downloads: Downloads, public alertController: AlertController, private authApiService: AuthApiService, private connApiService: ConnApiService, public router: Router, private fb: FormBuilder, private data: DataService) {
         console.log('teeest');
     }
 
@@ -134,7 +136,7 @@ export class LoginPage implements OnInit {
         this.router.navigate(['request/role/' + this.selectedRole]);
     }
 
-    // Alerts
+    // Alert
     async alertWrongLoginCredentials(subheader) {
         const alert = await this.alertController.create({
             cssClass: 'my-alert',
@@ -158,6 +160,6 @@ export class LoginPage implements OnInit {
     }
 
     onInfo() {
-
+        this.Downloads.becomeCollector();
     }
 }

@@ -34,7 +34,7 @@ export class ResourcesPage extends StatisticsPage implements OnInit {
       }
     }
 
-    weight.value = parseFloat(weight.value).toFixed(2)
+    weight.value = parseFloat(weight.value).toFixed(2).replace('.', ',');
     return weight;
   }
 
@@ -48,7 +48,7 @@ export class ResourcesPage extends StatisticsPage implements OnInit {
       weight.unit = 'T'
     }
 
-    weight.value = parseFloat(weight.value).toFixed(2)
+    weight.value = parseFloat(weight.value).toFixed(2).replace('.', ',');
     return weight;
   }
 

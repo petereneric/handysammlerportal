@@ -49,13 +49,13 @@ let ConnApiService = class ConnApiService {
         };
         return this.http.post(`${this.urlApi}${url}`, data, httpOptionsToken);
     }
-    safeGetPDF(url) {
+    safeGetFile(url) {
         return this.http.get(`${this.urlApi}${url}`, {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' }).set('Authorization', `Bearer ${localStorage.getItem('token')}`),
             responseType: 'blob'
         });
     }
-    getPDF(url) {
+    getFile(url) {
         return this.http.get(`${this.urlApi}${url}`, {
             headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
             responseType: 'blob'

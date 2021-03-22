@@ -1,7 +1,9 @@
 import { __awaiter, __decorate } from "tslib";
 import { Component } from '@angular/core';
+import { Alert } from '../../../../../utilities/alert';
 let AddPage = class AddPage {
-    constructor(connApi, router, alertController) {
+    constructor(Alert, connApi, router, alertController) {
+        this.Alert = Alert;
         this.connApi = connApi;
         this.router = router;
         this.alertController = alertController;
@@ -10,13 +12,21 @@ let AddPage = class AddPage {
         this.urlLabel = 'collector/label';
     }
     ngOnInit() {
+        //localStorage.setItem('bPopUp', 'false');
     }
     onClickLithiumNotice() {
-        this.connApi.safeGetPDF(this.urlLithiumIonLabel).subscribe(response => {
+        this.connApi.safeGetFile(this.urlLithiumIonLabel).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.alertPopUp().then(res => {
+                console.log('reuslt ' + res);
+                if (!res) {
+                    console.log("yeah");
+                    this.onClickLithiumNotice();
+                }
+            });
         });
     }
     onClickShippingLabel() {
@@ -46,7 +56,7 @@ let AddPage = class AddPage {
                 buttons: [{
                         'text': 'Bestätigen',
                         handler: () => {
-                            this.connApi.safeGetPDF(this.urlLabel).subscribe(response => {
+                            this.connApi.safeGetFile(this.urlLabel).subscribe(response => {
                                 console.log(response);
                                 let blob = new Blob([response], { type: 'application/pdf' });
                                 const url = window.URL.createObjectURL(blob);
@@ -69,6 +79,7 @@ AddPage = __decorate([
         selector: 'app-add',
         templateUrl: './add.page.html',
         styleUrls: ['./add.page.scss'],
+        providers: [Alert]
     })
 ], AddPage);
 export { AddPage };

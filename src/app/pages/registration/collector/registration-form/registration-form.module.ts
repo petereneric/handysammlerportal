@@ -10,7 +10,7 @@ import { RegistrationFormPage } from './registration-form.page';
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {FooterComponent} from '../../../../components/footer/footer.component';
-import {Toast} from '../../../../utilities/Toast';
+import {Toast} from '../../../../utilities/toast';
 
 @NgModule({
     imports: [

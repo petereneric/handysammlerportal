@@ -61,6 +61,7 @@ $divider: #BDBDBD;
 // Ionic
 ion-title {
   color: $white;
+  font-weight: 500;
 }
 
 ion-label {
@@ -71,8 +72,13 @@ ion-row {
   align-items: flex-start;
 }
 
+// select
 ion-select {
   max-width: 90% !important;
+}
+
+ion-select::part(text) {
+  white-space: normal;
 }
 
 ion-spinner {
@@ -85,12 +91,17 @@ ion-spinner {
 
 ion-label {
   --color: #757575 !important;
+  white-space: normal !important;
 }
 
 ion-button {
   //width: 100%;
   --border-radius: 0.6rem;
   border-radius: $borderRadius;
+  white-space: normal;
+  height: fit-content;
+  --padding-bottom: 0.7rem !important;
+  --padding-top: 0.8rem !important;
 }
 
 ion-item {
@@ -286,6 +297,10 @@ b {
   margin: 0.5rem 1rem 0.5rem 1rem;
 }
 
+.ion-button-long-text {
+  line-height: $textHeight;
+}
+
 
 .ion-button-one-inside {
   display: block;
@@ -449,7 +464,6 @@ b {
   display: flex;
   margin-left: $blockMarginOutside;
   margin-right: $blockMarginOutside;
-  margin-top: 1.5rem;
   justify-content: center;
 }
 
@@ -535,6 +549,20 @@ b {
     justify-content: center;
     align-items: stretch;
   }
+}
+
+// text-wrap for alert labels
+.alert-tappable.alert-radio {
+  height: auto;
+  contain: content;
+}
+
+.alert-radio-label.sc-ion-alert-md {
+  white-space: pre-line;
+}
+
+.alert-radio-label.sc-ion-alert-ios {
+  white-space: pre-line;
 }
 
 /*
@@ -634,9 +662,9 @@ b {
 // Toolbar
 
 .toolbar-subtitle {
-  font-size: 12px;
-  margin-top: 0.125rem;
-  font-style: normal;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 .toolbar-icon {

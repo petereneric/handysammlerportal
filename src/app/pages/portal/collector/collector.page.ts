@@ -52,6 +52,11 @@ export class CollectorPage implements OnInit {
             url: 'download',
             icon: 'download'
         },
+        {
+            title: 'Über uns',
+            url: 'about',
+            icon: 'leaf'
+        },
 
     ];
     selectedIndex = 0;

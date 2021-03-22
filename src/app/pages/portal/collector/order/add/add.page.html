@@ -63,7 +63,7 @@
                 Bestellung informieren.</p>
         </div>
     </div>
-    <div *ngIf="!spinner && !orderTaken && data != null && !(data.nOrders == 0 && data.nLocations == 0) && oBox.maxOrder <= 0 && oBricolage.maxOrder <= 0" class="input-block-element">
+    <div *ngIf="!spinner && !orderTaken && data != null && !(data.nOrders == 0 && data.nLocations == 0) && !(oBox != null && oBox.boxAvailable == 1 && oBox.nStock > 0 && oBox.maxOrder > 0) && !(oBricolage != null && oBricolage.bAvailable == 1 && oBricolage.nStock && oBricolage.maxOrder > 0)" class="input-block-element">
         <p class="note">* Du hast die Möglichkeit für jeden Sammelstandort eine Sammelbox ({{oBox.bAvailable ? (oBox.nStock > 0 ? 'Mobile-Box' : 'Bastel-Box') : 'Bastel-Box'}}) zu bestellen. Aktuell hast du {{data.nLocations == 1 ? 'einen Sammelstandort' : data.nLocations+' Sammelstandorte'}} angelegt und {{data.nOrders == 1 ? 'eine Sammelbox' : data.nOrders +' Sammelboxen'}} bestellt.
             Damit ist dein Limit {{oBox.maxOrder < 0 || oBox.maxOrder < 0 ? 'überschritten' : 'erreicht'}}. Weitere Sammelstandorte
             kannst du <a class="link-one" [routerLink]="['/collector/menu/data/tabs/locations']">hier</a> hinzufügen. Da jede Sammelbox irgendwann einmal abgenutzt ist, kannst du ab jedem 200ersten zugesendeten Handy eine neue Sammelbox bestellen. Aktuell fehlen dir dazu

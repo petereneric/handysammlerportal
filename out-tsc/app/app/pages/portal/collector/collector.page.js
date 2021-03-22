@@ -38,6 +38,11 @@ let CollectorPage = class CollectorPage {
                 url: 'download',
                 icon: 'download'
             },
+            {
+                title: 'Über uns',
+                url: 'about',
+                icon: 'leaf'
+            },
         ];
         this.selectedIndex = 0;
         console.log('jooooo');

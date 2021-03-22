@@ -13,7 +13,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CollectorPageModule} from './pages/portal/collector/collector.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {Toast} from './utilities/Toast';
+import {Toast} from './utilities/toast';
 
 
 @NgModule({

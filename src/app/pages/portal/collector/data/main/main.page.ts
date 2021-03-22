@@ -193,6 +193,7 @@ export class MainPage implements OnInit {
                 // @ts-ignore
                 kShippingCountry: this.oShippingCountry.id
             };
+        console.log(collector);
 
         // send data
         this.connApi.safePost(this.urlSave, collector).subscribe((data: HttpResponse<any>) => {
@@ -304,7 +305,7 @@ export class MainPage implements OnInit {
     onPassword() {
         // prepare
         let data = {
-            'role': 0,
+            'role': 1,
             'email':this.fgCollector.get('cEmail').value
         }
 

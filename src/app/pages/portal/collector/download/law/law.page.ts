@@ -21,7 +21,7 @@ export class LawPage implements OnInit {
     }
 
     onLegalStatement() {
-        this.connApi.safeGetPDF(this.urlLegalStatement).subscribe(response => {
+        this.connApi.safeGetFile(this.urlLegalStatement).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
@@ -30,7 +30,7 @@ export class LawPage implements OnInit {
     }
 
     onDataPrivacy() {
-        this.connApi.safeGetPDF(this.urlDataPrivacy).subscribe(response => {
+        this.connApi.safeGetFile(this.urlDataPrivacy).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
@@ -39,7 +39,7 @@ export class LawPage implements OnInit {
     }
 
     onPrivacyPolicy() {
-        this.connApi.getPDF(this.urlPrivacyPolicy+1).subscribe(response => {
+        this.connApi.getFile(this.urlPrivacyPolicy+1).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
@@ -48,7 +48,7 @@ export class LawPage implements OnInit {
     }
 
     onTermsOfUse() {
-        this.connApi.getPDF(this.urlTermsOfUse+1).subscribe(response => {
+        this.connApi.getFile(this.urlTermsOfUse+1).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);

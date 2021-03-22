@@ -16,7 +16,7 @@ let FooterComponent = class FooterComponent {
         window.open('https://mobile-box.eu', "_blank");
     }
     onPrivacyPolicy() {
-        this.api.getPDF(this.urlPrivacyPolicy + 1).subscribe(response => {
+        this.api.getFile(this.urlPrivacyPolicy + 1).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -24,7 +24,7 @@ let FooterComponent = class FooterComponent {
         });
     }
     onTermsOfUse() {
-        this.api.getPDF(this.urlTermsOfUse + 1).subscribe(response => {
+        this.api.getFile(this.urlTermsOfUse + 1).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);

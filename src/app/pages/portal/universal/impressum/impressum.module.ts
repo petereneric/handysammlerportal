@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { ImpressumPageRoutingModule } from './impressum-routing.module';
 
 import { ImpressumPage } from './impressum.page';
+import {FooterComponent} from '../../../../components/footer/footer.component';
+import {ImpressumComponent} from '../../../../components/impressum/impressum.component';
 
 @NgModule({
   imports: [
@@ -15,6 +17,9 @@ import { ImpressumPage } from './impressum.page';
     IonicModule,
     ImpressumPageRoutingModule
   ],
-  declarations: [ImpressumPage]
+  exports: [
+    ImpressumComponent
+  ],
+  declarations: [ImpressumPage, ImpressumComponent]
 })
 export class ImpressumPageModule {}

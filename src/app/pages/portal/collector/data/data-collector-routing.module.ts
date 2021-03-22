@@ -34,8 +34,6 @@ const routes: Routes = [
         path: '',
         redirectTo: 'tabs/main'
     },
-
-
 ];
 
 @NgModule({

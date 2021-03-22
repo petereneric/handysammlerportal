@@ -24,7 +24,7 @@ let ResourcesPage = class ResourcesPage extends StatisticsPage {
                 weight.unit = 'T';
             }
         }
-        weight.value = parseFloat(weight.value).toFixed(2);
+        weight.value = parseFloat(weight.value).toFixed(2).replace('.', ',');
         return weight;
     }
     transKilogramm(nKilogramm) {
@@ -36,7 +36,7 @@ let ResourcesPage = class ResourcesPage extends StatisticsPage {
             weight.value = nKilogramm / 1000;
             weight.unit = 'T';
         }
-        weight.value = parseFloat(weight.value).toFixed(2);
+        weight.value = parseFloat(weight.value).toFixed(2).replace('.', ',');
         return weight;
     }
 };

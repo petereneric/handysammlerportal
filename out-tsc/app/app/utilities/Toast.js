@@ -31,4 +31,4 @@ Toast = __decorate([
     Injectable()
 ], Toast);
 export { Toast };
-//# sourceMappingURL=Toast.js.map
+//# sourceMappingURL=toast.js.map

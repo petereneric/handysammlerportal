@@ -63,13 +63,13 @@ let AddPage = class AddPage {
     onChangedBoxOrder() {
         if (!this.flyerSelected && !this.posterSelected) {
             this.flyerOrder = (this.boxOrder * 100 <= this.flyerAvailable) ? this.boxOrder * 100 : this.flyerAvailable;
-            this.posterOrder = this.boxOrder * 10 <= this.posterAvailable ? this.boxOrder * 10 : this.posterAvailable;
+            this.posterOrder = this.boxOrder * 2 <= this.posterAvailable ? this.boxOrder * 2 : this.posterAvailable;
         }
     }
     onChangedBricolageOrder() {
         if (!this.flyerSelected && !this.posterSelected) {
             this.flyerOrder = this.bricolageOrder * 100 <= this.flyerAvailable ? this.bricolageOrder * 100 : this.flyerAvailable;
-            this.posterOrder = this.bricolageOrder * 10 <= this.posterAvailable ? this.bricolageOrder * 10 : this.posterAvailable;
+            this.posterOrder = this.bricolageOrder * 2 <= this.posterAvailable ? this.bricolageOrder * 2 : this.posterAvailable;
         }
     }
     onChangedFlyerOrder() {
@@ -126,33 +126,30 @@ let AddPage = class AddPage {
         this.connApi.safeGet(this.urlOrdersAvailable).subscribe((response) => {
             console.log(response.body);
             this.data = response.body;
-            //this.data.nLocations = 2;
-            // Box
             this.oBox = this.data.oBox;
+            this.oBricolage = this.data.oBricolage;
+            // Box
             if (this.oBox.bAvailable == 1) {
-                this.oBox.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices / this.data.intervallDevices) - this.oBox.nOrder));
+                this.oBox.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices / this.data.intervallDevices) - this.oBox.nOrder - this.oBricolage.nOrder));
                 console.log(this.oBox.maxOrder);
                 if (this.oBox.maxOrder > 0) {
                     for (var i = 1; i <= this.oBox.maxOrder && i <= 5; i++) {
                         this.boxChoice.push(i);
                     }
                 }
-                //this.oBox.maxOrder = 0;
             }
             else {
                 this.oBox.maxOrder = 0;
             }
             // Bricolage
-            this.oBricolage = this.data.oBricolage;
             if (this.oBricolage.bAvailable == 1) {
-                this.oBricolage.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices / this.data.intervallDevices) - this.oBox.nOrder));
-                console.log(this.oBricolage.maxOrder);
+                this.oBricolage.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices / this.data.intervallDevices) - this.oBricolage.nOrder - this.oBox.nOrder));
+                console.log("joo" + this.oBricolage.maxOrder);
                 if (this.oBricolage.maxOrder > 0) {
                     for (var i = 1; i <= this.oBricolage.maxOrder && i <= 5; i++) {
                         this.bricolageChoice.push(i);
                     }
                 }
-                //this.oBricolage.maxOrder = 0;
             }
             else {
                 this.oBricolage.maxOrder = 0;
@@ -165,9 +162,9 @@ let AddPage = class AddPage {
                 }
             }
             // Poster
-            this.posterAvailable = 50;
+            this.posterAvailable = 10;
             if (this.posterAvailable > 0) {
-                for (var i = 10; i <= this.posterAvailable; i += 10) {
+                for (var i = 2; i <= this.posterAvailable; i += 2) {
                     this.posterChoice.push(i);
                 }
             }

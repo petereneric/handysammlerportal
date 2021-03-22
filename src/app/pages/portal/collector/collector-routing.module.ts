@@ -32,12 +32,21 @@ const routes: Routes = [
                 path: 'download',
                 loadChildren: () => import('./download/download.module').then(m => m.DownloadPageModule)
             },
+            {
+                path: 'about',
+                loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
+            },
         ]
     },
     {
         path: 'collector',
         redirectTo: 'collector/menu/data'
     },
+  {
+    path: 'about',
+    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+  },
+
 
 
 ];

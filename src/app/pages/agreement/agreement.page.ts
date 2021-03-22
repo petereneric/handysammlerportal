@@ -87,7 +87,7 @@ export class AgreementPage implements OnInit {
     }
 
     onConditions() {
-        this.api.getPDF(this.urlTermsOfUse+this.tStakeholder).subscribe(response => {
+        this.api.getFile(this.urlTermsOfUse+this.tStakeholder).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
@@ -98,7 +98,7 @@ export class AgreementPage implements OnInit {
     }
 
     onPrivacyPolicy() {
-        this.api.getPDF(this.urlPrivacyPolicy+this.tStakeholder).subscribe(response => {
+        this.api.getFile(this.urlPrivacyPolicy+this.tStakeholder).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);

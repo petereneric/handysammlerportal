@@ -69,7 +69,7 @@ let AgreementPage = class AgreementPage {
         this.bPrivacyPolicy = !this.bPrivacyPolicy;
     }
     onConditions() {
-        this.api.getPDF(this.urlTermsOfUse + this.tStakeholder).subscribe(response => {
+        this.api.getFile(this.urlTermsOfUse + this.tStakeholder).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -79,7 +79,7 @@ let AgreementPage = class AgreementPage {
         });
     }
     onPrivacyPolicy() {
-        this.api.getPDF(this.urlPrivacyPolicy + this.tStakeholder).subscribe(response => {
+        this.api.getFile(this.urlPrivacyPolicy + this.tStakeholder).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);

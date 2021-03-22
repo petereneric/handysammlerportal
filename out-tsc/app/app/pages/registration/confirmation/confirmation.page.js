@@ -25,7 +25,7 @@ let ConfirmationPage = class ConfirmationPage {
         });
     }
     onInformation() {
-        this.connApi.getPDF(this.urlInformationForCollector).subscribe(response => {
+        this.connApi.getFile(this.urlInformationForCollector).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);

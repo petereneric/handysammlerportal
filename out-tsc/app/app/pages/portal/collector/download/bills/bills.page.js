@@ -38,7 +38,7 @@ let BillsPage = class BillsPage {
     }
     onBill(kBill) {
         console.log(kBill);
-        this.connApi.safeGetPDF(this.urlBill + '/' + kBill).subscribe(response => {
+        this.connApi.safeGetFile(this.urlBill + '/' + kBill).subscribe(response => {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
@@ -80,7 +80,7 @@ let BillsPage = class BillsPage {
         return lMonth[month];
     }
     onTotal() {
-        this.connApi.safeGetPDF(this.urlBill).subscribe(response => {
+        this.connApi.safeGetFile(this.urlBill).subscribe(response => {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);

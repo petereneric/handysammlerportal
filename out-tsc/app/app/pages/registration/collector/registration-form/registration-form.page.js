@@ -16,6 +16,7 @@ let RegistrationFormPage = class RegistrationFormPage {
         this.urlRegionCountries = 'region/countries';
         this.urlRegister = 'registration/collector';
         this.urlPartner = 'partner';
+        this.urlPartners = 'partner'; // next update set partners, also change in api
         this.urlBecomeCollector = "download/document/become_collector";
         this.urlMailRegistration = "registration/mail";
         this.urlTermsOfUse = 'agreement/terms_of_use/';
@@ -28,7 +29,7 @@ let RegistrationFormPage = class RegistrationFormPage {
             cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
             cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
             cCity: ['', [Validators.required, Validators.maxLength(50)]],
-            cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{8,}'), Validators.minLength(8)]],
+            cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{7,}'), Validators.minLength(8)]],
             cPrename: ['', [Validators.required, Validators.maxLength(50)]],
             cSurname: ['', [Validators.required, Validators.maxLength(50)]],
             cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
@@ -75,7 +76,7 @@ let RegistrationFormPage = class RegistrationFormPage {
             this.lTypes = data.body;
         });
         // partner
-        this.connApi.get(this.urlPartner).subscribe((response) => {
+        this.connApi.get(this.urlPartners).subscribe((response) => {
             this.lPartner = response.body;
         });
         this.activatedRoute.params.subscribe(params => {
@@ -217,7 +218,7 @@ let RegistrationFormPage = class RegistrationFormPage {
     get errorControl() {
         return this.fgCollector.controls;
     }
-    // Alerts
+    // Alert
     alertPasswordNotIdentical() {
         return __awaiter(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
@@ -330,7 +331,7 @@ let RegistrationFormPage = class RegistrationFormPage {
     }
     onInfo() {
         console.log("test");
-        this.connApi.getPDF(this.urlBecomeCollector).subscribe(response => {
+        this.connApi.getFile(this.urlBecomeCollector).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -340,7 +341,7 @@ let RegistrationFormPage = class RegistrationFormPage {
         });
     }
     onConditions() {
-        this.connApi.getPDF(this.urlTermsOfUse + 1).subscribe(response => {
+        this.connApi.getFile(this.urlTermsOfUse + 1).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -350,7 +351,7 @@ let RegistrationFormPage = class RegistrationFormPage {
         });
     }
     onSecurity() {
-        this.connApi.getPDF(this.urlPrivacyPolicy + 1).subscribe(response => {
+        this.connApi.getFile(this.urlPrivacyPolicy + 1).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);

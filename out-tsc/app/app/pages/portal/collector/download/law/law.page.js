@@ -12,7 +12,7 @@ let LawPage = class LawPage {
     ngOnInit() {
     }
     onLegalStatement() {
-        this.connApi.safeGetPDF(this.urlLegalStatement).subscribe(response => {
+        this.connApi.safeGetFile(this.urlLegalStatement).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -20,7 +20,7 @@ let LawPage = class LawPage {
         });
     }
     onDataPrivacy() {
-        this.connApi.safeGetPDF(this.urlDataPrivacy).subscribe(response => {
+        this.connApi.safeGetFile(this.urlDataPrivacy).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -28,7 +28,7 @@ let LawPage = class LawPage {
         });
     }
     onPrivacyPolicy() {
-        this.connApi.getPDF(this.urlPrivacyPolicy + 1).subscribe(response => {
+        this.connApi.getFile(this.urlPrivacyPolicy + 1).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -36,7 +36,7 @@ let LawPage = class LawPage {
         });
     }
     onTermsOfUse() {
-        this.connApi.getPDF(this.urlTermsOfUse + 1).subscribe(response => {
+        this.connApi.getFile(this.urlTermsOfUse + 1).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);

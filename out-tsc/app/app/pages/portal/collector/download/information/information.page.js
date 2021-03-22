@@ -1,29 +1,18 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
+import { Downloads } from '../../../../../utilities/downloads';
 let InformationPage = class InformationPage {
-    constructor(connApi) {
+    constructor(connApi, Downloads) {
         this.connApi = connApi;
-        // Urls
-        this.urlInformationForCollector = "download/document/informations_for_collector";
-        this.urlBecomeCollector = "download/document/become_collector";
+        this.Downloads = Downloads;
     }
     ngOnInit() {
     }
     onInformationForCollector() {
-        this.connApi.getPDF(this.urlInformationForCollector).subscribe(response => {
-            console.log(response);
-            let blob = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(blob);
-            window.open(url);
-        });
+        this.Downloads.informationForCollector();
     }
     onBecomeCollector() {
-        this.connApi.getPDF(this.urlBecomeCollector).subscribe(response => {
-            console.log(response);
-            let blob = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(blob);
-            window.open(url);
-        });
+        this.Downloads.becomeCollector();
     }
 };
 InformationPage = __decorate([
@@ -31,6 +20,7 @@ InformationPage = __decorate([
         selector: 'app-information',
         templateUrl: './information.page.html',
         styleUrls: ['./information.page.scss'],
+        providers: [Downloads]
     })
 ], InformationPage);
 export { InformationPage };
