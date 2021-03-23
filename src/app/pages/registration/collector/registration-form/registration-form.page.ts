@@ -1,13 +1,15 @@
 import {Component, ElementRef, NgModule, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, ValidationErrors, Validators} from '@angular/forms';
 import {ConnApiService} from '../../../../services/conn-api/conn-api.service';
-import {AlertController} from '@ionic/angular';
+import {AlertController, IonTextarea} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {HttpResponse} from '@angular/common/http';
 import {ActivatedRoute} from "@angular/router";
 import {Toast} from '../../../../utilities/toast';
 import {Downloads} from "../../../../utilities/downloads";
 import {Alert} from "../../../../utilities/alert";
+
+
 
 @Component({
     selector: 'app-registration-form',
@@ -16,6 +18,29 @@ import {Alert} from "../../../../utilities/alert";
     providers: [Downloads, Alert]
 })
 export class RegistrationFormPage implements OnInit {
+
+    @ViewChild('vName') vName;
+    @ViewChild('vNameDetails') vNameDetails;
+    @ViewChild('vStreet') vStreet;
+    @ViewChild('vStreetNumber') vStreetNumber;
+    @ViewChild('vCity') vCity;
+    @ViewChild('vZip') vZip;
+    @ViewChild('vPrename') vPrename;
+    @ViewChild('vSurname') vSurname;
+    @ViewChild('vEmail') vEmail;
+    @ViewChild('vEmailCC') vEmailCC;
+    @ViewChild('vPhoneFixedLine') vPhoneFixedLine;
+    @ViewChild('vPhoneMobile') vPhoneMobile;
+    @ViewChild('vShippingAddressOne') vShippingAddressOne;
+    @ViewChild('vShippingAddressTwo') vShippingAddressTwo;
+    @ViewChild('vShippingAddressThree') vShippingAddressThree;
+    @ViewChild('vShippingStreet') vShippingStreet;
+    @ViewChild('vShippingStreetNumber') vShippingStreetNumber;
+    @ViewChild('vShippingZip') vShippingZip;
+    @ViewChild('vShippingCity') vShippingCity;
+
+    //ViewChilds
+    private textArea: IonTextarea;
 
     // Urls
     private urlTypes = 'types';
@@ -90,7 +115,7 @@ export class RegistrationFormPage implements OnInit {
     }
 
     ngOnInit() {
-        // types
+                // types
         this.connApi.get(this.urlTypes).subscribe((data: HttpResponse<any>) => {
             this.lTypes = data.body;
         });
@@ -394,5 +419,65 @@ export class RegistrationFormPage implements OnInit {
 
     onPrivacyPolicy() {
         this.Downloads.privacyPolicyCollector();
+    }
+
+    ngAfterViewInit() {
+        this.vName.ionChange.subscribe(()=>{
+            if (this.vName.autoGrow == false) this.vName.autoGrow = true;
+        });
+        this.vNameDetails.ionChange.subscribe(()=>{
+            if (this.vNameDetails.autoGrow == false) this.vNameDetails.autoGrow = true;
+        });
+        this.vStreet.ionChange.subscribe(()=>{
+            if (this.vName.autoGrow == false) this.vName.autoGrow = true;
+        });
+        this.vStreetNumber.ionChange.subscribe(()=>{
+            if (this.vStreetNumber.autoGrow == false) this.vStreetNumber.autoGrow = true;
+        });
+        this.vCity.ionChange.subscribe(()=>{
+            if (this.vCity.autoGrow == false) this.vCity.autoGrow = true;
+        });
+        this.vZip.ionChange.subscribe(()=>{
+            if (this.vZip.autoGrow == false) this.vZip.autoGrow = true;
+        });
+        this.vPrename.ionChange.subscribe(()=>{
+            if (this.vPrename.autoGrow == false) this.vPrename.autoGrow = true;
+        });
+        this.vSurname.ionChange.subscribe(()=>{
+            if (this.vSurname.autoGrow == false) this.vSurname.autoGrow = true;
+        });
+        this.vEmail.ionChange.subscribe(()=>{
+            if (this.vEmail.autoGrow == false) this.vEmail.autoGrow = true;
+        });
+        this.vEmailCC.ionChange.subscribe(()=>{
+            if (this.vEmailCC.autoGrow == false) this.vEmailCC.autoGrow = true;
+        });
+        this.vPhoneFixedLine.ionChange.subscribe(()=>{
+            if (this.vPhoneFixedLine.autoGrow == false) this.vPhoneFixedLine.autoGrow = true;
+        });
+        this.vPhoneMobile.ionChange.subscribe(()=>{
+            if (this.vPhoneMobile.autoGrow == false) this.vPhoneMobile.autoGrow = true;
+        });
+        this.vShippingAddressOne.ionChange.subscribe(()=>{
+            if (this.vShippingAddressOne.autoGrow == false) this.vShippingAddressOne.autoGrow = true;
+        });
+        this.vShippingAddressTwo.ionChange.subscribe(()=>{
+            if (this.vShippingAddressTwo.autoGrow == false) this.vShippingAddressTwo.autoGrow = true;
+        });
+        this.vShippingAddressThree.ionChange.subscribe(()=>{
+            if (this.vShippingAddressThree.autoGrow == false) this.vShippingAddressThree.autoGrow = true;
+        });
+        this.vShippingStreet.ionChange.subscribe(()=>{
+            if (this.vShippingStreet.autoGrow == false) this.vShippingStreet.autoGrow = true;
+        });
+        this.vShippingStreetNumber.ionChange.subscribe(()=>{
+            if (this.vShippingStreetNumber.autoGrow == false) this.vShippingStreetNumber.autoGrow = true;
+        });
+        this.vShippingZip.ionChange.subscribe(()=>{
+            if (this.vShippingZip.autoGrow == false) this.vShippingZip.autoGrow = true;
+        });
+        this.vShippingCity.ionChange.subscribe(()=>{
+            if (this.vShippingCity.autoGrow == false) this.vShippingCity.autoGrow = true;
+        });
     }
 }

@@ -8,17 +8,18 @@ import { ImpressumPageRoutingModule } from './impressum-routing.module';
 
 import { ImpressumPage } from './impressum.page';
 import {ImpressumComponent} from '../../../../../components/impressum/impressum.component';
+import {ImpressumComponentModule} from "../../../../../components/impressum/impressum.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ImpressumPageRoutingModule
+    ImpressumPageRoutingModule,
+      ImpressumComponentModule
   ],
   exports: [
-    ImpressumComponent
   ],
-  declarations: [ImpressumPage, ImpressumComponent]
+  declarations: [ImpressumPage]
 })
 export class ImpressumPageModule {}
