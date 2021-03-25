@@ -26,7 +26,7 @@
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">Sammlername*</ion-label>
-                            <ion-textarea class="my-text-area" #vName rows="1" auto-grow="false" type="text" formControlName="cName" (ionChange)="onChangeAddress()"></ion-textarea>
+                            <ion-textarea #vName rows="1" auto-grow="false" type="text" formControlName="cName" (ionChange)="onChangeAddress()"></ion-textarea>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cName.errors?.required" class="input-invalid">Pflichtfeld</span>
                         <span *ngIf="bSubmitted && errorControl.cName.errors?.maxlength" class="input-invalid"

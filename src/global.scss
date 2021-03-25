@@ -139,6 +139,10 @@ b {
   font-weight: 500;
 }
 
+ion-textarea {
+  margin-top: 0.05rem !important;
+}
+
 
 // CLASSES
 
@@ -172,7 +176,7 @@ b {
 }
 
 .ion-grid-table {
-  padding:  1.25rem  1.25rem  1.25rem  1.25rem;
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
   flex-wrap: nowrap;
   overflow-y: hidden;
 }
@@ -367,7 +371,7 @@ b {
 
 .ion-item-toggle-check {
   display: flex;
-  margin-left: -1rem ;
+  margin-left: -1rem;
   padding-top: 1rem;
 }
 
@@ -650,8 +654,8 @@ b {
   -webkit-overflow-scrolling: touch;
   will-change: scroll-position;
   contain: size style layout;
-  display: flex;             // added by me
-  flex-direction: column;    // added by me
+  display: flex; // added by me
+  flex-direction: column; // added by me
 }
 
 .lower-content {
