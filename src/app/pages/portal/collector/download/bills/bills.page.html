@@ -10,7 +10,7 @@
             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Zeitraum</ion-label>
-                    <ion-select [(ngModel)]="cYear" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                    <ion-select [(ngModel)]="cYear" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
                                 [selectedText]="cYear" (ionChange)="onYear()">
                         <ion-select-option *ngFor="let cYear of lYears"
                                            [value]="cYear">{{cYear}}</ion-select-option>

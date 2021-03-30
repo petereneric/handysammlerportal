@@ -1,7 +1,10 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
+import { Downloads } from '../../utilities/downloads';
+import { Alert } from "../../utilities/alert";
 let FooterComponent = class FooterComponent {
-    constructor(api, router) {
+    constructor(Downloads, api, router) {
+        this.Downloads = Downloads;
         this.api = api;
         this.router = router;
         this.urlTermsOfUse = 'agreement/terms_of_use/';
@@ -16,22 +19,10 @@ let FooterComponent = class FooterComponent {
         window.open('https://mobile-box.eu', "_blank");
     }
     onPrivacyPolicy() {
-        this.api.getFile(this.urlPrivacyPolicy + 1).subscribe(response => {
-            console.log(response);
-            let blob = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(blob);
-            window.open(url);
-        });
+        this.Downloads.privacyPolicyCollector();
     }
     onTermsOfUse() {
-        this.api.getFile(this.urlTermsOfUse + 1).subscribe(response => {
-            console.log(response);
-            let blob = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(blob);
-            window.open(url);
-        }, error => {
-            console.log(error);
-        });
+        this.Downloads.termsOfUseCollector();
     }
 };
 FooterComponent = __decorate([
@@ -39,6 +30,7 @@ FooterComponent = __decorate([
         selector: 'app-footer',
         templateUrl: './footer.component.html',
         styleUrls: ['./footer.component.scss'],
+        providers: [Downloads, Alert]
     })
 ], FooterComponent);
 export { FooterComponent };

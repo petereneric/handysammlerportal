@@ -46,7 +46,7 @@ export class CertificatesPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
-            this.Alert.alertPopUp('Urkunde').then(res => {
+            this.Alert.popUp('Urkunde').then(res => {
                 if (!res) window.open(url);
             })
         }, error => {

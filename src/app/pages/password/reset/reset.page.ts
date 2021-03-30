@@ -5,6 +5,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ConnApiService} from '../../../services/conn-api/conn-api.service';
 import jwt_decode from 'jwt-decode';
 import {HttpResponse} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-reset',
@@ -12,6 +13,9 @@ import {HttpResponse} from '@angular/common/http';
   styleUrls: ['./reset.page.scss'],
 })
 export class ResetPage implements OnInit {
+
+  //Constants
+  private maxPassword = environment.maxPassword;
 
   // Urls
   private urlReset = 'password/reset'

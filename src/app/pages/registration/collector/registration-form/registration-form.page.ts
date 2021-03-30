@@ -4,11 +4,11 @@ import {ConnApiService} from '../../../../services/conn-api/conn-api.service';
 import {AlertController, IonTextarea} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {HttpResponse} from '@angular/common/http';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 import {Toast} from '../../../../utilities/toast';
-import {Downloads} from "../../../../utilities/downloads";
-import {Alert} from "../../../../utilities/alert";
-
+import {Downloads} from '../../../../utilities/downloads';
+import {Alert} from '../../../../utilities/alert';
+import {environment} from '../../../../../environments/environment';
 
 
 @Component({
@@ -17,8 +17,10 @@ import {Alert} from "../../../../utilities/alert";
     styleUrls: ['./registration-form.page.scss'],
     providers: [Downloads, Alert]
 })
+
 export class RegistrationFormPage implements OnInit {
 
+    // Views
     @ViewChild('vName') vName;
     @ViewChild('vNameDetails') vNameDetails;
     @ViewChild('vStreet') vStreet;
@@ -39,6 +41,11 @@ export class RegistrationFormPage implements OnInit {
     @ViewChild('vShippingZip') vShippingZip;
     @ViewChild('vShippingCity') vShippingCity;
 
+    //Constants
+    private maxZip = environment.maxZip;
+    private maxInput = environment.maxInput;
+    private maxPassword = environment.maxPassword;
+
     //ViewChilds
     private textArea: IonTextarea;
 
@@ -49,33 +56,33 @@ export class RegistrationFormPage implements OnInit {
     private urlRegister = 'registration/collector';
     private urlPartner = 'partner';
     private urlPartners = 'partner'; // next update set partners, also change in api
-    private urlBecomeCollector = "download/document/become_collector"
-    private urlMailRegistration = "registration/mail"
+    private urlBecomeCollector = 'download/document/become_collector';
+    private urlMailRegistration = 'registration/mail';
     private urlTermsOfUse = 'agreement/terms_of_use/';
     private urlPrivacyPolicy = 'agreement/privacy_policy/';
 
     // FormBuilder
     fgCollector = this.fb.group({
-        cName: ['', [Validators.required, Validators.maxLength(80)]],
-        cNameDetails: ['', [Validators.maxLength(80)]],
-        cStreet: ['', [Validators.required, Validators.maxLength(50)]],
-        cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
-        cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-        cCity: ['', [Validators.required, Validators.maxLength(50)]],
+        cName: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cNameDetails: ['', [Validators.maxLength(this.maxInput)]],
+        cStreet: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
+        cCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
         cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{7,}'), Validators.minLength(8)]],
-        cPrename: ['', [Validators.required, Validators.maxLength(50)]],
-        cSurname: ['', [Validators.required, Validators.maxLength(50)]],
-        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-        cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-        cPhoneFixedLine: ['', [Validators.maxLength(50)]],
-        cPhoneMobile: ['', [Validators.maxLength(50)]],
-        cShippingAddressOne: ['', [Validators.required, Validators.maxLength(80)]],
-        cShippingAddressTwo: ['', [Validators.maxLength(50)]],
-        cShippingAddressThree: ['', [Validators.maxLength(50)]],
-        cShippingStreet: ['', [Validators.required, Validators.maxLength(50)]],
-        cShippingStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
-        cShippingCity: ['', [Validators.required, Validators.maxLength(50)]],
-        cShippingZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+        cPrename: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cSurname: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+        cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+        cPhoneFixedLine: ['', [Validators.maxLength(this.maxInput)]],
+        cPhoneMobile: ['', [Validators.maxLength(this.maxInput)]],
+        cShippingAddressOne: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cShippingAddressTwo: ['', [Validators.maxLength(this.maxInput)]],
+        cShippingAddressThree: ['', [Validators.maxLength(this.maxInput)]],
+        cShippingStreet: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cShippingStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cShippingCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cShippingZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
     });
 
     // Variables
@@ -115,7 +122,7 @@ export class RegistrationFormPage implements OnInit {
     }
 
     ngOnInit() {
-                // types
+        // types
         this.connApi.get(this.urlTypes).subscribe((data: HttpResponse<any>) => {
             this.lTypes = data.body;
         });
@@ -125,17 +132,17 @@ export class RegistrationFormPage implements OnInit {
             this.lPartner = response.body;
         });
 
-        this.activatedRoute.params.subscribe( params => {
+        this.activatedRoute.params.subscribe(params => {
             if (params.id != null && params.id != 0) {
-                this.connApi.get(this.urlPartner+'/'+params.id).subscribe((response : HttpResponse<any>) => {
+                this.connApi.get(this.urlPartner + '/' + params.id).subscribe((response: HttpResponse<any>) => {
                     if (response.body != null) {
                         this.oPartner = response.body;
                         this.bChangePartner = false;
                     }
 
                 }, error => {
-                    console.log(error)
-                })
+                    console.log(error);
+                });
             }
         });
 
@@ -234,9 +241,9 @@ export class RegistrationFormPage implements OnInit {
     }
 
     private mailVerification() {
-        this.connApi.safePost(this.urlMailRegistration, null).subscribe((data:HttpResponse<any>) => {
+        this.connApi.safePost(this.urlMailRegistration, null).subscribe((data: HttpResponse<any>) => {
             if (data.status == 200) {
-                console.log("Verification mail sent");
+                console.log('Verification mail sent');
             }
         }, error => {
             console.log(error.message);
@@ -247,7 +254,7 @@ export class RegistrationFormPage implements OnInit {
 
     onChangeAddress() {
         if (this.bAddressIdentical) {
-            console.log("läuft");
+            console.log('läuft');
             this.fgCollector.controls['cShippingAddressOne'].setValue(this.fgCollector.get('cName').value);
             this.fgCollector.controls['cShippingAddressTwo'].setValue(this.fgCollector.get('cNameDetails').value);
             this.fgCollector.controls['cShippingAddressThree'].setValue((this.fgCollector.get('cPrename').value !== '' && this.fgCollector.get('cSurname').value !== '') ? 'z.H. ' + this.fgCollector.get('cPrename').value + ' ' + this.fgCollector.get('cSurname').value : '');
@@ -402,15 +409,15 @@ export class RegistrationFormPage implements OnInit {
     }
 
     onInfo() {
-        console.log("test")
+        console.log('test');
         this.connApi.getFile(this.urlBecomeCollector).subscribe(response => {
             console.log(response);
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
-            window.open(url)
+            window.open(url);
         }, error => {
             console.log(error);
-        })
+        });
     }
 
     onTermsOfUse() {
@@ -422,62 +429,99 @@ export class RegistrationFormPage implements OnInit {
     }
 
     ngAfterViewInit() {
-        this.vName.ionChange.subscribe(()=>{
-            if (this.vName.autoGrow == false) this.vName.autoGrow = true;
+        this.vName.ionChange.subscribe(() => {
+            console.log("hiiier");
+                this.vName.autoGrow = true;
+            this.vNameDetails.autoGrow = true;
         });
-        this.vNameDetails.ionChange.subscribe(()=>{
-            if (this.vNameDetails.autoGrow == false) this.vNameDetails.autoGrow = true;
+        this.vNameDetails.ionChange.subscribe(() => {
+            console.log("hiiddddier");
+            this.vNameDetails.autoGrow = true;
         });
-        this.vStreet.ionChange.subscribe(()=>{
-            if (this.vName.autoGrow == false) this.vName.autoGrow = true;
+        this.vStreet.ionChange.subscribe(() => {
+            if (this.vStreet.autoGrow == false) {
+                this.vStreet.autoGrow = true;
+            }
         });
-        this.vStreetNumber.ionChange.subscribe(()=>{
-            if (this.vStreetNumber.autoGrow == false) this.vStreetNumber.autoGrow = true;
+        this.vStreetNumber.ionChange.subscribe(() => {
+            if (this.vStreetNumber.autoGrow == false) {
+                this.vStreetNumber.autoGrow = true;
+            }
         });
-        this.vCity.ionChange.subscribe(()=>{
-            if (this.vCity.autoGrow == false) this.vCity.autoGrow = true;
+        this.vCity.ionChange.subscribe(() => {
+            if (this.vCity.autoGrow == false) {
+                this.vCity.autoGrow = true;
+            }
         });
-        this.vZip.ionChange.subscribe(()=>{
-            if (this.vZip.autoGrow == false) this.vZip.autoGrow = true;
+        this.vZip.ionChange.subscribe(() => {
+            if (this.vZip.autoGrow == false) {
+                this.vZip.autoGrow = true;
+            }
         });
-        this.vPrename.ionChange.subscribe(()=>{
-            if (this.vPrename.autoGrow == false) this.vPrename.autoGrow = true;
+        this.vPrename.ionChange.subscribe(() => {
+            if (this.vPrename.autoGrow == false) {
+                this.vPrename.autoGrow = true;
+            }
         });
-        this.vSurname.ionChange.subscribe(()=>{
-            if (this.vSurname.autoGrow == false) this.vSurname.autoGrow = true;
+        this.vSurname.ionChange.subscribe(() => {
+            if (this.vSurname.autoGrow == false) {
+                this.vSurname.autoGrow = true;
+            }
         });
-        this.vEmail.ionChange.subscribe(()=>{
-            if (this.vEmail.autoGrow == false) this.vEmail.autoGrow = true;
+        this.vEmail.ionChange.subscribe(() => {
+            if (this.vEmail.autoGrow == false) {
+                this.vEmail.autoGrow = true;
+            }
         });
-        this.vEmailCC.ionChange.subscribe(()=>{
-            if (this.vEmailCC.autoGrow == false) this.vEmailCC.autoGrow = true;
+        this.vEmailCC.ionChange.subscribe(() => {
+            if (this.vEmailCC.autoGrow == false) {
+                this.vEmailCC.autoGrow = true;
+            }
         });
-        this.vPhoneFixedLine.ionChange.subscribe(()=>{
-            if (this.vPhoneFixedLine.autoGrow == false) this.vPhoneFixedLine.autoGrow = true;
+        this.vPhoneFixedLine.ionChange.subscribe(() => {
+            if (this.vPhoneFixedLine.autoGrow == false) {
+                this.vPhoneFixedLine.autoGrow = true;
+            }
         });
-        this.vPhoneMobile.ionChange.subscribe(()=>{
-            if (this.vPhoneMobile.autoGrow == false) this.vPhoneMobile.autoGrow = true;
+        this.vPhoneMobile.ionChange.subscribe(() => {
+            if (this.vPhoneMobile.autoGrow == false) {
+                this.vPhoneMobile.autoGrow = true;
+            }
         });
-        this.vShippingAddressOne.ionChange.subscribe(()=>{
-            if (this.vShippingAddressOne.autoGrow == false) this.vShippingAddressOne.autoGrow = true;
+        this.vShippingAddressOne.ionChange.subscribe(() => {
+            if (this.vShippingAddressOne.autoGrow == false) {
+                this.vShippingAddressOne.autoGrow = true;
+            }
         });
-        this.vShippingAddressTwo.ionChange.subscribe(()=>{
-            if (this.vShippingAddressTwo.autoGrow == false) this.vShippingAddressTwo.autoGrow = true;
+        this.vShippingAddressTwo.ionChange.subscribe(() => {
+            if (this.vShippingAddressTwo.autoGrow == false) {
+                this.vShippingAddressTwo.autoGrow = true;
+            }
         });
-        this.vShippingAddressThree.ionChange.subscribe(()=>{
-            if (this.vShippingAddressThree.autoGrow == false) this.vShippingAddressThree.autoGrow = true;
+        this.vShippingAddressThree.ionChange.subscribe(() => {
+            if (this.vShippingAddressThree.autoGrow == false) {
+                this.vShippingAddressThree.autoGrow = true;
+            }
         });
-        this.vShippingStreet.ionChange.subscribe(()=>{
-            if (this.vShippingStreet.autoGrow == false) this.vShippingStreet.autoGrow = true;
+        this.vShippingStreet.ionChange.subscribe(() => {
+            if (this.vShippingStreet.autoGrow == false) {
+                this.vShippingStreet.autoGrow = true;
+            }
         });
-        this.vShippingStreetNumber.ionChange.subscribe(()=>{
-            if (this.vShippingStreetNumber.autoGrow == false) this.vShippingStreetNumber.autoGrow = true;
+        this.vShippingStreetNumber.ionChange.subscribe(() => {
+            if (this.vShippingStreetNumber.autoGrow == false) {
+                this.vShippingStreetNumber.autoGrow = true;
+            }
         });
-        this.vShippingZip.ionChange.subscribe(()=>{
-            if (this.vShippingZip.autoGrow == false) this.vShippingZip.autoGrow = true;
+        this.vShippingZip.ionChange.subscribe(() => {
+            if (this.vShippingZip.autoGrow == false) {
+                this.vShippingZip.autoGrow = true;
+            }
         });
-        this.vShippingCity.ionChange.subscribe(()=>{
-            if (this.vShippingCity.autoGrow == false) this.vShippingCity.autoGrow = true;
+        this.vShippingCity.ionChange.subscribe(() => {
+            if (this.vShippingCity.autoGrow == false) {
+                this.vShippingCity.autoGrow = true;
+            }
         });
     }
 }

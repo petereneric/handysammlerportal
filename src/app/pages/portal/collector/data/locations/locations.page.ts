@@ -8,6 +8,7 @@ import {AlertController, IonContent, ToastController} from '@ionic/angular';
 import {Content} from '@angular/compiler/src/render3/r3_ast';
 import {Router} from '@angular/router';
 import {DataService} from '../../../../../services/data/data.service';
+import {environment} from '../../../../../../environments/environment';
 
 @Component({
     selector: 'app-locations',
@@ -20,6 +21,10 @@ import {DataService} from '../../../../../services/data/data.service';
 export class LocationsPage implements OnInit {
     @ViewChild(IonContent) content: IonContent;
 
+    //Constants
+    private maxZip = environment.maxZip;
+    private maxInput = environment.maxInput;
+
     // Urls
     private urlLocation = 'collector/location';
     private urlLocationActive = 'collector/location/active';
@@ -27,12 +32,12 @@ export class LocationsPage implements OnInit {
 
     // FormBuilder
     fgLocation = this.formBuilder.group({
-        cName: ['', [Validators.required, Validators.maxLength(50)]],
-        cWebsite: ['', [Validators.maxLength(50)]],
-        cStreet: ['', [Validators.required, Validators.maxLength(50)]],
-        cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
-        cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-        cCity: ['', [Validators.required, Validators.maxLength(50)]],
+        cName: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cWebsite: ['', [Validators.maxLength(this.maxInput)]],
+        cStreet: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+        cZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
+        cCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
     });
 
     // Variables
@@ -201,6 +206,8 @@ export class LocationsPage implements OnInit {
         this.bAdd = bAdd;
         if (!bAdd) {
             this.fgLocation.reset();
+        } else {
+            this.bEdit = false;
         }
     }
 
@@ -209,6 +216,8 @@ export class LocationsPage implements OnInit {
         if (!bEdit) {
             this.fgLocation.reset();
             this.oLocationEdit = null;
+        } else {
+            this.bAdd = false;
         }
     }
 

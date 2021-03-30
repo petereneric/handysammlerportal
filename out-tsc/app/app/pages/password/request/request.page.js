@@ -1,6 +1,7 @@
 import { __awaiter, __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { environment } from '../../../../environments/environment';
 let RequestPage = class RequestPage {
     constructor(router, alertController, activatedRoute, fb, connApi) {
         this.router = router;
@@ -8,6 +9,8 @@ let RequestPage = class RequestPage {
         this.activatedRoute = activatedRoute;
         this.fb = fb;
         this.connApi = connApi;
+        //Constants
+        this.maxInput = environment.maxInput;
         // Urls
         this.urlPasswordRequest = "password/request";
         // Variables
@@ -15,7 +18,7 @@ let RequestPage = class RequestPage {
         this.role = null;
         // FormBuilder
         this.formGroup = this.fb.group({
-            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(50)]],
+            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
         });
     }
     ngOnInit() {

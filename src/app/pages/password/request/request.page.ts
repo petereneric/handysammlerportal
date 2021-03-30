@@ -4,6 +4,7 @@ import {ConnApiService} from '../../../services/conn-api/conn-api.service';
 import {HttpResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
+import {environment} from '../../../../environments/environment';
 
 @Component({
     selector: 'app-request',
@@ -11,6 +12,9 @@ import {AlertController} from '@ionic/angular';
     styleUrls: ['./request.page.scss'],
 })
 export class RequestPage implements OnInit {
+
+    //Constants
+    private maxInput = environment.maxInput;
 
     // Urls
     private urlPasswordRequest = "password/request"
@@ -21,7 +25,7 @@ export class RequestPage implements OnInit {
 
     // FormBuilder
     formGroup = this.fb.group({
-        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(50)]],
+        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
     });
 
     constructor(public router: Router, public alertController: AlertController, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private connApi: ConnApiService) {

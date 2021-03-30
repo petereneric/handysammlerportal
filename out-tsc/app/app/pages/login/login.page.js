@@ -2,8 +2,11 @@ import { __awaiter, __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Downloads } from '../../utilities/downloads';
+import { Alert } from "../../utilities/alert";
+import { environment } from '../../../environments/environment';
 let LoginPage = class LoginPage {
-    constructor(Downloads, alertController, authApiService, connApiService, router, fb, data) {
+    constructor(Alert, Downloads, alertController, authApiService, connApiService, router, fb, data) {
+        this.Alert = Alert;
         this.Downloads = Downloads;
         this.alertController = alertController;
         this.authApiService = authApiService;
@@ -11,17 +14,19 @@ let LoginPage = class LoginPage {
         this.router = router;
         this.fb = fb;
         this.data = data;
+        //Constants
+        this.maxInput = environment.maxInput;
         // Urls
         this.urlLogin = 'login';
         this.bSubmittedCollector = false;
         this.bSubmittedPartner = false;
         this.loginFormPartner = this.fb.group({
-            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-            cPassword: ['', [Validators.required, Validators.maxLength(50)]]
+            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cPassword: ['', [Validators.required, Validators.maxLength(this.maxInput)]]
         });
         this.loginFormCollector = this.fb.group({
-            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-            cPassword: ['', [Validators.required, Validators.maxLength(50)]]
+            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cPassword: ['', [Validators.required, Validators.maxLength(this.maxInput)]]
         });
         console.log('teeest');
     }
@@ -29,6 +34,7 @@ let LoginPage = class LoginPage {
         console.log('ngOnInit: LoginPage');
         //this.data.currentRole.subscribe(role => console.log(this.selectedRole = role))
         this.selectedRole = 1;
+        localStorage.setItem('bPopUp', 'false');
     }
     segmentChanged(ev) {
         console.log('Segment changed', ev);
@@ -69,10 +75,10 @@ let LoginPage = class LoginPage {
             }
         }, error => {
             if (error.status == 401) {
-                this.alertWrongLoginCredentials('E-Mail-Adresse unbekannt');
+                this.Alert.invalidInput('E-Mail unbekannt');
             }
             if (error.status == 403) {
-                this.alertWrongLoginCredentials('Passwort falsch');
+                this.Alert.invalidInput('Passwort falsch');
             }
         });
     }
@@ -137,7 +143,7 @@ LoginPage = __decorate([
         selector: 'app-login',
         templateUrl: './login.page.html',
         styleUrls: ['./login.page.scss'],
-        providers: [Downloads]
+        providers: [Downloads, Alert]
     })
 ], LoginPage);
 export { LoginPage };

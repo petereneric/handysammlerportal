@@ -20,7 +20,7 @@ export class Downloads {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url)
-            this.Alert.alertPopUp('Informationen für Sammler').then(res => {
+            this.Alert.popUp('Informationen für Sammler').then(res => {
                 if (!res) window.open(url);
             })
         })
@@ -32,7 +32,7 @@ export class Downloads {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
-            this.Alert.alertPopUp('Sammler werden').then(res => {
+            this.Alert.popUp('Sammler werden').then(res => {
                 if (!res) window.open(url);
             })
         });
@@ -44,7 +44,7 @@ export class Downloads {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url)
-            this.Alert.alertPopUp('Datenschutzerklärung').then(res => {
+            this.Alert.popUp('Datenschutzerklärung').then(res => {
                 if (!res) window.open(url)
             })
         })
@@ -56,7 +56,7 @@ export class Downloads {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url)
-            this.Alert.alertPopUp('Nutzungsbedingungen').then(res => {
+            this.Alert.popUp('Nutzungsbedingungen').then(res => {
                 if (!res) window.open(url)
             })
         }, error => {

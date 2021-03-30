@@ -1,6 +1,7 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { Downloads } from '../../../../../utilities/downloads';
+import { Alert } from "../../../../../utilities/alert";
 let InformationPage = class InformationPage {
     constructor(connApi, Downloads) {
         this.connApi = connApi;
@@ -20,7 +21,7 @@ InformationPage = __decorate([
         selector: 'app-information',
         templateUrl: './information.page.html',
         styleUrls: ['./information.page.scss'],
-        providers: [Downloads]
+        providers: [Downloads, Alert]
     })
 ], InformationPage);
 export { InformationPage };

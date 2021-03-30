@@ -9,7 +9,7 @@
                     <ion-col *ngIf="oBox != null && oBox.bAvailable == 1 && oBox.nStock > 0" [sizeXl]="6" [sizeLg]="6" [sizeMd]="12" [sizeSm]="12" [sizeXs]="12">
                         <ion-item>
                             <ion-label>{{(oBox != null && oBox.nStock > 0) ? (oBox.maxOrder > 0 ? 'Mobile-Box' : 'Mobile-Box (Limit erreicht)*') : 'Mobile-Box (Nicht auf Lager)'}}</ion-label>
-                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abrechen'" [okText]="'Auswählen'" [(ngModel)]="boxOrder" [compareWith]="compare" [disabled]="oBox.nStock == 0 || oBox.maxOrder <= 0" (ionChange)="onChangedBoxOrder()">
+                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abbrechen'" [okText]="'Auswählen'" [(ngModel)]="boxOrder" [compareWith]="compare" [disabled]="oBox.nStock == 0 || oBox.maxOrder <= 0" (ionChange)="onChangedBoxOrder()">
                                 <ion-select-option *ngFor="let boxOrder of boxChoice" [value]="boxOrder">{{boxOrder}}</ion-select-option>
                             </ion-select>
                         </ion-item>
@@ -18,7 +18,7 @@
                              [sizeXl]="6" [sizeLg]="6" [sizeMd]="12" [sizeSm]="12" [sizeXs]="12">
                         <ion-item>
                             <ion-label>{{(oBricolage != null && oBricolage.nStock > 0) ? (oBricolage.maxOrder > 0 ? 'Bastel-Box' : 'Bastel-Box (Limit erreicht)*') : 'Bastel-Box (Nicht auf Lager)'}}</ion-label>
-                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abrechen'" [okText]="'Auswählen'" [(ngModel)]="bricolageOrder" [compareWith]="compare" [disabled]="oBricolage.nStock == 0 || oBricolage.maxOrder <= 0"
+                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abbrechen'" [okText]="'Auswählen'" [(ngModel)]="bricolageOrder" [compareWith]="compare" [disabled]="oBricolage.nStock == 0 || oBricolage.maxOrder <= 0"
                                         (ionChange)="onChangedBricolageOrder()">
                                 <ion-select-option *ngFor="let bricolageOrder of bricolageChoice" [value]="bricolageOrder">{{bricolageOrder}}</ion-select-option>
                             </ion-select>
@@ -29,7 +29,7 @@
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item>
                             <ion-label>Flyer</ion-label>
-                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abrechen'" [okText]="'Auswählen'" [(ngModel)]="flyerOrder" [compareWith]="compare"
+                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abbrechen'" [okText]="'Auswählen'" [(ngModel)]="flyerOrder" [compareWith]="compare"
                                         [disabled]="flyerAvailable == 0" (ionChange)="onChangedFlyerOrder()">
                                 <ion-select-option *ngFor="let flyerOrder of flyerChoice"
                                                    [value]="flyerOrder">{{flyerOrder}}</ion-select-option>
@@ -39,7 +39,7 @@
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item>
                             <ion-label>Poster</ion-label>
-                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abrechen'" [okText]="'Auswählen'" [(ngModel)]="posterOrder" [compareWith]="compare" [disabled]="posterAvailable == 0"
+                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abbrechen'" [okText]="'Auswählen'" [(ngModel)]="posterOrder" [compareWith]="compare" [disabled]="posterAvailable == 0"
                                         (ionChange)="onChangedPosterOrder()">
                                 <ion-select-option [ngClass]="'.ion-select-option'" *ngFor="let posterOrder of posterChoice"
                                                    [value]="posterOrder">{{posterOrder}}</ion-select-option>

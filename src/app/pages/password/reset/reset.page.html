@@ -14,7 +14,7 @@
                     <ion-col size-xl="8" size-lg="12" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">Neues Passwort</ion-label>
-                            <ion-input [type]="bShowPassword ? 'text' : 'password'"
+                            <ion-input maxlength="{{maxPassword}}" [type]="bShowPassword ? 'text' : 'password'"
                                        formControlName="cPassword"></ion-input>
                         </ion-item>
                         <ion-row>

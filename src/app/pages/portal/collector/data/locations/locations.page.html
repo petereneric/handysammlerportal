@@ -18,14 +18,14 @@
                     </ion-item>
                     <span *ngIf="bSubmitted && errorControl.cName.errors?.required"
                           class="input-invalid">Pflichtfeld</span>
-                    <span *ngIf="bSubmitted && errorControl.cName.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
+                    <span *ngIf="bSubmitted && errorControl.cName.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                 </ion-col>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item lines="full">
                         <ion-label class="input-label" position="floating">Website</ion-label>
                         <ion-textarea rows="1" auto-grow="true" type="text" formControlName="cWebsite"></ion-textarea>
                     </ion-item>
-                    <span *ngIf="bSubmitted && errorControl.cWebsite.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
+                    <span *ngIf="bSubmitted && errorControl.cWebsite.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                 </ion-col>
             </ion-row>
 
@@ -37,7 +37,7 @@
                     </ion-item>
                     <span *ngIf="bSubmitted && errorControl.cStreet.errors?.required"
                           class="input-invalid">Pflichtfeld</span>
-                    <span *ngIf="bSubmitted && errorControl.cStreet.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
+                    <span *ngIf="bSubmitted && errorControl.cStreet.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                 </ion-col>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item lines="full">
@@ -45,7 +45,7 @@
                         <ion-input type="text" formControlName="cStreetNumber"></ion-input>
                     </ion-item>
                     <span *ngIf="bSubmitted && errorControl.cStreetNumber.errors?.required" class="input-invalid">Pflichtfeld</span>
-                    <span *ngIf="bSubmitted && errorControl.cStreetNumber.errors?.maxlength" class="input-invalid">Maximal-Länge von 10 Zeichen überschritten</span>
+                    <span *ngIf="bSubmitted && errorControl.cStreetNumber.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                 </ion-col>
             </ion-row>
 
@@ -64,17 +64,16 @@
                         <ion-textarea rows="1" auto-grow="true" type="text" formControlName="cCity"></ion-textarea>
                     </ion-item>
                     <span *ngIf="bSubmitted && errorControl.cCity.errors?.required" class="input-invalid">Pflichtfeld</span>
-                    <span *ngIf="bSubmitted && errorControl.cCity.errors?.maxlength" class="input-invalid">Maximal-Länge von 80 Zeichen überschritten</span>
+                    <span *ngIf="bSubmitted && errorControl.cCity.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                 </ion-col>
             </ion-row>
         </form>
         <ion-row class="ion-row-buttons">
             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
-                <ion-button class="ion-button-one-inside"
-                            (click)="bAdd ? onSaveAdd() : onSaveEdit()">{{bAdd ? 'Hinzufügen' : 'Änderungen übernehmen'}}</ion-button>
+                <ion-button class="ion-button-one-inside" (click)="bAdd ? onSaveAdd() : onSaveEdit()">{{bAdd ? 'Hinzufügen' : 'Änderungen übernehmen'}}</ion-button>
             </ion-col>
             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
-                <ion-button class="ion-button-two-inside" (click)="bAdd ? isAdding(false) : isEditing(false)">Abrechen
+                <ion-button class="ion-button-two-inside" (click)="bAdd ? isAdding(false) : isEditing(false)">Abbrechen
                 </ion-button>
             </ion-col>
         </ion-row>

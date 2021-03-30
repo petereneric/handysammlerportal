@@ -2,6 +2,7 @@ import { __awaiter, __decorate } from "tslib";
 import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { IonContent } from '@ionic/angular';
+import { environment } from '../../../../../../environments/environment';
 let LocationsPage = class LocationsPage {
     constructor(router, connApi, formBuilder, toastController, alertController, dataService) {
         this.router = router;
@@ -10,18 +11,21 @@ let LocationsPage = class LocationsPage {
         this.toastController = toastController;
         this.alertController = alertController;
         this.dataService = dataService;
+        //Constants
+        this.maxZip = environment.maxZip;
+        this.maxInput = environment.maxInput;
         // Urls
         this.urlLocation = 'collector/location';
         this.urlLocationActive = 'collector/location/active';
         this.urlLocations = 'collector/locations';
         // FormBuilder
         this.fgLocation = this.formBuilder.group({
-            cName: ['', [Validators.required, Validators.maxLength(50)]],
-            cWebsite: ['', [Validators.maxLength(50)]],
-            cStreet: ['', [Validators.required, Validators.maxLength(50)]],
-            cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
-            cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-            cCity: ['', [Validators.required, Validators.maxLength(50)]],
+            cName: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cWebsite: ['', [Validators.maxLength(this.maxInput)]],
+            cStreet: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
+            cCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
         });
         // Variables
         this.bEdit = false;
@@ -167,12 +171,18 @@ let LocationsPage = class LocationsPage {
         if (!bAdd) {
             this.fgLocation.reset();
         }
+        else {
+            this.bEdit = false;
+        }
     }
     isEditing(bEdit) {
         this.bEdit = bEdit;
         if (!bEdit) {
             this.fgLocation.reset();
             this.oLocationEdit = null;
+        }
+        else {
+            this.bAdd = false;
         }
     }
     alertInvalid() {

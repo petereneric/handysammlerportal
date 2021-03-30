@@ -7,7 +7,7 @@
             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Zeitraum</ion-label>
-                    <ion-select [(ngModel)]="cTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                    <ion-select [(ngModel)]="cTime" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
                                 [selectedText]="cTime.name">
                         <ion-select-option *ngFor="let oTime of lTime" [value]="oTime">{{oTime.name}}</ion-select-option>
                     </ion-select>
@@ -16,7 +16,7 @@
             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item *ngIf="cTime.key !== 'total'">
                     <ion-label class="input-label">Auswahl</ion-label>
-                    <ion-select [(ngModel)]="cSelectTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                    <ion-select [(ngModel)]="cSelectTime" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
                                 [selectedText]="cSelectTime">
                         <ion-select-option *ngFor="let selectTime of lSelectTime"
                                            [value]="selectTime">{{selectTime}}</ion-select-option>

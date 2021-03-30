@@ -1,4 +1,5 @@
 // Input - Underline -- Not working in global settings
+
 :host {
   .item-interactive.ion-invalid{
     --highlight-background: #FF !important;
@@ -7,6 +8,7 @@
     --highlight-background: #FF !important;
   }
 }
+
 
 .button-register {
   margin-bottom: 50px;

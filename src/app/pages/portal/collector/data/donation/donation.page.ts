@@ -36,7 +36,6 @@ export class DonationPage implements OnInit {
     // Partners
     this.connApi.safeGet(this.urlPartners).subscribe((response: HttpResponse<any>) => {
       this.lPartners = response.body;
-      console.log(this.lPartners);
     })
   }
 
@@ -49,20 +48,8 @@ export class DonationPage implements OnInit {
     // save
     this.connApi.safePost(this.urlPartner, data).subscribe((response: HttpResponse<any>) => {
       if (response.status == 200) {
-        this.toastSaved();
       }
     })
-  }
-
-  // Toasts
-  async toastSaved() {
-    const toast = await this.toastController.create({
-      message: 'Deine Daten wurden erfolgreich gespeichert.',
-      duration: 2500,
-      cssClass: 'my-toast',
-      position: 'bottom'
-    });
-    await toast.present();
   }
 
   onSelectedPartner($event: any) {

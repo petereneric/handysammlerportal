@@ -14,11 +14,11 @@
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">E-Mail Adresse</ion-label>
-                            <ion-input type="text" formControlName="cEmail"></ion-input>
+                            <ion-textarea rows="1" auto-grow="true" type="text" formControlName="cEmail"></ion-textarea>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cEmail.errors?.required" class="input-invalid">Pflichtfeld</span>
                         <span *ngIf="bSubmitted && errorControl.cEmail.errors?.pattern" class="input-invalid">Fehlerhafte Eingabe</span>
-                        <span *ngIf="bSubmitted && errorControl.cEmail.errors?.maxlength" class="input-invalid">Maximal-Länge von 50 Zeichen überschritten</span>
+                        <span *ngIf="bSubmitted && errorControl.cEmail.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                     </ion-col>
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-button class="ion-button-one-inside" (click)="onMail()">Passwort zurücksetzen</ion-button>

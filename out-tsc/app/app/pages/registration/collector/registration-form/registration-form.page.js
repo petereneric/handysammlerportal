@@ -1,15 +1,23 @@
 import { __awaiter, __decorate } from "tslib";
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Downloads } from '../../../../utilities/downloads';
+import { Alert } from '../../../../utilities/alert';
+import { environment } from '../../../../../environments/environment';
 let RegistrationFormPage = class RegistrationFormPage {
     // private activatedRoute: ActivatedRoute
-    constructor(uToast, activatedRoute, fb, connApi, alertController, router) {
+    constructor(Downloads, uToast, activatedRoute, fb, connApi, alertController, router) {
+        this.Downloads = Downloads;
         this.uToast = uToast;
         this.activatedRoute = activatedRoute;
         this.fb = fb;
         this.connApi = connApi;
         this.alertController = alertController;
         this.router = router;
+        //Constants
+        this.maxZip = environment.maxZip;
+        this.maxInput = environment.maxInput;
+        this.maxPassword = environment.maxPassword;
         // Urls
         this.urlTypes = 'types';
         this.urlRegionStates = 'region/states/';
@@ -17,32 +25,32 @@ let RegistrationFormPage = class RegistrationFormPage {
         this.urlRegister = 'registration/collector';
         this.urlPartner = 'partner';
         this.urlPartners = 'partner'; // next update set partners, also change in api
-        this.urlBecomeCollector = "download/document/become_collector";
-        this.urlMailRegistration = "registration/mail";
+        this.urlBecomeCollector = 'download/document/become_collector';
+        this.urlMailRegistration = 'registration/mail';
         this.urlTermsOfUse = 'agreement/terms_of_use/';
         this.urlPrivacyPolicy = 'agreement/privacy_policy/';
         // FormBuilder
         this.fgCollector = this.fb.group({
-            cName: ['', [Validators.required, Validators.maxLength(80)]],
-            cNameDetails: ['', [Validators.maxLength(80)]],
-            cStreet: ['', [Validators.required, Validators.maxLength(50)]],
-            cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
-            cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-            cCity: ['', [Validators.required, Validators.maxLength(50)]],
+            cName: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cNameDetails: ['', [Validators.maxLength(this.maxInput)]],
+            cStreet: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
+            cCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
             cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{7,}'), Validators.minLength(8)]],
-            cPrename: ['', [Validators.required, Validators.maxLength(50)]],
-            cSurname: ['', [Validators.required, Validators.maxLength(50)]],
-            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-            cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-            cPhoneFixedLine: ['', [Validators.maxLength(50)]],
-            cPhoneMobile: ['', [Validators.maxLength(50)]],
-            cShippingAddressOne: ['', [Validators.required, Validators.maxLength(80)]],
-            cShippingAddressTwo: ['', [Validators.maxLength(50)]],
-            cShippingAddressThree: ['', [Validators.maxLength(50)]],
-            cShippingStreet: ['', [Validators.required, Validators.maxLength(50)]],
-            cShippingStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
-            cShippingCity: ['', [Validators.required, Validators.maxLength(50)]],
-            cShippingZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+            cPrename: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cSurname: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cPhoneFixedLine: ['', [Validators.maxLength(this.maxInput)]],
+            cPhoneMobile: ['', [Validators.maxLength(this.maxInput)]],
+            cShippingAddressOne: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cShippingAddressTwo: ['', [Validators.maxLength(this.maxInput)]],
+            cShippingAddressThree: ['', [Validators.maxLength(this.maxInput)]],
+            cShippingStreet: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cShippingStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cShippingCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cShippingZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
         });
         // Variables
         this.cType = null;
@@ -178,7 +186,7 @@ let RegistrationFormPage = class RegistrationFormPage {
     mailVerification() {
         this.connApi.safePost(this.urlMailRegistration, null).subscribe((data) => {
             if (data.status == 200) {
-                console.log("Verification mail sent");
+                console.log('Verification mail sent');
             }
         }, error => {
             console.log(error.message);
@@ -187,7 +195,7 @@ let RegistrationFormPage = class RegistrationFormPage {
     // Address
     onChangeAddress() {
         if (this.bAddressIdentical) {
-            console.log("läuft");
+            console.log('läuft');
             this.fgCollector.controls['cShippingAddressOne'].setValue(this.fgCollector.get('cName').value);
             this.fgCollector.controls['cShippingAddressTwo'].setValue(this.fgCollector.get('cNameDetails').value);
             this.fgCollector.controls['cShippingAddressThree'].setValue((this.fgCollector.get('cPrename').value !== '' && this.fgCollector.get('cSurname').value !== '') ? 'z.H. ' + this.fgCollector.get('cPrename').value + ' ' + this.fgCollector.get('cSurname').value : '');
@@ -330,7 +338,7 @@ let RegistrationFormPage = class RegistrationFormPage {
         this.bSecurity = !this.bSecurity;
     }
     onInfo() {
-        console.log("test");
+        console.log('test');
         this.connApi.getFile(this.urlBecomeCollector).subscribe(response => {
             console.log(response);
             let blob = new Blob([response], { type: 'application/pdf' });
@@ -340,30 +348,172 @@ let RegistrationFormPage = class RegistrationFormPage {
             console.log(error);
         });
     }
-    onConditions() {
-        this.connApi.getFile(this.urlTermsOfUse + 1).subscribe(response => {
-            console.log(response);
-            let blob = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(blob);
-            window.open(url);
-        }, error => {
-            console.log(error);
-        });
+    onTermsOfUse() {
+        this.Downloads.termsOfUseCollector();
     }
-    onSecurity() {
-        this.connApi.getFile(this.urlPrivacyPolicy + 1).subscribe(response => {
-            console.log(response);
-            let blob = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(blob);
-            window.open(url);
+    onPrivacyPolicy() {
+        this.Downloads.privacyPolicyCollector();
+    }
+    ngAfterViewInit() {
+        this.vName.ionChange.subscribe(() => {
+            console.log("hiiier");
+            this.vName.autoGrow = true;
+            this.vNameDetails.autoGrow = true;
+        });
+        this.vNameDetails.ionChange.subscribe(() => {
+            console.log("hiiddddier");
+            this.vNameDetails.autoGrow = true;
+        });
+        this.vStreet.ionChange.subscribe(() => {
+            if (this.vStreet.autoGrow == false) {
+                this.vStreet.autoGrow = true;
+            }
+        });
+        this.vStreetNumber.ionChange.subscribe(() => {
+            if (this.vStreetNumber.autoGrow == false) {
+                this.vStreetNumber.autoGrow = true;
+            }
+        });
+        this.vCity.ionChange.subscribe(() => {
+            if (this.vCity.autoGrow == false) {
+                this.vCity.autoGrow = true;
+            }
+        });
+        this.vZip.ionChange.subscribe(() => {
+            if (this.vZip.autoGrow == false) {
+                this.vZip.autoGrow = true;
+            }
+        });
+        this.vPrename.ionChange.subscribe(() => {
+            if (this.vPrename.autoGrow == false) {
+                this.vPrename.autoGrow = true;
+            }
+        });
+        this.vSurname.ionChange.subscribe(() => {
+            if (this.vSurname.autoGrow == false) {
+                this.vSurname.autoGrow = true;
+            }
+        });
+        this.vEmail.ionChange.subscribe(() => {
+            if (this.vEmail.autoGrow == false) {
+                this.vEmail.autoGrow = true;
+            }
+        });
+        this.vEmailCC.ionChange.subscribe(() => {
+            if (this.vEmailCC.autoGrow == false) {
+                this.vEmailCC.autoGrow = true;
+            }
+        });
+        this.vPhoneFixedLine.ionChange.subscribe(() => {
+            if (this.vPhoneFixedLine.autoGrow == false) {
+                this.vPhoneFixedLine.autoGrow = true;
+            }
+        });
+        this.vPhoneMobile.ionChange.subscribe(() => {
+            if (this.vPhoneMobile.autoGrow == false) {
+                this.vPhoneMobile.autoGrow = true;
+            }
+        });
+        this.vShippingAddressOne.ionChange.subscribe(() => {
+            if (this.vShippingAddressOne.autoGrow == false) {
+                this.vShippingAddressOne.autoGrow = true;
+            }
+        });
+        this.vShippingAddressTwo.ionChange.subscribe(() => {
+            if (this.vShippingAddressTwo.autoGrow == false) {
+                this.vShippingAddressTwo.autoGrow = true;
+            }
+        });
+        this.vShippingAddressThree.ionChange.subscribe(() => {
+            if (this.vShippingAddressThree.autoGrow == false) {
+                this.vShippingAddressThree.autoGrow = true;
+            }
+        });
+        this.vShippingStreet.ionChange.subscribe(() => {
+            if (this.vShippingStreet.autoGrow == false) {
+                this.vShippingStreet.autoGrow = true;
+            }
+        });
+        this.vShippingStreetNumber.ionChange.subscribe(() => {
+            if (this.vShippingStreetNumber.autoGrow == false) {
+                this.vShippingStreetNumber.autoGrow = true;
+            }
+        });
+        this.vShippingZip.ionChange.subscribe(() => {
+            if (this.vShippingZip.autoGrow == false) {
+                this.vShippingZip.autoGrow = true;
+            }
+        });
+        this.vShippingCity.ionChange.subscribe(() => {
+            if (this.vShippingCity.autoGrow == false) {
+                this.vShippingCity.autoGrow = true;
+            }
         });
     }
 };
+__decorate([
+    ViewChild('vName')
+], RegistrationFormPage.prototype, "vName", void 0);
+__decorate([
+    ViewChild('vNameDetails')
+], RegistrationFormPage.prototype, "vNameDetails", void 0);
+__decorate([
+    ViewChild('vStreet')
+], RegistrationFormPage.prototype, "vStreet", void 0);
+__decorate([
+    ViewChild('vStreetNumber')
+], RegistrationFormPage.prototype, "vStreetNumber", void 0);
+__decorate([
+    ViewChild('vCity')
+], RegistrationFormPage.prototype, "vCity", void 0);
+__decorate([
+    ViewChild('vZip')
+], RegistrationFormPage.prototype, "vZip", void 0);
+__decorate([
+    ViewChild('vPrename')
+], RegistrationFormPage.prototype, "vPrename", void 0);
+__decorate([
+    ViewChild('vSurname')
+], RegistrationFormPage.prototype, "vSurname", void 0);
+__decorate([
+    ViewChild('vEmail')
+], RegistrationFormPage.prototype, "vEmail", void 0);
+__decorate([
+    ViewChild('vEmailCC')
+], RegistrationFormPage.prototype, "vEmailCC", void 0);
+__decorate([
+    ViewChild('vPhoneFixedLine')
+], RegistrationFormPage.prototype, "vPhoneFixedLine", void 0);
+__decorate([
+    ViewChild('vPhoneMobile')
+], RegistrationFormPage.prototype, "vPhoneMobile", void 0);
+__decorate([
+    ViewChild('vShippingAddressOne')
+], RegistrationFormPage.prototype, "vShippingAddressOne", void 0);
+__decorate([
+    ViewChild('vShippingAddressTwo')
+], RegistrationFormPage.prototype, "vShippingAddressTwo", void 0);
+__decorate([
+    ViewChild('vShippingAddressThree')
+], RegistrationFormPage.prototype, "vShippingAddressThree", void 0);
+__decorate([
+    ViewChild('vShippingStreet')
+], RegistrationFormPage.prototype, "vShippingStreet", void 0);
+__decorate([
+    ViewChild('vShippingStreetNumber')
+], RegistrationFormPage.prototype, "vShippingStreetNumber", void 0);
+__decorate([
+    ViewChild('vShippingZip')
+], RegistrationFormPage.prototype, "vShippingZip", void 0);
+__decorate([
+    ViewChild('vShippingCity')
+], RegistrationFormPage.prototype, "vShippingCity", void 0);
 RegistrationFormPage = __decorate([
     Component({
         selector: 'app-registration-form',
         templateUrl: './registration-form.page.html',
         styleUrls: ['./registration-form.page.scss'],
+        providers: [Downloads, Alert]
     })
 ], RegistrationFormPage);
 export { RegistrationFormPage };

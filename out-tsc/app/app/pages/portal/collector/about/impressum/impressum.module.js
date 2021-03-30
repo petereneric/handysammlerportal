@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ImpressumPageRoutingModule } from './impressum-routing.module';
 import { ImpressumPage } from './impressum.page';
-import { ImpressumComponent } from '../../../../../components/impressum/impressum.component';
+import { ImpressumComponentModule } from "../../../../../components/impressum/impressum.module";
 let ImpressumPageModule = class ImpressumPageModule {
 };
 ImpressumPageModule = __decorate([
@@ -14,12 +14,11 @@ ImpressumPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            ImpressumPageRoutingModule
+            ImpressumPageRoutingModule,
+            ImpressumComponentModule
         ],
-        exports: [
-            ImpressumComponent
-        ],
-        declarations: [ImpressumPage, ImpressumComponent]
+        exports: [],
+        declarations: [ImpressumPage]
     })
 ], ImpressumPageModule);
 export { ImpressumPageModule };

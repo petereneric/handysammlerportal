@@ -56,7 +56,7 @@ export class BillsPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
-            this.Alert.alertPopUp('Abrechnung').then(res => {
+            this.Alert.popUp('Abrechnung').then(res => {
                 if (!res) window.open(url);
             })
         }, error => {
@@ -103,7 +103,7 @@ export class BillsPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url);
-            this.Alert.alertPopUp('Abrechnung').then(res => {
+            this.Alert.popUp('Abrechnung').then(res => {
                 if (!res) window.open(url);
             })
         }, error => {

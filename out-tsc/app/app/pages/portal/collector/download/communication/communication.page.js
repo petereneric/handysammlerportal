@@ -1,8 +1,10 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { Toast } from '../../../../../utilities/toast';
+import { Alert } from "../../../../../utilities/alert";
 let CommunicationPage = class CommunicationPage {
-    constructor(connApi, Toast) {
+    constructor(Alert, connApi, Toast) {
+        this.Alert = Alert;
         this.connApi = connApi;
         this.Toast = Toast;
         // Urls
@@ -35,6 +37,10 @@ let CommunicationPage = class CommunicationPage {
             link.href = URL.createObjectURL(blob);
             link.download = "Muster-Pressemitteilung.docx";
             link.click();
+            this.Alert.popUp('Muster-Pressemitteilung').then(res => {
+                if (!res)
+                    link.click();
+            });
         });
     }
     onFlyer(id) {
@@ -43,6 +49,10 @@ let CommunicationPage = class CommunicationPage {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.popUp('Flyer').then(res => {
+                if (!res)
+                    window.open(url);
+            });
         }, error => {
             if (error.status == 404) {
                 this.Toast.fileNotFound();
@@ -55,6 +65,10 @@ let CommunicationPage = class CommunicationPage {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.popUp('Poster').then(res => {
+                if (!res)
+                    window.open(url);
+            });
         }, error => {
             if (error.status == 404) {
                 this.Toast.fileNotFound();
@@ -67,7 +81,7 @@ CommunicationPage = __decorate([
         selector: 'app-communication',
         templateUrl: './communication.page.html',
         styleUrls: ['./communication.page.scss'],
-        providers: [Toast]
+        providers: [Toast, Alert]
     })
 ], CommunicationPage);
 export { CommunicationPage };

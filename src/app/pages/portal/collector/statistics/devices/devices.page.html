@@ -8,7 +8,7 @@
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item>
                         <ion-label class="input-label">Zeitraum</ion-label>
-                        <ion-select [(ngModel)]="cFilter" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                        <ion-select [(ngModel)]="cFilter" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
                                     [selectedText]="cFilter" (ionChange)="onFilter($event)">
                             <ion-select-option *ngFor="let cFilter of lFilter"
                                                [value]="cFilter">{{cFilter}}</ion-select-option>
@@ -18,7 +18,7 @@
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item *ngIf="cFilter !== 'Gesamt'">
                         <ion-label class="input-label">Auswahl</ion-label>
-                        <ion-select [(ngModel)]="cSelect" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                        <ion-select [(ngModel)]="cSelect" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
                                     [selectedText]="cSelect" (ionChange)="onSelect($event)">
                             <ion-select-option *ngFor="let cSelect of lSelect"
                                                [value]="cSelect">{{cSelect}}</ion-select-option>

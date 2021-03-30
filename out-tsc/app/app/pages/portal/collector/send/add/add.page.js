@@ -20,12 +20,9 @@ let AddPage = class AddPage {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
-            this.Alert.alertPopUp().then(res => {
-                console.log('reuslt ' + res);
-                if (!res) {
-                    console.log("yeah");
-                    this.onClickLithiumNotice();
-                }
+            this.Alert.popUp('Lithium-Ionen-Warnhinweis').then(res => {
+                if (!res)
+                    window.open(url);
             });
         });
     }
@@ -61,6 +58,10 @@ let AddPage = class AddPage {
                                 let blob = new Blob([response], { type: 'application/pdf' });
                                 const url = window.URL.createObjectURL(blob);
                                 window.open(url);
+                                this.Alert.popUp('DHL Versandlabel').then(res => {
+                                    if (!res)
+                                        window.open(url);
+                                });
                             }, error => {
                                 console.log(error);
                                 if (error.status == 429) {

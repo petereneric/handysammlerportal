@@ -8,6 +8,7 @@ import {HttpResponse} from '@angular/common/http';
 import {AlertController} from '@ionic/angular';
 import {Downloads} from '../../utilities/downloads';
 import {Alert} from "../../utilities/alert";
+import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-login',
@@ -18,6 +19,9 @@ import {Alert} from "../../utilities/alert";
 
 export class LoginPage implements OnInit {
 
+    //Constants
+    private maxInput = environment.maxInput;
+
     // Urls
     private urlLogin: string = 'login';
 
@@ -27,16 +31,16 @@ export class LoginPage implements OnInit {
     bSubmittedPartner = false;
 
     loginFormPartner = this.fb.group({
-        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-        cPassword: ['', [Validators.required, Validators.maxLength(50)]]
+        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+        cPassword: ['', [Validators.required, Validators.maxLength(this.maxInput)]]
     });
 
     loginFormCollector = this.fb.group({
-        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-        cPassword: ['', [Validators.required, Validators.maxLength(50)]]
+        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+        cPassword: ['', [Validators.required, Validators.maxLength(this.maxInput)]]
     });
 
-    constructor(public Downloads: Downloads, public alertController: AlertController, private authApiService: AuthApiService, private connApiService: ConnApiService, public router: Router, private fb: FormBuilder, private data: DataService) {
+    constructor(public Alert: Alert, public Downloads: Downloads, public alertController: AlertController, private authApiService: AuthApiService, private connApiService: ConnApiService, public router: Router, private fb: FormBuilder, private data: DataService) {
         console.log('teeest');
     }
 
@@ -92,10 +96,10 @@ export class LoginPage implements OnInit {
             }
         }, error => {
             if (error.status == 401) {
-                this.alertWrongLoginCredentials('E-Mail-Adresse unbekannt');
+                this.Alert.invalidInput('E-Mail unbekannt');
             }
             if (error.status == 403) {
-                this.alertWrongLoginCredentials('Passwort falsch');
+                this.Alert.invalidInput('Passwort falsch');
             }
         });
     }

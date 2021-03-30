@@ -1,7 +1,11 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
+import { Downloads } from "../../../../../utilities/downloads";
+import { Alert } from "../../../../../utilities/alert";
 let LawPage = class LawPage {
-    constructor(connApi) {
+    constructor(Alert, Downloads, connApi) {
+        this.Alert = Alert;
+        this.Downloads = Downloads;
         this.connApi = connApi;
         // Urls
         this.urlLegalStatement = "collector/download/document/legal_statement";
@@ -17,6 +21,10 @@ let LawPage = class LawPage {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.popUp('Rechtliche Grundlage').then(res => {
+                if (!res)
+                    window.open(url);
+            });
         });
     }
     onDataPrivacy() {
@@ -25,25 +33,17 @@ let LawPage = class LawPage {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.popUp('Datenschutz').then(res => {
+                if (!res)
+                    window.open(url);
+            });
         });
     }
     onPrivacyPolicy() {
-        this.connApi.getFile(this.urlPrivacyPolicy + 1).subscribe(response => {
-            console.log(response);
-            let blob = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(blob);
-            window.open(url);
-        });
+        this.Downloads.privacyPolicyCollector();
     }
     onTermsOfUse() {
-        this.connApi.getFile(this.urlTermsOfUse + 1).subscribe(response => {
-            console.log(response);
-            let blob = new Blob([response], { type: 'application/pdf' });
-            const url = window.URL.createObjectURL(blob);
-            window.open(url);
-        }, error => {
-            console.log(error);
-        });
+        this.Downloads.termsOfUseCollector();
     }
 };
 LawPage = __decorate([
@@ -51,6 +51,7 @@ LawPage = __decorate([
         selector: 'app-law',
         templateUrl: './law.page.html',
         styleUrls: ['./law.page.scss'],
+        providers: [Downloads, Alert]
     })
 ], LawPage);
 export { LawPage };

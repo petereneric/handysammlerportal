@@ -2,6 +2,7 @@ import { __awaiter, __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import jwt_decode from 'jwt-decode';
+import { environment } from '../../../../environments/environment';
 let ResetPage = class ResetPage {
     constructor(toastController, router, alertController, activatedRoute, fb, connApi) {
         this.toastController = toastController;
@@ -10,6 +11,8 @@ let ResetPage = class ResetPage {
         this.activatedRoute = activatedRoute;
         this.fb = fb;
         this.connApi = connApi;
+        //Constants
+        this.maxPassword = environment.maxPassword;
         // Urls
         this.urlReset = 'password/reset';
         // Variables

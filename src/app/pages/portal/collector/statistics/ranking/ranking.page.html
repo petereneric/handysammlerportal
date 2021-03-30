@@ -7,7 +7,7 @@
             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Zeitraum</ion-label>
-                    <ion-select [(ngModel)]="cTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                    <ion-select [(ngModel)]="cTime" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
                                 [selectedText]="cTime.name" (ionChange)="onTime($event)">
                         <ion-select-option *ngFor="let cTime of lTime"
                                            [value]="cTime">{{cTime.name}}</ion-select-option>
@@ -17,7 +17,7 @@
             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item *ngIf="cTime.key !== 'total'">
                     <ion-label class="input-label">Auswahl</ion-label>
-                    <ion-select #selectTime [(ngModel)]="cSelectTime" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                    <ion-select #selectTime [(ngModel)]="cSelectTime" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
                                 [selectedText]="cSelectTime.name" (ionChange)="onLoad()">
                         <ion-select-option *ngFor="let cSelectTime of lSelectTime"
                                            [value]="cSelectTime">{{cSelectTime.name}}</ion-select-option>
@@ -29,7 +29,7 @@
             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Region</ion-label>
-                    <ion-select [(ngModel)]="cRegion" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                    <ion-select [(ngModel)]="cRegion" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
                                 [selectedText]="cRegion.name" (ionChange)="onRegion($event)">
                         <ion-select-option *ngFor="let cRegion of lRegion"
                                            [value]="cRegion">{{cRegion.name}}</ion-select-option>
@@ -40,7 +40,7 @@
                 <ion-item *ngIf="cRegion.key !== 'total'">
                     <ion-label class="input-label">Auswahl</ion-label>
                     <ion-select #selectRegion [(ngModel)]="oSelectRegion" [okText]="'Auswählen'"
-                                [cancelText]="'Abrechen'"
+                                [cancelText]="'Abbrechen'"
                                 [selectedText]="oSelectRegion != null ? oSelectRegion.cNameLocale : ''" (ionChange)="onLoad()">
                         <ion-select-option *ngFor="let oSelectRegion of lSelectRegion"
                                            [value]="oSelectRegion">{{oSelectRegion.cNameLocale}}</ion-select-option>
@@ -52,7 +52,7 @@
             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                 <ion-item>
                     <ion-label class="input-label">Typ/Branche</ion-label>
-                    <ion-select [(ngModel)]="cType" [okText]="'Auswählen'" [cancelText]="'Abrechen'"
+                    <ion-select [(ngModel)]="cType" [okText]="'Auswählen'" [cancelText]="'Abbrechen'"
                                 [selectedText]="cType.name" (ionChange)="onType($event)">
                         <ion-select-option *ngFor="let cType of lType"
                                            [value]="cType">{{cType.name}}</ion-select-option>
@@ -63,7 +63,7 @@
                 <ion-item *ngIf="cType.key !== 'total'">
                     <ion-label class="input-label">Auswahl</ion-label>
                     <ion-select class="myCustomSelect" #selectType [(ngModel)]="oSelectType" [okText]="'Auswählen'"
-                                [cancelText]="'Abrechen'"
+                                [cancelText]="'Abbrechen'"
                                 [selectedText]="oSelectType.cName" (ionChange)="onLoad()">
                         <ion-select-option *ngFor="let cSelectType of lSelectType"
                                            [value]="cSelectType">{{cSelectType.cName}}</ion-select-option>

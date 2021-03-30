@@ -1,7 +1,9 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
+import { Alert } from "../../../../../utilities/alert";
 let CertificatesPage = class CertificatesPage {
-    constructor(connApi) {
+    constructor(Alert, connApi) {
+        this.Alert = Alert;
         this.connApi = connApi;
         // Urls
         this.urlCertificate = 'collector/download/certificate';
@@ -32,6 +34,10 @@ let CertificatesPage = class CertificatesPage {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.popUp('Urkunde').then(res => {
+                if (!res)
+                    window.open(url);
+            });
         }, error => {
             console.log(error);
         });
@@ -42,6 +48,7 @@ CertificatesPage = __decorate([
         selector: 'app-certificates',
         templateUrl: './certificates.page.html',
         styleUrls: ['./certificates.page.scss'],
+        providers: [Alert]
     })
 ], CertificatesPage);
 export { CertificatesPage };

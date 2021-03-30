@@ -29,7 +29,7 @@ export class LawPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url)
-            this.Alert.alertPopUp('Rechtliche Grundlage').then(res => {
+            this.Alert.popUp('Rechtliche Grundlage').then(res => {
                 if (!res) window.open(url);
             })
         })
@@ -41,7 +41,7 @@ export class LawPage implements OnInit {
             let blob: any = new Blob([response], {type: 'application/pdf'});
             const url = window.URL.createObjectURL(blob);
             window.open(url)
-            this.Alert.alertPopUp('Datenschutz').then(res => {
+            this.Alert.popUp('Datenschutz').then(res => {
                 if (!res) window.open(url);
             })
         })

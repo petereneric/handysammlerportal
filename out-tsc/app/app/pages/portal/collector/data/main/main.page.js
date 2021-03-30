@@ -1,12 +1,16 @@
 import { __awaiter, __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { environment } from '../../../../../../environments/environment';
 let MainPage = class MainPage {
     constructor(connApi, formBuilder, toastController, alertController) {
         this.connApi = connApi;
         this.formBuilder = formBuilder;
         this.toastController = toastController;
         this.alertController = alertController;
+        //Constants
+        this.maxZip = environment.maxZip;
+        this.maxInput = environment.maxInput;
         // Urls
         this.urlCollector = 'collector/main';
         this.urlTypes = 'types';
@@ -16,25 +20,25 @@ let MainPage = class MainPage {
         this.urlPasswordRequest = "password/request";
         // FormBuilder
         this.fgCollector = this.formBuilder.group({
-            cName: ['', [Validators.required, Validators.maxLength(80)]],
-            cNameDetails: ['', [Validators.maxLength(80)]],
-            cStreet: ['', [Validators.required, Validators.maxLength(50)]],
-            cStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
-            cZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-            cCity: ['', [Validators.required, Validators.maxLength(50)]],
-            cPrenamePerson: ['', [Validators.required, Validators.maxLength(50)]],
-            cSurnamePerson: ['', [Validators.required, Validators.maxLength(50)]],
-            cPhoneFixedLine: ['', [Validators.maxLength(50)]],
-            cPhoneMobile: ['', [Validators.maxLength(50)]],
-            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-            cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(80)]],
-            cShippingAddressOne: ['', [Validators.required, Validators.maxLength(80)]],
-            cShippingAddressTwo: ['', [Validators.maxLength(50)]],
-            cShippingAddressThree: ['', [Validators.maxLength(50)]],
-            cShippingStreet: ['', [Validators.required, Validators.maxLength(50)]],
-            cShippingStreetNumber: ['', [Validators.required, Validators.maxLength(10)]],
-            cShippingZip: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
-            cShippingCity: ['', [Validators.required, Validators.maxLength(50)]],
+            cName: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cNameDetails: ['', [Validators.maxLength(this.maxInput)]],
+            cStreet: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
+            cCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cPrenamePerson: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cSurnamePerson: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cPhoneFixedLine: ['', [Validators.maxLength(this.maxInput)]],
+            cPhoneMobile: ['', [Validators.maxLength(this.maxInput)]],
+            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cShippingAddressOne: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cShippingAddressTwo: ['', [Validators.maxLength(this.maxInput)]],
+            cShippingAddressThree: ['', [Validators.maxLength(this.maxInput)]],
+            cShippingStreet: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cShippingStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
+            cShippingZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
+            cShippingCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
         });
         this.oType = null;
         this.lTypes = [];

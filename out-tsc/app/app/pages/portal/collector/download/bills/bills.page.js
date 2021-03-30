@@ -1,8 +1,10 @@
 import { __awaiter, __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Alert } from "../../../../../utilities/alert";
 let BillsPage = class BillsPage {
-    constructor(datepipe, connApi, toastController) {
+    constructor(Alert, datepipe, connApi, toastController) {
+        this.Alert = Alert;
         this.datepipe = datepipe;
         this.connApi = connApi;
         this.toastController = toastController;
@@ -42,6 +44,10 @@ let BillsPage = class BillsPage {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.popUp('Abrechnung').then(res => {
+                if (!res)
+                    window.open(url);
+            });
         }, error => {
             if (error.status) {
                 this.toastNotFound();
@@ -84,6 +90,10 @@ let BillsPage = class BillsPage {
             let blob = new Blob([response], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
             window.open(url);
+            this.Alert.popUp('Abrechnung').then(res => {
+                if (!res)
+                    window.open(url);
+            });
         }, error => {
             console.log(error);
         });
@@ -94,7 +104,7 @@ BillsPage = __decorate([
         selector: 'app-bills',
         templateUrl: './bills.page.html',
         styleUrls: ['./bills.page.scss'],
-        providers: [DatePipe]
+        providers: [DatePipe, Alert],
     })
 ], BillsPage);
 export { BillsPage };

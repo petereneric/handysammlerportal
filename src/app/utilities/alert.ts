@@ -8,7 +8,20 @@ export class Alert {
     constructor(public AlertController: AlertController) {
     }
 
-    async alertPopUp(document: string): Promise<any> {
+    async invalidInput(input: string): Promise<any> {
+        return new Promise(async (resolve) => {
+                const alert = await this.AlertController.create({
+                    cssClass: 'my-alert',
+                    header: 'Ungültige Eingabe',
+                    subHeader: input,
+                    buttons: [{text: 'Ok'}]
+                });
+                await alert.present();
+            }
+        );
+    }
+
+    async popUp(document: string): Promise<any> {
         return new Promise(async (resolve) => {
                 let bPopUp = localStorage.getItem('bPopUp');
                 console.log('jo' + bPopUp);

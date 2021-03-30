@@ -48,7 +48,7 @@ export class CommunicationPage implements OnInit {
         link.href = URL.createObjectURL(blob);
         link.download = "Muster-Pressemitteilung.docx";
         link.click();
-        this.Alert.alertPopUp('Muster-Pressemitteilung').then(res => {
+        this.Alert.popUp('Muster-Pressemitteilung').then(res => {
           if (!res) link.click();
         })
       })
@@ -60,7 +60,7 @@ export class CommunicationPage implements OnInit {
       let blob: any = new Blob([response], {type: 'application/pdf'});
       const url = window.URL.createObjectURL(blob);
       window.open(url)
-      this.Alert.alertPopUp('Flyer').then(res => {
+      this.Alert.popUp('Flyer').then(res => {
         if (!res) window.open(url);
       })
     }, error => {
@@ -76,7 +76,7 @@ export class CommunicationPage implements OnInit {
       let blob: any = new Blob([response], {type: 'application/pdf'});
       const url = window.URL.createObjectURL(blob);
       window.open(url)
-      this.Alert.alertPopUp('Poster').then(res => {
+      this.Alert.popUp('Poster').then(res => {
         if (!res) window.open(url);
       })
     }, error => {

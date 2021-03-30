@@ -51,6 +51,7 @@ const routes = [
         path: 'agreement',
         loadChildren: () => import('./pages/agreement/agreement.module').then(m => m.AgreementPageModule)
     },
+    { path: '**', component: AppComponent, canActivate: [CookieGuardService, RoleGuardService] },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
