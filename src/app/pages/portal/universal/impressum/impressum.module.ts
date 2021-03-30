@@ -17,7 +17,7 @@ import {ImpressumComponentModule} from "../../../../components/impressum/impress
     FormsModule,
     IonicModule,
     ImpressumPageRoutingModule,
-      ImpressumComponentModule
+    ImpressumComponentModule
   ],
   exports: [
   ],

@@ -8,6 +8,8 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 import {RegistrationFormPageModule} from '../registration/collector/registration-form/registration-form.module';
+import {FooterComponent} from "../../components/footer/footer.component";
+import {FooterModule} from "../../components/footer/footer.module";
 
 @NgModule({
     imports: [
@@ -16,7 +18,8 @@ import {RegistrationFormPageModule} from '../registration/collector/registration
         IonicModule,
         LoginPageRoutingModule,
         ReactiveFormsModule,
-        RegistrationFormPageModule
+        RegistrationFormPageModule,
+        FooterModule
     ],
   declarations: [LoginPage]
 })

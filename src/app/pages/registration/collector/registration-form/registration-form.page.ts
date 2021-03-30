@@ -122,6 +122,7 @@ export class RegistrationFormPage implements OnInit {
     }
 
     ngOnInit() {
+        //this.fgCollector.controls['cName'].setValue('test'); Hat keinen Einfluss
         // types
         this.connApi.get(this.urlTypes).subscribe((data: HttpResponse<any>) => {
             this.lTypes = data.body;
@@ -430,9 +431,7 @@ export class RegistrationFormPage implements OnInit {
 
     ngAfterViewInit() {
         this.vName.ionChange.subscribe(() => {
-            console.log("hiiier");
-                this.vName.autoGrow = true;
-            this.vNameDetails.autoGrow = true;
+            this.vName.autoGrow = true;
         });
         this.vNameDetails.ionChange.subscribe(() => {
             console.log("hiiddddier");
