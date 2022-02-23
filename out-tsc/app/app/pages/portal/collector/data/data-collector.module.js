@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { DataCollectorPageRoutingModule } from './data-collector-routing.module';
 import { DataCollectorPage } from './data-collector.page';
+import { MatIconModule } from "@angular/material/icon";
+import { MatTooltipModule } from '@angular/material/tooltip';
 let DataCollectorPageModule = class DataCollectorPageModule {
 };
 DataCollectorPageModule = __decorate([
@@ -13,7 +15,9 @@ DataCollectorPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            DataCollectorPageRoutingModule
+            DataCollectorPageRoutingModule,
+            [MatTooltipModule],
+            MatIconModule,
         ],
         declarations: [DataCollectorPage]
     })

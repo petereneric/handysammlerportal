@@ -1,9 +1,10 @@
 <ion-content class="input-background">
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Sammler</span>
-        </div>
-        <ion-grid>
+    <ion-grid>
+        <div class="block-element-top">
+            <div class="block-head">
+                <span class="text-head">Sammler</span>
+            </div>
+
             <form [formGroup]="fgCollector">
                 <ion-row>
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
@@ -40,7 +41,7 @@
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">Straße*</ion-label>
-                            <ion-textarea #vStreet rows="1" auto-grow="true"  type="text" formControlName="cStreet"
+                            <ion-textarea #vStreet rows="1" auto-grow="true" type="text" formControlName="cStreet"
                                           (ionChange)="onChangeAddress()"></ion-textarea>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cStreet.errors?.required" class="input-invalid">Pflichtfeld</span>
@@ -99,19 +100,20 @@
                     <span *ngIf="bSubmitted && oState == null" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-    </div>
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Ansprechpartner</span>
         </div>
-        <ion-grid>
+    </ion-grid>
+
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">Ansprechpartner</span>
+            </div>
             <form [formGroup]="fgCollector" (ngSubmit)="onSave()">
                 <ion-row>
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">Vorname*</ion-label>
-                            <ion-textarea  #vPrename rows="1" auto-grow="true" type="text" formControlName="cPrenamePerson" (ionChange)="onChangeAddress()"></ion-textarea>
+                            <ion-textarea #vPrename rows="1" auto-grow="true" type="text" formControlName="cPrenamePerson" (ionChange)="onChangeAddress()"></ion-textarea>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cPrenamePerson.errors?.required" class="input-invalid">Pflichtfeld</span>
                         <span *ngIf="bSubmitted && errorControl.cPrenamePerson.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
@@ -119,7 +121,7 @@
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">Nachname*</ion-label>
-                            <ion-textarea  #vSurname rows="1" auto-grow="true" type="text" formControlName="cSurnamePerson" (ionChange)="onChangeAddress()"></ion-textarea>
+                            <ion-textarea #vSurname rows="1" auto-grow="true" type="text" formControlName="cSurnamePerson" (ionChange)="onChangeAddress()"></ion-textarea>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cSurnamePerson.errors?.required" class="input-invalid">Pflichtfeld</span>
                         <span *ngIf="bSubmitted && errorControl.cSurnamePerson.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
@@ -141,7 +143,7 @@
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item class="ion-item-toggle-check">
                         <ion-label [ngClass]="{'ion-text-wrap' : true, 'ion-label-toggle' : true}">Persönliche Anrede*</ion-label>
-                        <ion-toggle [(ngModel)]="bFormally" [ngModelOptions]="{standalone: true}" (ionChange)="onToggleFormally($event)"></ion-toggle>
+                        <ion-toggle [(ngModel)]="bPersonally" [ngModelOptions]="{standalone: true}" (ionChange)="onToggleFormally($event)"></ion-toggle>
                     </ion-item>
                 </ion-col>
             </ion-row>
@@ -182,23 +184,27 @@
                     </ion-col>
                 </ion-row>
             </form>
-        </ion-grid>
-    </div>
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Sicherheit</span>
         </div>
-        <ion-row class="ion-row-buttons">
-            <ion-col>
-                <ion-button class="ion-button-two-inside" (click)="onPassword()">Neues Passwort vergeben</ion-button>
-            </ion-col>
-        </ion-row>
-    </div>
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Versandadresse</span>
+    </ion-grid>
+
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">Sicherheit</span>
+            </div>
+            <ion-row class="ion-row-buttons">
+                <ion-col>
+                    <ion-button class="ion-button-two-inside" (click)="onPassword()">Neues Passwort vergeben</ion-button>
+                </ion-col>
+            </ion-row>
         </div>
-        <ion-grid>
+    </ion-grid>
+
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">Versandadresse</span>
+            </div>
             <ion-row>
                 <ion-col size-xl="6" size-lg="12" size-md="12" size-sm="12" size-xs="12">
                     <ion-item class="ion-item-toggle-check">
@@ -213,7 +219,7 @@
                     <ion-col size-xl="6" size-lg="12" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">Adresszeile 1*</ion-label>
-                            <ion-textarea #vShippingAddressOne rows="1" auto-grow="true"  type="text" formControlName="cShippingAddressOne"
+                            <ion-textarea #vShippingAddressOne rows="1" auto-grow="true" type="text" formControlName="cShippingAddressOne"
                                           [disabled]="bAddressIdentSelected" (ionChange)="onChange()"></ion-textarea>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cShippingAddressOne.errors?.required" class="input-invalid">Pflichtfeld</span>
@@ -224,7 +230,7 @@
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">Adresszeile 2</ion-label>
-                            <ion-textarea #vShippingAddressTwo rows="1" auto-grow="true"  type="text" formControlName="cShippingAddressTwo"
+                            <ion-textarea #vShippingAddressTwo rows="1" auto-grow="true" type="text" formControlName="cShippingAddressTwo"
                                           [disabled]="bAddressIdentSelected" (ionChange)="onChange()"></ion-textarea>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cShippingAddressTwo.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
@@ -232,7 +238,7 @@
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">Adresszeile 3</ion-label>
-                            <ion-textarea #vShippingAddressThree rows="1" auto-grow="true"  type="text" formControlName="cShippingAddressThree"
+                            <ion-textarea #vShippingAddressThree rows="1" auto-grow="true" type="text" formControlName="cShippingAddressThree"
                                           [disabled]="bAddressIdentSelected" (ionChange)="onChange()"></ion-textarea>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cShippingAddressThree.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten
@@ -243,7 +249,7 @@
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
                             <ion-label class="input-label" position="floating">Straße*</ion-label>
-                            <ion-textarea #vShippingStreet rows="1" auto-grow="true"  type="text" formControlName="cShippingStreet"
+                            <ion-textarea #vShippingStreet rows="1" auto-grow="true" type="text" formControlName="cShippingStreet"
                                           [disabled]="bAddressIdentSelected" (ionChange)="onChange()"></ion-textarea>
                         </ion-item>
                         <span *ngIf="bSubmitted && errorControl.cShippingStreet.errors?.required" class="input-invalid">Pflichtfeld</span>
@@ -295,14 +301,21 @@
                     <span *ngIf="bSubmitted && oShippingCountry == null" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-    </div>
-    <div class="input-block-element">
-        <ion-row class="note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.</ion-row>
-    </div>
+        </div>
+    </ion-grid>
+
+    <ion-grid>
+        <div class="block-element">
+            <ion-row class="note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.</ion-row>
+        </div>
+    </ion-grid>
 </ion-content>
 
-<div class="block-button-outside-bottom">
-    <ion-button [disabled]="!bChanged" class="ion-button-outside" (click)="onSave()">Speichern</ion-button>
+<div class="input-background">
+    <ion-grid>
+        <div class="block-button-outside-bottom">
+            <ion-button [disabled]="!bChanged" class="ion-button-outside" (click)="onSave()">Speichern</ion-button>
+        </div>
+    </ion-grid>
 </div>
 

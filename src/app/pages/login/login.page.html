@@ -1,7 +1,6 @@
 <ion-header>
     <ion-toolbar>
-
-        <ion-buttons slot="end">
+        <ion-buttons slot="end" class="toolbar-buttons-right">
             <ion-button (click)="onInfo()" fill="clear">
                 <ion-icon class="toolbar-icon" slot="icon-only" name="information-circle"></ion-icon>
             </ion-button>
@@ -16,20 +15,20 @@
 
 <ion-content [ngClass]="{'ion-margin-vertical': true, 'input-background': true}">
     <div class="footer-content">
-        <div class="input-block-element">
-            <ion-segment [(ngModel)]="selectedRole" (ionChange)="segmentChanged($event)">
-                <ion-segment-button value=1>
-                    <ion-label>Sammler</ion-label>
-                </ion-segment-button>
-                <ion-segment-button value=2>
-                    <ion-label>Partner</ion-label>
-                </ion-segment-button>
-            </ion-segment>
-            <br/>
+        <ion-grid>
+            <div class="block-element-single">
+                <ion-segment [(ngModel)]="selectedRole" (ionChange)="segmentChanged($event)">
+                    <ion-segment-button value=1>
+                        <ion-label>Sammler</ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button value=2>
+                        <ion-label>Partner</ion-label>
+                    </ion-segment-button>
+                </ion-segment>
+                <br/>
 
-            <div [ngSwitch]="selectedRole">
-                <form *ngSwitchCase="1" [formGroup]="loginFormCollector" (ngSubmit)="onLoginCollector()">
-                    <ion-grid>
+                <div [ngSwitch]="selectedRole">
+                    <form (keyup.enter)="onLoginCollector()" *ngSwitchCase="1" [formGroup]="loginFormCollector" (ngSubmit)="onLoginCollector()">
                         <ion-row>
                             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                                 <ion-item lines="full">
@@ -65,15 +64,13 @@
                                 </ion-button>
                             </ion-col>
                         </ion-row>
-                    </ion-grid>
-                </form>
-                <form *ngSwitchCase="2" [formGroup]="loginFormPartner" (ngSubmit)="onLoginCollector()">
-                    <ion-grid>
+                    </form>
+                    <form *ngSwitchCase="2" [formGroup]="loginFormPartner" (ngSubmit)="onLoginCollector()">
                         <ion-row>
                             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                                 <ion-item lines="full" [class.ion-invalid]=true>
                                     <ion-label class="input-label" position="floating">E-Mail</ion-label>
-                                    <ion-input  class="input-label" type="text" required formControlName="cEmail"></ion-input>
+                                    <ion-input class="input-label" type="text" required formControlName="cEmail"></ion-input>
                                 </ion-item>
                             </ion-col>
                             <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
@@ -92,10 +89,10 @@
                                 <ion-button disabled="true" class=ion-button-one-inside type="submit">Anmelden</ion-button>
                             </ion-col>
                         </ion-row>
-                    </ion-grid>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </ion-grid>
         <br/>
         <br/>
         <br/>

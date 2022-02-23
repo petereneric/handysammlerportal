@@ -1,1 +1,1 @@
-//# sourceMappingURL=eventping.js.map
+//# sourceMappingURL=eventPing.js.map

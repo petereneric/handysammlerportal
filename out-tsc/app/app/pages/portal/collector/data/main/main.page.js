@@ -30,8 +30,8 @@ let MainPage = class MainPage {
             cSurnamePerson: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
             cPhoneFixedLine: ['', [Validators.maxLength(this.maxInput)]],
             cPhoneMobile: ['', [Validators.maxLength(this.maxInput)]],
-            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
-            cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$'), Validators.maxLength(this.maxInput)]],
             cShippingAddressOne: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
             cShippingAddressTwo: ['', [Validators.maxLength(this.maxInput)]],
             cShippingAddressThree: ['', [Validators.maxLength(this.maxInput)]],
@@ -44,7 +44,7 @@ let MainPage = class MainPage {
         this.lTypes = [];
         this.oTitle = null;
         this.lTitles = [{ cName: 'Herr' }, { cName: 'Frau' }, { cName: 'Herr Dr.' }, { cName: 'Frau Dr.' },];
-        this.bFormally = true;
+        this.bPersonally = true;
         this.oState = null;
         this.lCountries = [];
         this.lStates = [];
@@ -76,7 +76,6 @@ let MainPage = class MainPage {
             this.fgCollector.controls['cShippingStreetNumber'].setValue(collector.cShippingStreetNumber);
             this.fgCollector.controls['cShippingZip'].setValue(collector.cShippingZip);
             this.fgCollector.controls['cShippingCity'].setValue(collector.cShippingCity);
-            // type
             // types
             this.connApi.safeGet(this.urlTypes).subscribe((data) => {
                 this.lTypes = data.body;
@@ -90,7 +89,7 @@ let MainPage = class MainPage {
             // title
             this.oTitle = collector.cTitlePerson;
             // formally
-            this.bFormally = collector.bAddressFormally;
+            this.bPersonally = !(collector.bAddressFormally == 1);
             // country
             this.oCountry = collector.cCountry;
             // region
@@ -145,7 +144,7 @@ let MainPage = class MainPage {
             cPrenamePerson: this.fgCollector.get('cPrenamePerson').value,
             cSurnamePerson: this.fgCollector.get('cSurnamePerson').value,
             cTitle: this.oTitle,
-            bAddressFormally: this.bFormally ? 1 : 0,
+            bAddressFormally: this.bPersonally ? 0 : 1,
             cPhoneFixedLine: this.fgCollector.get('cPhoneFixedLine').value,
             cPhoneMobile: this.fgCollector.get('cPhoneMobile').value,
             cEmailCC: this.fgCollector.get('cEmailCC').value,
@@ -196,7 +195,7 @@ let MainPage = class MainPage {
     onToggleFormally($event) {
         if (!this.bChanged)
             this.bChanged = true;
-        this.bFormally = $event['detail']['checked'];
+        this.bPersonally = $event['detail']['checked'];
     }
     compareAddress() {
         return (this.fgCollector.get('cName').value === this.fgCollector.get('cShippingAddressOne').value &&

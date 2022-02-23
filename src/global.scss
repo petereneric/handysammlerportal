@@ -21,6 +21,8 @@
 // Text
 $sizeTextInformation: 1rem;
 $textSize: 0.95rem;
+$textSizeItemTitle: 1.1rem;
+$textSizeItemSubtitle: 0.8rem;
 $sizeTextHead: 1.5rem;
 $textSizeList: 0.95rem;
 $textSizeNote: 0.8rem;
@@ -42,23 +44,28 @@ $textSecondary: #757575;
 $textTertiary: #979797;
 
 // Icon
-$colorIcon: #afafaf;
+$colorIcon: #BDBDBD;
 
 // General
 $white: #ffffff;
 $green: #8BC34A;
 $greenLight: #a5d274;
 $red: #c34a4a;
-$colorBackground: #eaeaea;
+$colorBackground: #f1f1f1;
 $colorTransparent: rgba(0, 0, 0, 0);
 
 // Special
-$divider: #BDBDBD;
+$divider: #bdbdbd;
+$colorItem: #f6f6f6;
 
 
 // +++TAGS+++
 
 // Ionic
+ion-grid {
+  width: 80% !important;
+}
+
 ion-title {
   color: $white;
   font-weight: 500;
@@ -123,6 +130,7 @@ ion-toggle {
   --background: #d9d9d9;
   margin-bottom: 0.75rem;
   --handle-background: white;
+  --handle-background-checked: #8BC34A;
 }
 
 ion-toolbar ion-menu-button {
@@ -141,6 +149,62 @@ b {
 
 ion-textarea {
   margin-top: 0.05rem !important;
+}
+
+ul {
+  list-style: none; /* Remove default bullets */
+}
+
+ul li::before {
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: $green; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1.5rem; /* Also needed for space (tweak if needed) */
+  margin-left: -1.5em; /* Also needed for space (tweak if needed) */
+}
+
+// Dark-Mode
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    ion-item {
+      --background: black;
+    }
+
+    ion-button {
+      --background: #8BC34A;
+    }
+
+    ion-list {
+      --background: black !important;
+      background: black !important;
+    }
+
+    .block-element {
+      background: black !important;
+    }
+
+    .block-element-single {
+      background: black !important;
+    }
+
+    .block-element-bottom {
+      background: black !important;
+    }
+
+    .block-element-top {
+      background: black !important;
+    }
+
+    .ion-button-two-inside {
+      --background: black !important;
+    }
+
+    .ion-button-three-inside {
+      --background: black !important;
+    }
+  }
 }
 
 
@@ -289,13 +353,13 @@ ion-textarea {
 }
 
 .ion-button-outside {
-  width: 75%;
+  width: 100%;
   margin: 0rem auto;
 }
 
 .ion-button-two-inside {
   --color: #8BC34A;
-  --background: white;
+  --background: $colorTransparent !important;
   --ion-text-color: #8BC34A;
   border: 1px solid $green;
   --box-shadow: #00;
@@ -318,8 +382,18 @@ ion-textarea {
 .ion-button-three-inside {
   display: block;
   --color: #8BC34A;
-  --background: white;
+  --background: $colorTransparent !important;
   --ion-text-color: #8BC34A;
+  width: auto;
+  margin: 0.5rem 1rem 0.5rem 1rem;
+  --box-shadow: #00;
+}
+
+.ion-button-three-inside-delete {
+  display: block;
+  --color: #c34a4a;
+  --background: $colorTransparent !important;
+  --ion-text-color: #c34a4a;
   width: auto;
   margin: 0.5rem 1rem 0.5rem 1rem;
   --box-shadow: #00;
@@ -328,11 +402,11 @@ ion-textarea {
 .button-four {
   display: block;
   --color: #afafaf;
-  --background: white;
+  --background: white !important;
   --ion-text-color: #afafaf;
   --box-shadow: white;
   width: auto;
-  margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  margin: 0.5rem 1rem 0.5rem 1rem;
   border: 1px solid #afafaf;
   --box-shadow: #00;
 }
@@ -356,7 +430,7 @@ ion-textarea {
 }
 
 .input-background {
-  --background: #eaeaea;
+  --background: #f1f1f1;
   background: $colorBackground;
 }
 
@@ -412,7 +486,15 @@ ion-textarea {
 
 // Background, Block & Grid
 
-.ion-grid {
+.ios ion-grid {
+  width: 95% !important;
+}
+
+.wp ion-grid {
+  width: 95% !important;
+}
+
+.ion-grid { // only used once
   --padding-left: 0rem !important;
   --margin-left: 0rem !important;
   margin-left: 0rem !important;
@@ -430,8 +512,8 @@ ion-textarea {
   display: flex;
   width: 100%;
   background: $colorBackground;
-  padding-top: 2rem;
-  padding-bottom: 0rem;
+  padding-top: 1.75rem;
+  padding-bottom: 0.75rem;
 }
 
 .block-button-outside-bottom-content {
@@ -442,13 +524,20 @@ ion-textarea {
   padding-bottom: 2rem;
 }
 
+
 .block-button-outside-bottom {
   display: flex;
   width: 100%;
   background: $colorBackground;
-  padding-right: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
+  padding-right: 0.85rem;
+  margin-left: -0.1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 1.75rem;
+}
+
+.ios .block-button-outside-bottom {
+  margin-left: 0rem;
+  padding-right: 0rem;
 }
 
 .block-button-outside-top {
@@ -476,7 +565,7 @@ ion-textarea {
 
 .block-text {
   display: block;
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   margin-left: $blockMarginOutside;
   margin-right: $blockMarginOutside;
 }
@@ -496,12 +585,36 @@ ion-textarea {
   margin-right: $blockMarginOutside;
 }
 
-.input-block-element {
+.block-element {
   background: #ffffff;
   border-radius: $borderRadius;
   padding: 1rem 1rem 1rem 1rem;
-  width: 75%;
-  margin: 2rem auto;
+  width: 100%;
+  margin: 0.75rem 0rem 0.75rem 0rem;
+}
+
+.block-element-top {
+  background: #ffffff;
+  border-radius: $borderRadius;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 100%;
+  margin: 1.75rem 0rem 0.75rem 0rem;
+}
+
+.block-element-bottom {
+  background: #ffffff;
+  border-radius: $borderRadius;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 100%;
+  margin: 0.75rem 0rem 1.75rem 0rem;
+}
+
+.block-element-single {
+  background: #ffffff;
+  border-radius: $borderRadius;
+  padding: 1rem 1rem 1rem 1rem;
+  width: 100%;
+  margin: 1.75rem 0rem 1.75rem 0rem;
 }
 
 .image-block {
@@ -670,11 +783,142 @@ ion-textarea {
 // Toolbar
 
 .toolbar-subtitle {
-  margin: 0;
+  margin: 0.125rem 0rem 0rem 0rem;
   font-size: 0.8rem;
   font-weight: 400;
 }
 
 .toolbar-icon {
   color: white;
+}
+
+.toolbar-buttons-right {
+  margin-right: 0.5rem;
+}
+
+
+// Item
+
+.ion-row-header {
+  margin-bottom: 1.25rem;
+}
+
+.item-background {
+  //border: 1px solid $divider;
+  height: auto !important;
+  width: auto !important;
+  background-color: #fafafa;
+  margin-left: $blockMarginOutside;
+  margin-right: $blockMarginOutside;
+  margin-bottom: 2rem;
+  //border-style: solid;
+  //border-color: $green;
+  //border-width: 1px;
+  border-radius: $borderRadius;
+  padding: $blockMarginOutside;
+  vertical-align: center !important;
+  align-items: center;
+}
+
+.item-left {
+  display: flex;
+  flex-flow: row;
+  align-self: stretch;
+  align-content: stretch !important;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.item-middle {
+  height: available!important;
+  display: flex!important;
+  flex-direction: column;
+  flex-flow: column;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.item-right {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+  margin-bottom:0.5rem;
+}
+
+.item-divider-vertical-left {
+  width: 0.1rem;
+  height: 2rem;
+  background: $divider;
+  display: flex !important;
+  text-align: right !important;
+  margin-left: 1.25rem;
+
+}
+
+.item-divider-horizontal {
+  height: 0.05rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  background: $white;
+}
+
+.item_note {
+  width: 100% !important;
+  text-align: center !important;
+  font-size: $textSizeNote;
+  color: $divider;
+  font-style: italic;
+}
+
+.item-title {
+  font-size: $textSizeItemTitle;
+  font-weight: 400;
+  color: $textPrimary;
+  margin-bottom: 0.4rem;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  text-align: center!important;
+  justify-self: center!important;
+}
+
+.item-subtitle {
+  font-size: $textSizeItemSubtitle;
+  color: $textSecondary;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.item-left-text {
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  text-align: center!important;
+  justify-self: center!important;
+  color: $green;
+  font-weight: 400;
+  font-size: $textSizeItemTitle;
+}
+
+.item-icon-delete {
+  color: $red;
+  cursor: pointer;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.item-icon-default {
+  color: $green;
+  cursor: pointer;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+// List
+
+.list-block {
+  margin-top: 1.5rem;
 }

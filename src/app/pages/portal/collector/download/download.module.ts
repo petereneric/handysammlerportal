@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { DownloadPageRoutingModule } from './download-routing.module';
 
 import { DownloadPage } from './download.page';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DownloadPageRoutingModule
+    DownloadPageRoutingModule,
+    [MatTooltipModule],
+    MatIconModule,
   ],
   declarations: [DownloadPage]
 })

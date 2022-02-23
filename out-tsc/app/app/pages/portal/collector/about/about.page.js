@@ -1,7 +1,11 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
-let AboutPage = class AboutPage {
-    constructor() { }
+import { MyPage } from '../../my-page';
+let AboutPage = class AboutPage extends MyPage {
+    constructor(router) {
+        super(router);
+        this.router = router;
+    }
     ngOnInit() {
     }
 };

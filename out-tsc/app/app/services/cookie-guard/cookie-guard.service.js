@@ -1,7 +1,8 @@
 import { __awaiter, __decorate } from "tslib";
 import { Injectable } from '@angular/core';
 let CookieGuardService = class CookieGuardService {
-    constructor(toastController, api, authApiService, router) {
+    constructor(alert, toastController, api, authApiService, router) {
+        this.alert = alert;
         this.toastController = toastController;
         this.api = api;
         this.authApiService = authApiService;
@@ -13,39 +14,31 @@ let CookieGuardService = class CookieGuardService {
         console.log("cookie!");
         let bCookie = localStorage.getItem('bCookie');
         if (bCookie == null || bCookie === 'false') {
-            this.toastCookie();
+            this.dialogCookie();
             return true;
         }
         else {
             return true;
         }
     }
-    toastCookie() {
+    dialogCookie() {
         return __awaiter(this, void 0, void 0, function* () {
-            const toast = yield this.toastController.create({
-                message: 'Das Handysammlerportal nutzt Cookies. Bitte stimme der Nutzung zu um fortzufahren.',
-                position: 'bottom',
-                cssClass: 'my-toast',
-                buttons: [
-                    {
-                        side: 'end',
-                        role: 'cancel',
-                        icon: 'checkmark',
-                        text: 'Akzeptieren',
+            const alert = yield this.alert.create({
+                header: 'Cookies',
+                message: 'Wir, bei uns im Handysammler-Portal, nutzen keine Cookies zur Speicherung oder Verarbeitung deiner Daten. Du musst deren Nutzung also nicht zustimmen.',
+                cssClass: 'my-alert',
+                buttons: [{ text: 'Ok',
                         handler: () => {
                             localStorage.setItem('bCookie', 'true');
-                        }
-                    }, {
+                        } },
+                    {
                         text: 'Weitere Informationen',
-                        role: 'cancel',
                         handler: () => {
-                            this.toastCookie();
                             this.onPrivacyPolicy();
                         }
-                    }
-                ]
+                    }]
             });
-            toast.present();
+            yield alert.present();
         });
     }
     onPrivacyPolicy() {

@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MyPage} from '../../my-page';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-data-collector',
-  templateUrl: './data-collector.page.html',
-  styleUrls: ['./data-collector.page.scss'],
+    selector: 'app-data-collector',
+    templateUrl: './data-collector.page.html',
+    styleUrls: ['./data-collector.page.scss'],
 })
-export class DataCollectorPage implements OnInit {
+export class DataCollectorPage extends MyPage implements OnInit {
 
-  constructor() { }
+    constructor(public router: Router) {
+        super(router);
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 }

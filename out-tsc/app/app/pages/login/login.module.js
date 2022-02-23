@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 import { RegistrationFormPageModule } from '../registration/collector/registration-form/registration-form.module';
+import { FooterModule } from "../../components/footer/footer.module";
 let LoginPageModule = class LoginPageModule {
 };
 LoginPageModule = __decorate([
@@ -16,7 +17,8 @@ LoginPageModule = __decorate([
             IonicModule,
             LoginPageRoutingModule,
             ReactiveFormsModule,
-            RegistrationFormPageModule
+            RegistrationFormPageModule,
+            FooterModule
         ],
         declarations: [LoginPage]
     })

@@ -107,6 +107,7 @@ let LocationsPage = class LocationsPage {
         // send
         this.connApi.safePost(this.urlLocation, this.oLocationEdit).subscribe((data) => {
             if (data.status == 200) {
+                this.dataService.callLocation(null);
                 this.bEdit = false;
                 this.bSubmitted = false;
                 this.fgLocation.reset();

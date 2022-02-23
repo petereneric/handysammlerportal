@@ -1,9 +1,9 @@
 <ion-content class="input-background">
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Filter</span>
-        </div>
-        <ion-grid>
+    <ion-grid>
+        <div class="block-element-top">
+            <div class="block-head">
+                <span class="text-head">Filter</span>
+            </div>
             <ion-row>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item>
@@ -26,14 +26,15 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-
-    </div>
-    <div class="input-block-element">
-        <div class="block-head" *ngIf="lData != null && lData.length > 0">
-            <span class="text-head">Auswertung</span>
         </div>
-        <ion-grid class="ion-grid-table" *ngIf="lData != null && lData.length > 0">
+    </ion-grid>
+
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head" *ngIf="lData != null && lData.length > 0">
+                <span class="text-head">Auswertung</span>
+            </div>
+            <div class="ion-grid-table" *ngIf="lData != null && lData.length > 0">
                 <ion-row class="ion-row-table">
                     <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                         <div>
@@ -98,13 +99,17 @@
                         </div>
                     </ion-col>
                 </ion-row>
-        </ion-grid>
-        <div class="block-text-information-center" *ngIf="lData != null && lData.length == 0">
-            <p [ngClass]="'text-information'">Für diese Auswahl liegen uns leider keine Daten vor</p>
+            </div>
+            <div class="block-text-information-center" *ngIf="lData != null && lData.length == 0">
+                <p [ngClass]="'text-information'">Für diese Auswahl liegen uns leider keine Daten vor</p>
+            </div>
         </div>
-    </div>
-    <div class="input-block-element" *ngIf="lData != null && lData.length > 0">
-        <ion-row class="note">* Aktuell reparieren wir defekte Handys, erfassen diese Zahl jedoch (noch) nicht - Daher findet sich hier ein Wert von 0.
-        </ion-row>
-    </div>
+    </ion-grid>
+
+    <ion-grid>
+        <div class="block-element-bottom" *ngIf="lData != null && lData.length > 0">
+            <ion-row class="note">* Aktuell reparieren wir defekte Handys, erfassen diese Zahl jedoch (noch) nicht - Daher findet sich hier ein Wert von 0.
+            </ion-row>
+        </div>
+    </ion-grid>
 </ion-content>

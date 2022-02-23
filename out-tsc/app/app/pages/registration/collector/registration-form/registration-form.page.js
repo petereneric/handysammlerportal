@@ -37,11 +37,11 @@ let RegistrationFormPage = class RegistrationFormPage {
             cStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
             cZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
             cCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
-            cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{7,}'), Validators.minLength(8)]],
+            cPassword: ['', [Validators.required, Validators.pattern(environment.patternPassword), Validators.minLength(8)]],
             cPrename: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
             cSurname: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
-            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
-            cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9._%+-]{2,15}$'), Validators.maxLength(this.maxInput)]],
+            cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9._%+-]{2,15}$'), Validators.maxLength(this.maxInput)]],
             cPhoneFixedLine: ['', [Validators.maxLength(this.maxInput)]],
             cPhoneMobile: ['', [Validators.maxLength(this.maxInput)]],
             cShippingAddressOne: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
@@ -79,6 +79,7 @@ let RegistrationFormPage = class RegistrationFormPage {
         this.compareWith = this.compareWithFn;
     }
     ngOnInit() {
+        //this.fgCollector.controls['cName'].setValue('test'); Hat keinen Einfluss
         // types
         this.connApi.get(this.urlTypes).subscribe((data) => {
             this.lTypes = data.body;
@@ -328,7 +329,7 @@ let RegistrationFormPage = class RegistrationFormPage {
         return regex.test(this.fgCollector.get('cPassword').value);
     }
     passwordExtra() {
-        let regex = new RegExp('(?=.*[§#@$!%*?&])');
+        let regex = new RegExp('(?=.*[§#@$!%*?&<>])');
         return regex.test(this.fgCollector.get('cPassword').value);
     }
     changeConditions() {
@@ -356,9 +357,7 @@ let RegistrationFormPage = class RegistrationFormPage {
     }
     ngAfterViewInit() {
         this.vName.ionChange.subscribe(() => {
-            console.log("hiiier");
             this.vName.autoGrow = true;
-            this.vNameDetails.autoGrow = true;
         });
         this.vNameDetails.ionChange.subscribe(() => {
             console.log("hiiddddier");

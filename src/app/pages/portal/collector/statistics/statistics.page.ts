@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {ConnApiService} from "../../../../services/conn-api/conn-api.service";
 import {HttpResponse} from "@angular/common/http";
+import {Router} from '@angular/router';
+import {MyPage} from '../../my-page';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.page.html',
   styleUrls: ['./statistics.page.scss'],
 })
-export class StatisticsPage implements OnInit {
+export class StatisticsPage extends MyPage implements OnInit {
 
   // Urls
   urlStatistics = "";
@@ -20,8 +22,9 @@ export class StatisticsPage implements OnInit {
   cSelect: string = null;
   lData = null;
 
-  constructor(public connApi: ConnApiService) { }
-
+  constructor(public connApi: ConnApiService, public router: Router) {
+    super(router);
+  }
   ngOnInit() {
   }
 

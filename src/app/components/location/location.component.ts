@@ -1,6 +1,6 @@
 import {Component, NgModule, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Location} from '../../interfaces/location';
-import {Eventping} from '../../interfaces/eventping';
+import {EventpingLocation} from '../../interfaces/eventpingLocation';
 
 
 @Component({
@@ -23,7 +23,7 @@ export class LocationComponent implements OnInit {
 
   onChangeActive() {
     this.oLocation.bActive = this.oLocation.bActive == 1 ? 0 : 1;
-    const eventObject: Eventping = {
+    const eventObject: EventpingLocation = {
       label: 'check',
       object: this.oLocation
     }
@@ -31,7 +31,7 @@ export class LocationComponent implements OnInit {
   }
 
   onEdit() {
-    const eventObject: Eventping = {
+    const eventObject: EventpingLocation = {
       label: 'edit',
       object: this.oLocation
     }
@@ -39,7 +39,7 @@ export class LocationComponent implements OnInit {
   }
 
   onDelete() {
-    const eventObject: Eventping = {
+    const eventObject: EventpingLocation = {
       label: 'delete',
       object: this.oLocation
     }

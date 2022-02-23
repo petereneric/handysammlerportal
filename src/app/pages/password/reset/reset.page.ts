@@ -15,7 +15,7 @@ import {environment} from '../../../../environments/environment';
 export class ResetPage implements OnInit {
 
   //Constants
-  private maxPassword = environment.maxPassword;
+  public maxPassword = environment.maxPassword;
 
   // Urls
   private urlReset = 'password/reset'
@@ -28,7 +28,7 @@ export class ResetPage implements OnInit {
 
   // FormBuilder
   formGroup = this.fb.group({
-    cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{7,}'), Validators.minLength(8)]]
+    cPassword: ['', [Validators.required, Validators.pattern(environment.patternPassword), Validators.minLength(8)]]
   });
 
 
@@ -110,7 +110,7 @@ export class ResetPage implements OnInit {
   }
 
   passwordExtra() {
-    let regex = new RegExp('(?=.*[§#@$!%*?&])');
+    let regex = new RegExp('(?=.*[§#@$!%*?&<>])');
     return regex.test(this.formGroup.get('cPassword').value);
   }
 

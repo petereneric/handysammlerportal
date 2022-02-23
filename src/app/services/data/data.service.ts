@@ -11,6 +11,7 @@ export class DataService {
 
   private dataSubject = new Subject<any>();
   private locationSubject = new Subject<any>();
+  private orderSubject = new Subject<any>();
 
   constructor() { }
 
@@ -34,5 +35,13 @@ export class DataService {
 
   callbackLocation(): Subject<any> {
     return this.locationSubject;
+  }
+
+  callOrder(data: any) {
+    this.orderSubject.next(data);
+  }
+
+  callbackOrder(): Subject<any> {
+    return this.orderSubject;
   }
 }

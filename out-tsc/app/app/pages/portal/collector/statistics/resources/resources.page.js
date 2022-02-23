@@ -2,9 +2,10 @@ import { __decorate } from "tslib";
 import { Component } from '@angular/core';
 import { StatisticsPage } from "../statistics.page";
 let ResourcesPage = class ResourcesPage extends StatisticsPage {
-    constructor(connApi) {
-        super(connApi);
+    constructor(connApi, router) {
+        super(connApi, router);
         this.connApi = connApi;
+        this.router = router;
         // Urls
         this.urlStatistics = "collector/statistics/resources";
     }

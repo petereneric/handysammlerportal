@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HistoryPageRoutingModule } from './history-routing.module';
 import { HistoryPage } from './history.page';
+import { LocationComponentModule } from '../../../../../components/order/order.module';
 let HistoryPageModule = class HistoryPageModule {
 };
 HistoryPageModule = __decorate([
@@ -13,7 +14,8 @@ HistoryPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            HistoryPageRoutingModule
+            HistoryPageRoutingModule,
+            LocationComponentModule
         ],
         declarations: [HistoryPage]
     })

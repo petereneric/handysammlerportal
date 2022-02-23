@@ -22,7 +22,7 @@ let ResetPage = class ResetPage {
         this.role = null;
         // FormBuilder
         this.formGroup = this.fb.group({
-            cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{7,}'), Validators.minLength(8)]]
+            cPassword: ['', [Validators.required, Validators.pattern(environment.patternPassword), Validators.minLength(8)]]
         });
     }
     ngOnInit() {
@@ -89,7 +89,7 @@ let ResetPage = class ResetPage {
         return regex.test(this.formGroup.get('cPassword').value);
     }
     passwordExtra() {
-        let regex = new RegExp('(?=.*[§#@$!%*?&])');
+        let regex = new RegExp('(?=.*[§#@$!%*?&<>])');
         return regex.test(this.formGroup.get('cPassword').value);
     }
     // Toasts

@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { OrderPageRoutingModule } from './order-routing.module';
 import { OrderPage } from './order.page';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 let OrderPageModule = class OrderPageModule {
 };
 OrderPageModule = __decorate([
@@ -13,7 +15,9 @@ OrderPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            OrderPageRoutingModule
+            OrderPageRoutingModule,
+            [MatTooltipModule],
+            MatIconModule,
         ],
         declarations: [OrderPage]
     })

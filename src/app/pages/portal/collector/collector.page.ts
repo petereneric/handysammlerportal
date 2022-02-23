@@ -45,7 +45,7 @@ export class CollectorPage implements OnInit {
         {
             title: 'Statistiken',
             url: 'statistics',
-            icon: 'information'
+            icon: 'stats-chart'
         },
         {
             title: 'Download-Bereich',

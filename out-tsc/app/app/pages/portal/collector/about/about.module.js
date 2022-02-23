@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AboutPageRoutingModule } from './about-routing.module';
 import { AboutPage } from './about.page';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 let AboutPageModule = class AboutPageModule {
 };
 AboutPageModule = __decorate([
@@ -13,7 +15,9 @@ AboutPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            AboutPageRoutingModule
+            AboutPageRoutingModule,
+            [MatTooltipModule],
+            MatIconModule,
         ],
         declarations: [AboutPage]
     })

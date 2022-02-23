@@ -8,7 +8,7 @@ import {CollectorPage} from './pages/portal/collector/collector.page';
 import {CookieGuardService} from './services/cookie-guard/cookie-guard.service';
 
 const routes: Routes = [
-    {path: 'app-root', component: AppComponent, canActivate: [CookieGuardService, RoleGuardService]},
+    {path: 'app-root', component: AppComponent, canActivate: [RoleGuardService]},
     {
         path: 'collector',
         loadChildren: () => import('./pages/portal/collector/collector.module').then(m => m.CollectorPageModule),
@@ -22,7 +22,7 @@ const routes: Routes = [
         path: 'login',
         loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
     },
-    {path: '', component: AppComponent, canActivate: [CookieGuardService, RoleGuardService]},
+    {path: '', component: AppComponent, canActivate: [RoleGuardService]},
     {
         path: 'registration-collector',
         loadChildren: () => import('./pages/registration/collector/registration-form/registration-form.module').then(m => m.RegistrationFormPageModule)
@@ -55,7 +55,7 @@ const routes: Routes = [
         path: 'agreement',
         loadChildren: () => import('./pages/agreement/agreement.module').then( m => m.AgreementPageModule)
     },
-    {path: '**', component: AppComponent, canActivate: [CookieGuardService, RoleGuardService]},
+    {path: '**', component: AppComponent, canActivate: [RoleGuardService]},
     ]
 
 

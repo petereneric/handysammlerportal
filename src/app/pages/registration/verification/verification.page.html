@@ -7,13 +7,14 @@
 </ion-header>
 
 <ion-content class="input-background">
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Fast geschafft</span>
-        </div>
-        <div class="block-text">
-            <span class="text-secondary">Wir freuen uns über deine Anmeldung und dein Engagement. Um deine Registrierung als Sammler abzuschließen zu können, bitten wir dich deine E-Mail-Adresse zu bestätigen. Öffne dazu bitte die E-Mail, die wir dir zugesendet haben und folge den dort enthaltenen Anweisungen.</span>
-        </div>
+    <ion-grid>
+        <div class="block-element-single">
+            <div class="block-head">
+                <span class="text-head">Fast geschafft</span>
+            </div>
+            <div class="block-text">
+                <span class="text-secondary">Wir freuen uns über deine Anmeldung und dein Engagement. Um deine Registrierung als Sammler abzuschließen zu können, bitten wir dich deine E-Mail-Adresse zu bestätigen. Öffne dazu bitte die E-Mail, die wir dir zugesendet haben und folge den dort enthaltenen Anweisungen.</span>
+            </div>
             <ion-row class="ion-row-buttons">
                 <ion-col>
                     <ion-button class="ion-button-one-inside" (click)="mailVerification()">E-Mail erneut zusenden</ion-button>
@@ -22,5 +23,6 @@
                     <ion-button class="ion-button-three-inside" (click)="confirmVerification()">E-Mail bereits bestätigt</ion-button>
                 </ion-col>
             </ion-row>
-    </div>
+        </div>
+    </ion-grid>
 </ion-content>

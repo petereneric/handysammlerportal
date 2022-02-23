@@ -14,7 +14,7 @@ import {environment} from '../../../../environments/environment';
 export class RequestPage implements OnInit {
 
     //Constants
-    private maxInput = environment.maxInput;
+    public maxInput = environment.maxInput;
 
     // Urls
     private urlPasswordRequest = "password/request"
@@ -25,7 +25,7 @@ export class RequestPage implements OnInit {
 
     // FormBuilder
     formGroup = this.fb.group({
-        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9._%+-]{2,15}$'), Validators.maxLength(this.maxInput)]],
     });
 
     constructor(public router: Router, public alertController: AlertController, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private connApi: ConnApiService) {

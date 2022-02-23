@@ -1,6 +1,6 @@
 import {Location} from './location';
 
-export interface Eventping {
+export interface EventpingLocation {
     label: string;
     object: Location;
 }

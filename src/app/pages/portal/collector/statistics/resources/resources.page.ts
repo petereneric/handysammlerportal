@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {StatisticsPage} from "../statistics.page";
 import {ConnApiService} from "../../../../../services/conn-api/conn-api.service";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-resources',
@@ -12,8 +13,8 @@ export class ResourcesPage extends StatisticsPage implements OnInit {
   // Urls
   urlStatistics = "collector/statistics/resources"
 
-  constructor(public connApi: ConnApiService) {
-    super(connApi);
+  constructor(public connApi: ConnApiService, public router: Router) {
+    super(connApi, router);
   }
 
   ngOnInit() {

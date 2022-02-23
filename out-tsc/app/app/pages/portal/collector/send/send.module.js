@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SendPageRoutingModule } from './send-routing.module';
 import { SendPage } from './send.page';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 let SendPageModule = class SendPageModule {
 };
 SendPageModule = __decorate([
@@ -13,7 +15,9 @@ SendPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            SendPageRoutingModule
+            SendPageRoutingModule,
+            [MatTooltipModule],
+            MatIconModule,
         ],
         declarations: [SendPage]
     })

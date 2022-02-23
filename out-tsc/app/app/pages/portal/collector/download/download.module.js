@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { DownloadPageRoutingModule } from './download-routing.module';
 import { DownloadPage } from './download.page';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 let DownloadPageModule = class DownloadPageModule {
 };
 DownloadPageModule = __decorate([
@@ -13,7 +15,9 @@ DownloadPageModule = __decorate([
             CommonModule,
             FormsModule,
             IonicModule,
-            DownloadPageRoutingModule
+            DownloadPageRoutingModule,
+            [MatTooltipModule],
+            MatIconModule,
         ],
         declarations: [DownloadPage]
     })

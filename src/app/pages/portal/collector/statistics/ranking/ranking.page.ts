@@ -3,6 +3,7 @@ import {ConnApiService} from '../../../../../services/conn-api/conn-api.service'
 import {HttpResponse} from '@angular/common/http';
 import {IonSelect} from '@ionic/angular';
 import jwt_decode from 'jwt-decode';
+import {DataService} from '../../../../../services/data/data.service';
 
 @Component({
     selector: 'app-ranking',
@@ -58,7 +59,7 @@ export class RankingPage implements OnInit {
 
     bStatistics: boolean = null;
 
-    constructor(public connApi: ConnApiService) {
+    constructor(public connApi: ConnApiService, private dataService: DataService) {
     }
 
     ngOnInit() {
@@ -69,6 +70,11 @@ export class RankingPage implements OnInit {
 
         // load
         this.load();
+
+        // callback
+        this.dataService.callbackLocation().subscribe((data) => {
+            this.load()
+        })
 
         // city
         this.connApi.safeGet(this.urlCities).subscribe((response: HttpResponse<any>) => {

@@ -1,15 +1,16 @@
 <ion-content class="input-background">
-    <div *ngIf="data != null && !(data.nOrders == 0 && data.nLocations == 0) && !spinner" class="input-block-element">
-        <div *ngIf="!orderTaken" class="block-head">
-            <span class="text-head">Neue Bestellung</span>
-        </div>
-        <div *ngIf="!orderTaken">
-            <ion-grid>
+    <ion-grid>
+        <div *ngIf="data != null && !(data.nOrders == 0 && data.nLocations == 0) && !spinner" class="block-element-top">
+            <div *ngIf="!orderTaken" class="block-head">
+                <span class="text-head">Neue Bestellung</span>
+            </div>
+            <div *ngIf="!orderTaken">
                 <ion-row>
                     <ion-col *ngIf="oBox != null && oBox.bAvailable == 1 && oBox.nStock > 0" [sizeXl]="6" [sizeLg]="6" [sizeMd]="12" [sizeSm]="12" [sizeXs]="12">
                         <ion-item>
                             <ion-label>{{(oBox != null && oBox.nStock > 0) ? (oBox.maxOrder > 0 ? 'Mobile-Box' : 'Mobile-Box (Limit erreicht)*') : 'Mobile-Box (Nicht auf Lager)'}}</ion-label>
-                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abbrechen'" [okText]="'Auswählen'" [(ngModel)]="boxOrder" [compareWith]="compare" [disabled]="oBox.nStock == 0 || oBox.maxOrder <= 0" (ionChange)="onChangedBoxOrder()">
+                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abbrechen'" [okText]="'Auswählen'" [(ngModel)]="boxOrder" [compareWith]="compare" [disabled]="oBox.nStock == 0 || oBox.maxOrder <= 0"
+                                        (ionChange)="onChangedBoxOrder()">
                                 <ion-select-option *ngFor="let boxOrder of boxChoice" [value]="boxOrder">{{boxOrder}}</ion-select-option>
                             </ion-select>
                         </ion-item>
@@ -18,7 +19,8 @@
                              [sizeXl]="6" [sizeLg]="6" [sizeMd]="12" [sizeSm]="12" [sizeXs]="12">
                         <ion-item>
                             <ion-label>{{(oBricolage != null && oBricolage.nStock > 0) ? (oBricolage.maxOrder > 0 ? 'Bastel-Box' : 'Bastel-Box (Limit erreicht)*') : 'Bastel-Box (Nicht auf Lager)'}}</ion-label>
-                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abbrechen'" [okText]="'Auswählen'" [(ngModel)]="bricolageOrder" [compareWith]="compare" [disabled]="oBricolage.nStock == 0 || oBricolage.maxOrder <= 0"
+                            <ion-select [interfaceOptions]="{cssClass: 'my-select'}" [cancelText]="'Abbrechen'" [okText]="'Auswählen'" [(ngModel)]="bricolageOrder" [compareWith]="compare"
+                                        [disabled]="oBricolage.nStock == 0 || oBricolage.maxOrder <= 0"
                                         (ionChange)="onChangedBricolageOrder()">
                                 <ion-select-option *ngFor="let bricolageOrder of bricolageChoice" [value]="bricolageOrder">{{bricolageOrder}}</ion-select-option>
                             </ion-select>
@@ -47,42 +49,63 @@
                         </ion-item>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
-            <div class="block-text-information-center" *ngIf="(boxMax > 0 && boxAvailable == 0) || (bricolageMax > 0 && bricolageAvailable == 0) || flyerAvailable == 0 || posterAvailable == 0">
-                <p [ngClass]="'text-information'">Du hast Dein jährliches Bestell-Limit teilweise oder komplett erreicht.</p>
+                <div class="block-text-information-center" *ngIf="(boxMax > 0 && boxAvailable == 0) || (bricolageMax > 0 && bricolageAvailable == 0) || flyerAvailable == 0 || posterAvailable == 0">
+                    <p [ngClass]="'text-information'">Du hast Dein jährliches Bestell-Limit teilweise oder komplett erreicht.</p>
+                </div>
+                <ion-row class="ion-row-buttons">
+                    <ion-col>
+                        <ion-button [disabled]="!(boxOrder > 0 || bricolageOrder > 0 || flyerOrder > 0 || posterOrder > 0)" class=ion-button-one-inside (click)="onOrder()">Bestellen</ion-button>
+                    </ion-col>
+                </ion-row>
+            </div>
+
+            <div *ngIf="(orderTaken && !spinner)">
+            <div class="block-text-information-center">
+                <p (click)="onClickPageInformation()" [ngClass]="'text-information-pointer'"><b>Vielen Dank für Deine Bestellung!</b>
+                    {{bOrderMerge ? 'Um Versandkosten zu sparen, haben wir' + (bOrderSplit ? ' einen Teil Deiner ' : ' Deine ')+ 'Bestellung zu einer vorhandenen, noch nicht versendeten, Bestellung hinzugefügt. ' : ''}}
+                    {{(bOrderSplit && !bOrderMerge) ? 'Damit wir die bestellten Sammelboxen sicher versenden können, haben wir Deine Bestellung in zwei oder mehrere Teil-Bestellungen, mit jeweils maximal drei Sammelboxen, aufgeteilt.' : ''}}
+                    {{(bOrderSplit && bOrderMerge) ? 'Die restlichen Sammelboxen haben wir auf zwei oder mehrere Teil-Bestellungen aufgeteilt, da ein einziger Versandkarton für die verbleibenden Materialien nicht ausreichend ist.' : ''}} In der "Bestell-Historie" kannst Du Dich jederzeit über den Status Deiner
+                    Bestellungen informieren.</p>
+            </div>
+                <ion-row class="ion-row-buttons">
+                    <ion-col>
+                        <ion-button class=ion-button-two-inside (click)="onNextOrder()">Weitere Bestellung</ion-button>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
+    </ion-grid>
+
+    <ion-grid>
+        <div *ngIf="!spinner && !orderTaken && data != null && !(data.nOrders == 0 && data.nLocations == 0) && !(oBox != null && oBox.boxAvailable == 1 && oBox.nStock > 0 && oBox.maxOrder > 0) && !(oBricolage != null && oBricolage.bAvailable == 1 && oBricolage.nStock && oBricolage.maxOrder > 0)"
+             class="block-element-bottom">
+            <p class="note">* Du hast die Möglichkeit für jeden Sammelstandort eine Sammelbox ({{oBox.bAvailable ? (oBox.nStock > 0 ? 'Mobile-Box' : 'Bastel-Box') : 'Bastel-Box'}}) zu bestellen. Aktuell hast
+                du {{data.nLocations == 1 ? 'einen Sammelstandort' : data.nLocations + ' Sammelstandorte'}} angelegt und {{data.nOrders == 1 ? 'eine Sammelbox' : data.nOrders + ' Sammelboxen'}} bestellt.
+                Damit ist dein Limit {{oBox.maxOrder < 0 || oBox.maxOrder < 0 ? 'überschritten' : 'erreicht'}}. Weitere Sammelstandorte
+                kannst du <a class="link-one" [routerLink]="['/collector/menu/data/tabs/locations']">hier</a> hinzufügen. Da jede Sammelbox irgendwann einmal abgenutzt ist, kannst du ab jedem 200ersten zugesendeten Handy eine neue Sammelbox
+                bestellen. Aktuell fehlen dir dazu
+                {{getRestIntervall()}} {{data.nDevices != 0 ? 'weitere' : ''}} Handys. Eine Anleitung zum kostenlosen Versand von gesammelten Handys findest du <a class="link-one" [routerLink]="['/collector/menu/send/tabs/add']">hier</a>. Flyer und Poster können nach
+                Bedarf und ohne Einschränkung bestellt werden.
+            </p>
+        </div>
+    </ion-grid>
+
+    <ion-grid>
+        <div *ngIf="data!= null && data.nOrders == 0 && data.nLocations == 0" class="block-element-single">
+            <div *ngIf="!orderTaken" class="block-head">
+                <span class="text-head">Deine erste Bestellung</span>
+            </div>
+            <div class="block-text-information">
+            <span class="text-information">Du hast die Möglichkeit für jeden Sammelstandort, den du betreust eine Sammelbox zu bestellen. Da du noch keinen Sammelstandort hinzugefügt hast,
+            bitten wir dich dies zunächst zu tun bevor du mit deiner ersten Bestellung beginnen kannst. Klicke dazu bitten auf den folgenden Button.</span>
             </div>
             <ion-row class="ion-row-buttons">
                 <ion-col>
-                    <ion-button [disabled]="!(boxOrder > 0 || bricolageOrder > 0 || flyerOrder > 0 || posterOrder > 0)" class=ion-button-one-inside (click)="onOrder()">Bestellen</ion-button>
+                    <ion-button class="ion-button-one-inside" (click)="onLocation()">Sammelstandort hinzufügen</ion-button>
                 </ion-col>
             </ion-row>
         </div>
+    </ion-grid>
 
-        <div class="block-text-information-center" *ngIf="(orderTaken && !spinner)">
-            <p (click)="onClickPageInformation()" [ngClass]="'text-information-pointer'">Vielen Dank für Deine Bestellung. In der "Bestell-Historie" kannst Du Dich jederzeit über den Status Deiner
-                Bestellung informieren.</p>
-        </div>
-    </div>
-    <div *ngIf="!spinner && !orderTaken && data != null && !(data.nOrders == 0 && data.nLocations == 0) && !(oBox != null && oBox.boxAvailable == 1 && oBox.nStock > 0 && oBox.maxOrder > 0) && !(oBricolage != null && oBricolage.bAvailable == 1 && oBricolage.nStock && oBricolage.maxOrder > 0)" class="input-block-element">
-        <p class="note">* Du hast die Möglichkeit für jeden Sammelstandort eine Sammelbox ({{oBox.bAvailable ? (oBox.nStock > 0 ? 'Mobile-Box' : 'Bastel-Box') : 'Bastel-Box'}}) zu bestellen. Aktuell hast du {{data.nLocations == 1 ? 'einen Sammelstandort' : data.nLocations+' Sammelstandorte'}} angelegt und {{data.nOrders == 1 ? 'eine Sammelbox' : data.nOrders +' Sammelboxen'}} bestellt.
-            Damit ist dein Limit {{oBox.maxOrder < 0 || oBox.maxOrder < 0 ? 'überschritten' : 'erreicht'}}. Weitere Sammelstandorte
-            kannst du <a class="link-one" [routerLink]="['/collector/menu/data/tabs/locations']">hier</a> hinzufügen. Da jede Sammelbox irgendwann einmal abgenutzt ist, kannst du ab jedem 200ersten zugesendeten Handy eine neue Sammelbox bestellen. Aktuell fehlen dir dazu
-            {{getRestIntervall()}} {{data.nDevices != 0 ? 'weitere' : ''}} Handys. Eine Anleitung zum kostenlosen Versand findest du <a class="link-one" [routerLink]="['/collector/menu/send/tabs/add']">hier</a>. Flyer und Poster können nach Bedarf und ohne Einschränkung bestellt werden.
-        </p>
-    </div>
-    <div *ngIf="data!= null && data.nOrders == 0 && data.nLocations == 0" class="input-block-element">
-        <div *ngIf="!orderTaken" class="block-head">
-            <span class="text-head">Deine erste Bestellung</span>
-        </div>
-        <div class="block-text-information">
-            <span class="text-information">Du hast die Möglichkeit für jeden Sammelstandort, den du betreust eine Sammelbox zu bestellen. Da du noch keinen Sammelstandort hinzugefügt hast,
-            bitten wir dich dies zunächst zu tun bevor du mit deiner ersten Bestellung beginnen kannst. Klicke dazu bitten auf den folgenden Button.</span>
-        </div>
-        <ion-row class="ion-row-buttons">
-            <ion-col>
-                <ion-button class="ion-button-one-inside" (click)="onLocation()">Sammelstandort hinzufügen</ion-button>
-            </ion-col>
-        </ion-row>
-    </div>
     <ion-spinner *ngIf="spinner" name="bubbles"></ion-spinner>
 </ion-content>

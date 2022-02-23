@@ -1,36 +1,54 @@
 <ion-content class="input-background">
-    <div class="input-block-element">
-        <div class="block-head" *ngIf="orders.length > 0">
-            <span class="text-head">Bestell-Historie</span>
+    <ion-grid *ngIf="lOrdersOpen.length > 0">
+        <div class="block-element-single">
+            <div class="list-block">
+                <app-order (ping)="ping($event)" [oOrder]="order" *ngFor="let order of lOrdersOpen"></app-order>
+            </div>
+            <div class="list-block">
+                <app-order (ping)="ping($event)" [oOrder]="order" *ngFor="let order of lOrdersClosed"></app-order>
+            </div>
         </div>
-        <ion-grid class="ion-grid-table" *ngIf="orders.length > 0">
-            <ion-row class="ion-row-table">
-                <ion-col [ngClass]="'ion-col-table-header'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
-                    <div>
-                        Erstellt am
-                    </div>
-                </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header' " size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
-                    <div>
-                        Sendungsnummer
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row class="ion-row-table" *ngFor="let row of orders">
-                <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
-                    <div>
-                        {{row.dateCreation}}
-                    </div>
-                </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
-                    <div>
-                        {{row.ID_TRACKING != null ? row.ID_TRACKING : 'Noch nicht versendet'}}
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-        <div class="block-text-information-center" *ngIf="orders.length == 0">
-            <p [ngClass]="'text-information'">Du hast noch keine Bestellung getätigt</p>
-        </div>
-    </div>
+    </ion-grid>
 </ion-content>
+
+
+<!--
+<ion-content class="input-background">
+    <ion-grid>
+        <div class="block-element-single">
+            <div class="block-head" *ngIf="orders.length > 0">
+                <span class="text-head">Bestell-Historie</span>
+            </div>
+            <div class="ion-grid-table" *ngIf="orders.length > 0">
+                <ion-row class="ion-row-table">
+                    <ion-col [ngClass]="'ion-col-table-header'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
+                        <div>
+                            Erstellt am
+                        </div>
+                    </ion-col>
+                    <ion-col [ngClass]="'ion-col-table-header' " size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
+                        <div>
+                            Sendungsnummer
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-row-table" *ngFor="let row of orders">
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
+                        <div>
+                            {{row.dateCreation}}
+                        </div>
+                    </ion-col>
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
+                        <div>
+                            {{row.ID_TRACKING != null ? row.ID_TRACKING : 'Noch nicht versendet'}}
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="block-text-information-center" *ngIf="orders.length == 0">
+                <p [ngClass]="'text-information'">Du hast noch keine Bestellung getätigt</p>
+            </div>
+        </div>
+    </ion-grid>
+</ion-content>
+-->

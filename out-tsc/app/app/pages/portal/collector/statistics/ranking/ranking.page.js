@@ -2,8 +2,9 @@ import { __decorate } from "tslib";
 import { Component, ViewChild } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 let RankingPage = class RankingPage {
-    constructor(connApi) {
+    constructor(connApi, dataService) {
         this.connApi = connApi;
+        this.dataService = dataService;
         // Urls
         this.urlRanking = 'collector/statistics/ranking';
         this.urlCountries = 'region/countries';
@@ -47,6 +48,10 @@ let RankingPage = class RankingPage {
         this.kCollector = tokenInfo['id'];
         // load
         this.load();
+        // callback
+        this.dataService.callbackLocation().subscribe((data) => {
+            this.load();
+        });
         // city
         this.connApi.safeGet(this.urlCities).subscribe((response) => {
             console.log(response.body);

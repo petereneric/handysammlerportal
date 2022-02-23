@@ -6,7 +6,10 @@ let HistoryPage = class HistoryPage {
         this.dataService = dataService;
         // Urls
         this.urlOrders = 'collector/orders';
+        this.urlOrder = 'collector/order';
         // Variables
+        this.lOrdersOpen = [];
+        this.lOrdersClosed = [];
         this.orders = [];
     }
     ngOnInit() {
@@ -19,19 +22,35 @@ let HistoryPage = class HistoryPage {
         this.connApi.safeGet(this.urlOrders).subscribe((data) => {
             if (data.status == 200) {
                 console.log(data);
-                this.orders = data.body;
-                let boxOrders = 0;
-                let bricolageOrders = 0;
-                for (var i = 0; i < this.orders.length; i++) {
-                    if (this.orders[i]['NUMBER_BOX'] > 0)
-                        boxOrders++;
-                    if (this.orders[i]['NUMBER_BRICOLAGE'] > 0)
-                        bricolageOrders++;
-                }
-                this.boxVisible = boxOrders > 0;
-                this.bricolageVisible = bricolageOrders > 0;
+                let lOrders = data.body;
+                this.lOrdersOpen = lOrders['lOrdersOpen'];
+                this.lOrdersClosed = lOrders['lOrdersClosed'];
+                /*
+                lOrders.forEach((order: Order) => {
+                  if (order.tStatus < 2) {
+                    this.lOrdersOpen.push(order);
+                  } else {
+                    this.lOrdersClosed.push(order);
+                  }
+                  console.log('Länge'+this.lOrdersClosed);
+                });
+                 */
             }
         });
+    }
+    ping($event) {
+        const order = $event.object;
+        if ($event.label === 'delete') {
+            this.connApi.safeDelete(this.urlOrder + "/" + order.id).subscribe((response) => {
+                this.dataService.callOrder(null);
+                if (order.tStatus < 2) {
+                    this.lOrdersOpen.splice(this.lOrdersOpen.indexOf(order), 1);
+                }
+                else {
+                    this.lOrdersClosed.splice(this.lOrdersClosed.indexOf(order), 1);
+                }
+            });
+        }
     }
 };
 HistoryPage = __decorate([

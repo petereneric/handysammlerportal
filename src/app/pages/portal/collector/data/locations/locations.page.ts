@@ -3,7 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ConnApiService} from '../../../../../services/conn-api/conn-api.service';
 import {HttpResponse} from '@angular/common/http';
 import {Location} from '../../../../../interfaces/location';
-import {Eventping} from '../../../../../interfaces/eventping';
+import {EventpingLocation} from '../../../../../interfaces/eventpingLocation';
 import {AlertController, IonContent, ToastController} from '@ionic/angular';
 import {Content} from '@angular/compiler/src/render3/r3_ast';
 import {Router} from '@angular/router';
@@ -22,8 +22,8 @@ export class LocationsPage implements OnInit {
     @ViewChild(IonContent) content: IonContent;
 
     //Constants
-    private maxZip = environment.maxZip;
-    private maxInput = environment.maxInput;
+    public maxZip = environment.maxZip;
+    public maxInput = environment.maxInput;
 
     // Urls
     private urlLocation = 'collector/location';
@@ -134,6 +134,7 @@ export class LocationsPage implements OnInit {
             // send
             this.connApi.safePost(this.urlLocation, this.oLocationEdit).subscribe((data: HttpResponse<any>) => {
                 if (data.status == 200) {
+                    this.dataService.callLocation(null);
                     this.bEdit = false;
                     this.bSubmitted = false;
                     this.fgLocation.reset();
@@ -152,7 +153,7 @@ export class LocationsPage implements OnInit {
         return this.fgLocation.controls;
     }
 
-    ping($event: Eventping) {
+    ping($event: EventpingLocation) {
         const location: Location = $event.object;
         if ('check' === $event.label) {
             this.upload(location);

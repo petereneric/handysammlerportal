@@ -1,8 +1,11 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
-let StatisticsPage = class StatisticsPage {
-    constructor(connApi) {
+import { MyPage } from '../../my-page';
+let StatisticsPage = class StatisticsPage extends MyPage {
+    constructor(connApi, router) {
+        super(router);
         this.connApi = connApi;
+        this.router = router;
         // Urls
         this.urlStatistics = "";
         // Variables

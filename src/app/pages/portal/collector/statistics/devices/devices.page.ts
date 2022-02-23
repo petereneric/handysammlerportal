@@ -3,6 +3,7 @@ import {ConnApiService} from '../../../../../services/conn-api/conn-api.service'
 import {AlertController, ToastController} from '@ionic/angular';
 import {HttpResponse} from "@angular/common/http";
 import {StatisticsPage} from "../statistics.page";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-devices',
@@ -14,8 +15,8 @@ export class DevicesPage extends StatisticsPage implements OnInit {
   // Urls
   urlStatistics = "collector/statistics/devices"
 
-  constructor(public connApi: ConnApiService) {
-    super(connApi);
+  constructor(public connApi: ConnApiService, public router: Router) {
+    super(connApi, router);
   }
 
   ngOnInit() {

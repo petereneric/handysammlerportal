@@ -1,79 +1,89 @@
 <ion-content class="input-background">
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">1. Verpacken</span>
+    <ion-grid>
+        <div class="block-element-top">
+            <div class="block-head">
+                <span class="text-head">1. Verpacken</span>
+            </div>
+            <div class="block-text">
+                <ul>
+                    <li class="text-list">Wähle einen extra Karton für den Versand - So kannst du deine Mobile-Box(en) weiterhin für die Sammlung benutzen.</li>
+                    <li class="text-list">Gesammelte Handys bitte nicht aus großer Höhe schütten, sondern vorsichtig umfüllen.</li>
+                    <li class="text-list">Akkus bitte in den Handys belassen und lose Akkus an den goldenen Kontaktstellen mit Tesafilm abkleben.</li>
+                    <li class="text-list">Ladekabel und sonstige mit gesammelte Eletronikteile können mitversendet werden.</li>
+                    <li class="text-list">Achte bitte auf die Stabilität des Kartons und verwende (falls nötig) ausreichend Füllmaterial. Nutze dazu bitte wenn möglich Pappe und kein Plastik.</li>
+                    <li class="text-list">Bitte beachte die Mindestversandmenge von 40 Handys.</li>
+                </ul>
+            </div>
         </div>
-        <div class="block-text">
-            <ul>
-                <li class="text-list">Wähle einen extra Karton für den Versand - So kannst du deine Mobile-Box(en) weiterhin für die Sammlung benutzen.</li>
-                <li class="text-list">Gesammelte Handys bitte nicht aus großer Höhe schütten, sondern vorsichtig umfüllen.</li>
-                <li class="text-list">Akkus bitte in den Handys belassen und lose Akkus an den goldenen Kontaktstellen mit Tesafilm abkleben.</li>
-                <li class="text-list">Ladekabel und sonstige mit gesammelte Eletronikteile können mitversendet werden.</li>
-                <li class="text-list">Achte bitte auf die Stabilität des Kartons und verwende (falls nötig) ausreichend Füllmaterial. Nutze dazu bitte wenn möglich Pappe und kein Plastik.</li>
-                <li class="text-list">Bitte beachte die Mindestversandmenge von 40 Handys.</li>
-            </ul>
-        </div>
-    </div>
+    </ion-grid>
 
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">2. Lithium-Ionen-Warnhinweis aufkleben</span>
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">2. Lithium-Ionen-Warnhinweis aufkleben</span>
+            </div>
+            <div class="block-text">
+                <ul>
+                    <li class="text-list">Klicke bitte auf die Schaltfläche "Lithium-Ionen-Warnhinweis öffnen", um dir diesen in einem neuem Fenster anzeigen zu lassen.</li>
+                    <li class="text-list">Sollte sich kein neues Fenster öffnen, ist möglicherweise die Aktivierung von Pop-Ups in deinem Browser notwendig.</li>
+                    <li class="text-list">Drucke den geöffneten Warnhinweis aus und klebe diesen gut sichtbar auf dein Versand-Paket.</li>
+                </ul>
+            </div>
+            <ion-row class="ion-row-buttons">
+                <ion-col>
+                    <ion-button class=ion-button-two-inside (click)="onClickLithiumNotice()"><span class="ion-button-long-text">Lithium-Ionen-Warnhinweis öffnen</span></ion-button>
+                </ion-col>
+            </ion-row>
         </div>
-        <div class="block-text">
-            <ul>
-                <li class="text-list">Klicke bitte auf die Schaltfläche "Lithium-Ionen-Warnhinweis öffnen", um dir diesen in einem neuem Fenster anzeigen zu lassen.</li>
-                <li class="text-list">Sollte sich kein neues Fenster öffnen, ist möglicherweise die Aktivierung von Pop-Ups in deinem Browser notwendig.</li>
-                <li class="text-list">Drucke den geöffneten Warnhinweis aus und klebe diesen gut sichtbar auf dein Versand-Paket.</li>
-            </ul>
-        </div>
-        <ion-row class="ion-row-buttons">
-            <ion-col>
-                <ion-button class=ion-button-two-inside (click)="onClickLithiumNotice()"><span class="ion-button-long-text">Lithium-Ionen-Warnhinweis öffnen</span></ion-button>
-            </ion-col>
-        </ion-row>
-    </div>
+    </ion-grid>
 
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">3. Versandlabel aufkleben</span>
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">3. Versandlabel aufkleben</span>
+            </div>
+            <div class="block-text">
+                <ul>
+                    <li class="text-list">Klicke bitte auf die Schaltfläche "Versandlabel erstellen & öffnen", um dir ein kostenloses DHL-Versandlabel in einem neuen Fenster anzeigen zu lassen.</li>
+                    <li class="text-list">Sollte sich kein neues Fenster öffnen, ist möglicherweise die Aktivierung von Pop-Ups in deinem Browser notwendig.</li>
+                    <li class="text-list">Drucke das geöffnete Versandlabel aus und klebe dieses gut sichtbar auf dein Versand-Paket.</li>
+                </ul>
+            </div>
+            <ion-row class="ion-row-buttons">
+                <ion-col>
+                    <ion-button class=ion-button-two-inside (click)="onClickShippingLabel()"><span class="ion-button-long-text">Versandlabel erstellen & öffnen</span></ion-button>
+                </ion-col>
+            </ion-row>
         </div>
-        <div class="block-text">
-            <ul>
-                <li class="text-list">Klicke bitte auf die Schaltfläche "Versandlabel erstellen & öffnen", um dir ein kostenloses DHL-Versandlabel in einem neuen Fenster anzeigen zu lassen.</li>
-                <li class="text-list">Sollte sich kein neues Fenster öffnen, ist möglicherweise die Aktivierung von Pop-Ups in deinem Browser notwendig.</li>
-                <li class="text-list">Drucke das geöffnete Versandlabel aus und klebe dieses gut sichtbar auf dein Versand-Paket.</li>
-            </ul>
-        </div>
-        <ion-row class="ion-row-buttons">
-            <ion-col>
-                <ion-button class=ion-button-two-inside (click)="onClickShippingLabel()"><span class="ion-button-long-text">Versandlabel erstellen & öffnen</span></ion-button>
-            </ion-col>
-        </ion-row>
-    </div>
+    </ion-grid>
 
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">4. Versenden</span>
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">4. Versenden</span>
+            </div>
+            <div class="block-text">
+                <ul>
+                    <li class="text-list">Du kannst dein Paket bei jeder DHL-Filiale oder jeder DHL-Packstation abgeben, um es zu versenden.</li>
+                    <li class="text-list">Auch möglich ist die Übergabe an einen DHL-Zusteller, der ebenfalls versandfertige Pakete entgegennehmen kann.</li>
+                </ul>
+            </div>
         </div>
-        <div class="block-text">
-            <ul>
-                <li class="text-list">Du kannst dein Paket bei jeder DHL-Filiale oder jeder DHL-Packstation abgeben, um es zu versenden.</li>
-                <li class="text-list">Ebenfalls möglich ist die Übergabe an einen DHL-Zusteller, der ebenfalls versandfertige Pakete entgegennehmen kann.</li>
-            </ul>
-        </div>
-    </div>
+    </ion-grid>
 
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">So geht es weiter</span>
+    <ion-grid>
+        <div class="block-element-bottom">
+            <div class="block-head">
+                <span class="text-head">So geht es weiter</span>
+            </div>
+            <div class="block-text">
+                <ul>
+                    <li class="text-list">Nach Eingang deines Paketes dauert die Bearbeitung etwa 4-6 Wochen.</li>
+                    <li class="text-list">Nach Abschluss der Bearbeitung erhältst du von uns per E-Mail eine Bestätigung mit Abrechnung und Urkunde.</li>
+                    <li class="text-list">Ebenfalls werden deine Sammelergebnisse in deiner persönlichen "Statistik" berücksichtigt.</li>
+                    <li class="text-list">Den aktuellen Bearbeitungsstatus deiner Zusendung kannst du jederzeit unter dem Menü-Punkt "Versand-Historie" einsehen.</li>
+                </ul>
+            </div>
         </div>
-        <div class="block-text">
-            <ul>
-                <li class="text-list">Nach Eingang deines Paketes dauert die Bearbeitung etwa 4-6 Wochen.</li>
-                <li class="text-list">Nach Abschluss der Bearbeitung erhältst du von uns per E-Mail eine Bestätigung mit Abrechnung und Urkunde.</li>
-                <li class="text-list">Ebenfalls werden deine Sammelergebnisse in deiner persönlichen "Statistik" berücksichtigt.</li>
-                <li class="text-list">Den aktuellen Bearbeitungsstatus deiner Zusendung kannst du jederzeit unter dem Menü-Punkt "Versand-Historie" einsehen.</li>
-            </ul>
-        </div>
-    </div>
+    </ion-grid>
 </ion-content>

@@ -6,7 +6,7 @@
         <ion-title>Handysammlerportal
             <p class="toolbar-subtitle">Registrierung als Sammler</p></ion-title>
 
-        <ion-buttons slot="end">
+        <ion-buttons slot="end" class="toolbar-buttons-right">
             <ion-button (click)="onInfo()" fill="clear">
                 <ion-icon class="toolbar-icon" slot="icon-only" name="information-circle"></ion-icon>
             </ion-button>
@@ -16,11 +16,11 @@
 
 <ion-content class="input-background">
 
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Sammler</span>
-        </div>
-        <ion-grid>
+    <ion-grid>
+        <div class="block-element-top">
+            <div class="block-head">
+                <span class="text-head">Sammler</span>
+            </div>
             <form [formGroup]="fgCollector">
                 <ion-row>
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
@@ -45,8 +45,6 @@
                     </ion-col>
                 </ion-row>
             </form>
-        </ion-grid>
-        <ion-grid>
             <ion-row>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item>
@@ -61,9 +59,7 @@
                           class="input-invalid">Pflichtfeld</span>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-        <form [formGroup]="fgCollector">
-            <ion-grid>
+            <form [formGroup]="fgCollector">
                 <ion-row>
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
@@ -105,9 +101,7 @@
                     </span>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
-        </form>
-        <ion-grid>
+            </form>
             <ion-row>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item>
@@ -158,14 +152,15 @@
                     <span *ngIf="bSubmitted && !bSecurity" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-    </div>
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Ansprechpartner</span>
         </div>
-        <form [formGroup]="fgCollector">
-            <ion-grid>
+    </ion-grid>
+
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">Ansprechpartner</span>
+            </div>
+            <form [formGroup]="fgCollector">
                 <ion-row>
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
@@ -185,9 +180,7 @@
                         <span *ngIf="bSubmitted && errorControl.cSurname.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
-        </form>
-        <ion-grid>
+            </form>
             <ion-row class="ion-row-toggle">
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item>
@@ -208,9 +201,7 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-        <form [formGroup]="fgCollector">
-            <ion-grid>
+            <form [formGroup]="fgCollector">
                 <ion-row>
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
@@ -247,14 +238,15 @@
                         <span *ngIf="bSubmitted && errorControl.cPhoneMobile.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
-        </form>
-    </div>
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Versandadresse</span>
+            </form>
         </div>
-        <ion-grid>
+    </ion-grid>
+
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">Versandadresse</span>
+            </div>
             <ion-row>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item class="ion-item-toggle-check">
@@ -264,9 +256,7 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-        <form [formGroup]="fgCollector">
-            <ion-grid>
+            <form [formGroup]="fgCollector">
                 <ion-row>
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
@@ -344,9 +334,7 @@
                         <span *ngIf="bSubmitted && errorControl.cShippingCity.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
-        </form>
-        <ion-grid>
+            </form>
             <ion-row>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item>
@@ -361,15 +349,15 @@
                     <span *ngIf="bSubmitted && oShippingCountry == null" class="input-invalid">Pflichtfeld</span>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-    </div>
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Sicherheit</span>
         </div>
-        <form [formGroup]="fgCollector">
+    </ion-grid>
 
-            <ion-grid>
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">Sicherheit</span>
+            </div>
+            <form [formGroup]="fgCollector">
                 <ion-row class="end">
                     <ion-col size-xl="8" size-lg="8" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full" class="ion-item">
@@ -381,9 +369,7 @@
                         <ion-button (click)="showPassword()" class="button-four">{{bShowPassword ? 'Passwort nicht anzeigen' : 'Passwort anzeigen'}}</ion-button>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
-        </form>
-        <ion-grid>
+            </form>
             <ion-row>
                 <ion-col size-xl="2" size-lg="2" size-md="6" size-sm="6" size-xs="6" class="ion-text-center">
                     <span [ngClass]="((passwordInactive() && !bSubmitted) ? 'password-inactive' : (passwordLength()) ? 'password-valid' : 'password-invalid')">Mindestens 8 Zeichen</span>
@@ -398,17 +384,17 @@
                     <span [ngClass]="((passwordInactive() && !bSubmitted) ? 'password-inactive' : (passwordExtra()) ? 'password-valid' : 'password-invalid')">Sonderzeichen</span>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-    </div>
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Spendenempfänger</span>
-            <mat-icon class="icon-head"
-                      matTooltip="Mobile-Box spendet bis zu 2 € pro Handy an den von dir ausgewählten Partner">info
-            </mat-icon>
         </div>
+    </ion-grid>
 
-        <ion-grid>
+    <ion-grid>
+        <div class="block-element">
+            <div class="block-head">
+                <span class="text-head">Spendenempfänger</span>
+                <mat-icon class="icon-head" #tooltip="matTooltip" (click)="tooltip.toggle()"
+                          matTooltip="Mobile-Box spendet bis zu 2 € pro Handy an den von dir ausgewählten Partner">info
+                </mat-icon>
+            </div>
             <ion-row>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item>
@@ -424,17 +410,23 @@
                           class="input-invalid">Pflichtfeld</span>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-    </div>
-    <div class="input-block-element">
-        <ion-row class="note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.
-        </ion-row>
-    </div>
-    <div class="simple-background">
-        <div class="ion-text-center">
-            <ion-button class="ion-button-outside" (click)="register()">Registrieren</ion-button>
         </div>
-    </div>
+    </ion-grid>
+
+    <ion-grid>
+        <div class="block-element-bottom">
+            <ion-row class="note">Hinweis: Pflichtfelder sind mit einem Sternchen (*) markiert.
+            </ion-row>
+        </div>
+    </ion-grid>
+
+    <ion-grid>
+        <div class="simple-background">
+            <div class="ion-text-center">
+                <ion-button class="ion-button-outside" (click)="register()">Registrieren</ion-button>
+            </div>
+        </div>
+    </ion-grid>
     <br/>
     <br/>
     <br/>

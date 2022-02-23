@@ -1,12 +1,12 @@
 <ion-content class="input-background">
-    <div class="input-block-element">
-        <div class="block-head">
-            <span class="text-head">Veröffentlichung folgender Daten erlauben</span>
-            <mat-icon class="icon-head"
-                      matTooltip="Deine Daten werden mit deiner Zustimmung u.a. auf der Website von Mobile-Box sowie hier im Handysammlerportal veröffentlicht und damit für andere sichtbar">info
-            </mat-icon>
-        </div>
-        <ion-grid>
+    <ion-grid>
+        <div class="block-element-single">
+            <div class="block-head">
+                <span class="text-head">Veröffentlichung folgender Daten erlauben</span>
+                <mat-icon type="button" class="icon-head" #tooltip="matTooltip" (click)="tooltip.toggle()"
+                          matTooltip="Deine Daten werden mit deiner Zustimmung u.a. auf der Website von Mobile-Box sowie hier im Handysammlerportal veröffentlicht und damit für andere sichtbar">info
+                </mat-icon>
+            </div>
             <ion-row>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-item class="ion-item-toggle-check">
@@ -15,6 +15,6 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-        </ion-grid>
-    </div>
+        </div>
+    </ion-grid>
 </ion-content>

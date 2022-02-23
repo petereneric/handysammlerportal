@@ -7,9 +7,9 @@
 </ion-header>
 
 <ion-content class="input-background">
-    <div class="input-block-element">
-        <form [formGroup]="formGroup">
-            <ion-grid>
+    <ion-grid>
+        <div class="block-element-single">
+            <form [formGroup]="formGroup">
                 <ion-row class="ion-row-center">
                     <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                         <ion-item lines="full">
@@ -24,7 +24,7 @@
                         <ion-button class="ion-button-one-inside" (click)="onMail()">Passwort zurücksetzen</ion-button>
                     </ion-col>
                 </ion-row>
-            </ion-grid>
-        </form>
-    </div>
+            </form>
+        </div>
+    </ion-grid>
 </ion-content>

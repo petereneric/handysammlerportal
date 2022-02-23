@@ -21,11 +21,11 @@ let LoginPage = class LoginPage {
         this.bSubmittedCollector = false;
         this.bSubmittedPartner = false;
         this.loginFormPartner = this.fb.group({
-            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9._%+-]{2,15}$'), Validators.maxLength(this.maxInput)]],
             cPassword: ['', [Validators.required, Validators.maxLength(this.maxInput)]]
         });
         this.loginFormCollector = this.fb.group({
-            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+            cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9._%+-]{2,15}$'), Validators.maxLength(this.maxInput)]],
             cPassword: ['', [Validators.required, Validators.maxLength(this.maxInput)]]
         });
         console.log('teeest');
@@ -136,6 +136,8 @@ let LoginPage = class LoginPage {
     }
     onInfo() {
         this.Downloads.becomeCollector();
+    }
+    isCollectorInput() {
     }
 };
 LoginPage = __decorate([

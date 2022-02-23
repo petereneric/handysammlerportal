@@ -42,9 +42,9 @@ export class RegistrationFormPage implements OnInit {
     @ViewChild('vShippingCity') vShippingCity;
 
     //Constants
-    private maxZip = environment.maxZip;
-    private maxInput = environment.maxInput;
-    private maxPassword = environment.maxPassword;
+    public maxZip = environment.maxZip;
+    public maxInput = environment.maxInput;
+    public maxPassword = environment.maxPassword;
 
     //ViewChilds
     private textArea: IonTextarea;
@@ -69,11 +69,11 @@ export class RegistrationFormPage implements OnInit {
         cStreetNumber: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
         cZip: ['', [Validators.required, Validators.minLength(this.maxZip), Validators.maxLength(this.maxZip)]],
         cCity: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
-        cPassword: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])^[A-Za-z0-9$@$!%*?&].{7,}'), Validators.minLength(8)]],
+        cPassword: ['', [Validators.required, Validators.pattern(environment.patternPassword), Validators.minLength(8)]],
         cPrename: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
         cSurname: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
-        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
-        cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'), Validators.maxLength(this.maxInput)]],
+        cEmail: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9._%+-]{2,15}$'), Validators.maxLength(this.maxInput)]],
+        cEmailCC: ['', [Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z0-9._%+-]{2,15}$'), Validators.maxLength(this.maxInput)]],
         cPhoneFixedLine: ['', [Validators.maxLength(this.maxInput)]],
         cPhoneMobile: ['', [Validators.maxLength(this.maxInput)]],
         cShippingAddressOne: ['', [Validators.required, Validators.maxLength(this.maxInput)]],
@@ -397,7 +397,7 @@ export class RegistrationFormPage implements OnInit {
     }
 
     passwordExtra() {
-        let regex = new RegExp('(?=.*[§#@$!%*?&])');
+        let regex = new RegExp('(?=.*[§#@$!%*?&<>])');
         return regex.test(this.fgCollector.get('cPassword').value);
     }
 

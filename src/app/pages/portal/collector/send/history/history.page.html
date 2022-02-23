@@ -1,36 +1,38 @@
 <ion-content class="input-background">
-    <div class="input-block-element">
-        <div class="block-head" *ngIf="records.length > 0">
-            <span class="text-head">Versand-Historie</span>
+    <ion-grid>
+        <div class="block-element-single">
+            <div class="block-head" *ngIf="records.length > 0">
+                <span class="text-head">Versand-Historie</span>
+            </div>
+            <div class="ion-grid-table" *ngIf="records.length > 0">
+                <ion-row class="ion-row-table">
+                    <ion-col [ngClass]="'ion-col-table-header'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
+                        <div>
+                            Sendungsnummer
+                        </div>
+                    </ion-col>
+                    <ion-col [ngClass]="'ion-col-table-header'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
+                        <div>
+                            Status
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-row-table" *ngFor="let row of records">
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
+                        <div>
+                            {{row.shippingNumber != 0 ? row.shippingNumber : '-'}}
+                        </div>
+                    </ion-col>
+                    <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
+                        <div>
+                            {{row.status != 0 ? row.status : '-'}}
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="block-text-information-center" *ngIf="records.length == 0">
+                <p [ngClass]="'text-information'">Du hast noch keine Handys über das Handysammlerportal versendet</p>
+            </div>
         </div>
-        <ion-grid class="ion-grid-table" *ngIf="records.length > 0">
-            <ion-row class="ion-row-table">
-                <ion-col [ngClass]="'ion-col-table-header'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
-                    <div>
-                        Sendungsnummer
-                    </div>
-                </ion-col>
-                <ion-col [ngClass]="'ion-col-table-header'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
-                    <div>
-                        Status
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row class="ion-row-table" *ngFor="let row of records">
-                <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
-                    <div>
-                        {{row.shippingNumber != 0 ? row.shippingNumber : '-'}}
-                    </div>
-                </ion-col>
-                <ion-col [ngClass]="'ion-col-table'" size-xl="6" size-lg="6" size-md="6" size-sm="6" size-xs="6">
-                    <div>
-                        {{row.status != 0 ? row.status : '-'}}
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-        <div class="block-text-information-center" *ngIf="records.length == 0">
-            <p [ngClass]="'text-information'">Du hast noch keine Handys über das Handysammlerportal versendet</p>
-        </div>
-    </div>
+    </ion-grid>
 </ion-content>

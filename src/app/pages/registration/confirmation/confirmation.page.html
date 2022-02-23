@@ -1,26 +1,28 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Handysammlerportal
-      <p class="toolbar-subtitle">Registrierung abgeschlossen</p></ion-title>
+    <ion-toolbar>
+        <ion-title>Handysammlerportal
+            <p class="toolbar-subtitle">Registrierung abgeschlossen</p></ion-title>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content class="input-background">
-<div class="input-block-element">
-  <div class="block-head">
-    <span class="text-head">Geschafft</span>
-  </div>
-  <div class="block-text">
-    <p class="text-secondary">Du hast dich erfolgreich registriert. <span class="link-one" (click)="onInformation()">Hier</span> erhältst du einen ersten Überblick
-    zu den wichtigsten Funktionen des Handysammlerportals.</p>
-  </div>
-  <ion-grid class="ion-grid">
-    <ion-row class="ion-row-buttons">
-      <ion-col>
-        <ion-button class="ion-button-one-inside" (click)="onLogin()">Zurück zur Anmeldung</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</div>
+    <ion-grid>
+        <div class="block-element-single">
+            <div class="block-head">
+                <span class="text-head">Geschafft</span>
+            </div>
+            <div class="block-text">
+                <p class="text-secondary">Du hast dich erfolgreich registriert. <span class="link-one" (click)="onInformation()">Hier</span> erhältst du einen ersten Überblick
+                    zu den wichtigsten Funktionen des Handysammlerportals.</p>
+            </div>
+            <div class="ion-grid">
+                <ion-row class="ion-row-buttons">
+                    <ion-col>
+                        <ion-button class="ion-button-one-inside" (click)="onLogin()">Zurück zur Anmeldung</ion-button>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
+    </ion-grid>
 </ion-content>

@@ -31,7 +31,7 @@ let CollectorPage = class CollectorPage {
             {
                 title: 'Statistiken',
                 url: 'statistics',
-                icon: 'information'
+                icon: 'stats-chart'
             },
             {
                 title: 'Download-Bereich',

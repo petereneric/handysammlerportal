@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="location.component.scss">
 <div class="location-item">
   <div [ngClass]="(oLocation.bActive == 1) ? 'location-checkbox-area' : 'location-checkbox-area-deactivated'">
     <ion-checkbox [ngClass]="{'location-checkbox-deactivated' : oLocation.bActive == 0}" [matTooltip]="oLocation.bActive == 1 ? 'Deaktivieren' : 'Aktivieren'" [checked]="oLocation.bActive == 1" (ionChange)="onChangeActive()"></ion-checkbox>

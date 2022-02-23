@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AuthApiService} from '../auth-api/auth-api.service';
 import {CanActivate, Router} from '@angular/router';
-import {ToastController} from '@ionic/angular';
+import {AlertController, ToastController} from '@ionic/angular';
 import {ConnApiService} from '../conn-api/conn-api.service';
 
 @Injectable({
@@ -12,45 +12,38 @@ export class CookieGuardService implements CanActivate {
   // Urls
   private urlPrivacyPolicy = 'agreement/privacy_policy/';
 
-  constructor(public toastController: ToastController, public api: ConnApiService, private authApiService: AuthApiService, public router: Router) {
+  constructor(public alert: AlertController, public toastController: ToastController, public api: ConnApiService, private authApiService: AuthApiService, public router: Router) {
   }
 
   canActivate(r): boolean {
     console.log("cookie!")
     let bCookie = localStorage.getItem('bCookie');
     if (bCookie == null || bCookie === 'false') {
-      this.toastCookie()
+      this.dialogCookie()
       return true;
     } else {
       return true;
     }
   }
 
-  async toastCookie() {
-    const toast = await this.toastController.create({
-      message: 'Das Handysammlerportal nutzt Cookies. Bitte stimme der Nutzung zu um fortzufahren.',
-      position: 'bottom',
-      cssClass: 'my-toast',
-      buttons: [
+  async dialogCookie() {
+    const alert = await this.alert.create({
+      header: 'Cookies',
+      message: 'Wir, bei uns im Handysammler-Portal, nutzen keine Cookies zur Speicherung oder Verarbeitung deiner Daten. Du musst deren Nutzung also nicht zustimmen.',
+      cssClass: 'my-alert',
+      buttons: [{text: 'Ok',
+        handler: () => {
+          localStorage.setItem('bCookie', 'true');
+        }},
         {
-          side: 'end',
-          role: 'cancel',
-          icon: 'checkmark',
-          text: 'Akzeptieren',
-          handler: () => {
-            localStorage.setItem('bCookie', 'true');
-          }
-        }, {
-          text: 'Weitere Informationen',
-          role: 'cancel',
-          handler: () => {
-            this.toastCookie()
-            this.onPrivacyPolicy()
-          }
+        text: 'Weitere Informationen',
+        handler: () => {
+          this.onPrivacyPolicy()
         }
-      ]
+      }]
     });
-    toast.present();
+
+    await alert.present();
   }
 
   onPrivacyPolicy() {
@@ -61,6 +54,4 @@ export class CookieGuardService implements CanActivate {
       window.open(url)
     })
   }
-
-
 }

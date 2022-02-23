@@ -1,7 +1,11 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
-let SendPage = class SendPage {
-    constructor() { }
+import { MyPage } from '../../my-page';
+let SendPage = class SendPage extends MyPage {
+    constructor(router) {
+        super(router);
+        this.router = router;
+    }
     ngOnInit() {
     }
 };
