@@ -41,12 +41,12 @@ export class RegistrationFormPage implements OnInit {
     @ViewChild('vShippingZip') vShippingZip;
     @ViewChild('vShippingCity') vShippingCity;
 
-    //Constants
+    // Constants
     public maxZip = environment.maxZip;
     public maxInput = environment.maxInput;
     public maxPassword = environment.maxPassword;
 
-    //ViewChilds
+    // ViewChilds
     private textArea: IonTextarea;
 
     // Urls

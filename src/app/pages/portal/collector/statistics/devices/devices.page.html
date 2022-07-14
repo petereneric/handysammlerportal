@@ -61,7 +61,7 @@
                             Repariert*
                         </div>
                     </ion-col>
-                    <ion-col size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
+                    <ion-col *ngIf="isPayment()" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6" [ngClass]="'ion-col-table-header'">
                         <div>
                             Erlöse
                         </div>
@@ -93,7 +93,7 @@
                             {{row.nRepair}}
                         </div>
                     </ion-col>
-                    <ion-col [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
+                    <ion-col *ngIf="isPayment()" [ngClass]="'ion-col-table'" size-xl="2" size-lg="3" size-md="4" size-sm="6" size-xs="6">
                         <div [ngClass]="{bold : row.cYear == null && row.nMonth == null}">
                             {{getPayment(row.sPayment)}}
                         </div>

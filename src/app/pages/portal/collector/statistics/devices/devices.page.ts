@@ -27,6 +27,11 @@ export class DevicesPage extends StatisticsPage implements OnInit {
     return payment.replace('.', ',')+' €'
   }
 
+  isPayment() {
+    if (this.lData == null) return false;
+    return (this.lData[this.lData.length-1].sPayment > 0)
+  }
+
 
 
 
