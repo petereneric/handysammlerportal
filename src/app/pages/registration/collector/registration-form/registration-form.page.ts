@@ -173,7 +173,7 @@ export class RegistrationFormPage implements OnInit {
         this.bSubmitted = true;
 
         // check for invalid input
-        if (!this.fgCollector.valid || this.oType == null || this.oState == null || this.oCountry == null || this.oShippingCountry == null || this.oTitle == null || this.oPartner == null) {
+        if (!this.fgCollector.valid || this.oType == null || this.oState == null || this.oCountry == null || this.oShippingCountry == null || this.oTitle == null) {
             this.getFormValidationErrors();
             this.alertInvalid();
             return;
@@ -207,7 +207,7 @@ export class RegistrationFormPage implements OnInit {
                 cShippingCity: this.fgCollector.get('cShippingCity').value,
                 cShippingZip: this.fgCollector.get('cShippingZip').value,
                 kShippingCountry: this.oCountry.id,
-                kPartner: this.oPartner.id
+                kPartner: this.oPartner == null ? 13 : this.oPartner.id
             };
         console.log(collector);
 
