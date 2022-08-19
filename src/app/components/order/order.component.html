@@ -35,16 +35,17 @@
 <ion-grid class="item-background">
     <ion-row>
         <ion-col class="item-left" size-xl="3" size-lg="3" size-md="12" size-sm="12" size-xs="12">
-            <span class="item-left-text">{{oOrder.tStatus == 0 ? "NICHT VERSENDET" : oOrder.tStatus == 1 ? "VERSENDET" : oOrder.tStatus == 2 ? "ZUGESTELLT" : oOrder.tStatus == 3 ? "NICHT ZUGESTELLT" : ""}}</span>
+            <!--<span class="item-left-text">{{oOrder.tStatus == 0 ? "NICHT VERSENDET" : oOrder.tStatus == 1 ? "VERSENDET" : oOrder.tStatus == 2 ? "ZUGESTELLT" : oOrder.tStatus == 3 ? "NICHT ZUGESTELLT" : ""}}</span>-->
+            <span class="item-left-text">{{oOrder.bSent == 0 ? "NICHT VERSENDET" : "VERSENDET"}}</span>
             <!-- <div class="item-divider-vertical-left"></div> -->
         </ion-col>
         <ion-col class="item-middle" size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
             <span class="item-title">{{(oOrder.nBox > 0 ? oOrder.nBox > 1 ? oOrder.nBox + ' Sammelboxen &nbsp;&#183;&nbsp; ' : ' 1 Sammelbox &nbsp;&#183;&nbsp; ' : oOrder.nBricolage > 0 ? oOrder.nBricolage > 1 ? oOrder.nBricolage + ' Sammelboxen &nbsp;&#183;&nbsp; ' : '1 Sammelbox &nbsp;&#183;&nbsp; ' : '') + oOrder.nFlyer + ' Flyer &nbsp;&#183;&nbsp; ' + oOrder.nPoster + ' Poster'}}</span>
-            <span class="item-subtitle">Bestellt am <b>{{getDate(oOrder.dCreation)}} | {{oOrder.tStatus}}Voraussichtliche Zustellung </b></span>
+            <span class="item-subtitle">Bestellt am <b>{{getDate(oOrder.dCreation)}}</b></span>
         </ion-col>
         <ion-col class="item-right" size-xl="3" size-lg="3" size-md="12" size-sm="12" size-xs="12">
-            <mat-icon *ngIf="oOrder.tStatus == 0" class="item-icon-delete" (click)="onDelete()" matTooltip="Bestellung Löschen">close</mat-icon>
-            <mat-icon *ngIf="oOrder.tStatus > 0" class="item-icon-default" (click)="onSearch()" matTooltip="DHL-Sendungsverfolgung anzeigen">search</mat-icon>
+            <mat-icon *ngIf="oOrder.bSent == 0" class="item-icon-delete" (click)="onDelete()" matTooltip="Bestellung Löschen">close</mat-icon>
+            <mat-icon *ngIf="oOrder.bSent > 0" class="item-icon-default" (click)="onSearch()" matTooltip="DHL-Sendungsverfolgung anzeigen">search</mat-icon>
         </ion-col>
     </ion-row>
     <div *ngIf="oOrder.bMerge == 1 || oOrder.bSplit == 1" class="item-divider-horizontal"></div>

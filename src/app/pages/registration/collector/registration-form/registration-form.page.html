@@ -387,7 +387,7 @@
         </div>
     </ion-grid>
 
-    <ion-grid>
+    <ion-grid *ngIf="oPartner != null && oPartner.id == 6 && oPartner.kRewardmodel < 5">
         <div class="block-element">
             <div class="block-head">
                 <span class="text-head">Spendenempfänger</span>

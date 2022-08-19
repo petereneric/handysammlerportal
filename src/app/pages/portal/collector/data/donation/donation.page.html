@@ -2,21 +2,32 @@
     <ion-grid>
         <div class="block-element-single">
             <div class="block-head">
-                <span class="text-head">Spendenempfänger</span>
-                <mat-icon class="icon-head" #tooltip="matTooltip" (click)="tooltip.toggle()"
+                <span class="text-head">{{oPartner != null && oPartner.kRewardmodel < 5 ? 'Spendenempfänger' : 'Handy-Spende'}}</span>
+                <mat-icon *ngIf="oPartner != null && oPartner.kRewardmodel < 5" class="icon-head" #tooltip="matTooltip" (click)="tooltip.toggle()"
                           matTooltip="Mobile-Box spendet bis zu 2 € pro Handy an den von dir ausgewählten Partner">info
                 </mat-icon>
             </div>
 
             <ion-row>
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                    <div *ngIf="oPartner != null && oPartner.kRewardmodel < 5">
                     <ion-item text-wrap>
                         <ion-label position="floating" class="input-label">Partner</ion-label>
-                        <ion-select class="ion-text-wrap" [disabled]="oPartner != null ? oPartner.bChangePartner == 0 : false" [(ngModel)]="oPartner" [okText]="'Übernehmen'" [cancelText]="'Abrechen'"
+                        <ion-select class="ion-text-wrap" [disabled]="(oPartner != null ? oPartner.bChangePartner == 0 : false) || true" [(ngModel)]="oPartner" [okText]="'Übernehmen'" [cancelText]="'Abrechen'"
                                     [selectedText]="oPartner != null ? oPartner.cName : ''" (ionChange)="onSelectedPartner($event)">
                             <ion-select-option *ngFor="let oPartner of lPartners" [value]="oPartner">{{oPartner.cName}}</ion-select-option>
                         </ion-select>
                     </ion-item>
+                    </div>
+                    <div *ngIf="oPartner != null && oPartner.kRewardmodel == 5">
+                        <div class="block-text">
+                            <p class="text-secondary">Seit Beginn der Handy-Sammlung von Mobile-Box 2012, war die Spende für jedes gesammelte Handy an einen ausgewählten, gemeinnützigen Verein ein fester Bestandteil unseres Konzeptes. Leider
+                            mussten wir dieses Jahr feststellen, dass wir dazu wirtschaftlich nicht mehr in der Lage sind. Damit können wir auch für die von euch gesammelten Handys keine Spende mehr tätigen. Das wird uns aber nicht davon
+                            abhalten, die Sammlung auszuweiten und das Mobile-Box Konzept zu verbessern. Denn immer noch sind wir überzeugt, dass jedes umweltgerecht verwertete Handy einen wichtigen Beitrag zum Umweltschutz leistet und
+                            ein Zeichen für eine funktionierende Kreislaufwirtschaft ist. Wir hoffen auf euer Verständnis und weitere Unterstüzung.</p>
+                            <p class="text-secondary"><b>Euer Eric & euer Till</b>
+                        </div>
+                    </div>
                 </ion-col>
             </ion-row>
         </div>

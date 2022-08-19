@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { MainPageRoutingModule } from './main-routing.module';
-
 import { MainPage } from './main.page';
 
 @NgModule({
@@ -14,7 +13,7 @@ import { MainPage } from './main.page';
         FormsModule,
         IonicModule,
         MainPageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
   declarations: [MainPage]
 })

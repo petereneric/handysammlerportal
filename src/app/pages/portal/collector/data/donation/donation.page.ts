@@ -28,6 +28,7 @@ export class DonationPage implements OnInit {
       let partner = response.body;
       if (partner != null) {
         this.oPartner = partner;
+        console.log(this.oPartner.kRewardmodel)
       }
     }, error => {
       console.log(error);
