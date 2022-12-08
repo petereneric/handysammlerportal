@@ -47,6 +47,7 @@ export class LocationsPage implements OnInit {
     lLocationsActive: Location[] = [];
     lLocationsNotActive: Location[] = [];
     oLocationEdit: Location = null;
+    bAccess: boolean = false;
 
 
     constructor(private router: Router, private connApi: ConnApiService, private formBuilder: FormBuilder, public toastController: ToastController, public alertController: AlertController, private dataService: DataService) {
@@ -312,5 +313,9 @@ export class LocationsPage implements OnInit {
                 }}]
         });
         await alert.present();
+    }
+
+    onToggleAccess($event: any) {
+        
     }
 }

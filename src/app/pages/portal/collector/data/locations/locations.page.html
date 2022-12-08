@@ -68,7 +68,18 @@
                         <span *ngIf="bSubmitted && errorControl.cCity.errors?.maxlength" class="input-invalid">Maximal-Länge von {{maxInput}} Zeichen überschritten</span>
                     </ion-col>
                 </ion-row>
+
             </form>
+            <ion-row class="ion-row-toggle">
+                <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
+                    <ion-item class="ion-item-toggle-check">
+                        <ion-label class="ion-label-toggle">Persönliche Anrede*</ion-label>
+                        <ion-toggle [(ngModel)]="bAccess" checked="{{bAccess}}"
+                                    [ngModelOptions]="{standalone: true}"
+                                    (ionChange)="onToggleAccess($event)"></ion-toggle>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
             <ion-row class="ion-row-buttons">
                 <ion-col size-xl="6" size-lg="6" size-md="12" size-sm="12" size-xs="12">
                     <ion-button class="ion-button-one-inside" (click)="bAdd ? onSaveAdd() : onSaveEdit()">{{bAdd ? 'Hinzufügen' : 'Änderungen übernehmen'}}</ion-button>
