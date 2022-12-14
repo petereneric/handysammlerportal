@@ -47,7 +47,7 @@ export class LocationsPage implements OnInit {
     lLocationsActive: Location[] = [];
     lLocationsNotActive: Location[] = [];
     oLocationEdit: Location = null;
-    bAccess: boolean = false;
+    bAccessEdit: boolean = false;
 
 
     constructor(private router: Router, private connApi: ConnApiService, private formBuilder: FormBuilder, public toastController: ToastController, public alertController: AlertController, private dataService: DataService) {
@@ -94,6 +94,7 @@ export class LocationsPage implements OnInit {
                 cStreetNumber: this.fgLocation.get('cStreetNumber').value,
                 cZip: this.fgLocation.get('cZip').value,
                 cCity: this.fgLocation.get('cCity').value,
+                bAccess: this.bAccessEdit ? 1 : 0,
             };
 
         // send
@@ -106,6 +107,7 @@ export class LocationsPage implements OnInit {
                 this.lLocationsNotActive.push(location);
                 this.alertAdded(location);
                 this.fgLocation.reset();
+                this.bAccessEdit = false
 
             }
         }, error => {
@@ -131,6 +133,8 @@ export class LocationsPage implements OnInit {
             this.oLocationEdit.cStreet = this.fgLocation.get('cStreet').value;
             this.oLocationEdit.cStreetNumber = this.fgLocation.get('cStreetNumber').value;
             this.oLocationEdit.cZip = this.fgLocation.get('cZip').value;
+            this.oLocationEdit.cCity = this.fgLocation.get('cCity').value;
+            this.oLocationEdit.bAccess = this.bAccessEdit ? 1 : 0
 
             // send
             this.connApi.safePost(this.urlLocation, this.oLocationEdit).subscribe((data: HttpResponse<any>) => {
@@ -140,6 +144,7 @@ export class LocationsPage implements OnInit {
                     this.bSubmitted = false;
                     this.fgLocation.reset();
                     this.oLocationEdit = null;
+                    this.bAccessEdit = false
                 }
             }, error => {
                 console.log(error);
@@ -185,8 +190,9 @@ export class LocationsPage implements OnInit {
     }
 
     onEdit(location: Location) {
-        this.isEditing(true);
         this.oLocationEdit = location;
+        this.bAccessEdit = location.bAccess == 1
+        this.isEditing(true);
 
         // data
         this.fgLocation.controls['cName'].setValue(location.cName);

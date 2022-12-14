@@ -343,6 +343,7 @@ export class MainPage implements OnInit {
         this.loadStates();
     }
 
+    /*
     fillInAddress() {
 
         let autocomplete: google.maps.places.Autocomplete;
@@ -424,4 +425,5 @@ export class MainPage implements OnInit {
         address1Field.value = address1;
         postalField.value = postcode;
     };
+     */
 }

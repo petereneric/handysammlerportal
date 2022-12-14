@@ -8,4 +8,5 @@ export interface Location {
     cCity: string
     cCountry: string
     bActive: number
+    bAccess: number
 }
