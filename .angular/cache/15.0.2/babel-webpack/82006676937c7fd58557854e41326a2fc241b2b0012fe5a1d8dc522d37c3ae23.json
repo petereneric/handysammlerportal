@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class MyPage {\n  constructor(router) {\n    this.router = router;\n  }\n  onLogOut() {\n    localStorage.setItem('token', null);\n    this.router.navigate(['login']);\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

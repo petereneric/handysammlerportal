@@ -1,4 +1,6 @@
 <ion-content class="input-background">
+    <!--<p class="text-head">Leider können wir aktuell keine weiteren Bestellungen annehmen und müssen diese Funktion daher deaktivieren. Wir bitten um euer Verständis. Eric & Till </p>
+    -->
     <ion-grid>
         <div *ngIf="data != null && !(data.nOrders == 0 && data.nLocations == 0) && !spinner" class="block-element-top">
             <div *ngIf="!orderTaken" class="block-head">

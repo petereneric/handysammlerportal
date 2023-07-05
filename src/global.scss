@@ -66,6 +66,10 @@ ion-grid {
   width: 80% !important;
 }
 
+ion-textarea {
+  caret-color: #212121 !important;
+}
+
 ion-title {
   color: $white;
   font-weight: 500;
@@ -111,10 +115,7 @@ ion-button {
   --padding-top: 0.8rem !important;
 }
 
-ion-item {
-  --border-color: #cbcbcb;
-  padding: 0.4rem 1rem 0.4rem 1rem;
-}
+
 
 ion-textarea {
 }
@@ -458,7 +459,8 @@ ul li::before {
   font-size: $textSizeNote;
   display: block;
   margin-right: 1rem;
-  margin-left: 2rem;
+  margin-left: 1rem;
+  margin-top: 0.2rem;
 }
 
 .password-invalid {

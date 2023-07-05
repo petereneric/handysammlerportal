@@ -1,15 +1,22 @@
 // Input - Underline -- Not working in global settings
 :host {
   .item-interactive.ion-invalid{
-    --highlight-background: #FF !important;
+    --highlight-background: #dcdcdc !important;
+    --highlight-height: 0px;
+    --border-color: #dcdcdc !important;
   }
+
   .item-interactive.ion-valid{
-    --highlight-background: #FF !important;
+    --highlight-background: #dcdcdc !important;
+    --highlight-height: 0px;
+    --border-color: #dcdcdc !important;
   }
   .item-interactive.ion-select-option{
     --highlight-background: #FF !important;
   }
 }
+
+
 
 .ion-button-no-margin {
   margin-top: 0px;

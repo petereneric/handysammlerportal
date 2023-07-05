@@ -5,7 +5,6 @@ import {HttpResponse} from '@angular/common/http';
 import {Location} from '../../../../../interfaces/location';
 import {EventpingLocation} from '../../../../../interfaces/eventpingLocation';
 import {AlertController, IonContent, ToastController} from '@ionic/angular';
-import {Content} from '@angular/compiler/src/render3/r3_ast';
 import {Router} from '@angular/router';
 import {DataService} from '../../../../../services/data/data.service';
 import {environment} from '../../../../../../environments/environment';

@@ -59,7 +59,7 @@ export class AddPage implements OnInit {
         const alert = await this.alertController.create({
             cssClass: 'my-alert',
             header: 'Versand bestätigen',
-            message: 'Bitte bestätige uns kurz, dass du Dein Paket fertig gepackt und den Lithium-Ionen-Warnhinweis ' +
+            message: 'Bitte bestätige uns kurz, dass du Dein Paket fertig gepackt, die Versandvorschriften beachtet und den Lithium-Ionen-Warnhinweis ' +
                 'aufgeklebt hast. Danach erstellen wir Dir ein neues Versand-Label und merken ' +
                 'Deine Versendung vor.',
             buttons: [{

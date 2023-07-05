@@ -2,10 +2,15 @@
 
 :host {
   .item-interactive.ion-invalid{
-    --highlight-background: #FF !important;
+    --highlight-background: #dcdcdc !important;
+    --highlight-height: 0px;
+    --border-color: #dcdcdc !important;
   }
+
   .item-interactive.ion-valid{
-    --highlight-background: #FF !important;
+    --highlight-background: #dcdcdc !important;
+    --highlight-height: 0px;
+    --border-color: #dcdcdc !important;
   }
 }
 

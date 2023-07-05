@@ -184,6 +184,7 @@ export class AddPage implements OnInit {
             this.boxChoice = [0];
             if (this.oBox.bAvailable == 1) {
                 this.oBox.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices / this.data.intervallDevices) - this.oBox.nOrder - this.oBricolage.nOrder));
+                this.oBox.maxOrder = 6; // no limit
                 console.log(this.oBox.maxOrder);
                 if (this.oBox.maxOrder > 0) {
                     for (var i = 1; i <= this.oBox.maxOrder && i <= 6; i++) {
@@ -198,7 +199,7 @@ export class AddPage implements OnInit {
             this.bricolageChoice = [0];
             if (this.oBricolage.bAvailable == 1) {
                 this.oBricolage.maxOrder = Math.floor((+this.data.nLocations + (this.data.nDevices / this.data.intervallDevices) - this.oBricolage.nOrder - this.oBox.nOrder));
-                console.log('joo' + this.oBricolage.maxOrder);
+                this.oBricolage.maxOrder = 6;
                 if (this.oBricolage.maxOrder > 0) {
                     for (var i = 1; i <= this.oBricolage.maxOrder && i <= 6; i++) {
                         this.bricolageChoice.push(i);
